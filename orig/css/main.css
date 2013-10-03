@@ -1,0 +1,740 @@
+ /*! CUNY GC Primary Styles
+    Author: Nick Evans & Philipp C. Adrian
+ */
+
+.showgrid{
+	background: transparent url(../images/shared/grid.png) 0 0 repeat;
+}
+.showgrid > *{
+	opacity: 0.8;
+} 
+
+/*Reseting focus decorations... to set tabindex. */
+a:focus{
+	background-color:transparent;
+	text-decoration: none;
+}
+
+
+/* ! structural elements */
+html{
+	height: auto;
+}
+body{
+	background: #EDEDED url(../images/shared/white_line.gif) repeat-x;
+	height: auto;
+	width: 100%;
+	padding-bottom: 20px;
+}
+header, footer {
+	margin-left:-10px;
+}
+
+header{
+	height: 144px;
+	position: relative;
+	margin-bottom: 4.154em; /* == 54px */
+	z-index: 10;
+}
+
+.frontpage {
+	margin-bottom:0;
+}
+
+.page,
+.body{
+	position: relative;
+}
+.no-js.ie7 .body,
+.no-js.ie8 .body{
+	clear: both;
+	padding-top: 144px;
+	margin-left: 230px;
+}
+#service-nav a{
+	font-size: 85%;
+}
+#service-nav a:hover{
+	color: #444;
+}
+.leftCol{
+	margin-left: -10px;
+	padding-left: 10px;
+	z-index:2;
+}
+.no-js.ie7 .leftCol,
+.no-js.ie8 .leftCol{
+	margin-right: 20px;
+	margin-left: -250px;
+}
+
+.rightCol{
+	margin-left: 24px;
+}
+.no-js.ie7 .rightCol,
+.no-js.ie8 .rightCol{
+	float: right;
+	clear: none;
+}
+.cunyCols{
+	width: 190px;
+}
+.main{
+	background: transparent url(../images/shared/white-pixel.png) 25px 0 repeat-y;
+	border-right:1px solid #ffffff;
+	padding: 0 14px 0 40px;
+}
+
+/*change*/
+.main2{
+	border-right:1px solid #ffffff;
+	padding: 0 14px 0 0;
+	margin-right:230px;
+	margin-left: -8px;
+
+}
+/*change*/
+.mainNolines{
+	background: none;
+	border-right: none;
+	padding: 0px 0 0 22px;
+	margin-bottom: 15px;
+	margin-left: -30px;
+	margin-left: -10px;
+}
+
+#HomeAlt{
+	background-color: #ffffff;
+	padding: 30px 10px 10px 10px;
+	margin: -55px 0 15px -10px;
+}
+
+/*change*/
+.NoLinesTitleWrap{
+	margin-left: -30px;
+}
+
+.one-col .main{
+	background: transparent;
+	padding: 0 0 0 40px;
+}
+.main .line{
+	/* push grid elements back on to our grid ... */
+	padding-right: 10px;
+}
+.main .line .line{
+	/* ... but only once */
+	padding: 0;
+}
+.no-js.ie7 .inner,
+.no-js.ie8 .inner{
+	float: left;
+	width: 470px;
+}
+.no-js.ie7 .leftCol .inner,
+.no-js.ie8 .leftCol .inner,
+.no-js.ie7 .rightCol .inner,
+.no-js.ie8 .rightCol .inner{
+	width: 190px;
+}
+/* end structural elements */
+
+/* page elements */
+
+h1{
+	font-family:"UrbanoBoldCondensed", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif; 
+	color: #444;
+	font-size: 197%;
+	text-transform: uppercase;
+	margin-top: 0;
+	margin-bottom: 0.37em;
+	line-height:1.06em;
+}
+h4, h3, h2{
+	color: #444;
+	font-family:"UrbanoCondensed", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
+	font-size: 138.5%;
+	letter-spacing: 0.1em;
+	line-height: 1em;
+	margin-top: 1em;
+	margin-bottom: 0;
+}
+h4{
+	padding-left: 0;
+	margin: 0;
+}
+.main h4,
+h5{
+	font-size: 100%;
+	font-family:"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
+	margin-bottom: 0;
+	margin-left: 10px;
+	letter-spacing: 0;
+	font-weight: bold;
+	color:#999999;
+}
+h5{
+	margin-top: 1.347em;
+}
+.ie7.no-js h5,
+.ie8.no-js h5{
+	width: 470px;
+}
+
+.main h4{
+	color: #444;
+}
+/* These ie specific headers won't pass csslint.com but are unavoidable. */
+.ie7 h3,
+.ie7 h2,
+.ie8 h3,
+.ie8 h2{
+	letter-spacing: 0;	
+}
+/* .half-space (extends h1,h2,h3,h4 etc.) */
+.half-space{
+	margin-top: 0.5625em;
+}
+.title-divider{
+	background: #ccc;
+	margin-left: 0;
+	margin-right: 0;
+	padding: 0.5625em 10px;
+	margin-top: 0;		
+}
+
+.feint {
+	color: #ADAFB2;
+}
+
+.page h2{
+	margin-top: 0.666667em;
+}
+
+
+/* ruled-above (extends h1, h2, h3 etc.) */
+/* appears to be unused, maybe a candidate for removal */
+.ruled-above{
+	border-top: 1px solid #cccccc;
+	padding-top: 0.5em; /* This isn't  0.5625em because we want to loose a pixel for the border above. 0.5625em  == 9px : 0.5em == 8px */
+}
+
+.img-indent{
+	margin:10px;
+}
+
+.img-indent-caption{
+	margin-bottom:0;
+}
+
+dl{
+	margin-top: 0.75em;
+	margin-bottom: 0.75em;
+}
+
+span.radio label
+{
+    padding: 0 0px;
+	font-size: 93%;
+	line-height: 1.5em;
+	margin-top: 0.75em;
+	margin-bottom: 0.75em;
+	position: relative;
+    display: inline;
+}
+
+span.radio input
+{
+    background-color:#ffffff;    
+}
+
+span.radiobuttonlist label
+{
+    margin:12px 10px 0px 0px;
+    padding: 0 0px;
+	font-size: 93%;
+	position: relative;
+    display: inline;
+    vertical-align: bottom;
+}
+
+span.radiobuttonlist input
+{
+    margin:12px 3px 2px 5px;
+    vertical-align: bottom;
+    display:inline;
+    background-color:#ffffff;
+    cursor:pointer;
+    
+  
+}
+
+span.checkbox label
+{
+    padding: 0 0px;
+	font-size: 93%;
+	line-height: 1.5em;
+	margin-top: 0.75em;
+	margin-bottom: 0.75em;
+	position: relative;
+    display: inline;
+}
+
+label{
+	padding: 0 10px;
+	font-size: 93%;
+	line-height: 1.5em;
+	margin-top: 0.75em;
+	margin-bottom: 0.75em;
+	position: relative;
+	display: block;
+}
+
+/* .p (extends p) this is to simplify font-size declarations in non-standard p usage*/
+.p,
+.main p,
+.main ul,
+.main ol,
+.main blockquote{
+	font-size: 93%;
+	line-height: 1.5em;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+	position:relative;
+}
+
+.main blockquote{
+	padding-left: 1em;
+	padding-right: 1em;
+	font-style: italic;
+}
+
+ul{
+	margin-left: 4px;
+}
+.main ol{
+	margin-left: 20px;
+}
+.main ol li{
+	list-style: decimal;
+	padding-bottom: 0.75em;
+}
+.main ol ul{
+	margin-left: -0.5em;
+	font-size: 100%;
+}
+.main ol ul li{
+	list-style:none;
+	padding-bottom: 0;
+}
+.main ol li p{
+	padding-bottom: 0;
+}
+/* .list-regular (extends ul) deliberately overspecified as should be used to override lists nested in list-semantic */
+article ul li,
+body .main .list-regular li{
+	background: transparent url(../images/shared/li-bullet-dark.png) 0 0 no-repeat;
+	padding-left: 16px;
+}
+article ul.arc li
+{
+    background: transparent;
+    padding-left: 0px;
+}
+.ie7 .main ul li{
+	background-position: 0 2px;
+}
+.main ol li p,
+.main ul li p{
+	margin-left: 0;
+	font-size: 100%;
+}
+
+
+/* 
+*  list-semantic (extends ul)
+*  use this for situations where semantic markup dictates ul li markup
+*  but design doesn't
+*  the selectors here are messy, but given that ul li elements are going to 
+*  be user created via WYSIWYG editors, it makes sense to give them a bit more strength
+*/
+.list-semantic{
+	margin-left: 0;
+	font-size: 100%;
+}
+.list-semantic li{
+	margin-left: 0;
+	padding-left: 0;
+	background: transparent;
+}
+.main .list-semantic li{
+	margin-left: 0;
+	background-image: none;
+	list-style-type: none;
+}
+.ie7.no-js .list-semantic,
+.ie8.no-js .list-semantic{
+	clear: none;
+	float: left;
+}
+/* .list-semantic-ruled (extends .list-semantic)*/
+.list-semantic-ruled li{
+	border-top:1px solid #fff;
+	margin-top: -1px;
+}
+
+/* 
+*  .list-noLineSpace (extends .list-semantic)
+*  use this for text-lists that need no additional line space and no bullets.
+*/
+.main .list-semantic-indent li,
+.list-semantic-indent li {
+	margin-left: 10px;
+}
+.date{
+	color: #807F83;
+}
+.aside .date{
+	margin-bottom: -0.5em;
+}
+.label{
+	color: #807F83;
+}
+.download{
+	padding-left:20px;
+	position:relative;
+	display: block;
+}
+
+/* no-js styles for non-html5 compliant browsers */ 
+.ie7.no-js h3,
+.ie8.no-js h3,
+.ie7.no-js p,
+.ie8.no-js p,
+.ie7.no-js p,
+.ie8.no-js p{
+
+	width: 470px;
+}
+.ie7.no-js .inner h3,
+.ie8.no-js .inner h3,
+.ie7.no-js .inner p,
+.ie8.no-js .inner p,
+.ie7.no-js .list-semantic h3,
+.ie8.no-js .list-semantic h3,
+.ie7.no-js .list-semantic p,
+.ie8.no-js .list-semantic p,
+.ie7.no-js .media h3,
+.ie8.no-js .media h3,
+.ie7.no-js .media p,
+.ie8.no-js .media p,
+.ie7.no-js .leftCol h3,
+.ie8.no-js .leftCol h3,
+.ie7.no-js .leftCol p,
+.ie8.no-js .leftCol p,
+.ie7.no-js .leftCol p,
+.ie8.no-js .leftCol p
+.ie7.no-js .rightCol h3,
+.ie8.no-js .rightCol h3,
+.ie7.no-js .rightCol p,
+.ie8.no-js .rightCol p,
+.ie7.no-js .rightCol p,
+.ie8.no-js .rightCol p{
+	margin-left: 0px;
+	width: auto;
+}
+.ie7.no-js .inner p,
+.ie8.no-js .inner p{
+	margin-left: 10px;
+}
+/* img-float (extends img) */
+/* to be used for hanging images, inline with text */
+.img-float{
+	float: left;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+/* hanging icon (extends a) */
+.hanging-icon{
+	display: block;
+}
+
+
+/* .main .media extensions */
+.main .media,
+.main .media p{
+	padding-right: 0;
+	margin-right: 0;
+}
+.main .media .img{
+	margin-right: 10px;
+}
+.main .media p,
+.main .media h3{
+	margin-left: 0;
+}
+.ie7.no-js .media,
+.ie8.no-js .media,
+.ie7.no-js .media .bd,
+.ie8.no-js .media .bd{
+	width: 470px;
+	display: block;
+}
+
+/* References to the main sprite should use .icon */
+.icon{
+	background-image:url(../images/shared/icons-sprite.png);
+	width: 16px;
+	height: 16px;
+}
+/* jQuery UI has it's own icon class, this is here to normalize the sprite reference */
+.ui-icon{ 
+	background-image:url(../images/shared/icons-sprite.png);
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	left: 0;
+	display: block;
+	}
+.ui-icon-triangle-1-e{
+	background-position: -16px 0;
+}
+.ui-icon-triangle-1-s{
+	background-position: -16px -48px;
+}
+.ui-icon-triangle-1-n{
+	background-position: -16px -16px;
+}
+.ui-icon-triangle-1-w{
+	background-position:-16px -32px;
+}
+.ui-icon-download{
+	background-position: -224px -144px;
+}
+.ui-icon-ajax-loading{
+	background:url(../images/shared/ajax-loader.gif);
+}
+/*
+.add-icon{ 
+	background-image:url(../images/shared/icons-sprite.png);
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	display: block;
+	}*/
+.bioemail{
+background-position:-16px -200px;
+}
+/* .areasOfInterest and .arc */
+
+#areasOfInterest-fulllist,
+#arc-fulllist {
+	margin-top:-30px;
+	margin-left: 300px;
+}
+
+.areasOfInterest .cunyCols,
+.arc .cunyCols {
+	padding:0;
+	position:relative;
+}
+
+.areasOfInterest .leftCol {
+	display:block;
+	width:470px;
+	margin:60px 0 0 -10px;
+	z-index:1;
+}
+
+.arc .leftCol {
+	display:block;
+	width:470px;
+	margin:55px 0 0 -10px;
+	z-index:1;
+}
+
+.areasOfInterest .middleCol {
+	display:block;
+	width:470px;
+	margin:90px -200px 0 -100px;
+	float:left;
+	background-image:none;
+	border:0;
+	z-index:2;
+}
+
+.arc .middleCol {
+	display:block;
+	width:470px;
+	margin:85px -200px 0 -100px;
+	float:left;
+	background-image:none;
+	border:0;
+	z-index:2;
+}
+
+.areasOfInterest .rightCol {
+	width:250px;
+	margin:15px -10px 0 0;
+	z-index:3;
+}
+
+.arc .rightCol {
+	width:250px;
+	margin:0px -10px 0 0;
+	z-index:3;
+}
+
+.areasOfInterest .mod {
+	position:relative;
+	margin:0;
+}
+
+.arc .mod {
+	position:relative;
+}
+
+.areasOfInterest .aside .inner,
+.arc .aside .inner {
+	margin:0;
+	margin-bottom:10px;
+	padding:0 10px 20px 10px;
+}
+
+.areasOfInterest .rightCol .aside .inner,
+.arc .rightCol .aside .inner {
+	background-color:#ffffff;
+}
+
+.areasOfInterest .leftCol .aside .inner,
+.arc .leftCol .aside .inner {
+	background-color:#ffffff;
+	margin-bottom:2px;
+}
+
+.areasOfInterest .middleCol .aside .section,
+.areasOfInterest .middleCol .aside .inner,
+.arc .middleCol .aside .section,
+.arc .middleCol .aside .inner {
+	background-color:#DFDFDE;
+}
+
+.areasOfInterest .accordion-aside,
+.arc .accordion-aside {
+	margin:0;
+	font-size:108%;
+	line-height:1.3em;
+	overflow: hidden;
+}
+
+.areasOfInterest .accordion-aside .hd
+.arc .accordion-aside .hd {
+	padding:10px;
+	background-color:#ffffff;
+	margin:0;
+	display: block;
+}
+.areasOfInterest .accordion-aside .bd,
+.arc .accordion-aside .bd {
+	margin:0;
+	background-color:#ffffff;
+}
+
+.areasOfInterest .aside .section,
+.arc .aside .section {
+	padding:10px;
+	border-bottom:0;
+	border-top-width:4px;
+	border-top-style:solid;
+}
+.areasOfInterest .mod h2,
+.areasOfInterest .mod h5,
+.arc .mod h2,
+.arc .mod h5{
+	margin-left: 0;
+}
+.areasOfInterest .mod h2,
+.arc .mod h2{
+	margin-top: 0.666667em;
+}
+
+.middleCol .mod .bd,
+.middleCol .mod .ft,
+.middleCol .mod .hd {
+	width:280px;
+	padding-right:160px;
+	padding-left:30px;
+	padding-bottom:0;
+	margin-bottom:-10px;
+}
+
+.areasOfInterest .mod .ft,
+.arc .mod .ft {
+	font-size:93%;
+}
+
+.areasOfInterest .leftCol .mod .bd,
+.areasOfInterest .leftCol .mod .ft,
+.areasOfInterest .leftCol .mod .hd,
+.arc .leftCol .mod .bd,
+.arc .leftCol .mod .ft,
+.arc .leftCol .mod .hd {
+	width:310px;
+	padding-right:130px;
+	padding-left:30px;
+	padding-bottom:0;
+	padding-top:10px;
+	margin-bottom:-10px;
+}
+.areasOfInterest .rightCol h1,
+.arc .rightCol h1 {
+	margin-left: 0;
+}
+/* .areasOfInterest-menu (extends a) */
+.areasOfInterest-menu {
+	padding-right:30px;
+	position:relative;
+	text-decoration: none;
+}
+.areasOfInterest-menu:focus{
+	outline: none;
+	text-decoration: none;
+}
+.areasOfInterest-menu:hover {
+	color:#005DAA;
+}
+
+.ui-icon-popup-s {
+	background-position: -32px -128px;
+	width:32px;
+	height:32px;
+	left:auto;
+	right:0;
+	top:-1px;
+}
+
+.areasOfInterest .image-wrapper,
+.arc .image-wrapper {
+	position:relative;
+	padding:0;
+	margin:10px -2px;
+	border:2px solid #ffffff;
+}
+
+.areasOfInterest .image-wrapper img,
+.arc .image-wrapper img {
+	padding:0;
+	margin:0;
+}
+
+.no-js.ie7 .humanitiesLink,
+.no-js.ie8 .humanitiesLink,
+.no-js.ie7 .arcLink,
+.no-js.ie8 .arcLink
+{
+    display: none;
+}
+
+.leftcolum-calendar-fix { min-height:350px; }
+

@@ -1,0 +1,42 @@
+/*!
+*	Footer
+*/
+footer{
+	position: absolute;
+	height: 200px;
+	bottom: -230px;
+	width: 960px;
+}
+.ie7 footer{
+	bottom: auto;
+	margin-top: 20px;
+}
+.ie7.no-js .footer-line h3,
+.ie8.no-js .footer-line h3{
+	margin-left: 0;
+}
+.ie7.no-js .footer-line,
+.ie8.no-js .footer-line{
+	background: #fff;
+	margin-bottom: -20px;
+}
+footer ul,
+footer .vcard{
+	font-size: 85%;
+} 
+footer ul{ 
+	margin: 0 0 0 10px;
+	line-height: 1.5em;
+}
+.cuny-block-logo{
+	margin-top: 10px;
+	float: right;
+}
+footer .fn{
+	margin-top: 0;
+	margin-bottom: 0;
+}
+footer .adr{
+	margin-top: 0;
+	margin-bottom: -10px;
+}

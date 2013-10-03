@@ -1,0 +1,87 @@
+@charset "utf-8";
+/* CSS Document */
+
+.GcDropCMSMenu{
+font-size: 93%;
+	line-height: 1.5em;
+	margin-top: 0.75em;
+	margin-bottom: 0.75em;
+	display: block; 
+	display: inline-block;
+	position: relative; 
+	vertical-align: middle; 
+	text-decoration: none; 
+	overflow: hidden; 
+	zoom: 1;
+	
+}
+.GcDropCMSMenuItem{
+	padding:0; 
+	margin:0; 
+	display: block; 
+	border-top: 1px solid #f1f1f1; 
+	border-bottom: 1px solid #f1f1f1; 
+	border-right-width: 0 !important; 
+	border-left-width: 0 !important; 
+	font-weight: normal !important; 
+	padding-left: 5px;
+	background-color:#005DAA;
+	color:#FFF;
+}
+
+.GcDropCMSMenuItemMouseUp {
+	padding:0; 
+	margin:0; 
+	display: block; 
+	border-top: 1px dotted #f1f1f1; 
+	border-bottom: 1px dotted #f1f1f1; 
+	border-right-width: 0 !important; 
+	border-left-width: 0 !important; 
+	font-weight: normal !important; 
+	padding-left: 5px;
+	background-color:#ffffff;
+}
+
+.GcDropSubMenuCMSMenuItem{
+	padding:0; 
+	margin-left:650px; 
+	margin-top: -300px;
+	display: block; 
+	border-top: 1px dotted #f1f1f1; 
+	border-bottom: 1px dotted #f1f1f1; 
+	border-right-width: 0 !important; 
+	border-left-width: 0 !important; 
+	font-weight: normal !important; 
+	padding-left: 5px;
+	background-color:#ffffff;
+	position:absolute;
+	color:#005DAA;
+}
+
+.GcDropSubMenuCMSMenuItemMouseUp
+{
+	padding:0; 
+	margin-left:650px; 
+	margin-top: -300px;
+	display: block; 
+	border-top: 1px dotted #f1f1f1; 
+	border-bottom: 1px dotted #f1f1f1; 
+	border-right-width: 0 !important; 
+	border-left-width: 0 !important; 
+	font-weight: normal !important; 
+	padding-left: 5px;
+	background-color:#ffffff;
+	position:absolute;
+	color:#000000;
+}
+
+ 
+.GcDropOtherLevelsCMSMenuItem
+.GcDropOtherLevelsCMSMenuItemMouseUp
+
+
+GcDrop;GcDropSubMenu;GcDropOtherLevels*/
+
+.gcdropdownbox{
+	
+}
