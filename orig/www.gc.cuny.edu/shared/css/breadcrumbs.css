@@ -1,0 +1,30 @@
+/*!
+*	Breadcrumbs
+*/
+ul.breadcrumb{ 
+	margin:1em 0 1.5em 10px !important;
+	font-size: 77% !important; 
+	line-height: 1.2em !important;
+	}
+.breadcrumb li:hover, 
+.breadcrumb li{ 
+	display: inline; 
+	padding-left: 0px !important;
+	background: transparent !important;
+	/*white-space: nowrap;*/
+	}
+.breadcrumb .arrow{ 
+	width: 16px;
+	height:10px;
+	background: transparent url(../images/shared/icons-sprite.png) 0px -1px no-repeat !important;
+	margin-right: 0;
+	display:-moz-inline-stack; /* make inline block work reliably */
+	display:inline-block;
+	zoom:1;
+	}
+.ie7 .breadcrumb .arrow{
+	background-position: 0px -4px !important;
+}
+.breadcrumb a {
+	color: #2c4460 !important;
+	}

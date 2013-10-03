@@ -1,0 +1,1782 @@
+/*!
+*	Modules
+*/
+/* ====== Contour blocks ====== */
+/* ----- aside (extends mod) ----- */
+.aside{
+	margin: 0 0 8px 0;
+}
+.aside p{
+	margin: 0.5em 0;
+}
+.aside h5{
+	margin: 0;
+}
+.aside .bd p{
+	font-size: 93%;
+	line-height: 1.5em;
+}
+.aside img{
+	margin-left: -10px;
+}
+.ARC-remove-aside-margin img{
+    margin-left: 0px;
+}
+.ie8 .aside img{
+	margin-top: 4px;
+}
+.aside ul{
+	margin: 0 0 8px 0;
+	padding: 0;
+}
+.aside ul li{
+	border-bottom: 1px solid #fff;
+}
+.arc-center ul li{
+	border-bottom: 0px;
+}
+.aside .act{
+	background: transparent;
+	font-size: 77%;
+}
+/*! 
+* .column-blanker (extends div) 
+* This exists to extend the length of columns and so push the main column into a desired shape.
+* It is necessary as Kentico cannot place classes in the body tag at the time of writing
+*
+*/
+.column-blanker{
+	display: block;
+	height: 400px;
+}
+
+/* ----- mod-first (extends mod) ----- */
+/* some first elements need some padding to push them off the section title. */
+.mod .mod-first{
+	margin-top: 0.75em;
+	margin-bottom: 0.75em;
+}
+/* ----- accordion-aside (extends aside) ----- */
+.accordion-aside{
+	margin-left: -10px;
+	margin-right: -10px;
+}
+.accordion-aside img{
+	margin: 0 10px 10px 10px;
+}
+.accordion-aside .accordion-content{
+	background: #fff;
+	position: relative;
+	font-size: 85%;
+	padding-top: 10px;	
+	border-bottom:  1px dashed #EDEDED;
+}
+.accordion-aside .accordion-content p{
+	margin-top: 0;
+	margin-left: 16px;
+}
+.accordion-aside .ui-accordion-content ul{
+	margin-left: 0;
+}
+.accordion-aside .ui-accordion-content li,
+.accordion-aside .ui-accordion-content li ul li{
+	background: transparent url(../images/shared/li-bullet.png) 0 0 no-repeat;
+	padding-left: 16px;
+}
+.accordion-aside .ui-expandable-accordion{
+	padding: 0;
+}
+.accordion-aside .ui-accordion-content:first-of-type{ /* remove FOUT for new browsers */
+	display: block;
+}
+/* ----- mod-external (extends mod) ----- */
+.arc .mod-external{
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+.mod-external{
+	margin: 0 -10px 10px -10px;
+	padding: 0;
+}
+.mod-external h3{
+	margin: 0;
+}
+/* ----- menu (extends mod) ----- */
+.menu{
+	margin: 0 0 8px 0;
+}
+.menu ul{
+	margin: 0 0 8px 0;
+	padding: 0;
+	border-top: 1px solid #fff;
+	margin-top: -1px;
+}
+.menu ul li{
+	border-bottom: 1px solid #fff;
+	margin-bottom: -1px;
+	font-size: 93%;
+	line-height:1.5em;
+}
+.menu ul li a{
+	display: block;
+}
+.menu ul li ul{
+	margin: 0;
+}
+.menu ul li ul li{
+	border-top: 1px solid #fff;
+	margin-top: -1px;
+	border-bottom: 0;
+	margin-bottom: 0;
+	padding-left: 16px;
+	font-size: 100%;
+	background: transparent url(../images/shared/li-bullet-white.png) 0 1px no-repeat;
+}
+.ie7 .menu ul li ul li{
+	background-position: 0 4px;	
+}
+
+/* ----- menuLeftNav (extends mod) ----- */
+.menuLeftNav{
+	margin: 0 0 8px 0;
+}
+.menuLeftNav ul{
+	margin: 0 0 8px 0;
+	padding: 0 0 0 15px;
+	/*border-top: 1px solid #666;*/
+	margin-top: -1px;
+}
+.menuLeftNav ul li{
+	border-bottom: 1px dashed #ccc;
+	padding:3px 0 3px 0;
+	margin-bottom: -1px;
+	font-size: 93%;
+	line-height:1.5em;
+}
+.menuLeftNav ul li a, .menuLeftNav ul li span{
+	padding:0 0 0 3px;
+}
+.menuLeftNav ul li a{
+	display: block;
+}
+.menuLeftNav ul a:hover
+{
+    background-color: #fff;
+}
+
+.menuLeftNav ul li ul{
+	margin: 0;
+}
+.menuLeftNav ul li ul li{
+	border-top: 1px dashed #ccc;
+	padding: 3px 0 3px 15px;
+	margin-top: -1px;
+	border-bottom: 0;
+	margin-bottom: 0;
+	
+	font-size: 100%;
+	/*background: transparent url(../images/shared/li-bullet-white.png) 0 1px no-repeat;*/
+}
+.ie7 .menuLeftNav ul li ul li{
+	background-position: 0 4px;	
+}
+
+/* .aside-greybox (extends aside) */
+
+.aside-greybox h3{
+	margin: 0;
+}
+.aside-greybox{
+	margin-left: -10px;
+	padding: 0.697em 10px 0.7em 10px;
+	background: #ccc;
+}
+.aside-greybox .ft{
+	border-top: 1px solid #fff;
+	margin-top: -1px;
+}
+.aside-greybox .section{
+	background: #cccccc;
+	border-color: #cccccc;
+}
+/* ----- menu accordion (extends menu) ----- */
+.accordion-menu ul{
+	border: 0;
+	margin: 0;
+}
+.accordion-menu .ui-accordion-header{
+	color: #989898;
+	border-top: 1px solid #fff;
+	margin-top: -1px;
+}
+.accordion-menu .ui-expandable-accordion{
+	padding: 0;
+}
+.accordion-menu .ui-expandable-accordion .ui-accordion-content:first-of-type{ /* remove FOUT for new browsers */
+	display: block;
+}
+/* .keyboardAccess (extends a) */
+.keyboardAccess {
+ color:#989898;
+}
+
+/* ----- vcard (extends mod) ----- */
+.vcard{
+	background: #fff;
+	font-size: 93%;
+	line-height: 1.5em;
+}
+.ie7.no-js .vcard,
+.ie8.no-js .vcard{
+	width: 470px;
+	margin-left: 0;
+	float: left;	
+}
+.ie7.no-js .vcard h3,
+.ie8.no-js .vcard h3,
+.ie7.no-js .vcard p,
+.ie8.no-js .vcard p{
+	margin-left: 10px;
+}
+
+.vcard .person{
+	margin-left: 10px;
+	margin-top: 0;
+	font-size: 150%; /* takes us back up to 18px, and a bit */
+	line-height: 1em;
+}
+.vcard .bd{
+	margin-top: 0.75em;
+	margin-bottom: 0.75em;
+}
+.vcard p{
+	margin-right: 0;
+}
+.ie7 .vcard .bd{
+	margin-top: 1.2em;
+}
+/* ----- vcard-plain (extends vcard) ----- */
+.vcard-plain{
+	background: transparent;
+}
+/* ----- vcard-on-white (extends vcard) ----- */
+.vcard-on-white{
+	background: transparent;
+}
+.vcard-on-white .inner{
+	border-bottom: 1px solid #EDEDED;
+	border-top: 1px solid #EDEDED;
+	margin-top: -1px;
+	margin-bottom: -1px;
+	position: relative;
+}
+.vcard-on-white .inner .bd{
+	margin-left: -10px;
+	margin-right: -10px;
+	width: auto;
+}
+.ie7 .vcard-on-white .inner .bd{
+	left: -10px;
+	position: relative;
+}
+.main .vcard-on-white p{
+	margin-right: 0;
+}
+.accordion-content .vcard{ /* because sometimes vcard-on-white doesn't get added */
+	margin-left: 0;
+	margin-right: 0;
+}
+.accordion-content .vcard-on-white{ /* because markup may be applied inconsitently */
+	margin-left: 10px;
+	margin-right: 10px;
+}
+/* ----- vcard-small (extends vcard) ----- */
+.vcard-small{
+	font-size: 85%;
+}
+/* ----- facultyMember (extends mod and accordion) ----- */
+
+.facultyMember {
+	background-color:#ffffff;
+	margin:0;
+}
+
+.facultyMember img {
+	margin:10px;
+}
+.facultyMember .bio {
+	padding-left:3px;
+}
+.facultyMember .bio h3 { /* this is probably a bit naughty */
+	margin:10px 0 10px 10px;
+}
+.facultyMember .bd h5 {
+	margin:0;
+	font-size:93%;
+}
+
+.facultyMember .address {
+	border-top:1px solid #EDEDED;
+	margin:0 10px;
+	padding:10px 0;
+	
+}
+
+/* .img-wrapper (extends mod) */
+.main .img-wrapper{
+	margin-right: 11px;
+}
+.img-wrapper .inner{
+	background: #fff;
+}
+.main .img-wrapper-caption,
+.img-wrapper-caption{
+	margin-bottom: 0;
+}
+.ie7.no-js .main .img-wrapper-caption,
+.ie7.no-js .img-wrapper-caption,
+.ie8.no-js .main .img-wrapper-caption,
+.ie8.no-js .img-wrapper-caption{
+	margin-left: 0;
+}
+.img-wrapper .bd{
+	background: #cccccc;
+}
+.ie7 .main .img-wrapper-caption,
+.ie7 .img-wrapper-caption,
+.ie8 .main .img-wrapper-caption,
+.ie8 .img-wrapper-caption{
+	margin-bottom: 5px;
+}
+
+/* .ext-wrapper (extends mod) */
+.main .text-wrapper{
+	margin-right: 11px;
+}
+.text-wrapper .inner{
+	background: #fff;
+	padding-bottom: 0.692em;
+}
+/* ----- gScarousel (extends mod) ----- */
+.gScarousel{
+	width: 470px;
+	background: #ffffff;
+}
+.gScarousel .carousel-cassette {
+	position:relative;
+	width:470px;
+}
+.gScarousel .liLiner{
+	position:relative;
+	width:470px;
+	top:0;
+	background: #898989;
+}
+.gScarousel .left .liLiner{
+	right:0;
+	left:auto;
+}
+.gScarousel .right .liLiner{
+	left:0;
+	right:auto;
+}
+.gScarousel .carousel-caption{
+	margin:0;
+	padding: 1.636em 10px 0.75em;
+	background: #fff;
+}
+
+.gScarousel .carousel-controls{
+	position: absolute;
+	top:263px;
+	right:10px;
+	z-index:20;
+}
+.gScarousel .carousel-control-item{
+	background-color:transparent;
+	background-image:url(../images/shared/icons-sprite.png);
+	background-repeat:no-repeat;
+	position:relative;
+	width: 16px;
+	height: 16px;
+	float:left;
+	cursor:pointer;
+}
+.slideDot {
+	background-position:  -112px -64px;	
+}
+.slideDot:hover  {
+	background-position: -112px -96px;	
+}
+.next {
+	background-position: -82px -66px;
+}
+.next:hover {
+	background-position:  -82px -98px;
+}
+/*
+ORIGINAL POSITIONS
+.next {
+	background-position: -82px -66px;
+}
+.next:hover {
+	background-position:  -82px -98px;
+}
+    */
+
+.prev {
+	background-position: -96px -64px;
+}
+.prev:hover {
+	background-position: -96px -96px;
+}
+.active {
+	background-position:  -112px -80px;
+	cursor:default;
+}
+
+/* ----- filter (extends mod) ----- */
+.filter .inner{
+	border-top: 1px solid #ffffff;
+	margin-top: -1px;
+	border-bottom: 1px solid #ffffff;
+	margin-bottom: -1px;
+}
+.ie7.no-js .filter,
+.ie8.no-js .filter{
+	width: 470px;	
+}
+.ie7.no-js .filter .accordion-content,
+.ie8.no-js .filter .accordion-content{
+	margin-left: 0px;	
+}
+
+
+
+.filter h3{
+	margin-left: 0;
+}
+
+.ajax-selector-throbber{
+	width: 100%;
+	background: transparent url(../images/shared/ajax-loader-grey.gif) 50% 50% no-repeat;
+	height: 100px;
+}
+.ajax-container{ /* purely for ie7 */
+	overflow: hidden !important; 
+	position: relative; 
+}
+
+
+/* ====== Block headers and footers ====== */
+/*.hd h1, .hd h2, .hd h3, .hd h4, .hd h5, .hd h6{padding: 5px 10px;}*/
+.section {
+background: #fff;
+margin-left: -10px;
+margin-bottom: -4px;
+padding:3px 10px 3px 10px;
+border-bottom: 4px solid #cccccc;
+}
+.ie7 .section{
+	margin-right: -10px;
+	margin-bottom: 0;
+}
+.section h3{
+	font-family:"UrbanoLightCondensed", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
+	margin: 0;
+}
+.ie7 .section h3,
+.ie8 .section h3{
+	font-family:"UrbanoCondensed", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
+}
+
+/* areas (all extend .section) */
+
+.dropdownone, .dropdownone a{
+	border-color: #EC9C1D;
+}
+.dropdowntwo, .dropdowntwo a{
+	border-color: #FFC30B;
+}
+.dropdownthree, .dropdownthree a{
+	border-color: #C0D02A;
+}
+.dropdownfour, .dropdownfour a{
+	border-color: #8DC63F;
+}
+.dropdownfive, .dropdownfive a{
+	border-color: #00A94F;
+}
+.dropdownsix, .dropdownsix a{
+	border-color: #0093D0;
+}
+.dropdownseven, .dropdownseven a{
+	border-color: #005DAA;
+}
+/* .tags (extends p) */
+
+.main .mod .tags,
+.main .tags,
+.tags{
+	display:block;
+	border-top:1px solid #EDEDED;
+	margin-top: -1px;
+	zoom:1;
+	padding-top: 0.75em;
+	background: transparent url(../images/shared/icons-sprite.png)  100% -199px no-repeat;		
+}
+
+.main .mod .tags:hover,
+.main .tags:hover,
+.tags:hover{
+	background-position: 100% -247px;
+}
+
+.tag{
+	display: inline;
+	padding-right: 0.5em;
+}
+/*
+If I could start the project again I'd do
+.link
+.link-share
+.link-external
+etc.
+*/
+
+/* share-link (extends div) */
+
+.st_sharethis_custom,
+.share-link{
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: 93%;
+	border-top:1px solid #EDEDED;
+	margin-top: -1px;
+	padding-top: 0.75em;	
+	background: transparent url(../images/shared/icons-sprite.png)  100% -439px no-repeat;	
+	text-decoration:none;
+}
+.st_sharethis_custom:hover,
+.share-link:hover{
+	background-position: 100% -471px;
+}
+.at15t_compact{ /* this is a class from addThis.com */
+	background:transparent !important;
+	position: absolute;
+}
+.addthis_button_compact{
+	display: block;
+	text-decoration:none;
+}
+/* .share-link-onGrey (extends .share-link) */
+.share-link-onGrey{
+	border-top:1px solid #fff;		
+}
+
+.share-link-single {
+	margin-top:32px;
+}
+/* .registration-link (extends a) */
+.registration-link{
+	display: block;
+	border-top:1px solid #EDEDED;
+	zoom:1;
+	margin-top: -1px;
+	padding-top: 0.75em;
+	background: transparent url(../images/shared/icons-sprite.png)  100% -599px no-repeat;		
+}
+.registration-link:hover{
+	background-position:  100% -647px;
+}
+/* .seeAlso-link (extends a) */
+.ui-icon-popup-eye {
+	background-position: 0 -126px;
+	width:32px;
+	height:32px;
+	left:auto;
+	right:0;
+	top:-1px;
+}
+.seeAlso-link {
+	position:relative;
+	zoom:1;
+	border-top:1px solid #EDEDED;
+	margin-top: -1px;
+	padding-top: 0.75em;
+	background:transparent;
+}
+
+.last-link {
+	border-bottom:1px solid #EDEDED;
+	margin-bottom: -1px;
+	padding-bottom: 0.5em;
+}
+/* .calendar-link (extends a) */
+.calendar-link{
+	display: block;
+	border-top:1px solid #EDEDED;
+	zoom:1;
+	margin-top: -1px;
+	padding-top: 0.75em;
+	background: transparent url(../images/shared/icons-sprite.png)  100% -503px no-repeat;		
+}
+.calendar-link:hover{
+	background-position:  100% -551px;
+}
+/* .cart-link (extends a) */
+.cart-link{
+	display: block;
+	border-top:1px solid #EDEDED;
+	zoom:1;
+	margin-top: -1px;
+	padding-top: 0.75em;
+	background: transparent url(../images/shared/icons-sprite.png)  100% -790px no-repeat;		
+}
+.cart-link:hover{
+	background-position:  100% -838px;
+}
+
+/* external link (extends a) */
+.internal-link,
+.external-link{
+	display: block;
+	border-top:1px solid #EDEDED;
+	zoom:1;
+	margin-top: -1px;
+	padding-top: 0.75em;
+	padding-right:30px;
+}
+.external-link {
+	background: transparent url(../images/shared/icons-sprite.png)  100% -294px no-repeat;	
+}
+/*external-link-double-bar (extends external-link) */
+.external-link-double-bar{
+	border-bottom: 1px solid #EDEDED;
+	padding-bottom: 0.75em;
+	margin-bottom: 1.5em;
+}
+
+/* external-link-on-grey (extends external-link) */
+.external-link-on-grey{
+	border-color: #ffffff;	
+}
+/* external link color (extends external-link) */
+.external-link-white{
+	background-position: 120% -388px;
+	margin-top: 0;
+	padding-top: 0;
+	border-top: 0;
+	padding:10px;/* ADDED BY RTYSKA IN DIFF : 7/17 */
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+}
+.external-link-white:hover{
+	background-position: 120% -292px;
+	background-color: #fff;	
+}
+.external-link-dropdownone {
+	background-color: #EC9C1D;
+}
+.external-link-dropdowntwo{
+	background-color: #FFC30B;
+}
+.external-link-dropdownthree{
+	background-color: #C0D02A;
+}
+
+.external-link-dropdownfour {
+	background-color: #8DC63F;
+}
+.external-link-dropdownfive{
+	background-color: #00A94F;
+}
+.external-link-dropdownsix{
+	background-color: #0093D0;
+}
+.external-link-dropdownseven h3,
+.external-link-dropdownsix h3{
+	color: #fff;
+}
+.external-link-dropdownseven:hover h3,
+.external-link-dropdownsix:hover h3{
+	color: #333;
+}
+.external-link-dropdownseven{
+	background-color: #005DAA;
+}
+
+/* .external-link-white (this is a late in the day change, in an ideal world an extra class should be employed) */
+/* Perhaps with will come in Phase 2 */
+.mod-external .external-link-white{
+	padding: 10px 20px 10px 10px;
+	background-image:url(../images/shared/external-link-module-sprite.png);
+	background-position: 100% -68px;
+}
+.mod-external .external-link-white:hover{
+	background-position: 100% 12px; 
+}
+
+/* .pagination (extends div) */
+.pagination{
+	display: block;
+	
+	font-size: 93%;
+	margin-top: 1.5em;	
+	padding-top: 0.75em;	
+	padding-bottom: 0.75em;
+	position:relative;
+}
+
+.ie7.no-js .pagination,
+.ie8.no-js .pagination{
+	clear: both;	
+}
+
+.pagination-pages-list,
+.main .pagination-pages-list{
+	border-top:1px solid #fff;
+	margin: -1px auto 0 auto;
+	width: 100%;
+	top:0;
+	padding: 0.75em 0;
+	list-style: none;
+	list-style-type: none;
+	position: absolute;
+	text-align: center;
+	z-index: 1;
+}
+.ie7 .pagination-pages-list,
+.ie7 .main ul.pagination-pages-list{
+	left: 0;
+	
+}
+.pagination-page{
+	display: inline;
+	padding: 0 0.75em;
+	background: transparent !important;
+}
+.pagination-next-page,
+.pagination-previous-page{
+	position: relative;
+	z-index: 2;
+}
+.pagination-next-page{
+	float: right;
+}
+.pagination-page-current{
+	font-weight: bold;
+}
+
+/* .paginationAlphabeth (extends pagination) */
+
+.paginationAlphabeth .pagination-page{
+	padding:0 0.2em;
+	font-family:"UrbanoLightCondensed", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif; 
+	font-size:160%;
+	line-height: 1em;
+}
+.paginationAlphabeth .pagination-pages-list,
+.main .paginationAlphabeth ul.pagination-pages-list{
+	text-align: left;
+	padding:0 10px;
+	margin:0;
+	border:0;
+}
+
+/* .meta (extends p) */
+.meta{
+	font-weight: bold;
+}
+
+/* twoColumnHeader (extends mod) */
+body .twoColumnHeader{
+	position:relative;
+	display: table-cell;
+
+
+
+
+
+
+
+	margin:0;
+
+}
+body .twoColumnHeader h1{
+	padding-left: 20px;
+}
+.ie7 body .twoColumnHeader h1{
+	margin-left: 190px;
+}
+body.twoColumnHeader .leftCol{
+	position: absolute;
+	left: 0;
+	top:0;
+}
+body.twoColumnHeader .main{
+	padding-left: 230px;
+	background-position: 215px 0;
+}
+/*
+.ie7 body.twoColumnHeader .main,
+.ie8 body.twoColumnHeader .main{
+	width: 491px; /* It's ugly but it works. Sorry!
+} 
+*/
+/* twoColumnHeader (extends .main) */
+body .threeColumnContent {
+	position:abolute;
+	margin-left:-40px;
+	width:100%;
+	float:left;
+	padding:0;
+	padding-left:40px;	
+	border:0;
+	background-image:none;
+}
+
+/* multiCarousel (extends twoColumnHeader) */
+body .multiCarousel {
+	padding-left:240px;
+	margin-right: -20px;
+}
+.ie7 body .multiCarousel {
+	padding-left: 230px;
+}
+.multiCarousel .inner{
+	margin-bottom: 1.384em;
+}
+.multiCarousel .contentWrapper {
+	background:#CCCCCC url(../images/shared/ffffffx1-470x1.png) repeat-y;
+	width:730px;
+	overflow:hidden;
+	margin-left: 10px; /* strange game for Safari 5's benenfit */
+	margin-right: -20px;
+}
+.multiCarouselWrapper {
+	width:470px;
+	float:left;	
+	min-height:10px;
+}
+.multiCarouselWrapper .bd{
+	display: block;
+}
+.no-js .carouselTabs,
+.no-js .multiCarouselWrapper .multiCarouselLoading,
+.multiCarouselWrapper .multiCarouselContent,
+.multiCarouselWrapper .multiCarouselSorry {
+	display:none;
+}
+.multiCarouselSorry {
+	-webkit-background-size: 50px 50px;
+	-moz-background-size: 50px 50px;
+	background-size: 50px 50px; /* Controls the size of the stripes */
+	background-color: #666666;
+	background-image: -webkit-gradient(linear, 0 100%, 100% 0,
+							color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent),
+							color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)),
+							color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent),
+	 						to(transparent));
+	background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+						transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+						transparent 75%, transparent);
+	background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+						transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+						transparent 75%, transparent);
+	background-image: linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+						transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+						transparent 75%, transparent);
+	height:260px; 
+}
+
+.multiCarouselSorry h3{
+	padding: 10px;
+	width: 470px;
+	text-align: center;
+	color: #fff;
+	position: absolute;
+	top:40%;
+}
+.multiCarouselWrapper .multiCarouselLoading {
+	display:block;
+	background: #fff url(../images/shared/ajax-loader.gif) 50% 50% no-repeat;
+	line-height: 260px;
+	text-indent: 10px;
+	height: 260px;
+}
+.multiCarousel .carousel,
+.multiCarousel .gScarousel{
+	margin:0;
+	padding:0;
+}
+.carouselTabs {
+	position:relative;
+	float:left;
+	width:258px;
+	margin:0 0 0 2px;
+	padding:0;
+	
+}
+.carouselTabs ul {
+	margin:9px 0;
+	line-height:138%;
+	font-size:92%;
+}
+.carouselTabs ul li {
+	position:relative;
+	padding: 0;
+	margin: 0;
+	-webkit-transition: background-color 0.3s ease-out;
+	-moz-transition: background-color 0.3s ease-out;
+	-o-transition: background-color 0.3s ease-out;
+	transition: background-color 0.3s ease-out;
+
+}
+.carouselTabs ul li a {
+	display:block;
+	padding:9px 10px 9px 46px;
+}
+.carouselTabs ul li.title{
+	border-bottom:1px solid #ffffff;
+	background-color:transparent !important;
+	font-size:150%;
+	line-height:18px;
+	font-family:"UrbanoLightCondensed", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif; 
+	padding:5px 10px 13px 46px;
+	margin-bottom:9px;
+}
+
+.carouselTabs ul li:hover{
+	background-color: #e2e2e2;
+	-webkit-transition: background-color 0 ease-out;
+	-moz-transition: background-color 0 ease-out;
+	-o-transition: background-color 0 ease-out;
+	transition: background-color 0 ease-out;
+}
+.carouselTabs ul .active:hover,
+.carouselTabs ul .active{
+	background-color:#ffffff;
+}
+.carouselTabs .ui-icon{
+	position:absolute;
+	float: left;
+	clear: none;
+	overflow: hidden;
+	left:12px;
+	top:50%;
+	margin-top:-8px;
+	display: none;
+}
+.carouselTabs ul li:hover .ui-icon,
+.carouselTabs ul li.active .ui-icon{
+	display: block;
+}
+
+
+/* content-filter (extends mod) */
+.content-filter {
+	margin:10px 0 18px 0;
+	border-bottom: 1px solid #fff;
+	padding-bottom: 17px;
+	overflow-x: hidden;
+}
+.no-js .content-filter select{
+	width: 150px;
+}
+.content-filter h4{
+	font-family:"UrbanoLightCondensed", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
+	font-size: 138.5%;
+	font-weight: normal;
+}
+.content-filter .hd h4{
+	margin-left: 0;
+}
+.content-filter select{
+	width: 234px;
+}
+.content-filter h1{
+	padding-left: 10px;
+}
+
+.content-filter .hd {
+	padding:10px;
+}
+.content-filter .inner{
+	padding-right: 10px;
+	background: #fff;
+	height:100%;
+	padding-bottom: 9px;
+}
+.content-filter .inner .line{
+	padding-right: 0;
+}
+.content-filter .unit,
+.content-filter .line{
+	position: relative;
+}
+.content-filter .ui-selectmenu,
+.content-filter select{
+	margin-left: 10px;
+	margin-right: -10px;
+	margin-top:10px;
+	margin-bottom:0;
+	width: 228px;
+}
+
+.content-filter .ui-selectmenu-popup, 
+.content-filter .ui-selectmenu-menu-popup, 
+.content-filter .ui-selectmenu-menu-dropdown, 
+.content-filter a.ui-selectmenu-dropdown, 
+.content-filter .ui-selectmenu-dropdown{
+	background: #f1f1f1;
+}
+.content-filter .ui-selectmenu-dropdown,
+.content-filter .ui-selectmenu-menu{
+	border: 1px solid #f1f1f1;
+}
+.content-filter .ui-selectmenu.ui-state-active{
+	border: 1px solid #e2e2e2;
+}
+.content-filter input {
+	border:0;
+	background-color: #f1f1f1;
+}
+.content-filter .unit.search{
+	padding:0 30px 0 10px;
+}
+	
+.content-filter input.search {
+	width:190px;
+	padding:4px 30px 4px 10px;	
+	margin-left: 10px;
+	margin-top: 10px;
+}
+.content-filter .button {
+	background-color:transparent;
+	position:absolute;
+	top:4px;
+	right:4px;
+	left: auto;
+}
+/* .button-link (extends a) */
+
+a.button-link,
+.content-filter input.submit {
+	background: #f1f1f1;
+	border:1px solid #cccccc;
+	padding:3px 6px;
+	margin:10px 0 0 11px;
+	float:right;
+	-moz-border-radius: 3px; 
+	-webkit-border-radius: 3px; 
+     border-radius: 3px; 
+	-moz-background-clip: padding; 
+	-webkit-background-clip: padding-box; 
+	background-clip: padding-box; 
+	-webkit-transition: background 0.2s ease-out;
+	-moz-transition: background 0.2s ease-out;
+	-o-transition: background 0.2s ease-out;
+	transition: background 0.2s ease-out;	
+}
+a.button-link:hover,
+.content-filter input.submit:hover{
+	background-color: #005DAA;
+	border-color: #005DAA;
+	color: #fff;
+}
+a.button-link,
+.content-filter input.submit:active{
+	background-color: #036;
+}
+
+/* .button-warning (extends .button-link) */
+a.button-warning{
+	color: #333;
+	background-color: #fff;
+}
+a.button-warning:hover{
+	background-color: #CC3033;
+	border-color: #CCB8B8;
+}
+a.button-warning:active{
+	background-color: #CC0003;
+	border-color: #9E0003;
+}
+.content-filter p{
+	font-size: 93%;
+	line-height: 1.5em;
+}
+
+/* .content-filter-right (extends .content-filter) */
+.content-filter-right .ui-selectmenu,
+.content-filter-right select{
+	float: right;
+	margin-right: 0px;
+}
+/* twoColumnHeader-filter (extends content-filter  -> extends mod) */
+.twoColumnHeader-filter {
+	margin-left: 40px;
+	width:720px;
+}
+.ie7 .twoColumnHeader-filter { /* I know. It makes me blush to do this */
+	border-left: 20px solid #ededed;
+}
+.ie7.no-js .twoColumnHeader-filter,
+.ie8.no-js .twoColumnHeader-filter { 
+	width: 740px; /* and this */
+	margin-right: -230px;
+	background: #fff;
+}
+.ie7.no-js .twoColumnHeader-filter .inner,
+.ie8.no-js .twoColumnHeader-filter .inner{ 
+	width: 720px; /* and this */
+	float: right;
+}
+.ie7.no-js .twoColumnHeader-filter .size1of3.lastUnit,
+.ie8.no-js .twoColumnHeader-filter .size1of3.lastUnit{ 
+	float: right;
+	display: block;
+	width: 210px;
+	margin-right: 10px;
+}
+.ie7.no-js .twoColumnHeader-filter p,
+.ie8.no-js .twoColumnHeader-filter p{ 
+	margin-left: 0;
+}
+/* .defList (extends line) */
+.defList{
+	font-size: 93%;	
+	line-height: 1.5em;
+	margin-left:10px;
+}
+
+/* dateList (extends mod) */
+
+.dateList .bd p {
+	margin:0;
+	padding:0;
+}
+
+.dateList li {
+	border-top:1px solid #ffffff;
+	margin-top:5px;
+	padding-top:15px;
+	margin-bottom:15px;
+}
+
+/* feedbackFrom (extends mod) */
+
+.feedbackForm {
+	background-color:#ffffff;
+}
+
+.feedbackForm input, .feedbackForm textarea {
+	border:1px solid #cccccc;
+	padding:2px;
+	width:300px;
+	max-width:300px;
+}
+.feedbackForm .submit {
+	width:75px;
+	margin-bottom:10px;
+}
+
+
+/* boxoffice-link (extends div) */
+.boxoffice-link{
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: 93%;
+	border-top:1px solid #EDEDED;
+	margin-top: -1px;
+	padding-top: 0.75em;	
+	padding-bottom: 0.75em;	
+	background: transparent url(../images/shared/icons-sprite.png)  100% -695px no-repeat;	
+}
+.boxoffice-link:hover{
+	background-position: 100% -743px;	
+}
+
+/* .subPromo (extends text-wrapper) */
+
+.subPromo {
+	margin-left:-10px;
+	width:840px;
+}
+
+.subPromo .inner{
+	padding:0;
+	min-height:190px;
+}
+
+.subPromo .unit h2{
+	padding:10px 10px 0 0;
+	margin-left: 0;
+}
+
+.subPromo .unit p {
+	padding:0 10px 10px 0;
+	margin-left: 0;
+	font-size:93%;
+	margin-top: 0;
+}
+
+.subPromo .media {
+	padding-right: 10px;
+	margin-right: 0;
+}
+.subPromo .media .img {
+	padding:10px 20px 10px 10px;
+}
+
+/* .event-list (extends ul) */
+.main .event-list{
+	margin-left: 0;
+	font-size: 100%;
+}
+/* .vevent (extends li) */
+.event-list .vevent{
+	background: #fff !important;
+	margin-top: 0.75em;
+	padding: 0.75em 0;
+	width: 491px;
+	margin-right: -10px;
+}
+.no-js.ie7 .event-list .vevent h3,
+.no-js.ie8 .event-list .vevent h3{
+	margin-left: 10px;
+}
+.no-js.ie7 .event-list .vevent p,
+.no-js.ie8 .event-list .vevent p,
+.event-list .vevent p{
+	margin-left: 10px;
+	font-size: 93%;
+}
+/* seven column grid */
+.size1of7{width:14.2%;}
+.size2of7{width:28.5714286%;}
+.size3of7{width:42.8571429%;}
+.size4of7{width:57.1428572%;}
+.size5of7{width:71.4285715%;}
+.size6of7{width:85.7142858%;}
+.ie7 .size1of7{width:14.1%;}
+
+
+/* .calendar (extends ul) */
+.main .calendar {
+	margin:0 -15px 0 -40px;
+	border-bottom: 18px solid #ededed;
+	padding: 0;
+}
+.ie7.no-js .list-semantic.calendar,
+.ie8.no-js .list-semantic.calendar{
+	margin-left: -250px;
+	margin-top: 0;
+}
+
+.calendar .line {
+	position:relative;
+	padding:0;
+	margin:2px 0 36px 0;
+}
+
+.calendar .showAll {
+	font-weight:bold;
+	display:block;
+	margin-top:9px;
+	position:absolute;
+	bottom:1em;
+	margin-left: 10px;
+	font-size: 85%;
+}
+
+.calendar .liLiner p {
+	margin:0;
+	font-size:93%;
+}
+.calendar .liLiner a {
+	font-size:93%;
+	line-height:14px !important;
+	height:11px;
+}
+
+
+/*
+.calendar .size1of7 {
+	border-right: 2px solid #ededed;
+	padding:9px 0;
+	background-color:#ffffff;
+	position:relative;
+}
+*/
+.calendar .size1of7 {
+	border-right: 2px solid #ededed;
+	margin-bottom:0;
+	padding:9px 0 36px 0;
+	background-color:#ffffff;
+	max-width: 134px;
+	position:relative;
+	z-index: 0;
+}
+.calendar li.unit .date{
+	margin-left: 10px;
+	font-size:93%;
+
+}
+.calendar li.unit .liLiner p.date {
+	margin:0;
+}
+.calendar ul.list-semantic li.nextMonth {
+	background-color:#EDEDED !important;
+}
+.calendar ul.list-semantic li.nextMonth .event{
+	background-color:#EDEDED !important;
+}
+.calendar .lastUnit {
+	border-right: 0;
+    float: left; 
+    display: block; 
+}
+.ie7 .calendar .lastUnit {
+	margin-right: -100px;
+}
+.ie7.no-js .calendar .lastUnit,
+.ie8.no-js .calendar .lastUnit {
+	float: right;
+	margin-right: -10px;
+
+
+
+
+
+
+
+
+}
+.calendar h5 {
+	line-height:14px;
+	margin:0;
+	font-weight:normal;
+}
+
+.calendar .date,
+.calendar .time {
+	color:#000000;
+}
+.calendar li.unit .event{
+	position:relative;
+	width:100%;
+	z-index:0;
+
+}
+
+.today {
+	border:0;
+	border-top:9px solid #C0D02A;
+	margin-top:-9px;
+}
+
+.calendar .right .popupContent{
+	left:100% !important;
+}
+
+.calendar .left .popupContent{
+	right:100% !important;
+}
+.calendar .left .popupContent p,
+.calendar .right .popupContent p{
+	font-size: 85%;
+	margin-left: 10px;
+}
+
+.shadowPopup,
+.shadowPopupContent {
+	position:absolute;
+	height:80px;
+	left:-2px;
+	top:-2px;
+	background-color:#444444;
+	filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='3',MakeShadow='true',ShadowOpacity='0.80');
+	z-index:3;
+}
+
+.shadowPopup {
+	width:100%;
+	height:100%;
+
+}
+.shadowPopupContent {
+	width:270px;
+	height:100%;
+
+}
+
+.calendar .popupContent {
+	z-index:3;
+	position:absolute;
+	display:block;
+	top:0;
+	width:270px;
+	min-height:100px;
+	font-size:108%;
+	-moz-box-shadow: 3px 0 6px #444;
+	-webkit-box-shadow: 3px 0 6px #444;
+	box-shadow: 3px 0 6px #444;
+}
+
+.calendar .popupContent .content {
+	padding:9px 0;
+	position:relative;
+	background-color:#EDEDED;
+	z-index:4;
+
+}
+.calendar .liLiner {
+	padding:9px;
+	display:block;
+	position:relative;
+	top:0;
+	right:0;
+	z-index:9;
+}
+.calendar .popup {
+	position:absolute;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+	display:none;
+	z-index:0;
+	-moz-box-shadow: 3px 0 6px #444;
+	-webkit-box-shadow: 3px 0 6px #444;
+	box-shadow: 3px 0 6px #444;
+	
+}
+
+.calendar .calendar-link,
+.calendar .registration-link,
+.calendar .share-link,
+.calendar .tags {
+	border-color:#989898 !important;
+}
+
+/* .pagination-calendar (extends .pagination) */
+.pagination-calendar {
+	background-color:#ffffff;
+	border-width: 0 0 2px 0;
+	border-style: solid;
+	border-color: #ededed;
+	margin:0;
+	height:16px;
+}
+.ie7.no-js .pagination-calendar,
+.ie8.no-js .pagination-calendar{
+	margin-left: -250px;
+}
+
+.pagination-calendar li,
+.pagination-calendar .pagination-pages-list,
+.main .pagination-calendar .pagination-pages-list { /* this isn't very oocss, but I'm not sure if there's anywhere up the line where we can be less specific */
+	margin:0;
+	padding:0;
+	border:0;
+}
+.pagination-calendar h2 {
+	margin:8px 9px;
+	padding:0;
+	font-size:153.9%;		
+}
+
+.pagination-calendar .pagination-previous-page,
+.pagination-calendar .pagination-next-page {
+	height:16px;
+	width:16px;
+	margin:1px 9px;
+}
+.pagination-calendar .pagination-previous-page{
+	padding-left: 10px;
+	display: inline-block;
+}
+.ie7 .pagination-next-page{
+	position: absolute;
+	right: 0px;
+}
+/* .h6-calendar (extends h6) */
+
+.h6-calendar {
+	margin:4px 9px;
+	padding:4px 0;
+	border:0;
+	line-height:1em;
+	border-top:1px solid #C0D02A;
+	border-bottom:1px solid #C0D02A;
+	font-family:"UrbanoLightCondensed", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif; 
+	font-size:146.5%;		
+	font-style:normal;		
+}
+/* .h6-big-days (extends h6) */
+
+.h6-big-days {
+
+
+
+	font-size:376.5%;		
+}
+
+/* ARCMenu (extends mod) */
+.arcLink {
+	position:relative;
+	z-index:9;	
+	top:0;
+	left:0;
+}
+.arcLink h1,
+.arcLink p{
+	position:relative;
+	z-index:2;
+}
+ul.arcSubMenu{ 
+	margin:1em 0 1.5em 10px !important;
+	font-size: 77% !important; 
+	line-height: 1.2em !important;
+	}
+.arcSubMenu li:hover, 
+.arcSubMenu li{ 
+	display: inline; 
+	padding-left: 0px !important;
+	padding-right: 50px !important;
+	background: transparent !important;
+	/*white-space: nowrap;*/
+	}
+.arcSubMenu a {
+	color: #2c4460 !important;
+}
+
+/* humanitiesPopup (extends mod) */
+.humanitiesLink {
+	position:absolute;
+	z-index:9;	
+	top:0;
+	left:0;
+}
+.humanitiesLink h1,
+.humanitiesLink p{
+	position:relative;
+	z-index:2;
+}
+.humanitiesLink a.popup:focus {
+	outline:none;
+	text-decoration:none;
+}
+#humanitiesPopup {
+	position:absolute;
+	background:transparent url(../images/shared/000000x0.3.png);
+	top:-10px;
+	left:-10px;
+	padding:9px;
+	width:410px;
+	z-index:0;
+	display:none;
+	list-style:none;
+	opacity:1;
+}
+#humanitiesPopup:focus{
+	/*outline:none;*/
+}
+#humanitiesPopup .inner {
+	background-color:#ffffff;
+}
+
+#humanitiesPopup ul {
+	margin:60px 5px 10px 5px !important;
+	padding:0 !important;
+}
+
+#humanitiesPopup li {
+	position:relative;
+	float:left;
+	display:block;	
+	width:175px;
+	margin:0 5px;
+	padding:5px;
+	padding-bottom:6px;
+	margin-bottom:-1px;
+	border-bottom:1px solid #EDEDED;
+}
+#humanitiesPopup li a {
+	position:relative;
+	height:100%;
+	width:100%;
+	display:block;
+}
+/* facultyDirectory (extends mod) */
+
+.facultyDirectory {
+	background-color:#ffffff;
+	margin:10px 0;
+	padding:10px 0;
+	
+}
+
+.facultyDirectory h5{
+	margin-left:0;
+}
+
+
+/* resultList (extends ul) */
+
+.resultList {
+	margin:20px 0 !important;
+}
+.resultList li {
+	padding:0;
+	margin:12px 0;
+}
+.resultList h5 {
+	margin-bottom:0;
+}
+ 
+.resultList p {
+	margin-top:0;
+	margin-left: 10px !important;
+	font-size: 93% !important;
+} 
+
+/* resultsYear (extends ul) */
+.resultsYear h5, 
+.resultsYear .date{
+	margin:0 10px;
+	
+}
+
+.resultsYear li {
+	margin:0 0 17px 0;
+	padding:0 0 9px 0;
+	border-bottom:1px solid #fff;
+}
+.resultsYear li li{
+	margin:0;
+	padding:0;
+	border-bottom:0;
+}
+.main .resultsYear li p{
+	margin-left: 10px;
+	font-size: 93%;
+}
+/* .assistanceResults (extends accordion)*/
+.assistanceResults{
+	width:490px;
+	margin-left: -10px;
+	margin-right:-10px;
+
+}
+.assistanceResults .accordion-content{
+	padding-top: 0.75em;	
+	clear: both;
+}
+.assistanceResults h3{
+	background-color:#ffffff;
+	padding-left:20px;
+	margin-top:10px;
+	margin: 0;
+	padding-top: 0.4737em;
+	padding-bottom: 0.4737em;
+	position: relative;
+	font-size: 16px;
+}
+.assistanceResults h3 a:focus {
+	text-decoration:none;
+}
+.assistanceResults h3 a {
+	color:#000000;
+}
+.assistanceResults h3 span {
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif; 
+	font-size:69%;
+	letter-spacing:0;
+
+}
+.assistanceResults .ui-icon {
+	margin-left:3px;
+}
+.assistanceResults .accordion-content{
+	width:480px;
+	padding-right: 10px;
+	background-color:#ffffff;
+}
+
+/* .jobListing (extends list-semantic-ruled)*/
+
+.jobListing h3 {
+	margin-top:9px;
+}
+.main .jobListing li p,
+.jobListing li p{
+	margin-left: 10px;
+	font-size: 93%;
+	line-height: 1.5em;
+}
+
+/* resetting tables */
+table{
+	position:relative; 
+	zoom:1;
+	vertical-align: top;
+	text-align: left;
+	width:100%; 
+	table-layout:fixed;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	}
+.ie7.no-js table,
+.ie8.no-js table{
+	width: 470px;
+}
+
+th, 
+td{
+	vertical-align:top; 
+	padding:3px 20px 3px 0;
+	}
+table{
+	font-size: 93%;
+}
+.data p,
+.data ul,
+.data blockquote,
+.data ol{
+	font-size: 100%;
+}
+
+.browser-warning{
+	background: #fff url(../images/shared/emergency-icon.png) 20px 5px no-repeat;
+	color: #CF2E00;
+	padding: 10px 10px 20px 64px;
+	margin-bottom: 18px;
+	height: 60px;
+	overflow: hidden;
+	clear: none;
+	width: 396px;
+}
+.ie7.no-js .browser-warning,
+.ie8.no-js .browser-warning{
+	margin-right: 210px;	
+}
+
+/* .tree-header (extends h3) */
+.tree-header
+{
+	padding-left: 0;
+	margin-left: 3px;
+	color: #989898;
+	/*padding-top: 0.4737em;*/
+	/*padding-bottom: 0.4737em;*/
+	
+	position: relative;
+	font-family: "UrbanoCondensed", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+}
+

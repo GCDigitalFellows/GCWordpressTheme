@@ -1,0 +1,29 @@
+/* cuny table @extends data table */
+.cunyTable{
+	padding: 10px;/* doesn't this break stuff??? ok for win & mac on Safari, FF, chrome, opera. OK on IE6/7/8.   */ }
+table.cunyTable,
+.cunyTable table{
+	border-top:2px solid #EDEDED;
+	border-bottom:2px solid #EDEDED;
+	margin-top: -2px;
+	margin-bottom: -2px;
+	font-size: 93%;
+	padding-left:0;
+	margin-left:0;
+	}
+.cunyTable th{
+	border-bottom:1px solid #EDEDED;
+	margin-bottom: -1px;}
+.cunyTable thead tr{background:transparent;}
+.cunyTable th{color: #000; font-weight:bold}
+.cunyTable th,.cunyTable td{padding:0.75em 10px 0.75em 0px;}
+.cunyTable tr:hover td{
+	background: #f1f1f1;
+}
+
+
+/* specification table @extends data table */
+.spec{padding:10px;}
+.spec table{border-top: 1px solid #e2e2e2; border-bottom-color:#fff; border-left:none; border-right:none;}
+.spec th, .spec td{border:1px solid #e2e2e2; border-width: 1px 0; padding-left:0;}
+.spec .odd, .spec .even{background-color: #fff;}

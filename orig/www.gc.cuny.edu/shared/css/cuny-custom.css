@@ -1,0 +1,21 @@
+/*!
+*	CUNY Custom CSS
+*
+*   suggested naming convention:
+*   .cuny-xxxx {}
+*/
+
+.error
+{
+    color: #ff0000;
+}
+
+#microprinthead
+{
+    display:none;
+}
+
+.carousel-wrapper
+{
+       z-index: 1;
+}
