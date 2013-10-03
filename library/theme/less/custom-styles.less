@@ -8,11 +8,11 @@
   &-success           { background-color: @btn-success-bg; }
   &-info              { background-color: @btn-info-bg; }
   &-inverse           { background-color: @gray-dark; }
-  &-orange            { background-color: @carrot; }
-  &-inverse[href]     { background-color: darken(@carrot, 10%); }
-  &-purple            { background-color: @amethyst; }
-  &-inverse[href]     { background-color: darken(@amethyst, 10%); }
-  &-as                { background-color: #000; color: @pomegranate; padding: 0 6px; }
+  &-orange            { background-color: @orange; }
+  &-inverse[href]     { background-color: darken(@orange, 10%); }
+  &-purple            { background-color: @green-dark; }
+  &-inverse[href]     { background-color: darken(@green-dark, 10%); }
+  &-as                { background-color: #000; color: @orange; padding: 0 6px; }
 }
 
 
@@ -171,21 +171,21 @@ h1 { font-size: @font-size-base * 3.5; } // ~49px
 h2 { font-size: @font-size-base * 2.75; } // ~32px
 
 blockquote {
-  border-left: 7px solid @amethyst;
-  background-color: @silver;
+  border-left: 7px solid @green;
+  background-color: @white;
   padding: 14px 14px 14px 24px;
   p {
 	  color: @white;
   }
   small {
-    color: @asbestos;
+    color: @gray-darker;
 	text-align: right;
   }
   // make cite mirror small
   cite {
     display: block;
     line-height: @line-height-base;
-    color: @asbestos;
+    color: @gray-darker;
 	text-align: right;
     &:before {
       content: '\2014 \00A0';
@@ -193,7 +193,7 @@ blockquote {
 	
   }
   &.pull-right {
-    border-right: 7px solid @amethyst;
+    border-right: 7px solid @orange;
   }
 }
 
@@ -229,7 +229,7 @@ cite   { font-size: 85%; }
 	a:active,
 	a:visited,
 	a:hover {
-		color: @silver;
+		color: @white;
 	}
 
 	a.label,
@@ -239,19 +239,19 @@ cite   { font-size: 85%; }
 	  color: @white;
 	}
 	a.label:hover {
-		color: @asbestos;
+		color: @gray-darker;
 	}
 }
 
 #main article.sticky {
-	background-color: @clouds;
+	background-color: @white;
 	border-radius: @border-radius-small;
 	padding: 20px;
 	padding-right: 0;
 	margin-left: -20px;
 
 	a {
-		color: @wisteria;
+		color: @blue;
 	}
 
 	.entry-meta p,
@@ -259,7 +259,7 @@ cite   { font-size: 85%; }
 	.entry-meta a:active,
 	.entry-meta a:visited,
 	.entry-meta a:hover {
-		color: @asbestos;
+		color: @gray-darker;
 	}
 }
 
@@ -388,7 +388,7 @@ img {
 /* highlight comments by the post author */
 .bypostauthor {
 	//background-color: @wellBackground;
-    border: 3px solid @wisteria;
+    border: 3px solid @gray;
 	border-left: none;
 	border-right: none;
     //.border-radius(@baseBorderRadius);
@@ -400,7 +400,7 @@ img {
 }
 
 ol.commentlist li{
-	background-color: @clouds;
+	background-color: @white;
 }
 ol.commentlist ul.children li{
 	background-color: fade(#333,20%);;	
@@ -446,7 +446,7 @@ ol.commentlist ul.children li{
 
 /* from docs.css */
 section > .page-header, section > .lead {
-color: @wetasphalt;
+color: @gray-darker;
 }
 
 

@@ -7,58 +7,36 @@
 // --------------------------------------------------
 
 // Additional Colors (from designmodo's flat-ui)
-@turquoise: #1ABC9C; //turquoise
-@greensea: #16a085; //dark turquoise
-@emerland: #2ecc71; //light green
-@nephritis: #27ae60; //medium green
-@peterriver: #3498db; //light blue
-@belizehole: #2980b9; //medium blue
-@amethyst: #9b59b6; //light purple
-@wisteria: #8e44ad; //medium purple
-@wetasphalt: #34495e; //slate blue
-@midnightblue: #2c3e50; //dark slate blue
-@sunflower: #f1c40f; //bright yellow
-@orange: #f39c12; //yellow-orange
-@carrot: #e67e22; //light orange
-@pumpkin: #d35400; //dark orange
-@alizarin: #e74c3c; //light red
-@pomegranate: #c0392b; //deep red
-@clouds: #ecf0f1; //almost white
-@silver: #bdc3c7; //silver
-@concrete: #95a5a6; //medium gray
-@asbestos: #7f8c8d; //dark-medium gray
+@orange:				#EC9C1D;
+@yellow:				#FFC30B;
+@green-light:			#8DC63F;
+@green:					#8DC63F;
+@green-dark:			#00A94F;
+@blue-light:			#0093D0;
+@blue:					#005DAA;
+@blue-dark:				#036;
+@pink:					#FF5E99;
 
 
 // Grays
 // -------------------------
-@black:                  @midnightblue;
-@gray-darker:            @wetasphalt;
-@gray-dark:              @asbestos;
-@gray:                   @concrete;
-@gray-light:             @silver;
-@gray-lighter:           @silver;
+//@gray-darker:            @wetasphalt;
+@gray-dark:              #444;
+@gray:                   #666;
+@gray-light:             #989898;
+@gray-lighter:           #D8D9DA;
 @white:                  #fff;
-
-// Accent colors
-// -------------------------
-@blue:                  @peterriver;
-@blueDark:              @belizehole;
-@green:                 @emerland;
-@red:                   @pomegranate;
-@yellow:                @sunflower;
-//@orange:                @carrot;
-@pink:                  @alizarin;
-@purple:                @amethyst;
+@black:                  #000;
 
 
 // Brand colors
 // -------------------------
 
-@brand-primary:         @turquoise;//#428bca;
-@brand-success:         @emerland;//#5cb85c;
-@brand-warning:         @alizarin;//#f0ad4e;
-@brand-danger:          @pomegranate;//#d9534f;
-@brand-info:            @peterriver;//#5bc0de;
+@brand-primary:         @blue;//#428bca;
+@brand-success:         @green-dark;//#5cb85c;
+@brand-warning:         @orange;//#f0ad4e;
+@brand-danger:          @pink;//#d9534f;
+@brand-info:            @yellow;//#5bc0de;
 
 
 // Scaffolding
@@ -72,22 +50,22 @@
 
 // Typography
 // -------------------------
-@font-family-sans-serif:  "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
-@font-family-serif:       "Enriqueta", Georgia, "Times New Roman", Times, serif;
-@font-family-monospace:   "Inconsolata", Menlo, Consolas, "Courier New", monospace;
+@font-family-serif:			"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
+@font-family-sans-serif:	"UrbanoBoldCondensed", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif; // use this for headings
+@font-family-monospace:		"Inconsolata", Menlo, Consolas, "Courier New", monospace;
 
-@font-size-base:          16px;
+@font-size-base:          13px;
 @font-size-large:         ceil(@font-size-base * 1.25); // ~18px
 @font-size-small:         ceil(@font-size-base * 0.85); // ~12px
 @font-size-tiny:		  ceil(@font-size-base * 0.75); // ~12px
 
 @font-family-base:        @font-family-serif;
-@line-height-base:        1.428; // 20/14 => 22/16
-@line-height-computed:    floor(@font-size-base * @line-height-base); // ~20px => 23
+@line-height-base:        1.231; 
+@line-height-computed:    floor(@font-size-base * @line-height-base);
 
 @headings-font-family:    @font-family-sans-serif;
 @headings-font-weight:    300;
-@headings-line-height:    1.1;
+@headings-line-height:    1.06;
 
 
 // Links
@@ -139,8 +117,8 @@
 @btn-font-weight:                normal;
 
 @btn-default-color:              @white;
-@btn-default-bg:                 @silver;
-@btn-default-border:             @concrete;
+@btn-default-bg:                 @gray-lighter;
+@btn-default-border:             @gray-dark;
 
 @btn-primary-color:              #fff;
 @btn-primary-bg:                 @brand-primary;
@@ -201,7 +179,7 @@
 @dropdown-link-active-color:     @white;
 @dropdown-link-active-bg:        darken(@dropdown-bg, 15%);
 
-@dropdown-link-color:            @clouds;
+@dropdown-link-color:            @white;
 @dropdown-link-hover-color:      @gray-lighter;
 @dropdown-link-hover-bg:         @dropdown-link-active-bg;
 
@@ -258,18 +236,18 @@
 // Basics of a navbar
 @navbar-height:                    80px;
 @navbar-margin-bottom:             @line-height-computed;
-@navbar-default-color:             @white;
-@navbar-default-bg:                @alizarin;
+@navbar-default-color:             @black;
+@navbar-default-bg:                @white;
 @navbar-default-border:            darken(@navbar-default-bg, 15%);
 @navbar-border-radius:             @border-radius-base;
 @navbar-padding-horizontal:        floor(@grid-gutter-width / 2);
 @navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
 
 // Navbar links
-@navbar-default-link-color:                @clouds; //#777;
-@navbar-default-link-hover-color:          @wetasphalt;
+@navbar-default-link-color:                @gray-dark; //#777;
+@navbar-default-link-hover-color:          @gray-darker;
 @navbar-default-link-hover-bg:             transparent;
-@navbar-default-link-active-color:         @white;
+@navbar-default-link-active-color:         @gray-dark;
 @navbar-default-link-active-bg:            darken(@navbar-default-bg, 15%);
 @navbar-default-link-disabled-color:       #ccc;
 @navbar-default-link-disabled-bg:          transparent;
@@ -351,13 +329,13 @@
 // Pagination
 // -------------------------
 
-@pagination-bg:                        @clouds;
+@pagination-bg:                        @white;
 @pagination-border:                    transparent;
 
-@pagination-hover-bg:                  @peterriver;
+@pagination-hover-bg:                  @white;
 
-@pagination-active-bg:                 @belizehole;
-@pagination-active-color:              @silver;
+@pagination-active-bg:                 @gray-lighter;
+@pagination-active-color:              @gray-darker;
 
 @pagination-disabled-color:            @gray-light;
 
@@ -366,19 +344,19 @@
 // -------------------------
 
 @state-warning-text:             @white;
-@state-warning-bg:               @sunflower;
+@state-warning-bg:               @orange;
 @state-warning-border:           darken(spin(@state-warning-bg, -10), 3%);
 
 @state-danger-text:              @white;
-@state-danger-bg:                @alizarin;
+@state-danger-bg:                @pink;
 @state-danger-border:            darken(spin(@state-danger-bg, -10), 3%);
 
 @state-success-text:             @white;
-@state-success-bg:               @emerland;
+@state-success-bg:               @green-light;
 @state-success-border:           darken(spin(@state-success-bg, -10), 5%);
 
 @state-info-text:                @white;
-@state-info-bg:                  @peterriver;
+@state-info-bg:                  @yellow;
 @state-info-border:              darken(spin(@state-info-bg, -10), 7%);
 
 
@@ -394,7 +372,7 @@
 
 // Popovers
 // -------------------------
-@popover-bg:                          @clouds;
+@popover-bg:                          @white;
 @popover-max-width:                   276px;
 @popover-border-color:                rgba(0,0,0,.2);
 @popover-fallback-border-color:       #ccc;
@@ -402,7 +380,7 @@
 @popover-title-bg:                    darken(@popover-bg, 3%);
 
 @popover-arrow-width:                 10px;
-@popover-arrow-color:                 @clouds;
+@popover-arrow-color:                 @white;
 
 @popover-arrow-outer-width:           (@popover-arrow-width + 1);
 @popover-arrow-outer-color:           rgba(0,0,0,.25);
