@@ -1,9 +1,9 @@
 <?php
 /*
 Author: Keith Miyake
-URL: htp://keithmiyake.info/wheniwasbad/
-Version: 2.0
-Modified: 20130905
+URL: htp://keithmiyake.info/gcwordpresstheme/
+Version: 0.1
+Modified: 20131003
 */
 
 /* library/translation/translation.php	- adding support for other languages */
@@ -73,7 +73,8 @@ function theme_setup() {
 	);	
 	add_theme_support( 'menus' );            // wp menus
 	register_nav_menus(                      // wp3+ menus
-		array( 
+		array(
+			'header_nav' => 'Top Menu in Header',
 			'main_nav' => 'The Main Menu',   // main nav in header
 			'footer_links' => 'Footer Links' // secondary nav in footer
 		)
@@ -146,8 +147,8 @@ function wpbs_register_sidebars() {
     	'description' => 'Used on every page BUT the homepage page template.',
     	'before_widget' => '<div id="%1$s" class="widget %2$s">',
     	'after_widget' => '</div>',
-    	'before_title' => '<h4 class="widgettitle">',
-    	'after_title' => '</h4>',
+    	'before_title' => '<h3 class="widgettitle">',
+    	'after_title' => '</h3>',
     ));
     
     register_sidebar(array(
@@ -156,8 +157,17 @@ function wpbs_register_sidebars() {
     	'description' => 'Used only on the homepage page template.',
     	'before_widget' => '<div id="%1$s" class="widget %2$s">',
     	'after_widget' => '</div>',
-    	'before_title' => '<h4 class="widgettitle">',
-    	'after_title' => '</h4>',
+    	'before_title' => '<h3 class="widgettitle">',
+    	'after_title' => '</h3>',
+    ));
+	
+    register_sidebar(array(
+      'id' => 'sidebarnav',
+      'name' => 'Navigation Sidebar',
+      'before_widget' => '<div id="%1$s" class="widget %2$s">',
+      'after_widget' => '</div>',
+      'before_title' => '<h3 class="widgettitle tree-header">',
+      'after_title' => '</h3>',
     ));
     
     register_sidebar(array(
@@ -387,7 +397,7 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		'context'    => 'normal',
 		'priority'   => 'high',
 		'show_names' => true, // Show field names on the left
-		'show_on' => array( 'key' => 'page-template', 'value' => array('page-homepage.php','page-jumbotron.php','page.php') ),
+//		'show_on' => array( 'key' => 'page-template', 'value' => array('page-homepage.php','page-jumbotron.php','page.php') ),
 		'fields' => array(
 		    array(  
 		        'name'=> 'Sidebar Position',  
