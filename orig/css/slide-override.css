@@ -1,4 +1,5 @@
-﻿.normalize-height
+﻿/*
+.normalize-height
 {
     height:auto !important;
 }
@@ -99,3 +100,4 @@ a.slidesjs-previous,
     right:10px;
     z-index:100000;
 }  
+*/
