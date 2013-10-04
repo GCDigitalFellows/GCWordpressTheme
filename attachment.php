@@ -42,7 +42,7 @@ get_header(); ?>
 
 						<?php if ($post->post_parent) : ?>
 
-							<a href="<?php echo get_permalink($post->post_parent); ?>" rev="attachment"><?php echo get_the_title($post->post_parent); ?></a> <i class="icon-caret-right"></i>
+							<a href="<?php echo get_permalink($post->post_parent); ?>" rev="attachment"><?php echo get_the_title($post->post_parent); ?></a> <i class="glyphicon glyphicon-chevron-right"></i>
 
 						<?php endif; ?>
 
@@ -59,7 +59,7 @@ get_header(); ?>
 
 							<div class="well">
 								<?php the_excerpt(); ?>
-								<p><i class="icon-download-alt"></i> Download <a href="<?php echo wp_get_attachment_url($post->ID); ?>"><?php the_title(); ?></a></p>
+								<p><i class="glyphicon glyphicon-download-alt"></i> Download <a href="<?php echo wp_get_attachment_url($post->ID); ?>"><?php the_title(); ?></a></p>
 							</div>
 							<?php the_content(); ?>
 

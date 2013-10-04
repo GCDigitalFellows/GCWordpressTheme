@@ -65,8 +65,8 @@
 						<?php else : // if it is disabled, display regular wp prev & next links ?>
 							<nav class="wp-prev-next pagenavi">
 								<ul class="clearfix">
-									<li class="prev-link"><?php next_posts_link(_e('<i class="icon-chevron-sign-left"></i> Older Entries', "wheniwasbad")) ?></li>
-									<li class="next-link"><?php previous_posts_link(_e('Newer Entries <i class="icon-chevron-sign-right"></i>', "wheniwasbad")) ?></li>
+									<li class="prev-link"><?php next_posts_link(_e('<i class="glyphicon glyphicon-chevron-sign-left"></i> Older Entries', "wheniwasbad")) ?></li>
+									<li class="next-link"><?php previous_posts_link(_e('Newer Entries <i class="glyphicon glyphicon-chevron-sign-right"></i>', "wheniwasbad")) ?></li>
 								</ul>
 							</nav>
 						<?php endif; ?>
@@ -89,9 +89,9 @@
 							<div class="col-md-3">
 								<aside class="entry-meta muted<?php echo $extra_classes; ?>">
 									<?php $original_post = get_post($comment->comment_post_ID); ?>
-									<p><i class="icon-pencil"></i> Original post by <a href="<?php echo get_author_posts_url($original_post->post_author); ?>" title="Author page for <?php echo get_the_author_meta('display_name', $original_post->post_author); ?>"><?php echo get_the_author_meta('display_name', $original_post->post_author); ?></a></p>
-									<p><i class="icon-calendar-empty"></i> <time datetime="<?php echo get_comment_date(DATE_W3C,$comment->comment_ID); ?>" ><?php echo get_comment_date(get_option('date_format'),$comment->comment_ID); ?></time></p>
-									<p><i class="icon-bookmark"></i> <a href="<?php echo get_permalink($comment->comment_post_ID); ?>" title="On: '<?php echo get_the_title($comment->comment_post_ID); ?>'" rel="bookmark">Permalink</a>
+									<p><i class="glyphicon glyphicon-pencil"></i> Original post by <a href="<?php echo get_author_posts_url($original_post->post_author); ?>" title="Author page for <?php echo get_the_author_meta('display_name', $original_post->post_author); ?>"><?php echo get_the_author_meta('display_name', $original_post->post_author); ?></a></p>
+									<p><i class="glyphicon glyphicon-calendar-empty"></i> <time datetime="<?php echo get_comment_date(DATE_W3C,$comment->comment_ID); ?>" ><?php echo get_comment_date(get_option('date_format'),$comment->comment_ID); ?></time></p>
+									<p><i class="glyphicon glyphicon-bookmark"></i> <a href="<?php echo get_permalink($comment->comment_post_ID); ?>" title="On: '<?php echo get_the_title($comment->comment_post_ID); ?>'" rel="bookmark">Permalink</a>
 									<?php edit_comment_link( __( 'Edit', 'wheniwasbad' ), ' &nbsp;&bull;&nbsp; ', '' ); ?></p>
 								</aside>
 			 				</div>

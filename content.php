@@ -39,7 +39,7 @@ if ( ! is_singular() || ! is_page() ) {
 				<header class="entry-header media-heading">
 					<h3><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => 'Permalink to: ', 'after' => '' ) ); ?>" rel="bookmark"><?php the_title(); ?>
 						<?php if (get_post_format() == 'link') : ?>
-							<i class="icon-external-link"></i>
+							<i class="glyphicon glyphicon-external-link"></i>
 						<?php endif; ?>
 					</a></h3>
 				</header>
@@ -50,7 +50,7 @@ if ( ! is_singular() || ! is_page() ) {
 					if ( $wheniwasbad_options['use_excerpts'] ) {
 						the_excerpt();
 					} else {
-						the_content( __("<span class='btn btn-primary pull-right'>Read more <i class='icon-chevron-sign-right'></i></span>","wheniwasbad") );
+						the_content( __("<span class='btn btn-primary pull-right'>Read more <i class='glyphicon glyphicon-chevron-sign-right'></i></span>","wheniwasbad") );
 					}	
 				} else {
 					the_content();

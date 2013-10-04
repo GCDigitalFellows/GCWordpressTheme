@@ -217,7 +217,7 @@ add_action( 'widgets_init', 'wpbs_register_sidebars' );
 
 /************* Excerpts *********************/
 function new_excerpt_more( $more ) {
-	return ' [&hellip;]</p><p><a class="read-more btn pull-right" href="'. get_permalink( get_the_ID() ) . '">Read more <i class="icon-chevron-sign-right"></i></a>';
+	return ' [&hellip;]</p><p><a class="read-more btn pull-right" href="'. get_permalink( get_the_ID() ) . '">Read more <i class="glyphicon glyphicon-chevron-sign-right"></i></a>';
 }
 add_filter( 'excerpt_more', 'new_excerpt_more' );
 
@@ -244,7 +244,7 @@ function comments_layout($comment, $args, $depth) {
 				</div>
 				<div class="col-md-10 comment-text">
 					<?php printf('<h4>%s</h4>', get_comment_author_link()) ?>
-					<?php edit_comment_link(__('Edit','wheniwasbad'),'<span class="edit-comment btn btn-sm btn-info"><i class="icon-white icon-pencil"></i>','</span>') ?>
+					<?php edit_comment_link(__('Edit','wheniwasbad'),'<span class="edit-comment btn btn-sm btn-info"><i class="glyphicon glyphicon-white icon-pencil"></i>','</span>') ?>
                     
                     <?php if ($comment->comment_approved == '0') : ?>
        					<div class="alert-message success">
@@ -268,7 +268,7 @@ function comments_layout($comment, $args, $depth) {
 function list_pings($comment, $args, $depth) {
        $GLOBALS['comment'] = $comment;
 ?>
-        <li id="comment-<?php comment_ID(); ?>"><i class="icon icon-share-alt"></i>&nbsp;<?php comment_author_link(); ?>
+        <li id="comment-<?php comment_ID(); ?>"><i class="glyphicon glyphicon-share"></i>&nbsp;<?php comment_author_link(); ?>
 <?php 
 
 }
@@ -469,7 +469,7 @@ if( !function_exists("theme_styles") ) {
 		if (!is_admin()){
         wp_register_style( 'bootstrap', get_template_directory_uri() . '/library/css/bootstrap-themed.css', array(), '3.0.0', 'all' );
         //wp_register_style( 'bootstrap-docs', get_template_directory_uri() . '/library/bootstrap/docs-assets/css/docs.css', array(), '3.0.0', 'all' );
-		wp_register_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css', array(), '3.2.1', 'all' );
+		//wp_register_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css', array(), '3.2.1', 'all' );
         wp_register_style( 'theme-base', get_stylesheet_uri(), array(), '1.0', 'all' );
 		wp_register_style( 'theme-orig', get_template_directory_uri() . '/orig/css/cuny-all.css', array(), '1.0', 'all' );
 
@@ -478,7 +478,7 @@ if( !function_exists("theme_styles") ) {
         
         wp_enqueue_style( 'bootstrap' );
         //wp_enqueue_style( 'bootstrap-docs' );
-		wp_enqueue_style( 'font-awesome' );
+		//wp_enqueue_style( 'font-awesome' );
         wp_enqueue_style( 'theme-base');
 		wp_enqueue_style( 'theme-orig');
 		}

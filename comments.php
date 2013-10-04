@@ -92,21 +92,21 @@ comments page
 
 	<?php if ( is_user_logged_in() ) : ?>
 
-	<p class="comments-logged-in-as"><?php _e("Logged in as","wheniwasbad"); ?> <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo wp_logout_url(get_permalink()); ?>" title="<?php _e("Log out of this account","wheniwasbad"); ?>"><?php _e("Log out","wheniwasbad"); ?> <i class="icon-signout"></i></a></p>
+	<p class="comments-logged-in-as"><?php _e("Logged in as","wheniwasbad"); ?> <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo wp_logout_url(get_permalink()); ?>" title="<?php _e("Log out of this account","wheniwasbad"); ?>"><?php _e("Log out","wheniwasbad"); ?> <i class="glyphicon glyphicon-signout"></i></a></p>
 
 	<?php else : ?>
 		
 		<div class="form-group">
 		  <label for="author" class="col-lg-3 control-label"><?php _e("Name","wheniwasbad"); ?> <?php if ($req) echo "(required)"; ?></label>
 		  <div class="input-group col-lg-6">
-		  	<span class="input-group-addon"><i class="icon-user"></i></span><input type="text" class="form-control" name="author" id="author" value="<?php echo esc_attr($comment_author); ?>" placeholder="<?php _e("Your Name","wheniwasbad"); ?>" tabindex="1" <?php if ($req) echo "aria-required='true'"; ?> />
+		  	<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input type="text" class="form-control" name="author" id="author" value="<?php echo esc_attr($comment_author); ?>" placeholder="<?php _e("Your Name","wheniwasbad"); ?>" tabindex="1" <?php if ($req) echo "aria-required='true'"; ?> />
 		  </div>
 	  	</div>
 
 		<div class="form-group">
 		  <label for="email" class="col-lg-3 control-label"><?php _e("Mail","wheniwasbad"); ?> <?php if ($req) echo "(required)"; ?></label>
 		  <div class="input-group col-lg-6">
-		  	<span class="input-group-addon"><i class="icon-envelope"></i></span><input type="email" class="form-control" name="email" id="email" value="<?php echo esc_attr($comment_author_email); ?>" placeholder="<?php _e("Your Email","wheniwasbad"); ?>" tabindex="2" <?php if ($req) echo "aria-required='true'"; ?> />
+		  	<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input type="email" class="form-control" name="email" id="email" value="<?php echo esc_attr($comment_author_email); ?>" placeholder="<?php _e("Your Email","wheniwasbad"); ?>" tabindex="2" <?php if ($req) echo "aria-required='true'"; ?> />
 		  </div>
 		  <span class="help-block">(<?php _e("will not be published","wheniwasbad"); ?>)</span>
 	  	</div>
@@ -114,7 +114,7 @@ comments page
 		<div class="form-group">
 		  <label for="url" class="col-lg-3 control-label"><?php _e("Website","wheniwasbad"); ?></label>
 		  <div class="input-group col-lg-6">
-		  <span class="input-group-addon"><i class="icon-home"></i></span><input type="url" class="form-control" name="url" id="url" value="<?php echo esc_attr($comment_author_url); ?>" placeholder="<?php _e("Your Website","wheniwasbad"); ?>" tabindex="3" />
+		  <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input type="url" class="form-control" name="url" id="url" value="<?php echo esc_attr($comment_author_url); ?>" placeholder="<?php _e("Your Website","wheniwasbad"); ?>" tabindex="3" />
 		  </div>
 	  	</div>
 

@@ -1,7 +1,7 @@
 <?php 
 $avatar_class = ' pull-right';
 $extra_classes = '';
-$icon = 'icon-star';
+$icon = 'glyphicon glyphicon-star';
 $label_class = 'label-as';
 if (is_page_template('page-right-sidebar.php')) {
 	$extra_classes = ' text-right';
@@ -10,53 +10,53 @@ if (is_page_template('page-right-sidebar.php')) {
 
 $post_format = get_post_format();
 if (is_sticky()) {
-	$icon='icon-pushpin';
+	$icon='glyphicon glyphicon-pushpin';
 	$label_class='label-important';
 } else {
 switch ($post_format) {
 	case 'aside': 
-		$icon='icon-pushpin';
+		$icon='glyphicon glyphicon-pushpin';
 		$label_class='label-warning';
 		break;
 	case 'gallery':
 		$label_class='label-orange';
-		$icon='icon-camera';
+		$icon='glyphicon glyphicon-camera';
 		break;
 	case 'image': 
 		$label_class='label-info';
-		$icon='icon-picture';
+		$icon='glyphicon glyphicon-picture';
 		break;
 	case 'link':
 		$label_class='label-inverse';
-		$icon='icon-link';
+		$icon='glyphicon glyphicon-link';
 		break;
 	case 'quote': 
 		$label_class='label-success';
-		$icon='icon-quote-right';
+		$icon='glyphicon glyphicon-quote-right';
 		break;
 	case 'status': 
 		$label_class='label-purple';
-		$icon='icon-info-sign';
+		$icon='glyphicon glyphicon-info-sign';
 		break;
 	case 'attachment':
 		$label_class='label-inverse';
-		$icon='icon-paper-clip';
+		$icon='glyphicon glyphicon-paper-clip';
 		break;
 	case 'video':
 		$label_class='label-important';
-		$icon='icon-facetime-video';
+		$icon='glyphicon glyphicon-facetime-video';
 		break;
 	case 'audio':
 		$label_class='label-warning';
-		$icon='icon-microphone';
+		$icon='glyphicon glyphicon-microphone';
 		break;		
 	case 'post':
 	default:
 		if (is_attachment()) {	
 			$label_class='label-inverse';
-			$icon='icon-paper-clip';
+			$icon='glyphicon glyphicon-paper-clip';
 		} elseif (!is_page()) { //other edge cases or default post
-			$icon='icon-pencil';
+			$icon='glyphicon glyphicon-pencil';
 		}
 	} //switch 
 }
@@ -80,16 +80,16 @@ switch ($post_format) {
 	<?php endif; ?>
 		<p><span class="label <?php echo $label_class; ?>"><i class="<?php echo $icon; ?>"></i></span> <a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php echo $author; ?></a></p>
 	<?php if ( ! is_page() ) : ?>
-		<p><i class="icon-calendar-empty"></i> <time datetime="<?php the_time(DATE_W3C); ?>" ><?php the_time(get_option('date_format')); ?></time></p>
+		<p><i class="glyphicon glyphicon-calendar-empty"></i> <time datetime="<?php the_time(DATE_W3C); ?>" ><?php the_time(get_option('date_format')); ?></time></p>
 	<?php endif; ?>
-		<p><i class="icon-bookmark"></i> <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => 'Permalink to: ', 'after' => '' ) ); ?>" rel="bookmark">Permalink</a>
+		<p><i class="glyphicon glyphicon-bookmark"></i> <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => 'Permalink to: ', 'after' => '' ) ); ?>" rel="bookmark">Permalink</a>
 		<?php edit_post_link( __( 'Edit', 'wheniwasbad' ), ' &nbsp;&bull;&nbsp; ', '' ); ?></p>
 	<?php if ( comments_open() && get_comments_number() ) : ?>
-		<p><i class="icon-comment"></i> <?php comments_popup_link( __("Leave a comment","wheniwasbad"), __( "One Comment", "wheniwasbad"), __( "% Comments", "wheniwasbad" ) ); ?></p>
+		<p><i class="glyphicon glyphicon-comment"></i> <?php comments_popup_link( __("Leave a comment","wheniwasbad"), __( "One Comment", "wheniwasbad"), __( "% Comments", "wheniwasbad" ) ); ?></p>
 	<?php endif; // comments_open() ?>
 	<?php if ( ! is_page() && ! is_attachment() ) : ?>
-		<p><i class="icon-folder-close"></i> <span class="muted"> <?php the_category(", "); ?></span></p>
-		<p><i class="icon-tags"></i>
+		<p><i class="glyphicon glyphicon-folder-close"></i> <span class="muted"> <?php the_category(", "); ?></span></p>
+		<p><i class="glyphicon glyphicon-tags"></i>
 		<?php
 		$posttags = get_the_tags();
 		if ( $posttags ) :

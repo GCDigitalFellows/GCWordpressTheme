@@ -42,7 +42,7 @@ get_header(); ?>
 					<div class="page-header">
 						<h1 class="single-title" itemprop="headline">
 							<?php if ($post->post_parent) : ?>
-								<a href="<?php echo get_permalink($post->post_parent); ?>" rev="attachment"><?php echo get_the_title($post->post_parent); ?></a> <i class="icon-caret-right"></i>
+								<a href="<?php echo get_permalink($post->post_parent); ?>" rev="attachment"><?php echo get_the_title($post->post_parent); ?></a> <i class="glyphicon glyphicon-caret-right"></i>
 							<?php endif; ?>
 							<?php the_title(); ?>
 						</h1>
