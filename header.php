@@ -88,40 +88,55 @@
 		<header class="navbar <?php echo $navheader_class; ?>" role="banner">
 			<div class="container">
 				
-				<div class="navbar-header">
-				    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-				      <span class="sr-only">Toggle navigation</span>
-				      <span class="icon-bar"></span>
-				      <span class="icon-bar"></span>
-				      <span class="icon-bar"></span>
-				    </button>
-					<a class="navbar-brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>">
-					<?php if($wheniwasbad_options['branding_logo']['url']) { ?>
-						<img src="<?php echo $wheniwasbad_options['branding_logo']['url']; ?>" alt="<?php echo get_bloginfo('description'); ?>">
-					<?php }
-						if($wheniwasbad_options['site_name']) bloginfo('name'); ?>
-					</a>
-				</div> <!-- navbar-header -->
-				
-				<?php $nav_align = $wheniwasbad_options['nav_alignment']; ?>
-				
-				<?php if ($nav_align=='left') : ?>
-				<nav class="collapse navbar-collapse pull-left navbar-main-collapse" role="navigation">
-					<?php main_nav(); ?>
-				</nav>
-				<?php endif; ?>
-				
-				<?php if($wheniwasbad_options['search_bar']) : ?>
-				<form class="navbar-search pull-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
-					<input name="s" id="s" type="text" class="search-query" autocomplete="off" placeholder="<?php _e('Search','bonestheme'); ?>" >
-				</form>
-				<?php endif; ?>
-					
-				<?php if ($nav_align=='right') : ?>
-					<nav class="collapse navbar-collapse pull-right navbar-main-collapse" role="navigation">
-						<?php main_nav(); ?>
-					</nav>
-				<?php endif; ?>
+				<div class="row clearfix">
+					<div class="col-md-10">
+						<div class="row">
+							<div class="col-md-9">
+								<div class="navbar-header">
+								    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-top-collapse">
+								      <span class="sr-only">Toggle navigation</span>
+								      <span class="icon-bar"></span>
+								      <span class="icon-bar"></span>
+								      <span class="icon-bar"></span>
+								    </button>
+								  </div>
+								<nav id="service-nav" class="collapse navbar-collapse navbar-left navbar-top-collapse" role="navigation">
+									<?php top_nav(); ?>
+								</nav>
+							</div>
+							<div class="col-md-3">
+								<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
+									<div class="input-group input-group-sm">
+										<span class="input-group-btn">
+											<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+										</span>
+										<input name="s" id="s" type="text" class="form-control" autocomplete="off" placeholder="<?php _e('Search','gcwordpress'); ?>" >
+									</div>
+								</form>
+							</div>
+						</div> <!-- top nav row -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="navbar-header">
+								    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+								      <span class="sr-only">Toggle navigation</span>
+								      <span class="icon-bar"></span>
+								      <span class="icon-bar"></span>
+								      <span class="icon-bar"></span>
+								    </button>
+								  </div>
+								<nav class="collapse navbar-collapse pull-right navbar-main-collapse" role="navigation">
+									<?php main_nav(); ?>
+								</nav>
+							</div>
+						</div>
+					</div><!-- main nav row -->
+					<div class="col-md-2">
+						<a class="navbar-brand" id="logo" title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
+							<img src="http://www.gc.cuny.edu/shared/images/shared/CUNY-GC-logo.png" />
+						</a>
+					</div>
+				</div> 
 					
 			</div> <!-- end container -->		
 		</header> <!-- end header -->

@@ -531,7 +531,7 @@ add_action( 'wp_footer', function() {
 function bs_wpsearch($form) {
 	$form = '<form action="' . home_url( '/' ) . '" method="get" class="form-inline">
 		<div class="clearfix input-group input-group-sm">
-			<input type="text" name="s" id="search" class="form-control" placeholder="' . __("Search","wheniwasbad") . '" value="' . get_search_query() . '" /><span class="input-group-btn"><button type="submit" class="btn btn-primary" title="' . __("Search","wheniwasbad") . '" ><i class="icon-search"></i></button></span>
+			<input type="text" name="s" id="search" class="form-control" placeholder="' . __("Search","wheniwasbad") . '" value="' . get_search_query() . '" /><span class="input-group-btn"><button type="submit" class="btn btn-primary" title="' . __("Search","wheniwasbad") . '" ><i class="glyphicon glyphicon-search"></i></button></span>
         </div>
 </form>';
 	return $form;
@@ -540,6 +540,22 @@ add_filter( 'get_search_form', 'bs_wpsearch' );
 
 
 /************* NAVIGATION MENUS **************/
+function top_nav() {
+	// display the primary menu
+    wp_nav_menu( 
+    	array( 
+    		'menu' => 'header_nav', /* menu name */
+    		'menu_class' => 'nav navbar-nav',
+    		'theme_location' => 'header_nav', /* where in the theme it's assigned */
+    		'container' => 'false', /* container class */
+			/*'container-class' => '', */
+    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
+    		'depth' => '1', /* Bootstrap 3.0 doesn't support additional depths */
+    		'walker' => new wp_bootstrap_navwalker()
+    	)
+    );
+}
+
 function main_nav() {
 	// display the primary menu
     wp_nav_menu( 
@@ -549,7 +565,7 @@ function main_nav() {
     		'theme_location' => 'main_nav', /* where in the theme it's assigned */
     		'container' => 'false', /* container class */
 			/*'container-class' => '', */
-    		'fallback_cb' => 'nav_menu_fallback', /* menu fallback */
+    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
     		'depth' => '2', /* Bootstrap 3.0 doesn't support additional depths */
     		'walker' => new wp_bootstrap_navwalker()
     	)
@@ -565,25 +581,11 @@ function footer_links() {
     		'theme_location' => 'footer_links', /* where in the theme it's assigned */
     		'container' => 'div',
 			'container_class' => 'pull-right', /* container class */
-    		'fallback_cb' => 'nav_menu_fallback', /* menu fallback */
+    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
 			'depth' => '2', /* Bootstrap 3.0 doesn't support additional depths */
-			'walker' => new Bootstrap_Walker()
+			'walker' => new wp_bootstrap_navwalker()
     	)
 	);
-}
-
-
-// this is the fallback for header menu
-function nav_menu_fallback() { 
-	// Figure out how to make this output bootstrap-friendly html
-	wp_page_menu(
-		array(
-			'show_home' => 'Home',
-			'menu_class' => 'nav',
-			'sort_column' => 'menu_order, post_title',
-			'depth' => 0
-		)
-	); 
 }
 
 /************* Page Display Classes **************/
