@@ -105,7 +105,7 @@ add_filter('use_default_gallery_style', '__return_null');
 /************* CUSTOM LOGIN PAGE *****************/
 
 // custom login css
-function login_css() { wp_enqueue_style( 'login_css', get_template_directory_uri() . '/library/css/login.css', false ); }
+function login_css() { wp_enqueue_style( 'login_css', get_template_directory_uri() . '/library/theme/css/login.css', false ); }
 function login_url() {  return home_url(); }
 function login_title() { return get_option('blogname'); }
 
@@ -471,7 +471,7 @@ function add_active_class($classes, $item) {
 if( !function_exists("theme_styles") ) {  
     function theme_styles() { 
 		if (!is_admin()){
-        wp_register_style( 'bootstrap', get_template_directory_uri() . '/library/css/bootstrap-themed.css', array(), '3.0.0', 'all' );
+        wp_register_style( 'bootstrap', get_template_directory_uri() . '/library/theme/css/bootstrap-themed.css', array(), '3.0.0', 'all' );
         //wp_register_style( 'bootstrap-docs', get_template_directory_uri() . '/library/bootstrap/docs-assets/css/docs.css', array(), '3.0.0', 'all' );
 		//wp_register_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css', array(), '3.2.1', 'all' );
         //wp_register_style( 'theme-base', get_stylesheet_uri(), array(), '1.0', 'all' );
