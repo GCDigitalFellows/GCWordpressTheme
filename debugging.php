@@ -1,4 +1,6 @@
 <?php
+
+define('WP_LESS_ALWAYS_RECOMPILE', true);
 	
 function add_css_admin_bar_link() {
 	global $wp_admin_bar;
@@ -6,7 +8,6 @@ function add_css_admin_bar_link() {
 		return;
 	$wp_admin_bar->add_menu( array(
 		'href' => '#',
-		'parent' => 'false',
 		'id' => 'css_link',
 		'title' => __( 'Toggle GC CSS'),
 		'meta' => array(

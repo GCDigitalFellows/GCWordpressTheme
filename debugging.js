@@ -60,6 +60,7 @@ function togglejscssfile(filename, filetype, newfilename){
    isfound=true;
   }
  }
- if (!isfound && createjscssfile(newfilename,filetype))
-  console.log('added css file: '+ newfilename)
+ if (!isfound)
+  createjscssfile(newfilename,filetype)
+  //console.log('added css file: '+ newfilename)
 }
