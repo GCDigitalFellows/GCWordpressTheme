@@ -45,7 +45,12 @@ body.admin-bar .navbar-fixed-top {
 
 /* custom navs */
 .nav {
-  font-family: @font-family-sans-serif;
+  font-family: @font-family-serif;
+}
+#main-nav .nav {
+	font-family: @font-family-sans-serif-light;
+	font-size: ceil(@font-size-base * 1.07); // ~14px
+	letter-spacing: 0.1em;
 }
 .nav-header {
     font-weight: normal;
@@ -167,8 +172,6 @@ body {
 	-ms-word-wrap: break-word;
 	word-wrap: break-word;
 }
-h1 { font-size: @font-size-base * 3.5; } // ~49px
-h2 { font-size: @font-size-base * 2.75; } // ~32px
 
 blockquote {
   border-left: 7px solid @green;
@@ -206,6 +209,25 @@ cite   { font-size: 85%; }
   line-height: @line-height-base * 1.2;
 }
 
+h1 {
+	text-transform: uppercase;
+	font-family: @font-family-sans-serif-bold;
+}
+h2,
+h3 {
+	letter-spacing: 0.1em;
+}
+
+h5 {
+	color: @gray-light;
+	font-weight: bold;
+	font-family: @font-family-serif;
+}
+
+h6 {
+	font-style: italic;
+	font-family: @font-family-sans-serif-bold;
+}
 
 /* custom classes */
 .entry-meta, #tag-cloud {

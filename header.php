@@ -125,7 +125,7 @@
 								      <span class="icon-bar"></span>
 								    </button>
 								  </div>
-								<nav class="collapse navbar-collapse pull-right navbar-main-collapse" role="navigation">
+								<nav id="main-nav" class="collapse navbar-collapse pull-right navbar-main-collapse" role="navigation">
 									<?php main_nav(); ?>
 								</nav>
 							</div>
