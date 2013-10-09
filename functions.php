@@ -9,6 +9,10 @@ Modified: 20131003
 /* library/translation/translation.php	- adding support for other languages */
 // require_once('library/translation/translation.php'); // this comes turned off by default
 
+// const WPBS_DEBUGGING turns on or off the theme's development/debugging tools
+define("WPBS_DEBUGMODE",true);
+
+
 // Redux Options
 //add_action( 'init', 'initialize_redux_framework', 1000 );
 //function initialize_redux_framework() {
@@ -470,7 +474,7 @@ if( !function_exists("theme_styles") ) {
         wp_register_style( 'bootstrap', get_template_directory_uri() . '/library/css/bootstrap-themed.css', array(), '3.0.0', 'all' );
         //wp_register_style( 'bootstrap-docs', get_template_directory_uri() . '/library/bootstrap/docs-assets/css/docs.css', array(), '3.0.0', 'all' );
 		//wp_register_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css', array(), '3.2.1', 'all' );
-        wp_register_style( 'theme-base', get_stylesheet_uri(), array(), '1.0', 'all' );
+        //wp_register_style( 'theme-base', get_stylesheet_uri(), array(), '1.0', 'all' );
 		wp_register_style( 'theme-orig', get_template_directory_uri() . '/orig/css/cuny-all.css', array(), '1.0', 'all' );
 
 		// only enqueue the following styles when needed, but register them here to centralize updates.
@@ -479,7 +483,7 @@ if( !function_exists("theme_styles") ) {
         wp_enqueue_style( 'bootstrap' );
         //wp_enqueue_style( 'bootstrap-docs' );
 		//wp_enqueue_style( 'font-awesome' );
-        wp_enqueue_style( 'theme-base');
+        //wp_enqueue_style( 'theme-base');
 		wp_enqueue_style( 'theme-orig');
 		}
     }
@@ -524,6 +528,18 @@ add_action( 'wp_footer', function() {
 	<script>window.attachEvent(\'onload\',function(){CFInstall.check({mode:\'overlay\'})})</script>
 <![endif]-->';
 } );
+
+/************* DEBUGGING TOOLS ****************/
+if (WPBS_DEBUGMODE) {
+	// use runtime-compiled less instead of compiled css
+	wp_dequeue_style( 'bootstrap' );
+	wp_register_style( 'bootstrap', get_template_directory_uri() . '/library/theme/less/bootstrap-themed.less', array(), '3.0.0', 'all' ); // only for wp-less enabled site, for dev.
+	wp_enqueue_style( 'bootstrap' );
+	// include debugging php/js
+	wp_register_script('wpbs_debugging', get_template_directory_uri() . '/debugging.js',array(),'1.0', true );
+	wp_enqueue_script('wpbs_debugging');
+	include_once('debugging.php');
+}
 
 /************* SEARCH FORM LAYOUT *****************/
 
