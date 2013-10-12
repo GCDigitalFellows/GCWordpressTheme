@@ -78,9 +78,9 @@ function theme_setup() {
 	add_theme_support( 'menus' );            // wp menus
 	register_nav_menus(                      // wp3+ menus
 		array(
-			'header_nav' => 'Top Menu in Header',
-			'main_nav' => 'The Main Menu',   // main nav in header
-			'footer_links' => 'Footer Links' // secondary nav in footer
+			'service_nav' => 'Services Menu in Header',
+			'main_nav' => 'Primary Menu in Header', 
+			'footer_links' => 'Footer Links'
 		)
 	);
 	add_theme_support( 'infinite-scroll', array(
@@ -648,38 +648,6 @@ add_filter( 'get_search_form', 'bs_wpsearch' );
 
 
 /************* NAVIGATION MENUS **************/
-function top_nav() {
-	// display the primary menu
-    wp_nav_menu( 
-    	array( 
-    		'menu' => 'header_nav', /* menu name */
-    		'menu_class' => 'nav navbar-nav',
-    		'theme_location' => 'header_nav', /* where in the theme it's assigned */
-    		'container' => 'false', /* container class */
-			/*'container-class' => '', */
-    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
-    		'depth' => '1', /* Bootstrap 3.0 doesn't support additional depths */
-    		'walker' => new wp_bootstrap_navwalker()
-    	)
-    );
-}
-
-function main_nav() {
-	// display the primary menu
-    wp_nav_menu( 
-    	array( 
-    		'menu' => 'main_nav', /* menu name */
-    		'menu_class' => 'nav navbar-nav',
-    		'theme_location' => 'main_nav', /* where in the theme it's assigned */
-    		'container' => 'false', /* container class */
-			/*'container-class' => '', */
-    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
-    		'depth' => '2', /* Bootstrap 3.0 doesn't support additional depths */
-    		'walker' => new wp_bootstrap_navwalker()
-    	)
-    );
-}
-
 function footer_links() { 
 	// display the footer menu
     wp_nav_menu(

@@ -93,16 +93,27 @@
 						<div class="row">
 							<div class="col-md-9">
 								<div class="navbar-header">
-								    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-top-collapse">
+								    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-service-collapse">
 								      <span class="sr-only">Toggle navigation</span>
 								      <span class="icon-bar"></span>
 								      <span class="icon-bar"></span>
 								      <span class="icon-bar"></span>
 								    </button>
 								  </div>
-								<nav id="service-nav" class="collapse navbar-collapse navbar-left navbar-top-collapse" role="navigation">
-									<?php top_nav(); ?>
-								</nav>
+								<?php 
+								    wp_nav_menu( array(
+							    		'menu' => 'service_nav',
+							    		'menu_class' => 'nav navbar-nav',
+							    		'menu_id' => 'service-nav-menu',
+							    		'theme_location' => 'service_nav', /* where in the theme it's assigned */
+							    		'depth' => 1,
+							    		'container' => 'nav',
+										'container_class'   => 'collapse navbar-collapse navbar-service-collapse pull-left',
+							    		'container_id' => 'service-nav',
+							    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
+							    		'walker' => new wp_bootstrap_navwalker()
+								    ) );
+							    ?>
 							</div>
 							<div class="col-md-3">
 								<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
@@ -125,9 +136,20 @@
 								      <span class="icon-bar"></span>
 								    </button>
 								  </div>
-								<nav id="main-nav" class="collapse navbar-collapse pull-right navbar-main-collapse" role="navigation">
-									<?php main_nav(); ?>
-								</nav>
+								<?php 
+								    wp_nav_menu( array(
+							    		'menu' => 'main_nav',
+							    		'menu_class' => 'nav navbar-nav',
+							    		'menu_id' => 'main-nav-menu',
+							    		'theme_location' => 'main_nav', /* where in the theme it's assigned */
+							    		'depth' => 2, /* Bootstrap 3.0 doesn't support additional depths */
+							    		'container' => 'nav',
+										'container_class'   => 'collapse navbar-collapse navbar-main-collapse pull-right',
+							    		'container_id' => 'main-nav',
+							    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
+							    		'walker' => new wp_bootstrap_navwalker()
+								    ) );
+							    ?>
 							</div>
 						</div>
 					</div><!-- main nav row -->
