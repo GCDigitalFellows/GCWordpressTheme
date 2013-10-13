@@ -566,16 +566,12 @@ if( !function_exists("theme_styles") ) {
     function theme_styles() { 
 		if (!is_admin()){
         wp_register_style( 'bootstrap', get_template_directory_uri() . '/library/theme/css/bootstrap-themed.css', array(), '3.0.0', 'all' );
-        //wp_register_style( 'theme-base', get_stylesheet_uri(), array(), '1.0', 'all' );
-		wp_register_style( 'theme-orig', get_template_directory_uri() . '/orig/css/cuny-all.css', array(), '1.0', 'all' );
         wp_register_style( 'fonts', get_template_directory_uri() . '/library/theme/css/fonts.css', array(), '1.0.0', 'all' );		
 
 		// only enqueue the following styles when needed, but register them here to centralize updates.
 		wp_register_style( 'blueimp-gallery-css', get_template_directory_uri() . '/library/Gallery/css/blueimp-gallery.min.css', array(), '2.9.0', 'all' );
         
         wp_enqueue_style( 'bootstrap' );
-        //wp_enqueue_style( 'theme-base');
-		wp_enqueue_style( 'theme-orig');
 		wp_enqueue_style( 'fonts');
 		}
     }
