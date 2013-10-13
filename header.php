@@ -87,12 +87,16 @@
 				
 		<header class="navbar <?php echo $navheader_class; ?>" role="banner">
 			<div class="container">
-				
-				<div class="row clearfix">
+				<div class="row">
+				<div class="pull-right">
+					<a class="brand" id="logo" title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
+						<img src="http://www.gc.cuny.edu/shared/images/shared/CUNY-GC-logo.png" />
+					</a>
+				</div>
 					<div class="col-md-10">
 						<div class="row">
 							<div class="col-md-9">
-								<div class="navbar-header">
+								<div class="navbar-header pull-left">
 								    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-service-collapse">
 								      <span class="sr-only">Toggle navigation</span>
 								      <span class="icon-bar"></span>
@@ -153,11 +157,7 @@
 							</div>
 						</div>
 					</div><!-- main nav row -->
-					<div class="col-md-2">
-						<a class="navbar-brand" id="logo" title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
-							<img src="http://www.gc.cuny.edu/shared/images/shared/CUNY-GC-logo.png" />
-						</a>
-					</div>
+					
 				</div> 
 					
 			</div> <!-- end container -->		
