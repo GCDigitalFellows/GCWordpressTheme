@@ -85,80 +85,83 @@
 		
 	<body <?php body_class($body_style); ?>>
 				
-		<header class="navbar <?php echo $navheader_class; ?>" role="banner">
+		<header class="navbar <?php echo $navheader_class; ?> clearfix" role="banner">
 			<div class="container">
 				<div class="row">
-				<div class="pull-right">
-					<a class="brand" id="logo" title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
-						<img src="http://www.gc.cuny.edu/shared/images/shared/CUNY-GC-logo.png" />
-					</a>
+					<div class="col-sm-7 col-xs-12 col-md-8">
+						<div class="row">
+							<div class="navbar-header pull-left">
+							    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-service-collapse">
+							      <span class="sr-only">Toggle navigation</span>
+							      <span class="icon-bar"></span>
+							      <span class="icon-bar"></span>
+							      <span class="icon-bar"></span>
+							    </button>
+							</div>
+							<?php 
+							    wp_nav_menu( array(
+						    		'menu' => 'service_nav',
+						    		'menu_class' => 'nav navbar-nav',
+						    		'menu_id' => 'service-nav-menu',
+						    		'theme_location' => 'service_nav', /* where in the theme it's assigned */
+						    		'depth' => 1,
+						    		'container' => 'nav',
+									'container_class'   => 'collapse navbar-collapse navbar-service-collapse pull-left',
+						    		'container_id' => 'service-nav',
+						    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
+						    		'walker' => new wp_bootstrap_navwalker()
+							    ) );
+						    ?>
+					    </div>
+					    <div class="row">
+						    <a class="navbar-brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>">
+								<?php if($wheniwasbad_options['branding_logo']['url']) { ?>
+									<img src="<?php echo $wheniwasbad_options['branding_logo']['url']; ?>" alt="<?php echo get_bloginfo('description'); ?>">
+								<?php }
+									if($wheniwasbad_options['site_name']) bloginfo('name'); 
+								?>
+							</a>
+					    </div>
+					</div>
+					<div class="col-sm-2 col-sm-push-2 col-xs-4 col-md-push-2">
+						<a id="sitewide-logo" title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
+							<img class="alignright" src="http://www.gc.cuny.edu/shared/images/shared/CUNY-GC-logo.png" />
+						</a>
+					</div>
+					<div class="col-sm-3 col-sm-pull-2 col-xs-8 col-md-2">
+						<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
+							<div class="input-group input-group-sm">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+								</span>
+								<input name="s" id="s" type="text" class="form-control" autocomplete="off" placeholder="<?php _e('Search','gcwordpress'); ?>" >
+							</div>
+						</form>
+					</div>
 				</div>
-					<div class="col-md-10">
-						<div class="row">
-							<div class="col-md-9">
-								<div class="navbar-header pull-left">
-								    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-service-collapse">
-								      <span class="sr-only">Toggle navigation</span>
-								      <span class="icon-bar"></span>
-								      <span class="icon-bar"></span>
-								      <span class="icon-bar"></span>
-								    </button>
-								  </div>
-								<?php 
-								    wp_nav_menu( array(
-							    		'menu' => 'service_nav',
-							    		'menu_class' => 'nav navbar-nav',
-							    		'menu_id' => 'service-nav-menu',
-							    		'theme_location' => 'service_nav', /* where in the theme it's assigned */
-							    		'depth' => 1,
-							    		'container' => 'nav',
-										'container_class'   => 'collapse navbar-collapse navbar-service-collapse pull-left',
-							    		'container_id' => 'service-nav',
-							    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
-							    		'walker' => new wp_bootstrap_navwalker()
-								    ) );
-							    ?>
-							</div>
-							<div class="col-md-3">
-								<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
-									<div class="input-group input-group-sm">
-										<span class="input-group-btn">
-											<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-										</span>
-										<input name="s" id="s" type="text" class="form-control" autocomplete="off" placeholder="<?php _e('Search','gcwordpress'); ?>" >
-									</div>
-								</form>
-							</div>
-						</div> <!-- top nav row -->
-						<div class="row">
-							<div class="col-md-12">
-								<div class="navbar-header">
-								    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-								      <span class="sr-only">Toggle navigation</span>
-								      <span class="icon-bar"></span>
-								      <span class="icon-bar"></span>
-								      <span class="icon-bar"></span>
-								    </button>
-								  </div>
-								<?php 
-								    wp_nav_menu( array(
-							    		'menu' => 'main_nav',
-							    		'menu_class' => 'nav navbar-nav',
-							    		'menu_id' => 'main-nav-menu',
-							    		'theme_location' => 'main_nav', /* where in the theme it's assigned */
-							    		'depth' => 2, /* Bootstrap 3.0 doesn't support additional depths */
-							    		'container' => 'nav',
-										'container_class'   => 'collapse navbar-collapse navbar-main-collapse pull-right',
-							    		'container_id' => 'main-nav',
-							    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
-							    		'walker' => new wp_bootstrap_navwalker()
-								    ) );
-							    ?>
-							</div>
-						</div>
-					</div><!-- main nav row -->
-					
-				</div> 
-					
-			</div> <!-- end container -->		
+				<div id="main-nav-container">
+					<div class="navbar-header">
+					    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+					      <span class="sr-only">Toggle navigation</span>
+					      <span class="icon-bar"></span>
+					      <span class="icon-bar"></span>
+					      <span class="icon-bar"></span>
+					    </button>
+					  </div>
+					<?php 
+					    wp_nav_menu( array(
+				    		'menu' => 'main_nav',
+				    		'menu_class' => 'nav navbar-nav',
+				    		'menu_id' => 'main-nav-menu',
+				    		'theme_location' => 'main_nav', /* where in the theme it's assigned */
+				    		'depth' => 2, /* Bootstrap 3.0 doesn't support additional depths */
+				    		'container' => 'nav',
+							'container_class'   => 'collapse navbar-collapse navbar-main-collapse pull-right',
+				    		'container_id' => 'main-nav',
+				    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
+				    		'walker' => new wp_bootstrap_navwalker()
+					    ) );
+				    ?>
+				</div>					
+			</div> <!-- end container -->			
 		</header> <!-- end header -->
