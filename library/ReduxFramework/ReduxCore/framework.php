@@ -38,19 +38,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
     if( !defined( 'REDUX_DIR') )
         define( 'REDUX_DIR', $fslashed_dir );
 
-	//hacked fix for symlinks in abspath
-	
-	if ( ! strpos($fslashed_dir,$fslashed_abs) ) {
-		//TO-DO: fix symlinked plugins directory when it's included as a plugin.
-		$stylesheet_path = get_stylesheet_directory();
-		$stylesheet_path_rel = str_replace( ABSPATH, '', $stylesheet_path );
-		$fslashed_dir = str_replace( realpath( $stylesheet_path ), '', dirname( __FILE__ ) );
-		$fslashed_dir = trailingslashit( str_replace( '\\', '/', $stylesheet_path_rel . $fslashed_dir ) );
-	}
-	
     // Framework base URL
     if( !defined( 'REDUX_URL' ) )
         define( 'REDUX_URL', site_url( str_replace( $fslashed_abs, '', $fslashed_dir ) ) );
+
     /**
      * Main ReduxFramework class
      *
@@ -63,6 +54,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
         protected $framework_url        = 'http://www.reduxframework.com/';
         protected $framework_version    = REDUX_VERSION;
 
+        public $instance			= null;
+
         // Public vars
         public $page                = '';
         public $args                = array();
@@ -73,6 +66,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public $options             = array();
         public $options_defaults    = null;
 		public $folds    			= array();
+		public $url 				= '';
+		public $path 				= '';
+		public $output 				= array(); // Fields with CSS output selectors
+
+        public $fieldsValues        = array(); //all fields values in an id=>value array so we can check dependencies
+        public $fieldsHidden        = array(); //all fields that didnt pass the dependency test and are hidden
 
         /**
          * Class Constructor. Defines the args for the theme options class
@@ -103,6 +102,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['page_type']          = 'menu';
             $defaults['page_parent']        = 'themes.php';
             $defaults['page_position']      = null;
+            $defaults['enqueue']      		= true;
             $defaults['allow_sub_menu']     = true;
             $defaults['show_import_export'] = true;
             $defaults['dev_mode']           = false;
@@ -112,7 +112,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['help_tabs']          = array();
             $defaults['help_sidebar']       = __( '', 'redux-framework' );
             $defaults['database'] 			= ''; // possible: options, theme_mods, theme_mods_expanded, transient
+            $defaults['customizer'] 		= true; // setting to true forces get_theme_mod_expanded
 			$defaults['global_variable'] 	= '';
+			$defaults['output'] 			= true; // Dynamically generate CSS
             /** @noinspection PhpUndefinedConstantInspection */
             $defaults['transient_time'] 	= 60 * MINUTE_IN_SECONDS;
 
@@ -121,8 +123,12 @@ if( !class_exists( 'ReduxFramework' ) ) {
             $defaults['default_mark']		= ''; // What to print by the field's title if the value shown is default
 
 	    	// Set values
-
             $this->args = wp_parse_args( $args, $defaults );
+
+			if ( empty( $this->path ) ) {
+            	$this->path = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
+            	$this->url = site_url( str_replace( trailingslashit( str_replace( '\\', '/', ABSPATH ) ), '', $this->path ) );
+            }
 
             if ( $this->args['global_variable'] !== false ) {
             	if ( $this->args['global_variable'] == "" ) {
@@ -147,9 +153,19 @@ if( !class_exists( 'ReduxFramework' ) ) {
             // Register setting
             add_action( 'admin_init', array( &$this, '_register_setting' ) );
 
+			// Register extensions
+            add_action( 'init', array( &$this, '_register_extensions' ), 2 );
+
+            // Any dynamic CSS output, let's run
+            add_action( 'wp_enqueue_scripts', array( &$this, '_enqueue_output' ), 100 );
+
             // Hook into the WP feeds for downloading exported settings
             add_action( 'do_feed_reduxopts-' . $this->args['opt_name'], array( &$this, '_download_options' ), 1, 1 );
 
+        }
+
+        public function get_instance() {
+        	return $this->instance;
         }
 
         /**
@@ -210,6 +226,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		 * @param mixed $value the value of the option being added
 		 */
 		function set_options( $value = '' ) {
+			$value['REDUX_last_saved'] = time();
 			if( !empty($value) ) {
 				if ( $this->args['database'] === 'transient' ) {
 					set_transient( $this->args['opt_name'] . '-transient', $value, $this->args['transient_time'] );
@@ -332,14 +349,17 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		           			$data[$k] = $v;
 		        		}
 					}//if
-					else if ($type == "elusive-icons" || $type == "elusive-icon" || $type == "elusive") {
-						require_once(REDUX_DIR.'inc/fields/select/elusive-icons.php');
-						foreach($elusiveIcons as $k) {
+					else if ($type == "elusive-icons" || $type == "elusive-icon" || $type == "elusive" || 
+							 $type == "font-icon" || $type == "font-icons" || $type == "icons") {
+						$font_icons = apply_filters('redux-font-icons',array());
+						foreach($font_icons as $k) {
 		           			$data[$k] = $k;
 		        		}
+					}else if ($type == "callback") {
+						$data = call_user_func($args[0]);
 					}//if			
 				}//if
-			}
+			}//if
 
 			return $data;
 		}		
@@ -464,6 +484,37 @@ if( !class_exists( 'ReduxFramework' ) ) {
 				    }
 				}
 			}
+			/*
+			$parents = array();
+			$toHide = array();
+			foreach ($folds as $k=>$fold) { // ParentFolds WITHOUT parents
+				if ( empty( $fold['children'] ) || !empty( $fold['children']['parents'] ) ) {
+					continue;
+				}
+				$fold['value'] = $this->options[$k];
+				foreach ($fold['children'] as $key =>$value) {
+					if ($key == $fold['value']) {
+						unset($fold['children'][$key]);
+					}
+				}
+				if (empty($fold['children'])) {
+					continue;
+				}
+				foreach ($fold['children'] as $key => $value) {
+					foreach ($value as $k=> $hidden) {
+						$toHide[$hidden]=true;
+						
+					}
+				}				
+				$parents[] = $fold;
+			}
+
+
+
+			print_r($parents);
+			print_r($toHide);
+*/
+
 			return $folds;
 		    
 		}
@@ -476,6 +527,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _set_default_options() {
+
+        	$this->instance = $this;
+
 		    // Get args
 		    $this->args = apply_filters( 'redux-args-'.$this->args['opt_name'], $this->args );
 
@@ -601,6 +655,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             }
 
             add_action( 'admin_print_styles-' . $this->page, array( &$this, '_enqueue' ) );
+            
             add_action( 'load-' . $this->page, array( &$this, '_load_page' ) );
         }
 
@@ -612,8 +667,50 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @global      $wp_styles
          * @return      void
          */
+        public function _enqueue_output() {
+			foreach( $this->sections as $k => $section ) {
+                if( isset($section['type'] ) && $section['type'] == 'divide' ) {
+                    continue;
+                }
+                if( isset( $section['fields'] ) ) {
+                    foreach( $section['fields'] as $fieldk => $field ) {
+						if( isset( $field['type'] ) ) {
+                            $field_class = 'ReduxFramework_' . $field['type'];
+                            if( !class_exists( $field_class ) ) {
+                                $class_file = apply_filters( 'redux-typeclass-load', REDUX_DIR . 'inc/fields/' . $field['type'] . '/field_' . $field['type'] . '.php', $field_class );
+                                if( $class_file ) {
+                                    /** @noinspection PhpIncludeInspection */
+                                    require_once( $class_file );
+                                }
+                            }	
+
+                            if( !empty( $this->options[$field['id']] ) && class_exists( $field_class ) && method_exists( $field_class, 'output' ) ) {
+                            	if ( !empty($field['output']) && !is_array( $field['output'] ) ) {
+                					$field['output'] = array( $field['output'] );
+                				}
+								$value = isset($this->options[$field['id']])?$this->options[$field['id']]:'';
+                				$enqueue = new $field_class( $field, $value, $this );
+                                $enqueue->output();
+                            }
+                        }       	
+                    }
+                }
+            }
+        }        
+
+        /**
+         * Enqueue CSS/JS for options page
+         *
+         * @since       1.0.0
+         * @access      public
+         * @global      $wp_styles
+         * @return      void
+         */
         public function _enqueue() {
             global $wp_styles;
+
+	    wp_enqueue_script('jquery');
+	    wp_enqueue_script('jquery-ui-core');
 
             wp_register_style(
                 'redux-css',
@@ -905,6 +1002,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _register_setting() {
+
             register_setting( $this->args['opt_name'] . '_group', $this->args['opt_name'], array( &$this,'_validate_options' ) );
 
             if( is_null( $this->sections ) ) return;
@@ -916,6 +1014,10 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     continue;
                 }
 
+				if ( empty( $section['id'] ) ) {
+                	$section['id'] = strtolower( str_replace( " ", "", $section['title'] ) );	
+                }                   
+
                 // DOVY! Replace $k with $section['id'] when ready
                 $section = apply_filters( 'redux-section-' . $k . '-modifier-' . $this->args['opt_name'], $section );
 
@@ -923,6 +1025,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 if( isset( $section['fields'] ) ) {
                     foreach( $section['fields'] as $fieldk => $field ) {
+                    	
                     	$th = "";
                         if( isset( $field['title'] ) && isset( $field['type'] ) && $field['type'] !== "info" ) {
 			    			$default_mark = ( !empty($field['default']) && isset($this->options[$field['id']]) && $this->options[$field['id']] == $field['default'] && !empty( $this->args['default_mark'] ) && isset( $field['default'] ) ) ? $this->args['default_mark'] : '';
@@ -951,16 +1054,22 @@ if( !class_exists( 'ReduxFramework' ) ) {
 							$default_output = "";
 						    if (!is_array($field['default'])) {
 								if ( !empty( $field['options'][$field['default']] ) ) {
-									$default_output .= $field['options'][$field['default']].", ";
+									if (!empty($field['options'][$field['default']]['alt'])) {
+										$default_output .= $field['options'][$field['default']]['alt'] . ', ';
+									} else {
+										// TODO: This serialize fix may not be the best solution. Look into it. PHP 5.4 error without serialize
+										$default_output .= serialize($field['options'][$field['default']]).", ";	
+									}
 								} else if ( !empty( $field['options'][$field['default']] ) ) {
 									$default_output .= $field['options'][$field['default']].", ";
 								} else if ( !empty( $field['default'] ) ) {
 									$default_output .= $field['default'] . ', ';
 								}
 						    } else {
-								
 								foreach( $field['default'] as $defaultk => $defaultv ) {
-									if ( !empty( $field['options'][$defaultv] ) ) {
+									if (!empty($field['options'][$defaultv]['alt'])) {
+										$default_output .= $field['options'][$defaultv]['alt'] . ', ';
+									} else if ( !empty( $field['options'][$defaultv] ) ) {
 										$default_output .= $field['options'][$defaultv].", ";
 									} else if ( !empty( $field['options'][$defaultk] ) ) {
 										$default_output .= $field['options'][$defaultk].", ";
@@ -1007,6 +1116,41 @@ if( !class_exists( 'ReduxFramework' ) ) {
 			}				
 
         }
+
+        /**
+         * Register Extensions for use
+         *
+         * @since       3.0.0
+         * @access      public
+         * @return      void
+         */
+        public function _register_extensions() {        	
+        	
+        	$path = dirname( __FILE__ ) . '/extensions';
+			$folders = scandir( $path, 1 );		   
+
+		    foreach($folders as $folder){
+
+		    	if ($folder === '.' or $folder === '..' or !is_dir($path . '/' . $folder) ) {
+		    		continue;	
+		    	} 
+				$extension_class = 'ReduxFramework_Extension_' . $folder;
+
+                if( !class_exists( $extension_class ) ) {
+                    $class_file = apply_filters( 'redux-extensionclass-load', $this->path . 'extensions/' . $folder . '/extension_' . $folder . '.php', $extension_class );
+
+                    if( $class_file ) {
+                        /** @noinspection PhpIncludeInspection */
+                        require_once( $class_file );
+                        $extension = new $extension_class( $this );
+                 	}
+                }
+                		   		
+		    }    
+
+		    do_action( 'redux-register-extensions-' . $this->args['opt_name'], $this );        			
+
+        }        
 
         /**
          * Validate the Options options before insertion
@@ -1283,8 +1427,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
             echo '<div id="redux-sidebar">';
             echo '<ul id="redux-group-menu">';
             foreach( $this->sections as $k => $section ) {
-                if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
-                    $icon = ( !isset( $section['icon'] ) ) ? '' : '<img src="' . $section['icon'] . '" /> ';
+            	if( (isset($this->args['icon_type']) && $this->args['icon_type'] == 'image') || (isset($section['icon_type']) && $section['icon_type'] == 'image')) {
+                //if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
+                    $icon = ( !isset( $section['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . $section['icon'] . '" /> ';
                 } else {
                     $icon_class = ( !isset( $section['icon_class'] ) ) ? '' : ' ' . $section['icon_class'];
                     $icon = ( !isset( $section['icon'] ) ) ? '<i class="icon-cog' . $icon_class . '"></i> ' : '<i class="icon-' . $section['icon'] . $icon_class . '"></i> ';
@@ -1595,16 +1740,147 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 }
 
                 if( class_exists( $field_class ) ) {
-                    $value = $this->options[$field['id']];
+                    $value = isset($this->options[$field['id']])?$this->options[$field['id']]:'';
                     if ($v != "") {
                     	$value = $v;
                     }
                     do_action( 'redux-before-field-' . $this->args['opt_name'], $field, $value );
                     $render = new $field_class( $field, $value, $this );
+                    
+                    ob_start();
                     $render->render();
+                    $_render = apply_filters('redux-field-'.$this->args['opt_name'],ob_get_contents(),$field);
+                    ob_end_clean();
+
+                    //save the values into a unique array in case we need it for dependencies
+                    $this->fieldsValues[$field['id']] = (isset($value['url']) && is_array($value) )?$value['url']:$value;
+                    //create default data und class string and checks the dependencies of an object
+                    extract($this->check_dependencies($field));
+
+					echo '<fieldset id="'.$this->args['opt_name'].'-'.$field['id'].'" class="redux-field redux-container-'.$field['type'].' '.$class_string.'" data-id="'.$field['id'].'" '.$data_string.'>';
+	                    echo $_render;
+
+	                    if (!empty($field['desc'])) {
+	                    	$field['description'] = $field['desc'];
+	                    }
+                    
+                    echo ( isset( $field['description'] ) && !empty( $field['description'] ) ) ? '<div class="description field-desc">' . $field['description'] . '</div>' : '';
+
+                    echo '</fieldset>';
+
                     do_action( 'redux-after-field-' . $this->args['opt_name'], $field, $value );
                 }
             }
         } // function
+
+        /**
+         * Checks dependencies between objects based on the $field['required'] array
+         *
+         * If the array is set it needs to have exactly 3 entries.
+         * The first entry describes which field should be monitored by the current field. eg: "content"
+         * The second entry describes the comparison parameter. eg: "equals, not, is_larger, is_smaller ,contains"
+         * The third entry describes the value that we are comparing against.
+         *
+         * Example: if the required array is set to array('content','equals','Hello World'); then the current
+         * field will only be displayed if the field with id "content" has exactly the value "Hello World"
+         * 
+         * @param array $field
+         * @return array $params
+         */
+        public function check_dependencies($field) {
+            $params = array('data_string' => "", 'class_string' => "");
+
+            if (!empty($field['required'])) {
+                $data['check-field'] = $field['required'][0];
+                $data['check-comparison'] = $field['required'][1];
+                $data['check-value'] = $field['required'][2];
+                $params['data_string'] = $this->create_data_string($data);
+                $return = false;
+                //required field must not be hidden. otherwise hide this one by default
+                if (!isset($this->fieldsHidden[$data['check-field']])) {
+                    if (isset($this->fieldsValues[$data['check-field']])) {
+                        //$value1 = isset($this->fieldsValues[$data['check-field']]['url'])?isset($this->fieldsValues[$data['check-field']]['url']):$this->fieldsValues[$data['check-field']];
+                        $value1 = $this->fieldsValues[$data['check-field']];
+                        $value2 = $data['check-value'];
+                        switch ($data['check-comparison']) {
+                            case '=': 
+                            case 'equals': 
+                                if(is_array($value2)){
+                                    if(in_array($value1, $value2))
+                                       $return = true;  
+                                }else{
+                                    if ($value1 == $value2)
+                                        $return = true; 
+                                }
+                                break;
+                            case '!=':    
+                            case 'not':
+                                if(is_array($value2)){
+                                    if(!in_array($value1, $value2))
+                                       $return = true;  
+                                }else{ 
+                                    if ($value1 != $value2)
+                                        $return = true; 
+                                }
+                                break;
+                            case '>':    
+                            case 'greater':    
+                            case 'is_larger': 
+                                if ($value1 > $value2)
+                                    $return = true; 
+                                break;
+                            case '<':
+                            case 'less':    
+                            case 'is_smaller': 
+                                if ($value1 < $value2)
+                                    $return = true; 
+                                break;
+                            case 'contains': 
+                                if (strpos($value1, $value2) !== false)
+                                    $return = true; 
+                                break;
+                            case 'doesnt_contain': 
+                                if (strpos($value1, $value2) === false)
+                                    $return = true; 
+                                break;
+                            case 'is_empty_or': 
+                                if (empty($value1) || $value1 == $value2)
+                                    $return = true; 
+                                break;
+                            case 'not_empty_and': 
+                                if (!empty($value1) && $value1 != $value2)
+                                    $return = true; 
+                                break;
+                        }
+                    }
+                }
+
+                if (!$return) {
+                    $params['class_string'] = ' hiddenFold ';
+                    $this->fieldsHidden[$field['id']] = true;
+                }else{
+                    $params['class_string'] = ' showFold ';
+                }
+            }
+            return $params;
+        }
+
+        /**
+         * converts an array into a html data string
+         *
+         * @param array $data example input: array('id'=>'true')
+         * @return string $data_string example output: data-id='true'
+         */
+        public function create_data_string($data = array()){
+            $data_string = "";
+            
+            foreach($data as $key=>$value){
+                if(is_array($value)) $value = implode("|",$value);
+                $data_string .= " data-$key='$value' ";
+            }
+        
+            return $data_string;
+        } 
     } // class
 } // if
+

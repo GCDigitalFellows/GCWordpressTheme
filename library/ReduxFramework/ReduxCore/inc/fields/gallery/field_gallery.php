@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,25 +15,24 @@
  * along with Redux Framework. If not, see <http://www.gnu.org/licenses/>.
  *
  * @package     ReduxFramework
- * @subpackage  Field_Button_Set
- * @author      Daniel J Griffiths (Ghost1227)
- * @author      Dovy Paukstys
+ * @subpackage  Field_Gallery
+ * @author      Abdullah Almesbahi (cadr-sa)
  * @version     3.0.0
  */
-
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH'))
+    exit;
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_button_set' ) ) {
+if (!class_exists('ReduxFramework_gallery')) {
 
     /**
-     * Main ReduxFramework_button_set class
+     * Main ReduxFramework_gallery class
      *
-     * @since       1.0.0
+     * @since       3.0.0
      */
-    class ReduxFramework_button_set extends ReduxFramework {
-    
+    class ReduxFramework_gallery extends ReduxFramework {
+
         /**
          * Field Constructor.
          *
@@ -42,16 +42,14 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
          * @access      public
          * @return      void
          */
-        public function __construct( $field = array(), $value ='', $parent ) {
-        
-            parent::__construct( $parent->sections, $parent->args, $parent->extra_tabs );
+        public function __construct($field = array(), $value = '', $parent) {
+
+            parent::__construct($parent->sections, $parent->args, $parent->extra_tabs);
 
             $this->field = $field;
             $this->value = $value;
-        
         }
-    
-    
+
         /**
          * Field Render Function.
          *
@@ -62,21 +60,24 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
          * @return      void
          */
         public function render() {
-        
-            echo '<div class="buttonset ui-buttonset">';
-            
-            foreach( $this->field['options'] as $k => $v ) {
-                
-                echo '<input data-id="'.$this->field['id'].'" type="radio" id="'.$this->field['id'].'-buttonset'.$k.'" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" class="' . $this->field['class'] . '" value="' . $k . '" ' . checked( $this->value, $k, false ) . '/>';
-                echo '<label for="'.$this->field['id'].'-buttonset'.$k.'">' . $v . '</label>';
-                
-            }
-            
+
+            echo '<a href="#" onclick="return false;" class="gallery-attachments button button-large">' . __('Add/Edit Gallery', 'so-panels') . '</a>';
+            echo '<input type="hidden" class="gallery_values ' . $this->field['class'] . '" value="' . esc_attr($this->value) . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" />';
+
+            echo '<div class="screenshot">';
+            if (!empty($this->value)) :
+                $ids = explode(',', $this->value);
+                foreach ($ids as $attachment_id) {
+                    $img = wp_get_attachment_image_src($attachment_id, 'thumbnail');
+                    echo '<a class="of-uploaded-image" href="' . $img[0] . '">';
+                    echo '<img class="redux-option-image" id="image_' . $this->field['id'] .'_'.$attachment_id. '" src="' . $img[0] . '" alt="" />';
+                    echo '</a>';
+                }
+            endif;
             echo '</div>';
-        
+
         }
-    
-        
+
         /**
          * Enqueue Function.
          *
@@ -87,18 +88,21 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
          * @return      void
          */
         public function enqueue() {
-        
-            wp_enqueue_style( 'jquery-ui-css' );
+
+            if (function_exists('wp_enqueue_media')) {
+                wp_enqueue_media();
+            } else {
+                wp_enqueue_script('media-upload');
+                wp_enqueue_script('thickbox');
+                wp_enqueue_style('thickbox');
+            }
 
             wp_enqueue_script(
-                'redux-field-button-set-js', 
-                REDUX_URL . 'inc/fields/button_set/field_button_set.min.js', 
-                array( 'jquery', 'jquery-ui-core', 'jquery-ui-dialog' ),
-                time(),
-                true
+                    'redux-field-gallery-js', REDUX_URL . 'inc/fields/gallery/field_gallery.js', array('jquery', 'wp-color-picker'), time(), true
             );
 
         }
-    
+
     }
+
 }

@@ -32,7 +32,7 @@ a{outline:0 !important}
 #redux-sidebar #redux-group-menu li.divide{padding:0;border-width:1px 0 1px 0;border-style:solid;border-bottom-color:#e7e7e7;border-top-color:#f9f9f9}
 #redux-sidebar #redux-group-menu li a{display:block;padding:12px 8px;background:#eee;border-width:1px 0 1px 0;border-style:solid;border-bottom-color:#e7e7e7;border-top-color:#f9f9f9;opacity:.7;color:#555;font-weight:bold;text-decoration:none;-webkit-transition:none;transition:none}
 #redux-sidebar #redux-group-menu li a.custom-tab{background:#f6f6f6}
-#redux-sidebar #redux-group-menu li a img{width:16px;height:16px;margin-bottom:-3px;margin-right:3px}
+#redux-sidebar #redux-group-menu li a img{width:16px;height:16px;position:absolute;left:15px}
 #redux-sidebar #redux-group-menu li.active a:hover{color:#269ad6}
 #redux-sidebar #redux-group-menu li a:hover{background:#eee;width:184px;color:#269ad6;margin-right:-2px;opacity:1}
 #redux-sidebar #redux-group-menu li.active a{background:#fcfcfc;color:#797979;width:184px;opacity:1;margin-right:-2px}
@@ -61,7 +61,7 @@ a{outline:0 !important}
 #redux-import-action span{color:#b94a48}
 .redux-screenshot{max-width:300px;display:block}
 .redux-group-tab-link-a{position:relative}.redux-group-tab-link-a i{position:absolute}
-.redux-group-tab-link-a span{display:block;z-index:0}.redux-group-tab-link-a span.group_title{padding-left:30px}
+.redux-group-tab-link-a span{display:block;z-index:0}.redux-group-tab-link-a span.group_title{padding-left:30px;display:inline-table}
 .redux-group-tab-link-li a.hasError span.group_title{padding-right:25px}
 #ui-datepicker-div{display:none}
 #redux-container .ajax-loading-img-top{margin:5px 4px 0;float:left}
@@ -122,7 +122,7 @@ label.radio,label.multicheck{position:relative}
 #redux-main .button,#redux-main .button-secondary,#redux-main .button-primary{padding:0 10px 1px}
 #redux-main input.large-text{width:100%}
 .tipsy{font-size:10px;position:absolute;padding:5px;z-index:100000}
-.tipsy-inner{background-color:#000;color:#fff;max-width:200px;padding:5px 8px 4px 8px;text-align:center}
+.tipsy-inner{background-color:#000;color:#fff;max-width:200px;padding:5px 5px 1px 5px;text-align:center}
 .tipsy-inner{border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px}
 .tipsy-arrow{position:absolute;width:0;height:0;line-height:0;border:5px dashed #000}
 .tipsy-arrow-n{border-bottom-color:#000}
@@ -157,3 +157,4 @@ label.radio,label.multicheck{position:relative}
 #redux-object-browser{overflow:auto;word-wrap:break-word;max-height:600px;max-width:100%}
 #redux-main span.description{font-style:normal}
 #redux-main #redux-system-info textarea{min-height:730px}
+#redux-main .field-desc{clear:both}
