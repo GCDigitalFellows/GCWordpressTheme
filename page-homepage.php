@@ -72,6 +72,8 @@ Template Name: Homepage
 		$post_thumbnail_id = get_post_thumbnail_id();
 		$featured_src = wp_get_attachment_image_src( $post_thumbnail_id, 'wpbs-featured-home' );
 		$jumbotron_contents = get_post_meta($post->ID, 'jumbotron_contents' , true);
+		$jumbotron_bg_color = get_post_meta($post->ID, 'jumbotron_bg_color' , true);
+		$jumbotron_bg_image = get_post_meta($post->ID, 'jumbotron_bg_image' , true);
 
 		$sidebar_position = get_post_meta($post->ID, 'sidebar_position' , true);
 		$sidebar_widget_group = get_post_meta($post->ID, 'sidebar_widgets' , true);
@@ -92,8 +94,16 @@ Template Name: Homepage
 	?>
 	
 	<?php if ($jumbotron_contents != ''): ?>
+
+		<?php
+			if ($jumbotron_bg_image) {
+				$jumbotron_style = 'style="background-image: url(\'' . wp_get_attachment_url($jumbotron_bg_image) . '\'); background-repeat: no-repeat; background-position: 0 0; background-size: cover;\'"';
+			} elseif ($jumbotron_bg_color) {
+				$jumbotron_style = 'style="background-color: ' . $jumbotron_bg_color . '"';
+			}
+		?>
 	
-		<div class="jumbotron" style="background-image: url('<?php echo $featured_src[0]; ?>'); background-repeat: no-repeat; background-position: 0 0;">
+		<div class="jumbotron" <?php echo $jumbotron_style; ?>>
 	
 			<?php echo $jumbotron_contents;?>
 
