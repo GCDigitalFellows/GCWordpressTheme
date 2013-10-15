@@ -424,6 +424,105 @@ h6 {
 	font-family: @font-family-sans-serif-bold;
 }
 
+// Circle Icons
+// -------------------------
+
+@circle-font-weight:                normal;
+
+@circle-default-color:              @white;
+@circle-default-bg:                 @silver;
+@circle-default-border:             @concrete;
+
+@circle-primary-color:              #fff;
+@circle-primary-bg:                 @brand-primary;
+@circle-primary-border:             darken(@circle-primary-bg, 5%);
+
+@circle-success-color:              #fff;
+@circle-success-bg:                 @brand-success;
+@circle-success-border:             darken(@circle-success-bg, 5%);
+
+@circle-warning-color:              #fff;
+@circle-warning-bg:                 @brand-warning;
+@circle-warning-border:             darken(@circle-warning-bg, 5%);
+
+@circle-danger-color:               #fff;
+@circle-danger-bg:                  @brand-danger;
+@circle-danger-border:              darken(@circle-danger-bg, 5%);
+
+@circle-info-color:                 #fff;
+@circle-info-bg:                    @brand-info;
+@circle-info-border:                darken(@circle-info-bg, 5%);
+
+.circle-icon {
+	display: block;
+	border-radius: 50%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+	width: auto;
+	height: auto;
+	broder: 1px solid @circle-default-border;
+}
+.circle-icon-50 {
+	max-height: 50px;
+	max-width: 50px;
+	font-size: 24px;
+	padding: 13px 0;
+	.circle-icon;
+}
+.circle-icon-100 {
+	max-height: 100px;
+	max-width: 100px;
+	font-size: 32px;
+	padding: 34px 0;
+	.circle-icon;
+}
+.circle-icon-150 {
+	max-height: 150px;
+	max-width: 150px;
+	font-size: 32px;
+	padding: 59px 0;
+	.circle-icon;
+}
+.circle-icon-200 {
+	max-height: 200px;
+	max-width: 200px;
+	font-size: 40px;
+	padding: 80px 0;
+	.circle-icon;
+}
+.circle-icon-default {
+	color: @circle-default-color;
+	background-color: @circle-default-bg;
+	border-color: @circle-default-border;
+}
+.circle-icon-primary {
+	color: @circle-primary-color;
+	background-color: @circle-primary-bg;
+	border-color: @circle-primary-border;
+}
+.circle-icon-success {
+	color: @circle-success-color;
+	background-color: @circle-success-bg;
+	border-color: @circle-success-border;
+}
+.circle-icon-warning {
+	color: @circle-warning-color;
+	background-color: @circle-warning-bg;
+	border-color: @circle-warning-border;
+}
+.circle-icon-danger {
+	color: @circle-danger-color;
+	background-color: @circle-danger-bg;
+	border-color: @circle-danger-border;
+}
+.circle-icon-info {
+	color: @circle-info-color;
+	background-color: @circle-info-bg;
+	border-color: @circle-info-border;
+}
+
 /* custom classes */
 .entry-meta, #tag-cloud {
 	margin: (@line-height-base / 3) 0;
