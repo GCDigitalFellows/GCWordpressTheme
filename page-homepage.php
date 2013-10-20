@@ -145,6 +145,18 @@ Template Name: Homepage
 			
 		</div> <!-- row -->
 	</div> <!-- container -->
+
+	<?php /* add the contents of additional pages */
+		$additional_pages = get_post_meta( get_the_id(), 'homepage_additional_pages', false );
+		foreach ($additional_pages as $addon_page_id) {
+			$addon_page = get_post($addon_page_id);
+			//echo "<div class='container'>\n";
+			//echo "<h1>" . $addon_page->post_title . "</h1>\n";
+			echo edit_post_link("Edit",'','',$addon_page_id) . "\n";
+			echo $addon_page->post_content . "\n";
+			//echo "</div>\n";
+		}
+	?>
 				
 <?php endwhile; ?>
 

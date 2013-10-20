@@ -1,6 +1,7 @@
 <?php
 /**
  * Define the metabox and field configurations.
+ * The full list of available metabox fields: https://github.com/humanmade/Custom-Meta-Boxes/wiki
  *
  * @param  array $meta_boxes
  * @return array
@@ -83,6 +84,29 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		        'type'  => 'select',
 				'options' => $sidebar_list
 		    )
+		)
+	);
+
+
+	/* Homepage include additional pages */
+
+	$meta_boxes[] = array(
+		'title'      => 'Include Other Pages',
+		'pages'      => 'page', // Post type
+		'context'    => 'normal',
+		'priority'   => 'high',
+		'show_on' => array( 'page-template' => array('page-homepage.php') ),
+		'fields' => array(
+			array( 
+			    'id'       => 'homepage_additional_pages', 
+			    'name'     => 'Include the contents of another page (only the content, not the title) within the homepage, below the primary content and sidebars (so style accordingly).', 
+			    'type'     => 'post_select',
+			    'repeatable'     => true,
+			    'use_ajax' => true,
+			    'query' => array( 
+			        'post_type' => 'page'
+			    )
+			),
 		)
 	);
 
