@@ -115,7 +115,7 @@
 					    </div>
 					    <div class="row">
 						    <a class="navbar-brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>">
-								<?php if($wheniwasbad_options['branding_logo']['url']) { ?>
+								<?php if($wheniwasbad_options['branding_logo'] && $wheniwasbad_options['branding_logo']['url']) { ?>
 									<img src="<?php echo $wheniwasbad_options['branding_logo']['url']; ?>" alt="<?php echo get_bloginfo('description'); ?>">
 								<?php }
 									if($wheniwasbad_options['site_name']) bloginfo('name'); 

@@ -1,5 +1,5 @@
 <?php 
-function not_found($content_type) { ?>
+function not_found($content_type = null) { ?>
 
 	<article id="post-not-found" class="clearfix">
 	
@@ -18,6 +18,9 @@ function not_found($content_type) { ?>
 
 			<?php
 			switch($content_type) {
+				case 'index':
+ 					_e("We could not locate any posts","wheniwasbad");
+ 					break;
 				case 'day':
 					_e("We could not locate any posts published on ","wheniwasbad");
 					_e(the_time('l, F j, Y').".");
