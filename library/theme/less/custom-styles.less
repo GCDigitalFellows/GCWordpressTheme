@@ -10,9 +10,10 @@
   &-inverse           { background-color: @gray-dark; }
   &-orange            { background-color: @orange; }
   &-inverse[href]     { background-color: darken(@orange, 10%); }
-  &-purple            { background-color: @green-dark; }
-  &-inverse[href]     { background-color: darken(@green-dark, 10%); }
-  &-as                { background-color: #000; color: @orange; padding: 0 6px; }
+  &-light-green       { background-color: @green-light; }
+  &-dark-green        { background-color: @green-dark; }
+  &-light-blue        { background-color: @blue-light; }
+  &-pink              { background-color: @pink; }
 }
 
 
@@ -224,8 +225,30 @@ ul#main-nav-menu.navbar-nav > .active > a {
 }
 
 .navbar-form {
-	padding: 12px 0;
-	margin: 0;
+	margin: 4px 0 0 0;
+	padding: 1px;
+	border-bottom: 2px solid @gray-lighter;
+	.input-group-btn > .btn, .btn-default {
+		height: 20px;
+		padding: 0 4px;
+		border: none;
+		background-color: transparent;
+		color: @gray-light;
+	}
+	
+	.input-group-sm > .form-control {
+		height: 20px;
+		font-size: @font-size-small;
+		color: @gray-light;
+		&:focus {
+			color: @gray;
+		}
+	}
+
+	.form-control {
+		border: none;
+		.box-shadow(none);
+	}
 }
 
 #sitewide-logo {
@@ -271,15 +294,15 @@ body.navbar-fixed-offset {
 .pagination ul > li > a:focus {
   background-color: @pagination-hover-bg;
 }
-.pagination ul > .active > a,
-.pagination ul > .active > span {
+.pagination ul li span.current > a,
+.pagination ul li span.current {
   color: @pagination-active-color;
   background-color: @pagination-active-bg;
 }
-.pagination ul > .disabled > span,
-.pagination ul > .disabled > a,
-.pagination ul > .disabled > a:hover,
-.pagination ul > .disabled > a:focus {
+.pagination ul li span.disabled,
+.pagination ul li span.disabled > a,
+.pagination ul li span.disabled > a:hover,
+.pagination ul li span.disabled > a:focus {
   color: @gray-light;
   background-color: @gray-dark;
 }
@@ -404,33 +427,37 @@ h6 {
 /* custom classes */
 .entry-meta, #tag-cloud {
 	margin: (@line-height-base / 3) 0;
-	
-	p.label-postformat {
+
+	.label-postformat {
 		padding: 7px 14px;
 		font-size: @font-size-base*1.25;
 		line-height: @line-height-base;
 	}
 
-	p, .label {
-		font-size:  @font-size-tiny;
+	/*p, .label {*/
+		font-size:  @font-size-small;
 		font-family: @font-family-sans-serif;
 		font-weight: @headings-font-weight;
-		line-height: @line-height-base*1.5;
+		line-height: @line-height-base;
 		margin-bottom: 5px;
+	
+
+	.label {
+		line-height: @line-height-base*1.5;
 	}
 
 	a,
 	a:active,
 	a:visited,
 	a:hover {
-		color: @white;
+	/*	color: @white;*/
 	}
 
 	a.label,
 	a.label:active,
 	a.label:visited,
-	 {
-	  color: @white;
+	{
+	/*  color: @white;*/
 	}
 	a.label:hover {
 		color: @gray-darker;
@@ -721,7 +748,7 @@ video {
 
 /* sidebars */
 .sidebar {
-	margin-top: 70px;
+	margin-top: 30px;
 }
 
 /* comments */

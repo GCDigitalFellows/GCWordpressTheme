@@ -342,7 +342,7 @@ function comments_layout($comment, $args, $depth) {
 				</div>
 				<div class="col-md-10 comment-text">
 					<?php printf('<h4>%s</h4>', get_comment_author_link()) ?>
-					<?php edit_comment_link(__('Edit','wheniwasbad'),'<span class="edit-comment btn btn-sm btn-info"><i class="glyphicon glyphicon-white icon-pencil"></i>','</span>') ?>
+					<?php edit_comment_link(__('Edit','wheniwasbad'),'<span class="edit-comment btn btn-sm btn-info"><i class="glyphicon glyphicon-white glyphicon-edit"></i>','</span>') ?>
                     
                     <?php if ($comment->comment_approved == '0') : ?>
        					<div class="alert-message success">
