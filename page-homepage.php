@@ -10,33 +10,50 @@ Template Name: Homepage
 			
 <?php
 	global $wheniwasbad_options;
-	$use_carousel = $wheniwasbad_options['showhidden_slideroptions'];
+	$use_carousel = get_post_meta($post->ID, 'carousel_enable' , true);
+	$carousel_cats = get_post_meta($post->ID, 'carousel_categories',true);
+	$carousel_only_images = get_post_meta($post->ID, 'carousel_only_images',true);
+	if ( ! is_array($carousel_cats) ) {
+		$use_carousel = false;
+	} else {
+		$carousel_cats = implode(',',$carousel_cats);
+	}
+	$carousel_count = get_post_meta($post->ID, 'carousel_count' , true);
+	$carousel_height = get_post_meta($post->ID, 'carousel_height' , true);
+	if ( ! is_numeric($carousel_height) ) {
+		$carousel_height = 605;
+	}
 	if ($use_carousel) : ?>
 		
-		<div id="myCarousel" class="carousel">
-
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		    <!-- Carousel items -->
 		    <div class="carousel-inner">
 
 		    	<?php
 				global $post;
 				$tmp_post = $post;
-				$show_posts = $wheniwasbad_options['slider_options'];
-				$args = array( 'numberposts' => $show_posts ); // set this to how many posts you want in the carousel
+				$args = array( 'numberposts' => $carousel_count, 'category' => $carousel_cats );
+				if ( $carousel_only_images ) {
+					$args['meta_key'] = '_thumbnail_id';
+				}
 				$myposts = get_posts( $args );
 				$post_num = 0;
 				foreach( $myposts as $post ) :	setup_postdata($post);
-					$post_num++;
-					$post_thumbnail_id = get_post_thumbnail_id();
-					$featured_src = wp_get_attachment_image_src( $post_thumbnail_id, 'wpbs-featured-carousel' );
-				?>
+					$post_num++;?>
 
-			    <div class="<?php if($post_num == 1){ echo 'active'; } ?> item">
-			    	<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail( 'wpbs-featured-carousel' ); ?></a>
+			    <div class="<?php if($post_num == 1){ echo 'active'; } ?> item" style="height:<?php echo $carousel_height; ?>px; overflow:hidden;">
+			    	<?php 
+			    		if ( has_post_thumbnail($id) ){
+							$post_thumbnail_id = get_post_thumbnail_id($id); 
+							$featured_src = wp_get_attachment_image_src( $post_thumbnail_id, 'wpbs-featured-carousel' ); ?>
 
-				   	<div class="carousel-caption">
+				    	<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">
+				    		<img src="<?php echo $featured_src[0]; ?>" alt="<?php the_title_attribute(); ?>" style="width:100%; height: auto;" >
+				    	</a>
+					<?php }	?>
+				   	<div class="carousel-caption jumbotron">
 
-		                <h4><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h4>
+		                <h1><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
 		                <p>
 		                	<?php
 		                		$excerpt_length = 100; // length of excerpt to show (in characters)
@@ -44,11 +61,9 @@ Template Name: Homepage
 		                		if($the_excerpt != ""){
 		                			$the_excerpt = substr( $the_excerpt, 0, $excerpt_length );
 		                			echo $the_excerpt . '... ';
-		                	?>
-		                	<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>" class="btn btn-primary">Read more &rsaquo;</a>
-		                	<?php } ?>
+		                	} ?>
 		                </p>
-
+		                <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>" class="btn btn-sm btn-primary">Read more &rsaquo;</a>
 	                </div>
 			    </div>
 
@@ -58,8 +73,15 @@ Template Name: Homepage
 			    </div>
 
 			    <!-- Carousel nav -->
-			    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-			    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			    <a class="carousel-control left" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+			    <a class="carousel-control right" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+
+			    <!-- Indicators -->
+				<ol class="carousel-indicators">
+				<?php for ($c=0;$c<$post_num;$c++){ ?>
+			    	<li data-target="#myCarousel" data-slide-to="<?php echo $c; ?>"<?php if ($c==0) echo 'class="active"'; ?>></li>
+			    <?php } ?>
+				</ol>
 		    </div>
 		
 		</div> <!-- container for carousel -->

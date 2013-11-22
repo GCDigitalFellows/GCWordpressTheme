@@ -110,6 +110,66 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		)
 	);
 
+	/* Carousel */
+
+	$meta_boxes[] = array(
+		'title'		=> 'Carousel Options',
+		'pages'		=> 'page',
+		'context'	=> 'normal',
+		'priority'	=> 'default',
+		'show_on'	=> array( 'page-template' => array('page-homepage.php') ),
+		'fields'	=> array(
+			array(
+				'id'	=> 'carousel_enable',
+				'name'	=> 'Enable carousel for this page?',
+				'desc'	=> 'When checked, a carousel slider will be displayed at the top of this page',
+				'type'	=> 'checkbox',
+				'default' => false
+			),
+			array(
+				'id'	=> 'carousel_categories',
+				'name'	=> 'Categories to use for carousel',
+				'desc'	=> 'Select one or more categories from which to use posts to populate the carousel',
+				'multiple' => true,
+				'type'	=> 'taxonomy_select',
+				'taxonomy' => 'category'
+			),
+			array(
+				'id'	=> 'carousel_count',
+				'name'	=> 'Posts to display',
+				'desc'	=> 'Select the number of posts to include in the carousel',
+				'type'	=> 'select',
+				'default' => '5',
+				'options' => array(
+					'1' => '1',
+					'2' => '2',
+					'3' => '3',
+					'4' => '4',
+					'5' => '5',
+					'6' => '6',
+					'7' => '7',
+					'8' => '8',
+					'9' => '9',
+					'10' => '10'
+				)
+			),
+			array(
+				'id'	=> 'carousel_height',
+				'name'	=> 'Carousel Height',
+				'desc'	=> 'Enter the height for the carousel in pixels.',
+				'default' => '605',
+				'type'	=> 'text_small',
+			),
+			array(
+				'id'	=> 'carousel_only_images',
+				'name'	=> 'Only Display Posts with Featured Images',
+				'desc'	=> 'Check to only include posts with a featured image.',
+				'type'	=> 'checkbox',
+				'default'	=> '1'
+			)
+		)
+	);
+
 	
 	/* Table of Contents */
 
