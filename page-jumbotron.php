@@ -21,17 +21,17 @@ Template Name: Full-width Jumbotron
 	$jumbotron_bg_color = get_post_meta($post->ID, 'jumbotron_bg_color' , true);
 	$jumbotron_bg_image = get_post_meta($post->ID, 'jumbotron_bg_image' , true);
 
-	if ( is_active_sidebar($sidebar_widget_group) && ! $hide_empty_sidebar ) {
+	if ( ! is_active_sidebar($sidebar_widget_group) && $hide_empty_sidebar) {
+		$main_class = "col-md-12";
+		$sidebar_class = "";
+	} else {
 		if ( $sidebar_position == 'left' ) {
 			$main_class = "col-md-9 col-md-push-3";
 			$sidebar_class = "col-md-3 col-md-pull-9";
 		} elseif ( $sidebar_position == 'right' ) {
-			$main_class = "col-md-9 col-md-pull-3";
-			$sidebar_class = "col-md-3 col-md-push-9";
+			$main_class = "col-md-9";
+			$sidebar_class = "col-md-3";
 		}
-	} else {
-		$main_class = "col-md-12";
-		$sidebar_class = "";
 	}
 ?>
 
