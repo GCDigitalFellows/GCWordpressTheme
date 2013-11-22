@@ -1,3 +1,20 @@
 //
 // Custom Mixins
 // --------------------------------------------------
+
+// Use with colour name: .rgba(black, 0.5) or hex value: .rgba(#FF2400, 0.5)
+.rgba(@colour, @alpha)
+{
+	@alphaColour: hsla(hue(@colour), saturation(@colour), lightness(@colour), @alpha);
+	@ieAlphaColour: argb(@alphaColour);
+	
+	background-color: @colour; // Fallback for older browsers
+	background-color: @alphaColour; 
+	
+	// IE hacks
+	zoom: 1; // hasLayout
+	background-color: transparent\9;
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=@{ieAlphaColour}, endColorstr=@{ieAlphaColour})"; // IE 8+
+        filter:  ~"progid:DXImageTransform.Microsoft.gradient(startColorstr=@{ieAlphaColour}, endColorstr=@{ieAlphaColour})";  // IE 6 & 7 
+	
+}

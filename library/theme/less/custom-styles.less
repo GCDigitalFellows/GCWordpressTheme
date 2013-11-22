@@ -18,6 +18,11 @@
 
 
 /* custom navbars */
+
+.navbar {
+	margin-bottom: 0;
+}
+
 .navbar-static-top {
 	//max-height: 144px;
 	//overflow-y: visible;
@@ -80,6 +85,8 @@ ul#main-nav-menu > li a {
 	}
 
 	ul#main-nav-menu > li {
+
+		margin-bottom: 9px;
 
 		&:nth-child(7n+1) {
 			border-bottom: 9px solid @orange;
@@ -197,7 +204,7 @@ ul#main-nav-menu > li a {
 		}
 
 		a {
-			padding: 10px;
+			padding: 10px 10px 2px;
 		}
 		> .dropdown-menu {
 			border: none;
@@ -430,8 +437,8 @@ h6 {
 @circle-font-weight:                normal;
 
 @circle-default-color:              @white;
-@circle-default-bg:                 @silver;
-@circle-default-border:             @concrete;
+@circle-default-bg:                 @gray-light;
+@circle-default-border:             @gray;
 
 @circle-primary-color:              #fff;
 @circle-primary-bg:                 @brand-primary;
