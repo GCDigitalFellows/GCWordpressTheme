@@ -95,7 +95,7 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		'pages'      => 'page', // Post type
 		'context'    => 'normal',
 		'priority'   => 'high',
-		'show_on' => array( 'page-template' => array('page-homepage.php') ),
+		'show_on' => array( 'page-template' => array('page-homepage.php', 'page-blank.php') ),
 		'fields' => array(
 			array( 
 			    'id'       => 'homepage_additional_pages', 
