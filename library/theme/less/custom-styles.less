@@ -821,16 +821,35 @@ video {
 	margin-bottom: 18px;
 }
 
+/* carousel */
+
+.carousel-indicators {
+	bottom: auto;
+	top: 20px;
+}
+
+.carousel-caption {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin-bottom: 0;
+	p {
+		display: none;
+	}
+}
+
+.carousel-caption.jumbotron {
+	background-color: @gray-lighter;
+	.rgba(@gray-lighter,0.6);
+	#gradient.vertical(#fff, #c3c3c3, 0%, 90%);
+}
+
+.carousel-control {
+	z-index: 10;
+}
+
+
 /* page styling */
-
-#featured-carousel .item{
-	width: 970px;
-	height: 600px;
-}
-
-.carousel-caption p{
-	display: none;
-}
 
 .page-template-page-homepage-php #main article{
 	border-bottom: none;
