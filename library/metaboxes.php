@@ -166,6 +166,13 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 				'desc'	=> 'Check to only include posts with a featured image.',
 				'type'	=> 'checkbox',
 				'default'	=> '1'
+			),
+			array(
+				'id'	=> 'carousel_hide_xs',
+				'name'	=> 'Hide Carousel on Mobile Devices?',
+				'desc'	=> 'Check to hide the carousel on mobile devices and small screens.',
+				'type'	=> 'checkbox',
+				'default'	=> '1'
 			)
 		)
 	);

@@ -20,12 +20,13 @@ Template Name: Homepage
 	}
 	$carousel_count = get_post_meta($post->ID, 'carousel_count' , true);
 	$carousel_height = get_post_meta($post->ID, 'carousel_height' , true);
+	$carousel_hide_xs = get_post_meta($post->ID, 'carousel_hide_xs' , true);
 	if ( ! is_numeric($carousel_height) ) {
 		$carousel_height = 605;
 	}
 	if ($use_carousel) : ?>
 		
-		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel">
 		    <!-- Carousel items -->
 		    <div class="carousel-inner">
 
