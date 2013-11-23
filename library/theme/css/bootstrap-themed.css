@@ -5549,6 +5549,7 @@ body.modal-open,
 /* custom navbars */
 .navbar {
   margin-bottom: 0;
+  border: none;
 }
 .navbar-static-top {
   position: relative;
@@ -5574,6 +5575,9 @@ body.admin-bar .navbar-fixed-top {
 .nav {
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Verdana, Tahoma, sans-serif;
 }
+.navbar-nav {
+  margin: 0;
+}
 #main-nav-menu.nav {
   font-family: UrbanoLightCondensed, 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Verdana, Tahoma, sans-serif;
   font-size: 14px;
@@ -5581,7 +5585,7 @@ body.admin-bar .navbar-fixed-top {
 }
 #main-nav {
   margin-top: 26px;
-  margin: 0 -15px;
+  margin: 0;
   padding: 0;
 }
 ul#main-nav-menu > li a {
@@ -5602,7 +5606,8 @@ ul#main-nav-menu > li a {
     bottom: -9px;
   }
   ul#main-nav-menu > li {
-    margin-bottom: 9px;
+    /*margin-bottom: 9px;*/
+  
   }
   ul#main-nav-menu > li:nth-child(7n+1) {
     border-bottom: 9px solid #ec9c1d;
@@ -5737,6 +5742,16 @@ ul#main-nav-menu > li a {
     padding-right: 10px;
   }
 }
+/*.navbar-nav .open .dropdown-menu {
+	width: 200px;	
+}*/
+.navbar-header .navbar-toggle {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+#main-nav.navbar-collapse {
+  max-height: 600px;
+}
 ul#main-nav-menu.navbar-nav > .active > a {
   background-color: #ededed;
 }
@@ -5768,7 +5783,9 @@ ul#main-nav-menu.navbar-nav > .active > a {
 }
 #sitewide-logo {
   position: absolute;
-  bottom: -164px;
+  bottom: -166px;
+  background-color: #ffffff;
+  padding: 5px;
 }
 /* custom scaffolding */
 #content.content-no-margin {
