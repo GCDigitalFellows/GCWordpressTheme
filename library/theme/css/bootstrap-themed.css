@@ -5566,6 +5566,7 @@ body.admin-bar .navbar-fixed-top {
 .navbar-brand {
   padding-bottom: 60px;
   font-size: 32px;
+  line-height: 24px;
   font-weight: 400;
   font-family: UrbanoCondensed, 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Verdana, Tahoma, sans-serif;
   color: #444444;
@@ -5783,7 +5784,7 @@ ul#main-nav-menu.navbar-nav > .active > a {
 }
 #sitewide-logo {
   position: absolute;
-  bottom: -166px;
+  bottom: -181px;
   background-color: #ffffff;
   padding: 5px;
 }

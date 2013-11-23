@@ -21,6 +21,7 @@
 
 .navbar {
 	margin-bottom: 0;
+	border:none;
 }
 
 .navbar-static-top {
@@ -33,15 +34,16 @@ body.admin-bar .navbar-fixed-top {
 	top: @adminbar-top-margin;
 }
 .navbar-fixed-bottom {
-  bottom: 0;
+ 	bottom: 0;
 }
 .navbar .nav {
-  float: right;
+ 	float: right;
 }
 
 .navbar-brand {
 	padding-bottom: 60px;
 	font-size: 32px;
+	line-height: 24px;
 	font-weight: 400;
 	font-family: @headings-font-family;
 	color: @navbar-default-brand-color;
@@ -52,6 +54,11 @@ body.admin-bar .navbar-fixed-top {
 .nav {
   font-family: @font-family-serif;
 }
+
+.navbar-nav {
+	margin: 0;
+}
+
 #main-nav-menu.nav {
 	font-family: @font-family-sans-serif-light;
 	font-size: ceil(@font-size-base * 1.07); // ~14px
@@ -60,7 +67,7 @@ body.admin-bar .navbar-fixed-top {
 
 #main-nav {
 	margin-top: 26px;
-	margin: 0 -15px;
+	margin: 0;
 	padding: 0;
 }
 
@@ -86,7 +93,7 @@ ul#main-nav-menu > li a {
 
 	ul#main-nav-menu > li {
 
-		margin-bottom: 9px;
+		/*margin-bottom: 9px;*/
 
 		&:nth-child(7n+1) {
 			border-bottom: 9px solid @orange;
@@ -206,6 +213,7 @@ ul#main-nav-menu > li a {
 		a {
 			padding: 10px 10px 2px;
 		}
+
 		> .dropdown-menu {
 			border: none;
 			padding: 10px;
@@ -225,6 +233,19 @@ ul#main-nav-menu > li a {
 	#service-nav a {
 	    padding-right: 10px;
 	}
+}
+
+/*.navbar-nav .open .dropdown-menu {
+	width: 200px;	
+}*/
+
+.navbar-header .navbar-toggle {
+	margin-top: 8px;
+	margin-bottom: 8px;
+
+}
+#main-nav.navbar-collapse {
+	max-height: 600px; //big enough to get rid of scrollbars
 }
 
 ul#main-nav-menu.navbar-nav > .active > a {
@@ -260,7 +281,9 @@ ul#main-nav-menu.navbar-nav > .active > a {
 
 #sitewide-logo {
 	position: absolute;
-	bottom: -164px;
+	bottom: -181px;
+	background-color: @white;
+	padding: 5px;
 }
 
 /* custom scaffolding */
