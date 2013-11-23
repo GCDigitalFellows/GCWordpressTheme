@@ -11,6 +11,7 @@ function bootstrap_gallery($attr) {
 	wp_enqueue_style('blueimp-gallery-css');
 	wp_enqueue_script('blueimp-gallery-js');
 	wp_enqueue_script('blueimp-gallery-init-js');
+	wp_enqueue_script('gridalicious');
 
 	$post = get_post();
 
@@ -54,6 +55,7 @@ function bootstrap_gallery($attr) {
 		'showcaptions'	=> 'true'
 	), $attr);
 	extract($attr);
+	$attr = json_encode($attr);
 
 	$id = intval($id);
 
@@ -93,15 +95,15 @@ function bootstrap_gallery($attr) {
 	$gallery_id = 'blueimp_gallery_'.rand();
 	$links_id = 'links-'.$gallery_id;
 
-	$mosaic = '<div id="'.$links_id.'" class="clearfix">';
+	$mosaic = '<div id="'.$links_id.'" class="gridalicious clearfix">';
 	foreach ($attachments as $id => $attachment) {
 		$img_lg = wp_get_attachment_image_src($id,'large',false);
-		$img_sm = wp_get_attachment_image_src($id,'thumbnail',false);
+		$img_sm = wp_get_attachment_image_src($id,'full',false);
 		
 		$img = "\n<img src=\"" . $img_sm[0] . "\" alt=\"" . $attachment->post_title . "\"  />";
 		if ($showtooltips || $showcaptions) 
 			$tooltip = ' rel="tooltip" data-original-title="' . $attachment->post_excerpt . '" ';
-		$mosaic .= '<a href="' . $img_lg[0] . '" class="thumbnail pull-left" style="width: ' . $col_width . '%; margin: 0 2px 2px 0;" ' . $tooltip . ' data-gallery="#' . $gallery_id . '">';
+		$mosaic .= '<a href="' . $img_lg[0] . '" class="galleryitem" ' . $tooltip . ' data-gallery="#' . $gallery_id . '">';
 		$mosaic .= $img."</a>\n";
 		if (trim($attachment->post_excerpt)) {
 		  $mosaic .= '<p class="caption hidden">' . wptexturize($attachment->post_excerpt) . "</p>\n";
@@ -111,8 +113,15 @@ function bootstrap_gallery($attr) {
 	}
 
 	$mosaic .= "</div>\n";
-	
-	$mosaic .= "<script type='text/javascript'>\njQuery( document ).ready( function() { \nblueimpGalleryInit(\"".$gallery_id."\",'".json_encode($attr)."'); });";
+	$mosaic .= <<<EOD
+	<script type='text/javascript'>
+	jQuery( document ).ready( function() { 
+		blueimpGalleryInit('$gallery_id','$attr');
+	});
+	jQuery(window).on('load resize', function(){
+		jQuery('#$links_id').gridalicious({selector: '.galleryitem', gutter: 0, width: (jQuery('#$links_id').width()/$columns) });
+	});
+EOD;
 	$mosaic .= "</script>\n";
 	
 	if ($showtooltips) {

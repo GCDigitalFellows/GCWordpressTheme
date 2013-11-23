@@ -489,7 +489,7 @@ if( !function_exists("theme_styles") ) {
         wp_register_style( 'fonts', get_template_directory_uri() . '/library/theme/css/fonts.css', array(), '1.0.0', 'all' );		
 
 		// only enqueue the following styles when needed, but register them here to centralize updates.
-		wp_register_style( 'blueimp-gallery-css', get_template_directory_uri() . '/library/Gallery/css/blueimp-gallery.min.css', array(), '2.9.0', 'all' );
+		wp_register_style( 'blueimp-gallery-css', get_template_directory_uri() . '/library/Gallery/css/blueimp-gallery.min.css', array(), '2.12.1', 'all' );
         
         wp_enqueue_style( 'bootstrap' );
 		wp_enqueue_style( 'fonts');
@@ -514,9 +514,10 @@ if( !function_exists( "theme_js" ) ) {
 
 		// only enqueue the following scripts when needed, but register them here to centralize updates.
 		wp_register_script( 'bs-tooltips',get_template_directory_uri() . '/library/js/bs-tooltips.js',array('jquery','bootstrap'),'3.0', true );
-		wp_register_script( 'blueimp-gallery-js', get_template_directory_uri() . '/library/Gallery/js/jquery.blueimp-gallery.min.js', array(jquery), '1.2.0', true );
-		wp_register_script( 'blueimp-gallery-init-js', get_template_directory_uri() . '/library/js/gallery_init.js', array('jquery','blueimp-gallery-js'), false, true );
-	
+		wp_register_script( 'blueimp-gallery-js', get_template_directory_uri() . '/library/Gallery/js/jquery.blueimp-gallery.min.js', array(jquery), '2.12.1', true );
+		wp_register_script( 'blueimp-gallery-init-js', get_template_directory_uri() . '/library/js/gallery_init.js', array('jquery','blueimp-gallery-js'), '2.12.1', true );
+		wp_register_script( 'gridalicious', get_template_directory_uri() . '/library/Grid-A-Licious/jquery.grid-a-licious.js', array('jquery'), '3.01', true);
+
 		wp_enqueue_script('wpbs-scripts');
 	    wp_enqueue_script('modernizr');
 	}
