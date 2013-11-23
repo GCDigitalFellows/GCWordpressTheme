@@ -1,5 +1,5 @@
 /*
- * blueimp Gallery JS 2.9.0
+ * blueimp Gallery JS 2.11.5
  * https://github.com/blueimp/Gallery
  *
  * Copyright 2013, Sebastian Tschan
@@ -99,7 +99,9 @@
             clearSlides: true,
             // Defines if images should be stretched to fill the available space,
             // while maintaining their aspect ratio (will only be enabled for browsers
-            // supporting background-size="contain", which excludes IE < 9):
+            // supporting background-size="contain", which excludes IE < 9).
+            // Set to "cover", to make images cover all available space (requires
+            // support for background-size="cover", which excludes IE < 9):
             stretchImages: false,
             // Toggle the controls on pressing the Return key:
             toggleControlsOnReturn: true,
@@ -208,10 +210,10 @@
                         prefix: ''
                     }
                 },
-                prop,
-                transition,
-                translateZ,
                 elementTests = function () {
+                    var transition = support.transition,
+                        prop,
+                        translateZ;
                     document.body.appendChild(element);
                     if (transition) {
                         prop = transition.name.slice(0, -9) + 'ransform';
@@ -228,23 +230,29 @@
                         }
                     }
                     if (element.style.backgroundSize !== undefined) {
+                        support.backgroundSize = {};
                         element.style.backgroundSize = 'contain';
-                        support.backgroundSize = {
-                            contain: window.getComputedStyle(element)
-                                .getPropertyValue('background-size') === 'contain'
-                        };
+                        support.backgroundSize.contain = window
+                                .getComputedStyle(element)
+                                .getPropertyValue('background-size') === 'contain';
+                        element.style.backgroundSize = 'cover';
+                        support.backgroundSize.cover = window
+                                .getComputedStyle(element)
+                                .getPropertyValue('background-size') === 'cover';
                     }
                     document.body.removeChild(element);
                 };
-            for (prop in transitions) {
-                if (transitions.hasOwnProperty(prop) &&
-                        element.style[prop] !== undefined) {
-                    transition = transitions[prop];
-                    transition.name = prop;
-                    support.transition = transition;
-                    break;
+            (function (support, transitions) {
+                var prop;
+                for (prop in transitions) {
+                    if (transitions.hasOwnProperty(prop) &&
+                            element.style[prop] !== undefined) {
+                        support.transition = transitions[prop];
+                        support.transition.name = prop;
+                        break;
+                    }
                 }
-            }
+            }(support, transitions));
             if (document.body) {
                 elementTests();
             } else {
@@ -379,6 +387,14 @@
 
         add: function (list) {
             var i;
+            if (!list.concat) {
+                // Make a real array out of the list to add:
+                list = Array.prototype.slice.call(list);
+            }
+            if (!this.list.concat) {
+                // Make a real array out of the Gallery list:
+                this.list = Array.prototype.slice.call(this.list);
+            }
             this.list = this.list.concat(list);
             this.num = this.list.length;
             if (this.num > 2 && this.options.continuous === null) {
@@ -509,11 +525,12 @@
         },
 
         onmousedown: function (event) {
-            // Trigger on clicks of the left mouse button only:
-            if (event.which && event.which === 1) {
+            // Trigger on clicks of the left mouse button only
+            // and exclude video elements:
+            if (event.which && event.which === 1 &&
+                    event.target.nodeName !== 'VIDEO') {
                 // Preventing the default mousedown action is required
                 // to make touch emulation work with Firefox:
-                event.preventDefault();
                 (event.originalEvent || event).touches = [{
                     pageX: event.pageX,
                     pageY: event.pageY
@@ -638,8 +655,8 @@
                 isValidSlide = (isShortDuration && Math.abs(this.touchDelta.x) > 20) ||
                     Math.abs(this.touchDelta.x) > slideWidth / 2,
                 // Determine if slide attempt is past start or end:
-                isPastBounds = (!index && this.touchDelta.x > 0)
-                        || (index === this.num - 1 && this.touchDelta.x < 0),
+                isPastBounds = (!index && this.touchDelta.x > 0) ||
+                        (index === this.num - 1 && this.touchDelta.x < 0),
                 isValidClose = !isValidSlide && this.options.closeOnSwipeUpOrDown &&
                     ((isShortDuration && Math.abs(this.touchDelta.y) > 20) ||
                         Math.abs(this.touchDelta.y) > this.slideHeight / 2),
@@ -889,9 +906,7 @@
             var that = this,
                 img = this.imagePrototype.cloneNode(false),
                 url = obj,
-                contain = this.options.stretchImages &&
-                    this.support.backgroundSize &&
-                    this.support.backgroundSize.contain,
+                backgroundSize = this.options.stretchImages,
                 called,
                 element,
                 callbackWrapper = function (event) {
@@ -908,11 +923,11 @@
                         }
                         called = true;
                         $(img).off('load error', callbackWrapper);
-                        if (contain) {
+                        if (backgroundSize) {
                             if (event.type === 'load') {
                                 element.style.background = 'url("' + url +
                                     '") center no-repeat';
-                                element.style.backgroundSize = 'contain';
+                                element.style.backgroundSize = backgroundSize;
                             }
                         }
                         callback(event);
@@ -923,7 +938,12 @@
                 url = this.getItemProperty(obj, this.options.urlProperty);
                 title = this.getItemProperty(obj, this.options.titleProperty);
             }
-            if (contain) {
+            if (backgroundSize === true) {
+                backgroundSize = 'contain';
+            }
+            backgroundSize = this.support.backgroundSize &&
+                this.support.backgroundSize[backgroundSize] && backgroundSize;
+            if (backgroundSize) {
                 element = this.elementPrototype.cloneNode(false);
             } else {
                 element = img;
@@ -1096,10 +1116,31 @@
             return obj;
         },
 
+        getDataProperty: function (obj, property) {
+            if (obj.getAttribute) {
+                var prop = obj.getAttribute('data-' +
+                        property.replace(/([A-Z])/g, '-$1').toLowerCase());
+                if (typeof prop === 'string') {
+                    if (/^(true|false|null|-?\d+(\.\d+)?|\{[\s\S]*\}|\[[\s\S]*\])$/
+                            .test(prop)) {
+                        try {
+                            return $.parseJSON(prop);
+                        } catch (ignore) {}
+                    }
+                    return prop;
+                }
+            }
+        },
+
         getItemProperty: function (obj, property) {
-            return obj[property] || (obj.getAttribute &&
-                obj.getAttribute('data-' + property)) ||
-                this.getNestedProperty(obj, property);
+            var prop = obj[property];
+            if (prop === undefined) {
+                prop = this.getDataProperty(obj, property);
+                if (prop === undefined) {
+                    prop = this.getNestedProperty(obj, property);
+                }
+            }
+            return prop;
         },
 
         initStartIndex: function () {
@@ -1195,13 +1236,13 @@
             }
             this.slidesContainer = this.container.find(
                 this.options.slidesContainer
-            );
+            ).first();
             if (!this.slidesContainer.length) {
                 return false;
             }
             this.titleElement = this.container.find(
                 this.options.titleElement
-            );
+            ).first();
             if (this.num === 1) {
                 this.container.addClass(this.options.singleClass);
             }
