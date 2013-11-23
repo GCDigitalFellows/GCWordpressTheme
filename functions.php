@@ -308,7 +308,7 @@ add_action( 'widgets_init', 'wpbs_register_sidebars' );
 
 /************* Excerpts *********************/
 function new_excerpt_more( $more ) {
-	return ' [&hellip;]</p><p><a class="read-more btn pull-right" href="'. get_permalink( get_the_ID() ) . '">Read more <i class="glyphicon glyphicon-chevron-sign-right"></i></a>';
+	return ' [&hellip;]</p><p><a class="read-more btn btn-primary pull-right" href="'. get_permalink( get_the_ID() ) . '">Read more <i class="glyphicon glyphicon-chevron-right"></i></a>';
 }
 add_filter( 'excerpt_more', 'new_excerpt_more' );
 
