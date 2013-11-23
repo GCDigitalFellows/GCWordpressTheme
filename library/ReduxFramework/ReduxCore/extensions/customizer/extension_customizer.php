@@ -50,7 +50,11 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
        */
       public function __construct( $parent ) {
         global $pagenow;
-        if ($pagenow !== "customize.php") {
+        if ($pagenow !== "customize.php" && $pagenow !== "admin-ajax.php") {
+          return;
+        }
+
+        if ($parent->args['customizer'] === false) {
           return;
         }
         
@@ -64,11 +68,9 @@ if( !class_exists( 'ReduxFramework_extension_customizer' ) ) {
           customize_controls_print_styles
           customize_controls_print_scripts
           customize_controls_print_footer_scripts
-
-
         */
 
-        add_action( 'admin_init', array( &$this, '_enqueue' ), 30 );
+        add_action( 'admin_init', array( &$this, '_enqueue' ), 30 ); // Customizer control scripts
 
         add_action( 'customize_register', array( &$this, '_register_customizer_controls' ) ); // Create controls
 
@@ -307,7 +309,7 @@ static_front_page - Static Front Page
         wp_enqueue_script( 'redux-extension-previewer-js', $this->extension_url . 'assets/js/preview.js' );
         $localize = array(
           'save_pending'      => __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ), 
-          'reset_confirm'     => __( 'Are you sure? Resetting will loose all custom values.', 'redux-framework' ), 
+          'reset_confirm'     => __( 'Are you sure? Resetting will lose all custom values.', 'redux-framework' ), 
           'preset_confirm'    => __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ), 
           'opt_name'          => $this->args['opt_name'],
           'folds'       => $this->folds,
@@ -337,9 +339,9 @@ static_front_page - Static Front Page
 
 
         $localize = array(
-          'save_pending'      => __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ), 
-          'reset_confirm'     => __( 'Are you sure? Resetting will loose all custom values.', 'redux-framework' ), 
-          'preset_confirm'    => __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ), 
+          'save_pending'      => __( 'You have changes that are not saved.  Would you like to save them now?', 'redux-framework' ), 
+          'reset_confirm'     => __( 'Are you sure?  Resetting will lose all custom values.', 'redux-framework' ), 
+          'preset_confirm'    => __( 'Your current options will be replaced with the values of this preset.  Would you like to proceed?', 'redux-framework' ), 
           'opt_name'          => $this->args['opt_name'],
           'folds'       => $this->folds,
           'options'     => $this->options,

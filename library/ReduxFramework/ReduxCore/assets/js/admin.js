@@ -1,12 +1,28 @@
 /*global jQuery, document, redux_opts, confirm, relid:true, console, jsonView */
 (function($){
 	'use strict';
-
 	$.redux = $.redux || {}
 
 	var the_body = $("body");
 
 	$(document).ready(function(){
+
+		jQuery.fn.isOnScreen = function() {
+			if (!window) {
+				return;
+			}
+			var win = jQuery(window);
+			var viewport = {
+				top: win.scrollTop(),
+				left: win.scrollLeft()
+			};
+			viewport.right = viewport.left + win.width();
+			viewport.bottom = viewport.top + win.height();
+			var bounds = this.offset();
+			bounds.right = bounds.left + this.outerWidth();
+			bounds.bottom = bounds.top + this.outerHeight();
+			return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+		};
 
 		$.redux.required();
 
@@ -20,7 +36,7 @@
 		// Hide the fold elements on load ,
 		// It's better to do this by PHP but there is no filter in tr tag , so is not possible
 		// we going to move each attributes we may need for folding to tr tag
-		jQuery('.hiddenFold , .showFold').each(function() {
+		$('.hiddenFold , .showFold').each(function() {
 			var current 	= $(this), 
             scope	        = current.parents('tr:eq(0)'),
             check_data      = current.data();
@@ -28,7 +44,8 @@
             if(current.hasClass('hiddenFold')){
 				scope.addClass('hiddenFold').attr('data-check-field' , check_data.checkField)
 					.attr('data-check-comparison' , check_data.checkComparison)
-					.attr('data-check-value' , check_data.checkValue).hide();
+					.attr('data-check-value' , check_data.checkValue)
+					.attr('data-check-id' , check_data.id).hide();
 				//we clean here, so we won't get confuse 	
 				current.removeClass('hiddenFold').removeAttr('data-check-field')
 					.removeAttr('data-check-comparison')
@@ -36,7 +53,8 @@
 			}else{
 				scope.attr('data-check-field' , check_data.checkField)
 					.attr('data-check-comparison' , check_data.checkComparison)
-					.attr('data-check-value' , check_data.checkValue);
+					.attr('data-check-value' , check_data.checkValue)
+					.attr('data-check-id' , check_data.id);
 				//we clean here, so we won't get confuse 	
 				current.removeClass('showFold').removeAttr('data-check-field')
 					.removeAttr('data-check-comparison')
@@ -44,31 +62,51 @@
 			}
 		});
 
+		$( ".fold" ).promise().done(function() {
+			// Hide the fold elements on load
+			$('.foldParent').each(function() {
+				// in case of a radio input, take in consideration only the checked value
+				if ( $(this).attr('type') =='radio' && $(this).attr('checked') !='checked' ) {
+					return;
+				}
+				var id = $(this).parents('.redux-field:first').data('id');
+				if ( redux_opts.folds[ id ] ) {
+					if ( !redux_opts.folds[ id ].parent  ) {
+						$.redux.verify_fold($(this));
+					}
+				}
+			});
+		});
+
 		the_body.on('change', '#redux-main select, #redux-main radio, #redux-main input[type=checkbox], #redux-main input[type=hidden]', function(e){
 	        $.redux.check_dependencies(e,this);
-	        
 	    });
 	}
 
 	$.redux.check_dependencies = function(e,variable){
-		var current 	= $(variable),
-	        scope	= current.parents('#redux-main:eq(0)');
+		
+		var current = $(variable),
+	        scope	= current.parents('.redux-group-tab:eq(0)');
  
         if(!scope.length) scope = the_body;
 
-        var id		= current.parents('fieldset:eq(0)').data('id'),
+	// Fix for Checkbox + Required issue
+        if($(variable).prop('type') == "checkbox")
+		$(variable).is(":checked") ? $(variable).val('1') : $(variable).val('0');
+
+        var id		= current.parents('.redux-field:first').data('id'),
         dependent	= scope.find('tr[data-check-field="'+id+'"]'), 
         value1		= variable.value,
-        is_hidden	= current.parents('fieldset:eq(0)').is('.hiddenFold');
+        is_hidden	= current.parents('tr:eq(0)').is('.hiddenFold');
 		
         if(!dependent.length) return;
-		
+
         dependent.each(function(){
             var current		= $(this), 
             check_data	= current.data(), 
             value2		= check_data.checkValue, 
             show		= false;
-				
+			
             if(!is_hidden){
                 switch(check_data.checkComparison){
                 	case '=':
@@ -100,13 +138,13 @@
                     case '>':    
                     case 'greater':    
                     case 'is_larger':
-                        if(value1 >  value2) 
+                        if(parseFloat(value1) >  parseFloat(value2)) 
                         	show = true;
                         break;
                     case '<':
                     case 'less':    
                     case 'is_smaller':
-                        if(value1 <  value2) 
+                        if(parseFloat(value1) < parseFloat(value2)) 
                         	show = true;
                         break;
                     case 'contains':
@@ -125,12 +163,10 @@
                         if(value1 != "" && value1 != value2) 
                         	show = true;
                         break;
-						
-						
                 }
             }
 				
-            if(show == true && current.is('.hiddenFold')){
+            /*if(show == true && current.is('.hiddenFold')){
                 current.css({
                     display:'none'
                 }).removeClass('hiddenFold').find('select, radio, input[type=checkbox]').trigger('change');
@@ -140,8 +176,70 @@
                     display:''
                 }).addClass('hiddenFold').find('select, radio, input[type=checkbox]').trigger('change');
                 current.slideUp(300);
-            }
+            }*/
+           	$.redux.verify_fold($(variable)); 
         });
+	}
+
+	$.redux.verify_fold = function(item){
+		var id = item.parents('.redux-field:first').data('id');
+		var itemVal = item.val();
+		var scope = (item.parents('.redux-groups-accordion-group:first').length > 0)?item.parents('.redux-groups-accordion-group:first'):item.parents('.redux-group-tab:eq(0)');
+
+		if ( redux_opts.folds[ id ] ) {
+
+			if ( redux_opts.folds[ id ].children ) {
+
+				var theChildren = {};
+				$.each(redux_opts.folds[ id ].children, function(index, value) {
+					$.each(value, function(index2, value2) { // Each of the children for this value
+						if ( ! theChildren[value2] ) { // Create an object if it's not there
+							theChildren[value2] = { show:false, hidden:false };
+						}
+						
+						if ( index == itemVal || theChildren[value2] === true ) { // Check to see if it's in the criteria
+							theChildren[value2].show = true;
+						}
+
+						if ( theChildren[value2].show === true && scope.find('tr[data-check-id="'+id+'"]').hasClass("hiddenFold") ) {
+							theChildren[value2].show = false; // If this item is hidden, hide this child
+						}
+
+						if ( theChildren[value2].show === true && scope.find('tr[data-check-id="'+redux_opts.folds[ id ].parent+'"]').hasClass('hiddenFold') ) {
+							theChildren[value2].show = false; // If the parent of the item is hidden, hide this child
+						}
+						// Current visibility of this child node
+						theChildren[value2].hidden = scope.find('tr[data-check-id="'+value2+'"]').hasClass("hiddenFold");
+					});
+				});
+
+				$.each(theChildren, function(index) {
+
+					var parent = scope.find('tr[data-check-id="'+index+'"]');
+					
+					if ( theChildren[index].show === true ) {
+
+						parent.fadeIn('medium', function() {
+							parent.removeClass('hiddenFold');
+							if ( redux_opts.folds[ index ] && redux_opts.folds[ index ].children ) {
+								// Now iterate the children
+								$.redux.verify_fold(parent.find('select, radio, input[type=checkbox], input[type=hidden]'));
+							}
+						});
+
+					} else if ( theChildren[index].hidden === false ) {
+						
+						parent.fadeOut('medium', function() {
+							parent.addClass('hiddenFold');
+							if ( redux_opts.folds[ index ].children ) {
+								// Now iterate the children
+								$.redux.verify_fold(parent.find('select, radio, input[type=checkbox], input[type=hidden]'));
+							}
+						});
+					}
+				});
+			}
+		}	
 	}
 
 })(jQuery);
@@ -247,19 +345,23 @@ function verify_fold(item) {
 
 function redux_change(variable) {
 	//We need this for switch and image select fields , jquery dosn't catch it on fly
-	if(variable.is('input[type=hidden]') || jQuery(variable).parents('fieldset:eq(0)').is('.redux-container-image_select') )
+	//if(variable.is('input[type=hidden]') || variable.hasClass('spinner-input') || variable.hasClass('slider-input') || variable.hasClass('upload') || jQuery(variable).parents('fieldset:eq(0)').is('.redux-container-image_select') ) {
+		
 		jQuery('body').trigger('check_dependencies' , variable);
+	//}
 		
 	if (variable.hasClass('compiler')) {
 		jQuery('#redux-compiler-hook').val(1);
 		//console.log('Compiler init');
 	}
+
+
 	if (variable.hasClass('foldParent')) {
 		//verify_fold(variable);
 	}
 	window.onbeforeunload = confirmOnPageExit;
-	if (jQuery(variable).hasClass('redux-field-error')) {
-		jQuery(variable).removeClass('redux-field-error');
+	if (jQuery(variable).parents('fieldset.redux-field:first').hasClass('redux-field-error')) {
+		jQuery(variable).parents('fieldset.redux-field:first').removeClass('redux-field-error');
 		jQuery(variable).parent().find('.redux-th-error').slideUp();
 		var parentID = jQuery(variable).closest('.redux-group-tab').attr('id');
 		var hideError = true;
@@ -284,6 +386,17 @@ jQuery(document).ready(function($) {
 			opacity: 0.7
 		});
 	}
+
+	$('#toplevel_page_'+redux_opts.slug+' .wp-submenu a').click(function(e) {
+		//if ( $(this).hasClass('wp-menu-open') ) {
+			e.preventDefault();
+			var url = $(this).attr('href').split('&tab=');
+			$('#'+url[1]+'_section_group_li_a').click();
+			console.log(url[1]);
+			return false;	
+		//}
+	});
+
 /**
 		Current tab checks, based on cookies
 	**/
@@ -291,9 +404,21 @@ jQuery(document).ready(function($) {
 		relid = jQuery(this).data('rel'); // The group ID of interest
 		// Set the proper page cookie
 		$.cookie('redux_current_tab', relid, {
-			expires: 7,
-			path: '/'
+       		expires: 7,
+       		path: '/'
+       	});
+
+		$('#toplevel_page_'+redux_opts.slug+' .wp-submenu a.current').removeClass('current');
+		$('#toplevel_page_'+redux_opts.slug+' .wp-submenu li.current').removeClass('current');
+
+		$('#toplevel_page_'+redux_opts.slug+' .wp-submenu a').each(function() {
+			var url = $(this).attr('href').split('&tab=');
+			if (url[1] == relid) {
+				$(this).addClass('current');
+				$(this).parent().addClass('current');
+			}
 		});
+
 		// Remove the old active tab
 		var oldid = jQuery('.redux-group-tab-link-li.active .redux-group-tab-link-a').data('rel');
 		jQuery('#' + oldid + '_section_group_li').removeClass('active');
@@ -385,7 +510,7 @@ jQuery(document).ready(function($) {
 	if (jQuery('#redux-imported').is(':visible')) {
 		jQuery('#redux-imported').slideDown();
 	}
-	jQuery('input, textarea, select').on('change', function() {
+	jQuery(document.body).on('change', 'input, textarea, select', function() {
 		if (!jQuery(this).hasClass('noUpdate')) {
 			redux_change(jQuery(this));
 		}
@@ -416,26 +541,10 @@ jQuery(document).ready(function($) {
 		}
 		jQuery('#redux-export-link-value').toggle('fade');
 	});
-	jQuery.fn.isOnScreen = function() {
-		if (!window) {
-			return;
-		}
 
-		var win = jQuery(window);
-		var viewport = {
-			top: win.scrollTop(),
-			left: win.scrollLeft()
-		};
-		viewport.right = viewport.left + win.width();
-		viewport.bottom = viewport.top + win.height();
-		var bounds = this.offset();
-		bounds.right = bounds.left + this.outerWidth();
-		bounds.bottom = bounds.top + this.outerHeight();
-		return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
-	};
-/**
-	Show the sticky header bar and notes!
-**/
+	/**
+		BEGIN Sticky footer bar
+	**/
 	var stickyHeight = jQuery('#redux-footer').height();
 	jQuery('#redux-sticky-padder').css({
 		height: stickyHeight
@@ -473,36 +582,13 @@ jQuery(document).ready(function($) {
 	jQuery('.redux-save').click(function() {
 		window.onbeforeunload = null;
 	});
-/*
-	// Markdown Viewer for Theme Documentation
-	if ($('#theme_docs_section_group').length !== 0) {
-		var converter = new Showdown.converter();
-		var text = jQuery('#theme_docs_section_group').html();
-		text = converter.makeHtml(text);
-		jQuery('#theme_docs_section_group').html(text);
-	}
-*/
-	// Hide the fold elements on load
-	
-	jQuery('.fold').each(function() {
-		jQuery(this).parents("tr:first").addClass('hiddenFold');
-		jQuery(this).parents("tr:first").hide();
-	});
+	/**
+		END Sticky footer bar
+	**/
 
-
- 
-	jQuery( ".fold" ).promise().done(function() {
-		// Hide the fold elements on load
-		jQuery('.foldParent').each(function() {
-			var id = jQuery(this).parents('.redux-field:first').data('id');
-			if ( redux_opts.folds[ id ] ) {
-				if ( !redux_opts.folds[ id ].parent  ) {
-					//verify_fold( jQuery( this ) );
-				}
-			}
-		});
-	});
-
+	/**
+		BEGIN dev_mode commands
+	**/	
 	$('#consolePrintObject').on('click', function() {
 		console.log(jQuery.parseJSON(jQuery("#redux-object-json").html()));
 	});
@@ -510,7 +596,13 @@ jQuery(document).ready(function($) {
 	if (typeof jsonView === 'function') {
 		jsonView('#redux-object-json', '#redux-object-browser');
 	}
+	/**
+		END dev_mode commands
+	**/	
 
+	/**
+		BEGIN error and warning notices
+	**/	
 	// Display errors on page load
 	if (redux_opts.errors !== undefined) {
 		jQuery("#redux-field-errors span").html(redux_opts.errors.total);
@@ -519,8 +611,9 @@ jQuery(document).ready(function($) {
 			jQuery("#" + sectionID + "_section_group_li_a").prepend('<span class="redux-menu-error">' + sectionArray.total + '</span>');
 			jQuery("#" + sectionID + "_section_group_li_a").addClass("hasError");
 			jQuery.each(sectionArray.errors, function(key, value) {
-				jQuery("#" + value.id).addClass("redux-field-error");
-				jQuery("#" + value.id).parents("td:first").append('<span class="redux-th-error">' + value.msg + '</span>');
+				console.log(value);
+				jQuery("#" + redux_opts.opt_name+'-'+value.id).addClass("redux-field-error");
+				jQuery("#" + redux_opts.opt_name+'-'+value.id).append('<div class="redux-th-error">' + value.msg + '</div>');
 			});
 		});
 	}
@@ -532,14 +625,20 @@ jQuery(document).ready(function($) {
 			jQuery("#" + sectionID + "_section_group_li_a").prepend('<span class="redux-menu-warning">' + sectionArray.total + '</span>');
 			jQuery("#" + sectionID + "_section_group_li_a").addClass("hasWarning");
 			jQuery.each(sectionArray.warnings, function(key, value) {
-				jQuery("#" + value.id).addClass("redux-field-warning");
-				jQuery("#" + value.id).parents("td:first").append('<span class="redux-th-warning">' + value.msg + '</span>');
+				jQuery("#" + redux_opts.opt_name+'-'+value.id).addClass("redux-field-warning");
+				jQuery("#" + redux_opts.opt_name+'-'+value.id).append('<div class="redux-th-warning">' + value.msg + '</div>');
 			});
 		});
 	}
+	/**
+		END error and warning notices
+	**/	
 
 
 
+	/**
+		BEGIN Control the tabs of the site to the left. Eventually (perhaps) across the top too.
+	**/
 	//jQuery( ".redux-section-tabs" ).tabs();
 	jQuery('.redux-section-tabs div').hide();
 	jQuery('.redux-section-tabs div:first').show();
@@ -553,6 +652,9 @@ jQuery(document).ready(function($) {
 		jQuery(currentTab).fadeIn();
 		return false;
 	});
+	/**
+		END Control the tabs of the site to the left. Eventually (perhaps) across the top too.
+	**/
 
 
 });

@@ -44,7 +44,7 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
          */
         public function __construct( $field = array(), $value ='', $parent ) {
         
-            parent::__construct( $parent->sections, $parent->args, $parent->extra_tabs );
+            parent::__construct( $parent->sections, $parent->args );
 
             $this->field = $field;
             $this->value = $value;
@@ -102,7 +102,7 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
 		            }
 
 		            if( isset( $this->field['icon'] ) && !empty( $this->field['icon'] ) && $this->field['icon'] !== true ) {
-		                echo '<p class="redux-info-icon"><i class="icon-' . $this->field['icon'] . ' icon-large"></i></p>';
+		                echo '<p class="redux-info-icon"><i class="' . $this->field['icon'] . ' icon-large"></i></p>';
 		            }
 
 	            	echo '<p class="redux-info-desc">' . $this->field['title'] . $this->field['desc'] . '</p>';
@@ -127,7 +127,7 @@ if( !class_exists( 'ReduxFramework_info' ) ) {
 
             wp_enqueue_style(
                 'redux-field-info-css',
-                REDUX_URL . 'inc/fields/info/field_info.css',
+                ReduxFramework::$_url . 'inc/fields/info/field_info.css',
                 time(),
                 true
             );

@@ -26,7 +26,7 @@ class ReduxFramework_sorter extends ReduxFramework {
      * @since Redux_Options 1.0.0
      */
     function __construct($field = array(), $value = '', $parent) {
-        parent::__construct($parent->sections, $parent->args, $parent->extra_tabs);
+        parent::__construct($parent->sections, $parent->args);
         $this->field = $field;
         $this->value = $value;
         if (!is_array($this->value) && isset($this->field['options'])) {
@@ -119,10 +119,9 @@ class ReduxFramework_sorter extends ReduxFramework {
     }
 
     function enqueue() {
-        wp_enqueue_script('jquery-ui-sortable');
-        wp_register_script('options-sorter', REDUX_URL . 'inc/fields/sorter/field_sorter.min.js', array(
+        wp_register_script('options-sorter', ReduxFramework::$_url . 'inc/fields/sorter/field_sorter.min.js', array(
             'jquery'));
-        wp_register_style('options-sorter', REDUX_URL . 'inc/fields/sorter/field_sorter.css');
+        wp_register_style('options-sorter', ReduxFramework::$_url . 'inc/fields/sorter/field_sorter.css');
         wp_enqueue_script('options-sorter');
         wp_enqueue_style('options-sorter');
     }

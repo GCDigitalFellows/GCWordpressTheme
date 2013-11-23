@@ -3,9 +3,9 @@
 jQuery(document).ready(function() {
 
 	// On label click, change the input and class
-	jQuery('.redux-image-select label img').click(function(e) {
+	jQuery('.redux-image-select label img, .redux-image-select label .tiles').click(function(e) {
 		var id = jQuery(this).closest('label').attr('for');
-		jQuery(this).parents("td:first").find('.redux-image-select-selected').removeClass('redux-image-select-selected');
+		jQuery(this).parents("fieldset:first").find('.redux-image-select-selected').removeClass('redux-image-select-selected');
 		jQuery(this).closest('label').find('input[type="radio"]').prop('checked');
 		if (jQuery(this).closest('label').hasClass('redux-image-select-presets')) { // If they clicked on a preset, import!
 			e.preventDefault();
@@ -35,7 +35,7 @@ jQuery(document).ready(function() {
 		title : function(){
 			return "<img src='" + jQuery(this).attr('rel') + "' style='max-width:150px;' alt='' />";
 		},
-		opacity: 1,
+		opacity: 1
 	});
 	/*var xOffset = 10; // these 2 variable determine the popup's distance from the cursor
 	var yOffset = 30;

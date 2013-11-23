@@ -44,7 +44,7 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 		 */
 		public function __construct( $field = array(), $value ='', $parent ) {
 		
-			parent::__construct( $parent->sections, $parent->args, $parent->extra_tabs );
+			parent::__construct( $parent->sections, $parent->args );
 
 			$this->field = $field;
 			$this->value = $value;
@@ -69,7 +69,7 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 				if ( $this->value == "transparent" ) {
 					$tChecked = ' checked="checked"';
 				}
-				echo '<label for="' . $this->field['id'] . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency ' . $this->field['class'] . '" id="' . $this->field['id'] . '-transparency" data-id="'.$this->field['id'] . '-color" value="1"'.$tChecked.'> Transparent</label>';				
+				echo '<label for="' . $this->field['id'] . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency ' . $this->field['class'] . '" id="' . $this->field['id'] . '-transparency" data-id="'.$this->field['id'] . '-color" value="1"'.$tChecked.'> '.__('Transparent', 'redux-framework').'</label>';				
 			}
 
 		}
@@ -89,7 +89,7 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 
 			wp_enqueue_script(
 				'redux-field-color-js', 
-				REDUX_URL . 'inc/fields/color/field_color.min.js', 
+				ReduxFramework::$_url . 'inc/fields/color/field_color.min.js', 
 				array( 'jquery', 'wp-color-picker' ),
 				time(),
 				true
@@ -97,7 +97,7 @@ if( !class_exists( 'ReduxFramework_color' ) ) {
 
 			wp_enqueue_style(
 				'redux-field-color-css', 
-				REDUX_URL . 'inc/fields/color/field_color.css', 
+				ReduxFramework::$_url . 'inc/fields/color/field_color.css', 
 				time(),
 				true
 			);

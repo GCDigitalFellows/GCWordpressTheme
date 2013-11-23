@@ -9,9 +9,15 @@ jQuery(document).ready(function() {
 	});
 
 	jQuery('.redux-dimensions-input').on('change', function() {
-		var units = jQuery(this).parents('.redux-field:first').find('.redux-dimensions-units option:selected').val();
-		var id = jQuery(this).attr('rel');
-		jQuery('#'+id).val(jQuery(this).val()+units);
+		var units = jQuery(this).parents('.redux-field:first').find('.field-units').val();
+		if ( jQuery(this).parents('.redux-field:first').find('.redux-dimensions-units').length !== 0 ) {
+			units = jQuery(this).parents('.redux-field:first').find('.redux-dimensions-units option:selected').val();
+		}
+		if( typeof units !== 'undefined' ) {
+			jQuery('#'+jQuery(this).attr('rel')).val(jQuery(this).val()+units);
+		} else {
+			jQuery('#'+jQuery(this).attr('rel')).val(jQuery(this).val());
+		}
 	});
 
 	jQuery('.redux-dimensions-units').on('change', function() {

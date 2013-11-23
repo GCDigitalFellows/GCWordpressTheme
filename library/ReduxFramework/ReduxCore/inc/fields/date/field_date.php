@@ -44,7 +44,7 @@ if( !class_exists( 'ReduxFramework_date' ) ) {
 		 */
 		public function __construct( $field = array(), $value ='', $parent ) {
 		
-			parent::__construct( $parent->sections, $parent->args, $parent->extra_tabs );
+			parent::__construct( $parent->sections, $parent->args );
 
 			$this->field = $field;
 			$this->value = $value;
@@ -61,9 +61,9 @@ if( !class_exists( 'ReduxFramework_date' ) ) {
 	 	 * @return		void
 		 */
 		public function render() {
-				
-			echo '<input data-id="'.$this->field['id'].'" type="text" id="'. $this->field['id'] .'-date" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" value="' . $this->value . '" class="redux-datepicker ' . $this->field['class'] . '" />';
-		
+    			$placeholder = (isset($this->field['placeholder'])) ? ' placeholder="' . esc_attr($this->field['placeholder']) . '" ' : '';
+                                                
+    			echo '<input data-id="'.$this->field['id'].'" type="text" id="'. $this->field['id'] .'-date" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']"' . $placeholder . 'value="' . $this->value . '" class="redux-datepicker ' . $this->field['class'] . '" />';
 		}
 	
 		/**
@@ -76,11 +76,9 @@ if( !class_exists( 'ReduxFramework_date' ) ) {
 		 * @return		void
 		 */
 		public function enqueue() {
-			wp_enqueue_style( 'jquery-ui-css' );
-		
 			wp_enqueue_script(
 				'redux-field-date-js', 
-				REDUX_URL . 'inc/fields/date/field_date.min.js',
+				ReduxFramework::$_url . 'inc/fields/date/field_date.min.js',
 				array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker' ),
 				time(),
 				true
