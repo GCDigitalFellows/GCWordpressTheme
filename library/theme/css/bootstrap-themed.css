@@ -6311,18 +6311,16 @@ video {
   display: none;
 }
 .carousel-caption.jumbotron {
-  background-color: #d8d9da;
-  background-color: rgba(216, 217, 218, 0.6);
-  zoom: 1;
-  background-color: transparent\9;
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99d8d9da, endColorstr=#99d8d9da)";
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99d8d9da, endColorstr=#99d8d9da);
-  background-image: -webkit-gradient(linear, left 0%, left 90%, from(#ffffff), to(#c3c3c3));
-  background-image: -webkit-linear-gradient(top, #ffffff, 0%, #c3c3c3, 90%);
-  background-image: -moz-linear-gradient(top, #ffffff 0%, #c3c3c3 90%);
-  background-image: linear-gradient(to bottom, #ffffff 0%, #c3c3c3 90%);
+  /*background-color: @gray-lighter;
+	.rgba(@gray-lighter,0.6);*/
+
+  background-color: transparent;
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(rgba(128, 128, 128, 0)), to(rgba(0, 0, 0, 0.8)));
+  background-image: -webkit-linear-gradient(top, rgba(128, 128, 128, 0), 0%, rgba(0, 0, 0, 0.8), 100%);
+  background-image: -moz-linear-gradient(top, rgba(128, 128, 128, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  background-image: linear-gradient(to bottom, rgba(128, 128, 128, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffc3c3c3', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00808080', endColorstr='#cc000000', GradientType=0);
 }
 .carousel-control {
   z-index: 10;

@@ -154,10 +154,10 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 				)
 			),
 			array(
-				'id'	=> 'carousel_height',
-				'name'	=> 'Carousel Height',
-				'desc'	=> 'Enter the height for the carousel in pixels.',
-				'default' => '605',
+				'id'	=> 'carousel_height_ratio',
+				'name'	=> 'Carousel Width/Height Ratio',
+				'desc'	=> 'Enter a decimal number for the width/height aspect ratio for the carousel.',
+				'default' => '1.78',
 				'type'	=> 'text_small',
 			),
 			array(
@@ -165,14 +165,12 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 				'name'	=> 'Only Display Posts with Featured Images',
 				'desc'	=> 'Check to only include posts with a featured image.',
 				'type'	=> 'checkbox',
-				'default'	=> '1'
 			),
 			array(
 				'id'	=> 'carousel_hide_xs',
 				'name'	=> 'Hide Carousel on Mobile Devices?',
 				'desc'	=> 'Check to hide the carousel on mobile devices and small screens.',
 				'type'	=> 'checkbox',
-				'default'	=> '1'
 			)
 		)
 	);

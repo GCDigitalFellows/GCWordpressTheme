@@ -19,14 +19,14 @@ Template Name: Homepage
 		$carousel_cats = implode(',',$carousel_cats);
 	}
 	$carousel_count = get_post_meta($post->ID, 'carousel_count' , true);
-	$carousel_height = get_post_meta($post->ID, 'carousel_height' , true);
-	$carousel_hide_xs = get_post_meta($post->ID, 'carousel_hide_xs' , true);
-	if ( ! is_numeric($carousel_height) ) {
-		$carousel_height = 605;
+	$carousel_height_ratio = get_post_meta($post->ID, 'carousel_height_ratio' , true);
+	$carousel_hide_xs = ( get_post_meta($post->ID, 'carousel_hide_xs' , true) ? ' hidden-xs' : '');
+	if ( ! is_numeric($carousel_height_ratio) ) {
+		$carousel_height_ratio = 2.33;
 	}
 	if ($use_carousel) : ?>
 		
-		<div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel">
+		<div id="myCarousel" class="carousel slide<?php echo $carousel_hide_xs; ?>" data-ride="carousel">
 		    <!-- Carousel items -->
 		    <div class="carousel-inner">
 
@@ -42,7 +42,7 @@ Template Name: Homepage
 				foreach( $myposts as $post ) :	setup_postdata($post);
 					$post_num++;?>
 
-			    <div class="<?php if($post_num == 1){ echo 'active'; } ?> item" style="height:<?php echo $carousel_height; ?>px; overflow:hidden;">
+			    <div class="<?php if($post_num == 1){ echo 'active'; } ?> item" style="overflow:hidden;">
 			    	<?php 
 			    		if ( has_post_thumbnail($id) ){
 							$post_thumbnail_id = get_post_thumbnail_id($id); 
@@ -57,14 +57,14 @@ Template Name: Homepage
 		                <h1><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
 		                <p>
 		                	<?php
-		                		$excerpt_length = 100; // length of excerpt to show (in characters)
+		                		///$excerpt_length = 100; // length of excerpt to show (in characters)
 		                		$the_excerpt = get_the_excerpt(); 
 		                		if($the_excerpt != ""){
-		                			$the_excerpt = substr( $the_excerpt, 0, $excerpt_length );
-		                			echo $the_excerpt . '... ';
+		                			//$the_excerpt = substr( $the_excerpt, 0, $excerpt_length );
+		                			echo $the_excerpt;
 		                	} ?>
-		                </p>
-		                <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>" class="btn btn-sm btn-primary">Read more &rsaquo;</a>
+		                
+		                <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>" class="btn btn-xs btn-primary">Read more &rsaquo;</a></p>
 	                </div>
 			    </div>
 
@@ -86,7 +86,15 @@ Template Name: Homepage
 		    </div>
 		
 		</div> <!-- container for carousel -->
-
+		<script>
+			jQuery(window).on('load resize', function(){
+			    jQuery('#myCarousel .item').each(function() {
+			    	console.log(jQuery(this).width);
+			    	jQuery(this).width(jQuery(window).width());
+			    	jQuery(this).height(jQuery(window).width()/<?php echo $carousel_height_ratio; ?>);
+			    });
+			});
+		</script>
 <?php endif; // end carousel ?>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
