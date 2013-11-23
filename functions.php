@@ -8,7 +8,7 @@ Modified: 20131003
 
 /************* DEBUGGING TOOLS ****************/
 // const WPBS_DEBUGGING turns on or off the theme's development/debugging tools
-define("WPBS_DEBUGMODE",true);
+define("WPBS_DEBUGMODE",false);
 
 
 // Redux Options
