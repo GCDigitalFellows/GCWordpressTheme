@@ -120,7 +120,7 @@ function wpbs_register_required_plugins() {
 	 */
 	$plugins = array(
 
-		// This is an example of how to include a plugin pre-packaged with a theme
+		/*
 		array(
 			'name'     				=> 'Github Theme Updater', // The plugin name
 			'slug'     				=> 'theme-updater', // The plugin slug (typically the folder name)
@@ -131,11 +131,13 @@ function wpbs_register_required_plugins() {
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
 			'external_url' 			=> 'https://github.com/kaymmm/Github-Theme-Updater', // If set, overrides default API URL and points to an external URL
 		),
-
+*/
 		array(
-			'name' 		=> 'WP-Less',
-			'slug' 		=> 'wp-less',
-			'required' 	=> false,
+			'name' 					=> 'WP-Less',
+			'slug' 					=> 'wp-less',
+			'required' 				=> false,
+			'source'				=> 'http://downloads.wordpress.org/plugin/wp-less.latest-stable.zip',
+			'external_url'			=> 'http://wordpress.org/support/plugin/wp-less'
 		),
 
 	);
