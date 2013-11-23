@@ -88,7 +88,7 @@
 		<header class="navbar <?php echo $navheader_class; ?> clearfix" role="banner">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-7 col-xs-12 col-md-8">
+					<div class="col-xs-8">
 						<div class="row">
 							<div class="navbar-header pull-left">
 							    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-service-collapse">
@@ -123,12 +123,12 @@
 							</a>
 					    </div>
 					</div>
-					<div class="col-sm-2 col-sm-push-2 col-xs-4 col-md-push-2">
+					<div class="col-sm-2 col-sm-push-2 col-xs-4">
 						<a id="sitewide-logo" title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
 							<img class="alignright" src="http://www.gc.cuny.edu/shared/images/shared/CUNY-GC-logo.png" />
 						</a>
 					</div>
-					<div class="col-sm-3 col-sm-pull-2 col-xs-8 col-md-2">
+					<div class="col-sm-3 col-sm-pull-2 col-md-2 visible-sm">
 						<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
 							<div class="input-group input-group-sm">
 								<span class="input-group-btn">
@@ -156,7 +156,7 @@
 				    		'theme_location' => 'main_nav', /* where in the theme it's assigned */
 				    		'depth' => 2, /* Bootstrap 3.0 doesn't support additional depths */
 				    		'container' => 'nav',
-							'container_class'   => 'collapse navbar-collapse navbar-main-collapse pull-right',
+							'container_class'   => 'collapse navbar-collapse navbar-main-collapse',
 				    		'container_id' => 'main-nav',
 				    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
 				    		'walker' => new wp_bootstrap_navwalker()
