@@ -16,7 +16,7 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		'pages'      => 'page', // Post type
 		'context'    => 'normal',
 		'priority'   => 'high',
-		'show_on' => array( 'page-template' => array('page-homepage.php','page-jumbotron.php') ),
+		'show_on' => array( 'page-template' => array('page-homepage.php','page-jumbotron.php','page-blog.php') ),
 		'fields' => array(
 			array(
 		        'name'=> 'Jumbotron Background Color',
@@ -95,7 +95,7 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		'pages'      => 'page', // Post type
 		'context'    => 'normal',
 		'priority'   => 'high',
-		'show_on' => array( 'page-template' => array('page-homepage.php', 'page-blank.php') ),
+		'show_on' => array( 'page-template' => array('page-homepage.php', 'page-blank.php', 'page-blog.php') ),
 		'fields' => array(
 			array( 
 			    'id'       => 'homepage_additional_pages', 
@@ -117,7 +117,7 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		'pages'		=> 'page',
 		'context'	=> 'normal',
 		'priority'	=> 'default',
-		'show_on'	=> array( 'page-template' => array('page-homepage.php') ),
+		'show_on'	=> array( 'page-template' => array('page-homepage.php','page-blog.php') ),
 		'fields'	=> array(
 			array(
 				'id'	=> 'carousel_enable',
@@ -285,6 +285,48 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		        'id'    => 'toc_ignoreSelector',  
 		        'type'  => 'text_small'
 			)			
+		)
+	);
+
+	/* pinterest blog page settings */
+
+	$meta_boxes[] = array(
+		'title'      => 'Pinterest Style Grid Options',
+		'pages'      => 'page', // Post type
+		'context'    => 'normal',
+		'priority'   => 'high',
+		'show_on' => array( 'page-template' => array('page-blog.php') ),
+		'fields' => array(
+			array(
+				'id'		=> 'pinterest_column_method', 
+				'name'		=> 'Column Width/Count Method', 
+				'desc'		=> 'Select whether to use a fixed column width or a fixed number of columns with variable width.',
+				'type'		=> 'radio',
+				'options'	=> array(
+					'fixed-width' => 'Fixed Column Width',
+					'fixed-count' => 'Fixed Number of Columns'
+				)
+			),
+			array(
+				'id'		=> 'pinterest_columns', 
+				'name'		=> 'Column Width/Count', 
+				'desc'		=> 'Enter the number of columns to use OR the nominal width for each column in px, based on above selection.',
+				'type'		=> 'text_small',
+			),
+			array( 
+				'id'		=> 'pinterest_taxonomy', 
+				'name'		=> 'Categories to Include', 
+				'desc'		=> 'Select one or more categories from which to draw posts, or leave blank to include all posts.',
+				'type'		=> 'taxonomy_select',
+				'multiple'	=> true,
+				'taxonomy'	=> 'category'
+			),
+			array(
+				'id'		=> 'pinterest_args', 
+				'name'		=> '(Advanced) Custom WP_Query Arguments', 
+				'desc'		=> 'Enter a custom WP_Query string to select/order posts (e.g., "post_type=post&orderby=rand"). Leave blank if you don\'t know what this means.',
+				'type'		=> 'text',
+			),
 		)
 	);
 
