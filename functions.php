@@ -506,7 +506,7 @@ if( !function_exists( "theme_js" ) ) {
   function theme_js(){
 	  if (!is_admin()) {
 	  //use CDN for loading Bootstrap
-		wp_register_script('bootstrap', '//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js', array('jquery'), '3.0.0', true);
+		wp_register_script('bootstrap', '//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js', array('jquery'), '3.0.1', true);
 		wp_enqueue_script('bootstrap');
 
 	    wp_register_script( 'wpbs-scripts', get_template_directory_uri() . '/library/js/scripts.js',array('jquery'),'1.2', true );
