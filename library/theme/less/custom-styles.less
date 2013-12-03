@@ -16,7 +16,6 @@
   &-pink              { background-color: @pink; }
 }
 
-
 /* custom navbars */
 
 .navbar {
@@ -737,6 +736,32 @@ img {
     line-height: 17px;
     margin: 0;
     padding: 0 4px 5px;
+}
+
+
+.gallery-brick {
+	position: relative;
+	overflow: hidden;
+}
+
+.gallery-caption {
+	position:absolute;
+    top:0;
+    right:0;
+    left:0;
+    background:rgba(66, 139, 202, 0.75);
+    width:100%;
+    height:100%;
+    padding:2%;
+    display: none;
+    text-align:center;
+    color:#fff !important;
+    z-index:2;
+}
+
+.gallery-brick:hover .gallery-caption {
+	display: block;
+	cursor: pointer;
 }
 
 

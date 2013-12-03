@@ -11,7 +11,7 @@ function bootstrap_gallery($attr) {
 	wp_enqueue_style('blueimp-gallery-css');
 	wp_enqueue_script('blueimp-gallery-js');
 	wp_enqueue_script('blueimp-gallery-init-js');
-	wp_enqueue_script('gridalicious');
+	wp_enqueue_script('freewall');
 
 	$post = get_post();
 
@@ -87,9 +87,7 @@ function bootstrap_gallery($attr) {
 		return $output;
 	}
 
-	$col_span = floor(12/$columns);
-	$col_gutter = 10/$columns;
-	$col_width = 100/$columns-$col_gutter;
+	$col_width = 100/$columns;
 	$i=1;
 
 	$gallery_id = 'blueimp_gallery_'.rand();
@@ -97,32 +95,63 @@ function bootstrap_gallery($attr) {
 
 	$mosaic = '<div id="'.$links_id.'" class="gridalicious clearfix">';
 	foreach ($attachments as $id => $attachment) {
-		$img_lg = wp_get_attachment_image_src($id,'large',false);
+		//$img_lg = wp_get_attachment_image_src($id,'large',false);
 		$img_sm = wp_get_attachment_image_src($id,'full',false);
 		
-		$img = "\n<img src=\"" . $img_sm[0] . "\" alt=\"" . $attachment->post_title . "\"  />";
-		if ($showtooltips || $showcaptions) 
-			$tooltip = ' rel="tooltip" data-original-title="' . $attachment->post_excerpt . '" ';
-		$mosaic .= '<a href="' . $img_lg[0] . '" class="galleryitem" ' . $tooltip . ' data-gallery="#' . $gallery_id . '">';
-		$mosaic .= $img."</a>\n";
-		if (trim($attachment->post_excerpt)) {
-		  $mosaic .= '<p class="caption hidden">' . wptexturize($attachment->post_excerpt) . "</p>\n";
+		$img = '<img src="' . $img_sm[0] . '" alt="' . $attachment->post_title . '" />';		
+		$mosaic .= '<div class="gallery-brick" style="width: '.$col_width.'%;">';
+		$mosaic .= '<a href="' . $img_sm[0] . '" data-gallery="#' . $gallery_id . '">';
+
+		$mosaic .= '<span style="background-image: url(\'http://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif\'");z-index: 1;position:absolute;width:100%;height:100%;top:0;left:0;"></span></a>';
+
+		$mosaic .= "\n" . $img . "\n</a>\n";
+		$the_excerpt = wptexturize($attachment->post_excerpt);
+		if ($the_excerpt) {
+			$mosaic .= '<div class="gallery-caption"><h1>'. $attachment->post_title .'</h1><p>' . $the_excerpt . "</p></div>\n";
+			$mosaic .= '<p class="caption hidden">' . $the_excerpt . "</p>\n";
 		}
+		$mosaic .= "</div>";
 		
 		//$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_url($id) : get_attachment_link($id);
 	}
 
 	$mosaic .= "</div>\n";
 	$mosaic .= <<<EOD
-	<script type='text/javascript'>
+<script type='text/javascript'>
 	jQuery( document ).ready( function() { 
 		blueimpGalleryInit('$gallery_id','$attr');
+		jQuery('#$links_id.galleryitem').each(function(){
+			jQuery(this).width(jQuery('#$links_id').width()/$columns);
+		});
 	});
-	jQuery(window).on('load resize', function(){
-		jQuery('#$links_id').gridalicious({selector: '.galleryitem', gutter: 0, width: (jQuery('#$links_id').width()/$columns) });
+ 
+    jQuery('.gallery-brick').hover(
+        function(){
+            jQuery(this).find('.gallery-caption').slideDown(250); //.fadeIn(250)
+        },
+        function(){
+            jQuery(this).find('.gallery-caption').slideUp(250); //.fadeOut(205)
+        }
+    );
+
+	jQuery(function() {
+		var ewall = new freewall("#$links_id");
+		ewall.reset({
+			selector: '.gallery-brick',
+			animate: true,
+			cellW: (jQuery('#$links_id').width()/$columns),
+			cellH: 'auto',
+			fixSize: 1,
+			gutterX: 0,
+			gutterY: 0,
+			onResize: function() {
+				ewall.fitWidth();
+			}
+		})
+		jQuery(window).trigger("resize");
 	});
+</script>
 EOD;
-	$mosaic .= "</script>\n";
 	
 	if ($showtooltips) {
 		wp_enqueue_script('bs-tooltips'); // bootstrap hover tooltips
