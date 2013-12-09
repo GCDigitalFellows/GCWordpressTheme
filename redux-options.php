@@ -333,13 +333,6 @@ function setup_framework_options(){
                 'desc' => __('Default used if no color is selected.', Redux_TEXT_DOMAIN),
                 'default' => ''
             ),
-            array(
-                'id' => 'link_active_color',
-                'type' => 'color',
-                'title' => __('Link:active Color', Redux_TEXT_DOMAIN), 
-                'desc' => __('Default used if no color is selected.', Redux_TEXT_DOMAIN),
-                'default' => ''
-			)
         )
     );
 	
@@ -366,38 +359,33 @@ function setup_framework_options(){
 				"options" => array('left'=>'Align Left', 'right'=>'Align Right')
 			),
 			array( 
-				'title' => __('Use inverted colors on nav bar', Redux_TEXT_DOMAIN),
-					'desc' => __('Uses dark (default) background and light text', Redux_TEXT_DOMAIN),
-					'id' => 'navbar_style_inverted',
-					'default' => '0',
-					'type' => 'checkbox'
+				'title' => __('Use inverted colors on homepage nav bar?', Redux_TEXT_DOMAIN),
+				'desc' => __('Swap the font and background color on the navbar for the homepage template.', Redux_TEXT_DOMAIN),
+				'id' => 'navbar_style_inverted',
+				'default' => 'on',
+				'type' => 'switch'
 			),
-			array( 
-				'title' => __('Top nav background color', Redux_TEXT_DOMAIN),
-				'desc' => __('Default used if no color is selected.', Redux_TEXT_DOMAIN),
-				'id' => 'top_nav_bg_color',
-				'default' => '',
-				'type' => 'color'
-			),	
 			array( 'title' => __('Check to use a gradient for top nav background', Redux_TEXT_DOMAIN),
 					'desc' => __('Use gradient', Redux_TEXT_DOMAIN),
 					'id' => 'showhidden_gradient',
 					'default' => 0,
 					'type' => 'switch'
 			),
-			array( 'title' => __('Bottom gradient color', Redux_TEXT_DOMAIN),
-					'desc' => __('Top nav background color used as top gradient color.', Redux_TEXT_DOMAIN),
-					'id' => 'top_nav_bottom_gradient_color',
-					'fold' => array('showhidden_gradient'),
+			array( 'title' => __('Background gradient', Redux_TEXT_DOMAIN),
+					'desc' => __('Top nav gradient colors.', Redux_TEXT_DOMAIN),
+					'id' => 'top_nav_gradient_color',
+					'required' => array('showhidden_gradient','equals', true),
 					'default' => '',
-					'type' => 'color'
-			),		
-			array( 'title' => __('Top nav item color', Redux_TEXT_DOMAIN),
-					'desc' => __('Link color.', Redux_TEXT_DOMAIN),
-					'id' => 'top_nav_link_color',
-					'default' => '',
-					'type' => 'color'
+					'type' => 'color_gradient'
 			),
+			array( 
+				'title' => __('Top nav background color', Redux_TEXT_DOMAIN),
+				'desc' => __('Default used if no color is selected.', Redux_TEXT_DOMAIN),
+				'id' => 'top_nav_bg_color',
+				'required' => array('showhidden_gradient','equals', false),
+				'default' => '',
+				'type' => 'color'
+			),	
 			array( 'title' => __('Top nav item hover color', Redux_TEXT_DOMAIN),
 					'desc' => __('Link hover color.', Redux_TEXT_DOMAIN),
 					'id' => 'top_nav_link_hover_color',
@@ -515,7 +503,7 @@ function setup_framework_options(){
 				array( 'title' => __('Sidebar Position', Redux_TEXT_DOMAIN),
 							'desc' => __('Where should the sidebar be positioned relative to the list of posts?', Redux_TEXT_DOMAIN),
 							'id' => 'blog_sidebar_position',
-							'fold' => array('blog_sidebar'),
+							'required' => array('blog_sidebar','equals', true),
 							"default" => "left",
 							"type" => "select",
 							"options" => array('left'=>'Left', 'right'=>'Right')
@@ -523,7 +511,7 @@ function setup_framework_options(){
 				array( 'title' => __('Sidebar Widget Group', Redux_TEXT_DOMAIN),
 							'desc' => __('Select a widget group to display on the archive page sidebar.', Redux_TEXT_DOMAIN),
 							'id' => 'blog_sidebar_widgets',
-							'fold' => array('blog_sidebar'),
+							'required' => array('blog_sidebar','equals', true),
 							"default" => "sidebar1",
 							"type" => "select",
 							"options" => $sidebar_list
@@ -567,7 +555,7 @@ function setup_framework_options(){
 				array( 'title' => __('Slider options', Redux_TEXT_DOMAIN),
 							'desc' => __('Number of posts to show.', Redux_TEXT_DOMAIN),
 							'id' => 'slider_options',
-							'fold' => array('showhidden_slideroptions'),
+							'required' => array('showhidden_slideroptions','equals', true),
 							'default' => '5',
 							'type' => 'text'
 				),
