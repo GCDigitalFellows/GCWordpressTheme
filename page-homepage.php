@@ -140,7 +140,7 @@ Template Name: Homepage
 
 		</div>
 
-	<?php else: ?>
+	<?php /*else: ?>
 		<div class="container clearfix">
 			<header class="page-header">
 			
@@ -152,7 +152,7 @@ Template Name: Homepage
 
 		</div>
 
-	<?php endif;?>
+	<?php*/ endif;?>
 	
 	<div class="container clearfix">
 		
