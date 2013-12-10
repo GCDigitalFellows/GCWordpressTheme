@@ -9,12 +9,13 @@ class ReduxFramework_dimensions extends ReduxFramework {
      *
      * @since ReduxFramework 1.0.0
      */
-    function __construct($field = array(), $value = '', $parent) {
-
-        parent::__construct($parent->sections, $parent->args);
+    function __construct( $field = array(), $value ='', $parent ) {
+    
+        parent::__construct( $parent->sections, $parent->args );
+        $this->parent = $parent;
         $this->field = $field;
         $this->value = $value;
-        //$this->render();
+    
     }
 
 //function
@@ -169,9 +170,9 @@ class ReduxFramework_dimensions extends ReduxFramework {
 
             //  Extended units, show 'em all
             if ( $this->field['units_extended'] ) {
-                    $testUnits = array('px', 'em', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc');	
+                    $testUnits = array('px', 'em', 'rem', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc'); 
             } else {
-                    $testUnits = array('px', 'em', '%');
+                    $testUnits = array('px', 'em', 'rem', '%');
             }
             
             if ( $this->field['units'] != "" && is_array( $this->field['units'] ) ) {
@@ -204,12 +205,41 @@ class ReduxFramework_dimensions extends ReduxFramework {
         wp_enqueue_style('select2-css');
 
         wp_enqueue_script(
-                'redux-field-dimensions-js', ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.min.js', array('jquery', 'select2-js', 'jquery-numeric'), time(), true
+                'redux-field-dimensions-js', ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.js', array('jquery', 'select2-js', 'jquery-numeric'), time(), true
         );
 
         wp_enqueue_style(
                 'redux-field-dimensions-css', ReduxFramework::$_url . 'inc/fields/dimensions/field_dimensions.css', time(), true
         );
+    }
+
+    public function output() {
+
+        if ( !isset($this->field['output']) || empty( $this->field['output'] ) ) {
+            return;
+        }
+
+        $units = isset( $this->value['units'] ) ? $this->value['units'] : "";
+
+        $cleanValue = array(
+            'height' => isset( $this->value['height'] ) ? filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT) : '',
+            'width' => isset( $this->value['width'] ) ? filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_INT) : '',
+        ); 
+
+        $style = "";
+
+        $keys = implode(",", $this->field['output']);
+        $style .= $keys."{";
+            foreach($cleanValue as $key=>$value) {
+                if( $value ) {
+                    $style .= $key . ':' . $value . $units . ';';
+                }
+            }          
+        $style .= '}';
+        if ( !empty($style ) ) {
+            $this->parent->outputCSS .= $style;  
+        }
+        
     }
 
 //function

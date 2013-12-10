@@ -1,8 +1,8 @@
-/* global redux_change, reduxSliders */
+/* global redux_change */
 jQuery(document).ready(function() {
 	jQuery('.redux_slider').each(function() {
 		//slider init
-		var slider = reduxSliders[jQuery(this).attr('rel')];
+		var slider = redux.slider[jQuery(this).attr('rel')];
 	
 		jQuery(this).slider({
 			value: parseInt(slider.val, null),
@@ -24,7 +24,8 @@ jQuery(document).ready(function() {
 		}
 
 		jQuery(".slider-input").numeric({
-			negative: neg,
+			allowPlus: false,
+			allowMinus: neg,
 			min: slider.min,
 			max: slider.max
 		});
@@ -46,12 +47,14 @@ jQuery(document).ready(function() {
 		}
 		jQuery(this).removeClass('sliderInputChange');
 
-		var slider = reduxSliders[jQuery(this).attr('id')];
-		var value = jQuery(this).val();
+		var slider = redux.slider[jQuery(this).attr('id')];
+		value = parseInt(jQuery(this).val());
 		if (value > slider.max) {
 			value = slider.max;
 		} else if (value < slider.min) {
 			value = slider.min;
+		} else {
+			value = Math.round(value / slider.step) * slider.step;
 		}
 
 		jQuery('#' + slider.id + '-slider').slider("value", value);
@@ -67,12 +70,16 @@ jQuery(document).ready(function() {
 			}
 			jQuery(this).removeClass('sliderInputChange');
 
-			var slider = reduxSliders[jQuery(this).attr('id')];
+			var slider = redux.slider[jQuery(this).attr('id')];
+			value = parseInt(jQuery(this).val());
 			if (value > slider.max) {
 				value = slider.max;
 			} else if (value < slider.min) {
 				value = slider.min;
+			} else {
+				value = Math.round(value / slider.step) * slider.step;
 			}
+			
 
 			jQuery('#' + slider.id + '-slider').slider("value", value);
 			jQuery("#" + slider.id).val(value);

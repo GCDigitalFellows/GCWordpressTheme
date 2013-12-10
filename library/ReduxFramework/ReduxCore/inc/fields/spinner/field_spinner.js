@@ -1,8 +1,9 @@
-/* global redux_change, reduxSpinners */
+/* global redux_change */
 jQuery(document).ready(function() {
+
     jQuery('.redux_spinner').each(function() {
         //slider init
-        var spinner = reduxSpinners[jQuery(this).attr('rel')];
+        var spinner = redux.spinner[jQuery(this).attr('rel')];
 
         jQuery("#" + spinner.id).spinner({
             value: parseInt(spinner.val, null),
@@ -23,11 +24,11 @@ jQuery(document).ready(function() {
             neg = true;
         }
 
-        jQuery(".spinner-input").numeric({
-            negative: neg,
-            min: spinner.min,
-            max: spinner.max
-        });
+		jQuery(".spinner-input").numeric({
+			allowMinus: neg,
+			min: spinner.min,
+			max: spinner.max
+		});
 
     });
 
@@ -46,16 +47,17 @@ jQuery(document).ready(function() {
         }
         jQuery(this).removeClass('spinnerInputChange');
 
-        var spinner = reduxSpinners[jQuery(this).attr('id')];
-        var value = jQuery(this).val();
+        var spinner = redux.spinner[jQuery(this).attr('id')];
+        value = jQuery(this).val();
         if (value > spinner.max) {
             value = spinner.max;
         } else if (value < spinner.min) {
             value = spinner.min;
+        } else {
+            value = Math.round(value / spinner.step) * spinner.step;
         }
 
-        jQuery('#' + spinner.id + '-spinner').spinner("value", value);
-        jQuery("#" + spinner.id).val(value);
+        jQuery('#' + spinner.id).spinner("value", value);
 
     });
 
@@ -67,15 +69,17 @@ jQuery(document).ready(function() {
             }
             jQuery(this).removeClass('spinnerInputChange');
 
-            var spinner = reduxSpinners[jQuery(this).attr('id')];
+            var spinner = redux.spinner[jQuery(this).attr('id')];
+            value = jQuery(this).val();
             if (value > spinner.max) {
                 value = spinner.max;
             } else if (value < spinner.min) {
                 value = spinner.min;
+            } else {
+                value = Math.round(value / spinner.step) * spinner.step;
             }
 
-            jQuery('#' + spinner.id + '-spinner').spinner("value", value);
-            jQuery("#" + spinner.id).val(value);
+            jQuery('#' + spinner.id).spinner("value", value);
 
         },
         wait: 400,

@@ -42,12 +42,13 @@ if (!class_exists('ReduxFramework_gallery')) {
          * @access      public
          * @return      void
          */
-        public function __construct($field = array(), $value = '', $parent) {
-
-            parent::__construct($parent->sections, $parent->args);
-
+        function __construct( $field = array(), $value ='', $parent ) {
+        
+            parent::__construct( $parent->sections, $parent->args );
+            $this->parent = $parent;
             $this->field = $field;
             $this->value = $value;
+        
         }
 
         /**
@@ -68,7 +69,7 @@ if (!class_exists('ReduxFramework_gallery')) {
                 foreach ($ids as $attachment_id) {
                     $img = wp_get_attachment_image_src($attachment_id, 'thumbnail');
                     echo '<a class="of-uploaded-image" href="' . $img[0] . '">';
-                    echo '<img class="redux-option-image" id="image_' . $this->field['id'] .'_'.$attachment_id. '" src="' . $img[0] . '" alt="" />';
+                    echo '<img class="redux-option-image" id="image_' . $this->field['id'] .'_'.$attachment_id. '" src="' . $img[0] . '" alt="" target="_blank" rel="external" />';
                     echo '</a>';
                 }
             endif;
