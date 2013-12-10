@@ -55,6 +55,9 @@ function change_framework_args($args){
  *
  */
 function setup_framework_options(){
+    
+    ReduxFramework::$_url = get_template_directory_uri().'/library/ReduxFramework/ReduxCore/';
+
     $args = array();
 
 
@@ -289,8 +292,8 @@ function setup_framework_options(){
     $sections = array();              
 
     //Background Patterns Reader
-    $sample_patterns_path = REDUX_DIR . 'sample/patterns/';
-    $sample_patterns_url  = REDUX_URL . 'sample/patterns/';
+    $sample_patterns_path = ReduxFramework::$_dir . 'sample/patterns/';
+    $sample_patterns_url  = ReduxFramework::$_dir . 'sample/patterns/';
     $sample_patterns      = array();
 
     if ( is_dir( $sample_patterns_path ) ) :
@@ -629,7 +632,7 @@ function setup_framework_options(){
 
 	if(file_exists(dirname(__FILE__).'/README.md')){
 	$tabs['theme_docs'] = array(
-				'icon' => REDUX_URL.'assets/img/glyphicons/glyphicons_071_book.png',
+				'icon' => ReduxFramework::$_url.'assets/img/glyphicons/glyphicons_071_book.png',
 				'title' => __('Documentation', 'redux-framework'),
 				'content' => file_get_contents(dirname(__FILE__).'/README.md')
 				);
