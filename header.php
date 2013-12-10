@@ -89,39 +89,44 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-8">
-						<div class="row">
-							<div class="navbar-header pull-left">
-							    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-service-collapse">
-							      <span class="sr-only">Toggle navigation</span>
-							      <span class="icon-bar"></span>
-							      <span class="icon-bar"></span>
-							      <span class="icon-bar"></span>
-							    </button>
-							</div>
-							<?php 
-							    wp_nav_menu( array(
-						    		'menu' => 'service_nav',
-						    		'menu_class' => 'nav navbar-nav',
-						    		'menu_id' => 'service-nav-menu',
-						    		'theme_location' => 'service_nav', /* where in the theme it's assigned */
-						    		'depth' => 1,
-						    		'container' => 'nav',
-									'container_class'   => 'collapse navbar-collapse navbar-service-collapse pull-left',
-						    		'container_id' => 'service-nav',
-						    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
-						    		'walker' => new wp_bootstrap_navwalker()
-							    ) );
-						    ?>
-					    </div>
-					    <div class="row">
-						    <a class="navbar-brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>">
-								<?php if($wheniwasbad_options['branding_logo'] && $wheniwasbad_options['branding_logo']['url']) { ?>
-									<img src="<?php echo $wheniwasbad_options['branding_logo']['url']; ?>" alt="<?php echo get_bloginfo('description'); ?>">
-								<?php }
-									if($wheniwasbad_options['site_name']) bloginfo('name'); 
-								?>
-							</a>
-					    </div>
+						
+						<?php if ( has_nav_menu('service_nav') ) : ?>
+							<div class="row">
+								<div class="navbar-header pull-left">
+								    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-service-collapse">
+								      <span class="sr-only">Toggle navigation</span>
+								      <span class="icon-bar"></span>
+								      <span class="icon-bar"></span>
+								      <span class="icon-bar"></span>
+								    </button>
+								</div>
+								<?php 
+								    wp_nav_menu( array(
+							    		'menu' => 'service_nav',
+							    		'menu_class' => 'nav navbar-nav',
+							    		'menu_id' => 'service-nav-menu',
+							    		'theme_location' => 'service_nav', /* where in the theme it's assigned */
+							    		'depth' => 1,
+							    		'container' => 'nav',
+										'container_class'   => 'collapse navbar-collapse navbar-service-collapse pull-left',
+							    		'container_id' => 'service-nav',
+							    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
+							    		'walker' => new wp_bootstrap_navwalker()
+								    ) );
+							    ?>
+						    </div>
+						<?php endif; ?>
+						<?php if ( ($wheniwasbad_options['branding_logo'] && $wheniwasbad_options['branding_logo']['url']) || ($wheniwasbad_options['site_name'] && get_bloginfo()) ): ?>
+						    <div class="row">
+							    <a class="navbar-brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>">
+									<?php if($wheniwasbad_options['branding_logo'] && $wheniwasbad_options['branding_logo']['url']) { ?>
+										<img src="<?php echo $wheniwasbad_options['branding_logo']['url']; ?>" alt="<?php echo get_bloginfo('description'); ?>">
+									<?php }
+										if($wheniwasbad_options['site_name'] && get_bloginfo()) bloginfo('name'); 
+									?>
+								</a>
+						    </div>
+						<?php endif; ?>
 					</div>
 					<div class="col-sm-2 col-sm-push-2 col-xs-4">
 						<a id="sitewide-logo" title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
