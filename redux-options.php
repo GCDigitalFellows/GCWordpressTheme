@@ -365,27 +365,6 @@ function setup_framework_options(){
 				'default' => 'on',
 				'type' => 'switch'
 			),
-			array( 'title' => __('Check to use a gradient for top nav background', Redux_TEXT_DOMAIN),
-					'desc' => __('Use gradient', Redux_TEXT_DOMAIN),
-					'id' => 'showhidden_gradient',
-					'default' => 0,
-					'type' => 'switch'
-			),
-			array( 'title' => __('Background gradient', Redux_TEXT_DOMAIN),
-					'desc' => __('Top nav gradient colors.', Redux_TEXT_DOMAIN),
-					'id' => 'top_nav_gradient_color',
-					'required' => array('showhidden_gradient','equals', true),
-					'default' => '',
-					'type' => 'color_gradient'
-			),
-			array( 
-				'title' => __('Top nav background color', Redux_TEXT_DOMAIN),
-				'desc' => __('Default used if no color is selected.', Redux_TEXT_DOMAIN),
-				'id' => 'top_nav_bg_color',
-				'required' => array('showhidden_gradient','equals', false),
-				'default' => '',
-				'type' => 'color'
-			),	
 			array( 'title' => __('Top nav item hover color', Redux_TEXT_DOMAIN),
 					'desc' => __('Link hover color.', Redux_TEXT_DOMAIN),
 					'id' => 'top_nav_link_hover_color',
