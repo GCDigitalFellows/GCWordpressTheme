@@ -12,25 +12,13 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 	/* Jumbotron */
 
 	$meta_boxes[] = array(
-		'title'      => 'Jumbotron',
+		'title'      => 'Jumbotron Header',
 		'pages'      => 'page', // Post type
 		'context'    => 'normal',
 		'priority'   => 'high',
 		'show_on' => array( 'page-template' => array('page-homepage.php','page-jumbotron.php','page-blog.php') ),
 		'fields' => array(
-			array(
-		        'name'=> 'Jumbotron Background Color',
-		        'desc'  => 'Pick a background color for the Jumbotron.',  
-		        'id'    => 'jumbotron_bg_color',
-		        'type'  => 'colorpicker'
-		    ),
-		    array( 
-			    'id'   => 'jumbotron_bg_image', 
-			    'name' => 'Jumbotron Background Image', 
-			    'desc' => 'Upload or select an image to use as the jumbotron background. Overrides the background color.',
-			    'type' => 'image', 
-			),
-		    array(  
+			array(  
 		        'name'=> 'Jumbotron Contents',  
 		        'desc'  => 'Displayed in place of a page title. Only used on homepage and jumbotron templates. HTML can be used.',  
 		        'id'    => 'jumbotron_contents',  
@@ -48,7 +36,19 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 					    'tinymce' => true, // load TinyMCE, can be used to pass settings directly to TinyMCE using an array()
 					    'quicktags' => true // load Quicktags, can be used to pass settings directly to Quicktags using an array()	
 					) 
-		    )
+		    ),
+			array(
+		        'name'=> 'Jumbotron Background Color',
+		        'desc'  => 'Pick a background color for the Jumbotron.',  
+		        'id'    => 'jumbotron_bg_color',
+		        'type'  => 'colorpicker'
+		    ),
+		    array( 
+			    'id'   => 'jumbotron_bg_image', 
+			    'name' => 'Jumbotron Background Image', 
+			    'desc' => 'Upload or select an image to use as the jumbotron background. Overrides the background color.',
+			    'type' => 'image', 
+			),
 		)
 	);
 
