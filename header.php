@@ -84,6 +84,11 @@
 	?>
 		
 	<body <?php body_class($body_style); ?>>
+	<div id="sitewide-logo-div">
+		<a title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
+			<img id="sitewide-logo-img" src="http://www.gc.cuny.edu/shared/images/shared/CUNY-GC-logo.png" />
+		</a>
+	</div>
 				
 		<header class="navbar <?php echo $navheader_class; ?> clearfix" role="banner">
 			<div class="container">
@@ -128,11 +133,7 @@
 						    </div>
 						<?php endif; ?>
 					</div>
-					<div class="col-sm-2 col-sm-push-2 col-xs-4">
-						<a id="sitewide-logo" title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
-							<img class="alignright" src="http://www.gc.cuny.edu/shared/images/shared/CUNY-GC-logo.png" />
-						</a>
-					</div>
+					
 					<div class="col-sm-3 col-sm-pull-2 col-md-2 visible-sm">
 						<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
 							<div class="input-group input-group-sm">

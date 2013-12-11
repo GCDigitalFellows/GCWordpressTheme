@@ -41,7 +41,7 @@ body.admin-bar .navbar-fixed-top {
 }
 
 .navbar-brand {
-	padding-bottom: 60px;
+	padding: 18px 15px 36px;
 	font-size: 32px;
 	line-height: 24px;
 	font-weight: 400;
@@ -280,11 +280,22 @@ ul#main-nav-menu.navbar-nav > .active > a {
 	}
 }
 
-#sitewide-logo {
+#sitewide-logo-div {
 	position: absolute;
-	bottom: -181px;
-	background-color: @white;
-	padding: 5px;
+	top: 0;
+	right: 0;
+	z-index: 1200;
+	background-color: @navbar-default-bg;
+	padding: 4px;
+}
+
+.admin-bar #sitewide-logo-div {
+	top: 28px;
+}
+
+#sitewide-logo-img {
+	height: 120px;
+	width: auto;
 }
 
 /* custom scaffolding */
@@ -314,6 +325,10 @@ body.admin-bar.navbar-fixed-offset #content {
 */
 body.navbar-fixed-offset {
 	padding-top: @navbar-height;
+
+	#sitewide-logo-div {
+		position: fixed;
+	}
 }
 
 /* custom pagination */
