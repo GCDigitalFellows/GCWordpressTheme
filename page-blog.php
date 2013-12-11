@@ -142,19 +142,40 @@ wp_enqueue_script('freewall');
 
 		</div>
 
-	<?php else: ?>
-		<div class="container clearfix">
-			<header class="page-header">
-			
-				<h1><?php single_post_title(); ?></h1>
-			
-				<?php get_template_part('postmeta-horizontal'); ?>
-		
-			</header> <!-- end page header -->
+	<?php endif; ?>
 
-		</div>
+	<?php 
+		$display_page_title = get_post_meta( get_the_id(), 'display_page_title', false );
+		$display_page_meta = get_post_meta( get_the_id(), 'display_page_meta', false );
+	?>
+
+	<?php if ( $display_page_title ) : ?>
+
+			<div class="container clearfix">
+
+				<header class="page-header">
+				
+					<h1><?php single_post_title(); ?></h1>
+				
+					<?php if ( $display_page_meta ) get_template_part('postmeta-horizontal'); ?>
+			
+				</header> <!-- end page header -->
+
+			</div>
 
 	<?php endif;?>
+
+	<?php /* add the contents of additional pages */
+		$additional_pages = get_post_meta( get_the_id(), 'homepage_additional_pages_above', false );
+		foreach ($additional_pages as $addon_page_id) {
+			$addon_page = get_post($addon_page_id);
+			//echo "<div class='container'>\n";
+			//echo "<h1>" . $addon_page->post_title . "</h1>\n";
+			echo edit_post_link("Edit",'','',$addon_page_id) . "\n";
+			echo $addon_page->post_content . "\n";
+			//echo "</div>\n";
+		}
+	?>
 	
 	<div class="container clearfix">
 		
@@ -283,7 +304,7 @@ wp_enqueue_script('freewall');
 	</div> <!-- container -->
 
 	<?php /* add the contents of additional pages */
-		$additional_pages = get_post_meta( get_the_id(), 'homepage_additional_pages', false );
+		$additional_pages = get_post_meta( get_the_id(), 'homepage_additional_pages_below', false );
 		foreach ($additional_pages as $addon_page_id) {
 			$addon_page = get_post($addon_page_id);
 			//echo "<div class='container'>\n";

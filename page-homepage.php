@@ -140,19 +140,28 @@ Template Name: Homepage
 
 		</div>
 
-	<?php /*else: ?>
-		<div class="container clearfix">
-			<header class="page-header">
-			
-				<h1><?php single_post_title(); ?></h1>
-			
-				<?php get_template_part('postmeta-horizontal'); ?>
-		
-			</header> <!-- end page header -->
+	<?php endif; ?>
 
-		</div>
+	<?php 
+		$display_page_title = get_post_meta( get_the_id(), 'display_page_title', false );
+		$display_page_meta = get_post_meta( get_the_id(), 'display_page_meta', false );
+	?>
 
-	<?php*/ endif;?>
+	<?php if ( $display_page_title ) : ?>
+
+			<div class="container clearfix">
+
+				<header class="page-header">
+				
+					<h1><?php single_post_title(); ?></h1>
+				
+					<?php if ( $display_page_meta ) get_template_part('postmeta-horizontal'); ?>
+			
+				</header> <!-- end page header -->
+
+			</div>
+
+	<?php endif;?>
 	
 	<div class="container clearfix">
 		

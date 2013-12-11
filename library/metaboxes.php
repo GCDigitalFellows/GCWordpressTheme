@@ -87,6 +87,29 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		)
 	);
 
+	/* Display/disable page title? */
+	$meta_boxes[] = array(
+		'title'      => 'Display Page Meta Info',
+		'pages'      => 'page', // Post type
+		'context'    => 'normal',
+		'priority'   => 'core',
+		'show_on' => array( 'page-template' => array('page-homepage.php', 'page-blog.php', 'page-jumbotron.php') ),
+		'fields'	=> array(
+			array(
+				'id'	=> 'display_page_title',
+				'name'	=> 'Display the page title for this page?',
+				'type'	=> 'checkbox',
+				'default' => false
+			),
+			array(
+				'id'	=> 'display_page_meta',
+				'name'	=> 'Display the meta info for this page?',
+				'desc'	=> 'If checked, the date modified, author, and categories will be shown.',
+				'type'	=> 'checkbox',
+				'default' => false
+			),
+		)
+	);
 
 	/* Homepage include additional pages */
 
@@ -98,8 +121,18 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		'show_on' => array( 'page-template' => array('page-homepage.php', 'page-blank.php', 'page-blog.php') ),
 		'fields' => array(
 			array( 
-			    'id'       => 'homepage_additional_pages', 
-			    'name'     => 'Include the contents of another page (only the content, not the title) within the homepage, below the primary content and sidebars (so style accordingly).', 
+			    'id'       => 'homepage_additional_pages_above', 
+			    'name'     => 'Include the contents of another page (only the content!) within the homepage, ABOVE the primary content and sidebars.', 
+			    'type'     => 'post_select',
+			    'repeatable'     => true,
+			    'use_ajax' => true,
+			    'query' => array( 
+			        'post_type' => 'page'
+			    )
+			),
+			array( 
+			    'id'       => 'homepage_additional_pages_below', 
+			    'name'     => 'Include the contents of another page (only the content!) within the homepage, BELOW the primary content and sidebars.', 
 			    'type'     => 'post_select',
 			    'repeatable'     => true,
 			    'use_ajax' => true,
