@@ -5,7 +5,8 @@ Template Name: Pinterest Blog
 ?>
 
 <?php get_header();
-wp_enqueue_script('freewall');
+//wp_enqueue_script('freewall');
+wp_enqueue_script('shuffle');
 ?>
 
 <div id="content" class="content-no-margin clearfix">
@@ -51,7 +52,7 @@ wp_enqueue_script('freewall');
 							$featured_src = wp_get_attachment_image_src( $post_thumbnail_id, 'wpbs-featured-carousel' ); ?>
 
 				    	<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">
-				    		<img src="<?php echo $featured_src[0]; ?>" alt="<?php the_title_attribute(); ?>" style="width:100%; height: auto;" >
+				    		<img src="<?php echo $featured_src[0]; ?>" alt="<?php the_title_attribute(); ?>" style="width:auto; height: 100%; max-width:none;" >
 				    	</a>
 					<?php }	?>
 				   	<div class="carousel-caption jumbotron">
@@ -91,9 +92,10 @@ wp_enqueue_script('freewall');
 		<script>
 			jQuery(window).on('load resize', function(){
 			    jQuery('#myCarousel .item').each(function() {
-			    	console.log(jQuery(this).width);
 			    	jQuery(this).width(jQuery(window).width());
-			    	jQuery(this).height(jQuery(window).width()/<?php echo $carousel_height_ratio; ?>);
+					//jQuery(this).height(jQuery(window).width()/<?php echo $carousel_height_ratio; ?>);
+					jQuery(this).height(jQuery(window).height() - jQuery('.navbar').height());
+					jQuery(this).find('img').height('100%');
 			    });
 			});
 		</script>
@@ -167,6 +169,7 @@ wp_enqueue_script('freewall');
 
 	<?php /* add the contents of additional pages */
 		$additional_pages = get_post_meta( get_the_id(), 'homepage_additional_pages_above', false );
+		print_r($additional_pages);
 		foreach ($additional_pages as $addon_page_id) {
 			$addon_page = get_post($addon_page_id);
 			//echo "<div class='container'>\n";
@@ -187,107 +190,126 @@ wp_enqueue_script('freewall');
 
 				<!-- blog posts -->
 				<?php
-					$args = 'post_type=post';
+					$args = 'post_type=post&numberposts=20&posts_per_page=20';
 					$pinterest_taxonomy = get_post_meta( get_the_id(), 'pinterest_taxonomy', true );
 					$pinterest_args = get_post_meta( get_the_id(), 'pinterest_args', true );
 					if ($pinterest_args != '') {
-						$args .= '&'.$pinterest_args;
+						//$args .= '&'.$pinterest_args;
 					}
 					if (is_array($pinterest_taxonomy)) {
 						$pinterest_taxonomies = implode(',',$pinterest_taxonomy);
-						$args .= '&cat=' . $pinterest_taxonomies;
+						//$args .= '&cat=' . $pinterest_taxonomies;
 					}
 					$pinterest_query = new WP_Query( $args );
+				
+					// setup the pinterest columns
+					$pinterest_columns_width = get_post_meta($post->ID, 'pinterest_columns_width' , true);
+					if ( ! is_numeric($pinterest_columns_width) || $pinterest_columns_width <= 0 ) { // sanity check to prevent div by 0
+						$pinterest_columns_width = 150;
+					}
+					
 				?>
 				
 				<div id="pinterest_list" style="width: 100%; ">
 
 					<?php while ( $pinterest_query->have_posts() ) : $pinterest_query->the_post(); ?>
-						
-						<?php if (get_post_format() == 'video') : ?>
 
-								<div class="pinterest_item panel" style="width: 600px; padding: 0; border: none;">
+<?php 
+$col_span = 1;
+if (get_post_format() == 'video'){// || has_post_thumbnail() ){
+	$col_span = 2;
+}?>
 
-								<?php if ( get_the_title() != '' ) : ?>
-<div class="post-excerpt" style="padding: 10px;">
-									<header class="entry-header media-heading">
-									
-										<h3><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => 'Permalink to: ', 'after' => '' ) ); ?>" rel="bookmark"><?php the_title(); ?>
-									
-										<?php if (get_post_format() == 'link') : ?>
-									
-											<i class="glyphicon glyphicon-external-link"></i>
-									
-										<?php endif; ?>
-									
-										</a></h3>
-									
-									</header>
-								</div>
-								<?php endif; ?>
+						<?php if (get_post_format() == 'video') : //display videos across 2 columns ?>
 
-						 		<?php echo get_the_post_thumbnail( $the_post->ID, 'thumbnail' ); ?> 
-								
-								</div>
-
-						<?php else : ?>
-
-						<div class="pinterest_item panel" style="width: 300px; padding: 0; border: none;">
-						
-							<?php 
-							$has_thumb = '';
-							if ( has_post_thumbnail()) : 
-
-								$has_thumb=' thumb'; ?>
-								
-								<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark">
-								
-									<?php $thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id($the_post->ID), 'thumbnail'); ?>
-
-									<img src="<?php echo $thumbnail_src[0];?>" class="attachment-thumbnail wp-post-image" alt="<?php the_title_attribute(); ?>" style="width: 100%; height: auto; border-top-right-radius: 4px; border-top-left-radius: 4px;">
-								
-								</a>
-
-				 			<?php endif; ?>
-
-				 			<div class="pinterest_caption<?php echo $has_thumb;?>">
+								<div class="pinterest_item panel pinterest_video" style="width: <?php echo $pinterest_columns_width * $col_span; ?>px; height:auto; padding: 0; border: none;" data-groups='["post","video"]'>								
 
 								<?php if ( get_the_title() != '' ) : ?>
+									
+									<div class="post-excerpt" style="padding: 10px;">
 
-									<header class="entry-header media-heading">
-									
-										<h3><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => 'Permalink to: ', 'after' => '' ) ); ?>" rel="bookmark"><?php the_title(); ?>
-									
-										<?php if (get_post_format() == 'link') : ?>
-									
-											<i class="glyphicon glyphicon-external-link"></i>
-									
-										<?php endif; ?>
-									
-										</a></h3>
-									
-									</header>
-								
+										<header class="entry-header media-heading">
+										
+											<h3><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => 'Permalink to: ', 'after' => '' ) ); ?>" rel="bookmark"><?php the_title(); ?>
+										
+											<?php if (get_post_format() == 'link') : ?>
+										
+												<i class="glyphicon glyphicon-external-link"></i>
+										
+											<?php endif; ?>
+										
+											</a></h3>
+										
+										</header>
+
+									</div>
+
 								<?php endif; ?>
 
-								<section class="post_content clearfix">
+						 		<?php echo get_the_post_thumbnail( $the_post->ID, array($pinterest_columns_width* $col_span,$pinterest_columns_width) ); ?> 
 								
-									<?php the_excerpt(); ?>
+								</div>
+
+						<?php else : //not a video, use single column width ?>
+
+							<div class="pinterest_item panel pinterest_<?php echo get_post_format(); ?>" style="width: <?php echo $pinterest_columns_width* $col_span; ?>px; padding: 0; border: none;" data-groups='["post","<?php echo get_post_format(); ?>"]'>
+						
+								<?php if ( has_post_thumbnail()) : ?>
+									
+									<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark">
+									
+										<?php /*$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id($the_post->ID), 'thumbnail'); ?>
+
+										<img src="<?php echo $thumbnail_src[0];?>" class="attachment-thumbnail wp-post-image" alt="<?php the_title_attribute(); ?>" style="width: 100%; height: auto; border-top-right-radius: 4px; border-top-left-radius: 4px;">
+										<?php */ ?>
+										<?php 
+										$has_thumb = ' thumb';
+										echo get_the_post_thumbnail($the_post->ID,'thumbnail'); ?>
+
+									</a>
+
+					 			<?php else :
+					 				$has_thumb='';
+					 			endif; ?>
+
+					 			<div class="pinterest_caption<?php echo $has_thumb; ?>">
+
+									<?php if ( get_the_title() != '' ) : ?>
+
+										<header class="entry-header media-heading">
+										
+											<h3><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => 'Permalink to: ', 'after' => '' ) ); ?>" rel="bookmark"><?php the_title(); ?>
+										
+											<?php if (get_post_format() == 'link') : ?>
+										
+												<i class="glyphicon glyphicon-external-link"></i>
+										
+											<?php endif; ?>
+										
+											</a></h3>
+										
+										</header>
+									
+									<?php endif; ?>
+
+									<section class="post_content clearfix">
+									
+										<?php the_excerpt(); ?>
+									
+									</section> <!-- post-content -->							
 								
-								</section> <!-- post-content -->							
-							
+								</div>
+
 							</div>
 
-						</div>
-
-					<?php endif; ?>
+						<?php endif; ?>
 					
 					<?php endwhile; ?>
 
 					<?php wp_reset_query(); ?>
 				
 				</div><!-- pinterest blog -->
-							
+
 			</section> <!-- end main -->
 			
 			<?php if ($sidebar_class != ''): ?>
@@ -325,39 +347,33 @@ wp_enqueue_script('freewall');
 			    
 </div> <!-- end #content -->
 
-<?php
-	$pinterest_column_method = get_post_meta($post->ID, 'pinterest_column_method' , true);
-	$pinterest_columns = get_post_meta($post->ID, 'pinterest_columns' , true);
-	if ( ! is_numeric($pinterest_columns) || $pinterest_columns <= 0 ) { // sanity check to prevent div by 0
-		$pinterest_columns = 3;
-		$pinterest_column_method = 'fixed-columns'; // default to 3 columns
-	}
-	if ( $pinterest_column_method == 'fixed-width' ) {
-		$column_width = $pinterest_columns;
-	} else {
-		$column_width = "jQuery('#pinterest_list').width()/" . $pinterest_columns;
-	}
-
-?>
 <script type='text/javascript'>
-	/*jQuery(window).on('load resize', function(){
-		jQuery('#pinterest_list').gridalicious({selector: '.pinterest_item', gutter: 0, width: <?php echo $column_width; ?>});
-	});*/
-	jQuery(function() {
-		var ewall = new freewall("#pinterest_list");
+	
+	jQuery(document).ready(function() {
+		var $pinterest_list = jQuery('#pinterest_list'),
+			$sizer = <?php echo $pinterest_columns_width; ?>;
+		$pinterest_list.shuffle({
+			itemSelector: '.pinterest_item',
+			sizer: $sizer,
+			gutterWidth: 10
+		});
+
+		/*var ewall = new freewall("#pinterest_list");
+
 		ewall.reset({
 			selector: '.pinterest_item',
 			animate: true,
-			cellW: 'auto',
-			cellH: 'auto',
-			fixSize: 1,
+			cellW: <?php echo $pinterest_columns_width; ?>,
+			cellH: 60,
 			gutterX: 10,
-			gutterY: 20,
+			gutterY: 30,
+			fixSize: 1,
+			animate: true,
 			onResize: function() {
 				ewall.fitWidth();
-			}
-		})
-		jQuery(window).trigger("resize");
+			},
+		});
+		jQuery(window).trigger("resize");*/
 	});
 
 </script>

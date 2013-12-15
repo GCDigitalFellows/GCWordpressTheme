@@ -406,7 +406,7 @@ if( !function_exists( "theme_js" ) ) {
 		wp_register_script('bootstrap-js', '//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js', array('jquery'), '3.0.1', true);
 		wp_enqueue_script('bootstrap-js');
 
-	    wp_register_script( 'wpbs-scripts', get_template_directory_uri() . '/library/js/scripts.js',array('jquery'),'1.2', true );
+	    //wp_register_script( 'wpbs-scripts', get_template_directory_uri() . '/library/js/scripts.js',array('jquery'),'1.2', true );
 	    wp_register_script( 'modernizr', get_template_directory_uri() . '/library/js/modernizr.custom.min.js', array(), '2.5.3', true );
 
 		// only enqueue the following scripts when needed, but register them here to centralize updates.
@@ -415,7 +415,8 @@ if( !function_exists( "theme_js" ) ) {
 		wp_register_script( 'blueimp-gallery-js', get_template_directory_uri() . '/library/Gallery/js/jquery.blueimp-gallery.min.js', array(jquery), '2.12.1', true );
 		wp_register_script( 'blueimp-gallery-init-js', get_template_directory_uri() . '/library/js/gallery_init.js', array('jquery','blueimp-gallery-js'), '2.12.1', true );
 		wp_register_script( 'gridalicious', get_template_directory_uri() . '/library/Grid-A-Licious/jquery.grid-a-licious.js', array('jquery'), '3.01', true);
-		wp_register_script( 'freewall', get_template_directory_uri() . '/library/js/freewall.js', array('jquery'), '1.02', true);
+		wp_register_script( 'freewall', get_template_directory_uri() . '/library/freewall/freewall.js', array('jquery'), '1.03', true);
+		wp_register_script( 'shuffle', get_template_directory_uri() . '/library/js/jquery.shuffle.js', array('jquery'), '1.03', true);
 
 		wp_enqueue_script('wpbs-scripts');
 	    wp_enqueue_script('modernizr');

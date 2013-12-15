@@ -331,19 +331,9 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		'show_on' => array( 'page-template' => array('page-blog.php') ),
 		'fields' => array(
 			array(
-				'id'		=> 'pinterest_column_method', 
-				'name'		=> 'Column Width/Count Method', 
-				'desc'		=> 'Select whether to use a fixed column width or a fixed number of columns with variable width.',
-				'type'		=> 'radio',
-				'options'	=> array(
-					'fixed-width' => 'Fixed Column Width',
-					'fixed-count' => 'Fixed Number of Columns'
-				)
-			),
-			array(
-				'id'		=> 'pinterest_columns', 
-				'name'		=> 'Column Width/Count', 
-				'desc'		=> 'Enter the number of columns to use OR the nominal width for each column in px, based on above selection.',
+				'id'		=> 'pinterest_columns_width', 
+				'name'		=> 'Column Width', 
+				'desc'		=> 'Enter the nominal width for each cell (in px).',
 				'type'		=> 'text_small',
 			),
 			array( 
