@@ -5,8 +5,8 @@ Template Name: Pinterest Blog
 ?>
 
 <?php get_header();
-//wp_enqueue_script('freewall');
-wp_enqueue_script('shuffle');
+wp_enqueue_script('freewall');
+//wp_enqueue_script('shuffle');
 ?>
 
 <div id="content" class="content-no-margin clearfix">
@@ -174,7 +174,8 @@ wp_enqueue_script('shuffle');
 			$addon_page = get_post($addon_page_id);
 			//echo "<div class='container'>\n";
 			//echo "<h1>" . $addon_page->post_title . "</h1>\n";
-			echo edit_post_link("Edit",'','',$addon_page_id) . "\n";
+			echo "<div class='pull-left'>";
+			echo edit_post_link("Edit <span class='glyphicon glyphicon-edit'></span>",'','',$addon_page_id) . "</div>\n";
 			echo $addon_page->post_content . "\n";
 			//echo "</div>\n";
 		}
@@ -190,15 +191,15 @@ wp_enqueue_script('shuffle');
 
 				<!-- blog posts -->
 				<?php
-					$args = 'post_type=post&numberposts=20&posts_per_page=20';
+					$args = 'post_type=post';
 					$pinterest_taxonomy = get_post_meta( get_the_id(), 'pinterest_taxonomy', true );
 					$pinterest_args = get_post_meta( get_the_id(), 'pinterest_args', true );
 					if ($pinterest_args != '') {
-						//$args .= '&'.$pinterest_args;
+						$args .= '&'.$pinterest_args;
 					}
 					if (is_array($pinterest_taxonomy)) {
 						$pinterest_taxonomies = implode(',',$pinterest_taxonomy);
-						//$args .= '&cat=' . $pinterest_taxonomies;
+						$args .= '&cat=' . $pinterest_taxonomies;
 					}
 					$pinterest_query = new WP_Query( $args );
 				
@@ -350,30 +351,30 @@ if (get_post_format() == 'video'){// || has_post_thumbnail() ){
 <script type='text/javascript'>
 	
 	jQuery(document).ready(function() {
-		var $pinterest_list = jQuery('#pinterest_list'),
+		/*var $pinterest_list = jQuery('#pinterest_list'),
 			$sizer = <?php echo $pinterest_columns_width; ?>;
 		$pinterest_list.shuffle({
 			itemSelector: '.pinterest_item',
 			sizer: $sizer,
 			gutterWidth: 10
-		});
+		});*/
 
-		/*var ewall = new freewall("#pinterest_list");
+		var ewall = new freewall("#pinterest_list");
 
 		ewall.reset({
 			selector: '.pinterest_item',
 			animate: true,
 			cellW: <?php echo $pinterest_columns_width; ?>,
-			cellH: 60,
+			cellH: 'auto',
 			gutterX: 10,
 			gutterY: 30,
-			fixSize: 1,
+			fixSize: null,
 			animate: true,
 			onResize: function() {
 				ewall.fitWidth();
 			},
 		});
-		jQuery(window).trigger("resize");*/
+		jQuery(window).trigger("resize");
 	});
 
 </script>
