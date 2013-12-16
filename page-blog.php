@@ -5,8 +5,8 @@ Template Name: Pinterest Blog
 ?>
 
 <?php get_header();
-wp_enqueue_script('freewall');
-//wp_enqueue_script('shuffle');
+//wp_enqueue_script('freewall');
+wp_enqueue_script('shuffle');
 ?>
 
 <div id="content" class="content-no-margin clearfix">
@@ -205,9 +205,9 @@ wp_enqueue_script('freewall');
 				
 					// setup the pinterest columns
 					$pinterest_columns_width = get_post_meta($post->ID, 'pinterest_columns_width' , true);
-					if ( ! is_numeric($pinterest_columns_width) || $pinterest_columns_width <= 0 ) { // sanity check to prevent div by 0
-						$pinterest_columns_width = 150;
-					}
+					//if ( ! is_numeric($pinterest_columns_width) || $pinterest_columns_width <= 0 ) { // sanity check to prevent div by 0
+						$pinterest_columns_width = 180;
+					//}
 					
 				?>
 				
@@ -215,96 +215,62 @@ wp_enqueue_script('freewall');
 
 					<?php while ( $pinterest_query->have_posts() ) : $pinterest_query->the_post(); ?>
 
-<?php 
-$col_span = 1;
-if (get_post_format() == 'video'){// || has_post_thumbnail() ){
-	$col_span = 2;
-}?>
+						<?php 
+						$col_span = 1;
+						if (get_post_format() == 'video' ){// || has_post_thumbnail() ){
+							$col_span = 3;
+						} elseif (has_post_thumbnail()) {
+							$col_span = 2;
+						}?>
 
-						<?php if (get_post_format() == 'video') : //display videos across 2 columns ?>
+						<div class="pinterest_item panel pinterest_<?php echo get_post_format(); ?>" style="width: <?php echo $pinterest_columns_width* $col_span+10*($col_span-1); ?>px; padding: 0; border: none;" data-groups='["post","<?php echo get_post_format(); ?>"]'>
+					
+							<?php if ( has_post_thumbnail()) : ?>
 
-								<div class="pinterest_item panel pinterest_video" style="width: <?php echo $pinterest_columns_width * $col_span; ?>px; height:auto; padding: 0; border: none;" data-groups='["post","video"]'>								
+								<?php $has_thumb = ' thumb'; ?>
+								
+								<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark">
+								
+									<?php echo get_the_post_thumbnail($the_post->ID,'thumbnail'); ?>
+
+								</a>
+
+				 			<?php else :
+
+				 				$has_thumb='';
+				 			
+				 			endif; ?>
+
+				 			<div class="pinterest_caption<?php echo $has_thumb; ?>">
 
 								<?php if ( get_the_title() != '' ) : ?>
+
+									<header class="entry-header media-heading">
 									
-									<div class="post-excerpt" style="padding: 10px;">
-
-										<header class="entry-header media-heading">
-										
-											<h3><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => 'Permalink to: ', 'after' => '' ) ); ?>" rel="bookmark"><?php the_title(); ?>
-										
-											<?php if (get_post_format() == 'link') : ?>
-										
-												<i class="glyphicon glyphicon-external-link"></i>
-										
-											<?php endif; ?>
-										
-											</a></h3>
-										
-										</header>
-
-									</div>
-
+										<h3><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => 'Permalink to: ', 'after' => '' ) ); ?>" rel="bookmark"><?php the_title(); ?>
+									
+										<?php if (get_post_format() == 'link') : ?>
+									
+											<i class="glyphicon glyphicon-external-link"></i>
+									
+										<?php endif; ?>
+									
+										</a></h3>
+									
+									</header>
+								
 								<?php endif; ?>
 
-						 		<?php echo get_the_post_thumbnail( $the_post->ID, array($pinterest_columns_width* $col_span,$pinterest_columns_width) ); ?> 
+								<section class="post_content clearfix">
 								
-								</div>
-
-						<?php else : //not a video, use single column width ?>
-
-							<div class="pinterest_item panel pinterest_<?php echo get_post_format(); ?>" style="width: <?php echo $pinterest_columns_width* $col_span; ?>px; padding: 0; border: none;" data-groups='["post","<?php echo get_post_format(); ?>"]'>
-						
-								<?php if ( has_post_thumbnail()) : ?>
-									
-									<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark">
-									
-										<?php /*$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id($the_post->ID), 'thumbnail'); ?>
-
-										<img src="<?php echo $thumbnail_src[0];?>" class="attachment-thumbnail wp-post-image" alt="<?php the_title_attribute(); ?>" style="width: 100%; height: auto; border-top-right-radius: 4px; border-top-left-radius: 4px;">
-										<?php */ ?>
-										<?php 
-										$has_thumb = ' thumb';
-										echo get_the_post_thumbnail($the_post->ID,'thumbnail'); ?>
-
-									</a>
-
-					 			<?php else :
-					 				$has_thumb='';
-					 			endif; ?>
-
-					 			<div class="pinterest_caption<?php echo $has_thumb; ?>">
-
-									<?php if ( get_the_title() != '' ) : ?>
-
-										<header class="entry-header media-heading">
-										
-											<h3><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => 'Permalink to: ', 'after' => '' ) ); ?>" rel="bookmark"><?php the_title(); ?>
-										
-											<?php if (get_post_format() == 'link') : ?>
-										
-												<i class="glyphicon glyphicon-external-link"></i>
-										
-											<?php endif; ?>
-										
-											</a></h3>
-										
-										</header>
-									
-									<?php endif; ?>
-
-									<section class="post_content clearfix">
-									
-										<?php the_excerpt(); ?>
-									
-									</section> <!-- post-content -->							
+									<?php the_excerpt(); ?>
 								
-								</div>
-
+								</section> <!-- post-content -->
+							
 							</div>
 
-						<?php endif; ?>
-					
+						</div>
+
 					<?php endwhile; ?>
 
 					<?php wp_reset_query(); ?>
@@ -351,13 +317,23 @@ if (get_post_format() == 'video'){// || has_post_thumbnail() ){
 <script type='text/javascript'>
 	
 	jQuery(document).ready(function() {
-		/*var $pinterest_list = jQuery('#pinterest_list'),
+		var $pinterest_list = jQuery('#pinterest_list'),
 			$sizer = <?php echo $pinterest_columns_width; ?>;
 		$pinterest_list.shuffle({
 			itemSelector: '.pinterest_item',
 			sizer: $sizer,
 			gutterWidth: 10
-		});*/
+		});
+
+		/*jQuery("#pinterest_list .pinterest_item").each(function(){
+			var cellW = <?php echo $pinterest_columns_width; ?>,
+				cellH = Math.ceil(panelW / 3),
+				panelW = jQuery(this).width(),
+				panelH = jQuery(this).height();
+			jQuery(this).width(Math.ceil(panelW / cellW) * cellW);
+			jQuery(this).height(Math.ceil(panelH / cellH) * cellH);
+
+		});
 
 		var ewall = new freewall("#pinterest_list");
 
@@ -365,16 +341,15 @@ if (get_post_format() == 'video'){// || has_post_thumbnail() ){
 			selector: '.pinterest_item',
 			animate: true,
 			cellW: <?php echo $pinterest_columns_width; ?>,
-			cellH: 'auto',
+			cellH: 'auto',//<?php echo ceil($pinterest_columns_width / 3); ?>,
 			gutterX: 10,
 			gutterY: 30,
-			fixSize: null,
 			animate: true,
 			onResize: function() {
 				ewall.fitWidth();
 			},
 		});
-		jQuery(window).trigger("resize");
+		jQuery(window).trigger("resize");*/
 	});
 
 </script>
