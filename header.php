@@ -93,7 +93,16 @@
 		<header class="navbar <?php echo $navheader_class; ?> clearfix" role="banner">
 			<div class="container">
 				<div class="row">
-					<div class="col-xs-8">
+
+					<?php if ( $wheniwasbad_options['search_bar'] ) : ?>
+
+						<div class="col-xs-8">
+
+					<?php else : ?>
+
+						<div class="col-xs-12">
+
+					<?php endif; ?>
 						
 						<?php if ( has_nav_menu('service_nav') ) : ?>
 							<div class="row">
@@ -133,17 +142,21 @@
 						    </div>
 						<?php endif; ?>
 					</div>
-					
-					<div class="col-sm-3 col-sm-pull-2 col-md-2 visible-sm">
-						<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
-							<div class="input-group input-group-sm">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-								</span>
-								<input name="s" id="s" type="text" class="form-control" autocomplete="off" placeholder="<?php _e('Search','gcwordpress'); ?>" >
-							</div>
-						</form>
-					</div>
+
+					<?php if ( $wheniwasbad_options['search_bar'] ) : ?>
+
+						<div class="col-sm-3 col-sm-pull-2 col-md-2">
+							<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
+								<div class="input-group input-group-sm">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+									</span>
+									<input name="s" id="s" type="text" class="form-control" autocomplete="off" placeholder="<?php _e('Search','gcwordpress'); ?>" >
+								</div>
+							</form>
+						</div>
+
+					<?php endif; ?>
 				</div>
 				<div id="main-nav-container">
 					<div class="navbar-header">
