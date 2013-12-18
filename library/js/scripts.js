@@ -37,27 +37,6 @@ func();}}}}
 // as the page loads, call these scripts
 jQuery(document).ready(function($) {
 	
-	$("#wp-calendar").each(function() {
-		$(this).addClass('table table-bordered');
-		return true;
-	});
-	
-	$("ol.commentlist a.comment-reply-link").each(function() {
-		$(this).addClass('btn btn-success btn-mini pull-right');
-		return true;
-	});
-	
-	$('#cancel-comment-reply-link').each(function() {
-		$(this).addClass('btn btn-danger btn-mini pull-right');
-		return true;
-	});
-	
-	$('article.post').hover(function(){
-		$('a.edit-post').show();
-	},function(){
-		$('a.edit-post').hide();
-	});
-	
 	// Input placeholder text fix for IE
 	$('[placeholder]').focus(function() {
 	  var input = $(this);
@@ -82,22 +61,24 @@ jQuery(document).ready(function($) {
 		}
 	  })
 	});
-	
-	$('#s').focus(function(){
-		if( $(window).width() < 940 ){
-			$(this).animate({ width: '200px' });
-		}
-	});
-	
-	$('#s').blur(function(){
-		if( $(window).width() < 940 ){
-			$(this).animate({ width: '100px' });
-		}
-	});
 			
 	$('.alert-message').alert();
 	
 	$('.dropdown-toggle').dropdown();
+
+	// parallax scrolling
+    $('section[data-type="background"]').each(function(){
+        var $bgobj = $(this); // assigning the object
+     
+        $(window).scroll(function() {
+            var yPos = -($(window).scrollTop() / $bgobj.data('speed')); 
+             
+            // Put together our final background position
+            var coords = '50% '+ yPos + 'px';
+            // Move the background
+            $bgobj.css({ backgroundPosition: coords });
+        }); 
+    });    
  
 }); /* end of as page load scripts */
 
