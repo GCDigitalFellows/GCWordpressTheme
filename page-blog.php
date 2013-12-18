@@ -169,7 +169,6 @@ wp_enqueue_script('shuffle');
 
 	<?php /* add the contents of additional pages */
 		$additional_pages = get_post_meta( get_the_id(), 'homepage_additional_pages_above', false );
-		print_r($additional_pages);
 		foreach ($additional_pages as $addon_page_id) {
 			$addon_page = get_post($addon_page_id);
 			//echo "<div class='container'>\n";
@@ -205,9 +204,9 @@ wp_enqueue_script('shuffle');
 				
 					// setup the pinterest columns
 					$pinterest_columns_width = get_post_meta($post->ID, 'pinterest_columns_width' , true);
-					//if ( ! is_numeric($pinterest_columns_width) || $pinterest_columns_width <= 0 ) { // sanity check to prevent div by 0
+					if ( ! is_numeric($pinterest_columns_width) || $pinterest_columns_width <= 0 ) { // sanity check to prevent div by 0
 						$pinterest_columns_width = 180;
-					//}
+					}
 					
 				?>
 				

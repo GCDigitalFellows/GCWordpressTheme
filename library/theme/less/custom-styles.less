@@ -16,6 +16,48 @@
   &-pink              { background-color: @pink; }
 }
 
+/* text */
+.text {
+	&-orange 		{ color: @orange; }
+	&-yellow		{ color: @yellow; }
+	&-green-light	{ color: @green-light; }
+	&-green			{ color: @green; }
+	&-green-dark	{ color: @green-dark; }
+	&-blue-light	{ color: @blue-light; }
+	&-blue			{ color: @blue; }
+	&-blue-dark		{ color: @blue-dark; }
+	&-pink			{ color: @pink; }
+}
+
+/* buttons */
+.btn-orange {
+  .button-variant(@btn-default-color; @orange; darken(@orange, 5%););
+}
+.btn-yellow {
+  .button-variant(@btn-default-color; @yellow; darken(@yellow, 5%););
+}
+.btn-green-light {
+  .button-variant(@btn-default-color; @green-light; darken(@green-light, 5%););
+}
+.btn-green {
+  .button-variant(@btn-default-color; @green; darken(@green, 5%););
+}
+.btn-green-dark {
+  .button-variant(@btn-default-color; @green-dark; darken(@green-dark, 5%););
+}
+.btn-blue-light {
+  .button-variant(@btn-default-color; @blue-light; darken(@blue-light, 5%););
+}
+.btn-blue {
+  .button-variant(@btn-default-color; @blue; darken(@blue, 5%););
+}
+.btn-blue-dark {
+  .button-variant(@btn-default-color; @blue-dark; darken(@blue-dark, 5%););
+}
+.btn-pink {
+  .button-variant(@btn-default-color; @pink; darken(@pink, 5%););
+}
+
 /* custom navbars */
 
 .navbar {
@@ -40,7 +82,7 @@ body.admin-bar .navbar-fixed-top {
 }
 
 .navbar-brand {
-	padding: 18px 15px 36px;
+	padding: 24px 15px 40px;
 	font-size: 32px;
 	line-height: 24px;
 	font-weight: 400;
@@ -305,24 +347,12 @@ ul#main-nav-menu.navbar-nav > .active > a {
 #content {
 	margin-top: 48px;
 }
-/*body.admin-bar #content {
-	margin-top: @adminbar-top-margin;
-}*/
-/*
-body.navbar-fixed-offset #content {
-	margin-top: (@navbar-height + @navbar-margin-bottom);
-}
-body.navbar-fixed-offset #content.content-no-margin {
+
+body.admin-bar.navbar-fixed-offset #content {
 	margin-top: @navbar-height;
 }
-body.navbar-no-offset #content.content-no-margin {
-	margin-top: (-@navbar-margin-bottom);
-}
-body.admin-bar.navbar-fixed-offset #content {
-	margin-top: @navbar-height;// + @navbar-margin-bottom);@adminbar-top-margin);
-}
-*/
-body.navbar-fixed-offset {
+
+body.admin-bar.navbar-fixed-offset {
 	padding-top: @navbar-height;
 
 	#sitewide-logo-div {
@@ -577,6 +607,7 @@ h6 {
 	vertical-align: middle;
 	padding: 0;
 	background-size: cover;
+	overflow: hidden; 
 }
 .circle-image-50 {
 	height: 50px;
@@ -660,47 +691,6 @@ h6 {
 		color: @gray-darker;
 	}
 }
-
-
-/* layout
-body.admin-bar.navbar-fixed-offset {
-	padding-top: 80px;
-}
-
-body.navbar-no-offset {
-	padding-top: 0;
-}
-
-#content {
-	padding: 40px 0 0;
-}
-
-#main article {
-	margin-bottom: 60px;
-	padding: 0 0 20px;
-	padding: 0 0 1rem;
-}
-
-#inner-footer {
-	font-size: @font-size-small;
-	line-height: @line-height-base * 0.8;
-}
-
-.size-auto, 
-.size-full,
-.size-large,
-.size-medium,
-.size-thumbnail {
-	max-width: 100%;
-	height: auto;
-}
-*/
-
-/* Link posts 
-article.format-link .icon-external-link {
-	font-size: @font-size-base;
-}
-*/
 
 /* Post Images */
 

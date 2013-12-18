@@ -11,7 +11,7 @@ function bootstrap_gallery($attr) {
 	wp_enqueue_style('blueimp-gallery-css');
 	wp_enqueue_script('blueimp-gallery-js');
 	wp_enqueue_script('blueimp-gallery-init-js');
-	wp_enqueue_script('freewall');
+	wp_enqueue_script('shuffle');
 
 	$post = get_post();
 
@@ -99,7 +99,7 @@ function bootstrap_gallery($attr) {
 		$img_sm = wp_get_attachment_image_src($id,'full',false);
 		
 		$img = '<img src="' . $img_sm[0] . '" alt="' . $attachment->post_title . '" />';		
-		$mosaic .= '<div class="gallery-brick" style="width: '.$col_width.'%;">';
+		$mosaic .= '<div class="gallery-brick" style="width: '.$col_width.'%;" data-groups='["image"]'>';
 		$mosaic .= '<a href="' . $img_sm[0] . '" data-gallery="#' . $gallery_id . '">';
 
 		$mosaic .= '<span style="background-image: url(\'http://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif\'");z-index: 1;position:absolute;width:100%;height:100%;top:0;left:0;"></span></a>';
@@ -123,6 +123,14 @@ function bootstrap_gallery($attr) {
 		jQuery('#$links_id.galleryitem').each(function(){
 			jQuery(this).width(jQuery('#$links_id').width()/$columns);
 		});
+
+		var $pinterest_list = jQuery('#$links_id'),
+			$sizer = (jQuery('#$links_id').width()/$columns)
+		$pinterest_list.shuffle({
+			itemSelector: '.gallery-brick',
+			sizer: $sizer,
+			gutterWidth: 0
+		});
 	});
  
     jQuery('.gallery-brick').hover(
@@ -133,23 +141,6 @@ function bootstrap_gallery($attr) {
             jQuery(this).find('.gallery-caption').slideUp(250); //.fadeOut(205)
         }
     );
-
-	jQuery(function() {
-		var ewall = new freewall("#$links_id");
-		ewall.reset({
-			selector: '.gallery-brick',
-			animate: true,
-			cellW: (jQuery('#$links_id').width()/$columns),
-			cellH: 'auto',
-			fixSize: 1,
-			gutterX: 0,
-			gutterY: 0,
-			onResize: function() {
-				ewall.fitWidth();
-			}
-		})
-		jQuery(window).trigger("resize");
-	});
 </script>
 EOD;
 	
