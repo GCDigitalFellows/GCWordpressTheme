@@ -99,7 +99,7 @@ function bootstrap_gallery($attr) {
 		$img_sm = wp_get_attachment_image_src($id,'full',false);
 		
 		$img = '<img src="' . $img_sm[0] . '" alt="' . $attachment->post_title . '" />';		
-		$mosaic .= '<div class="gallery-brick" style="width: '.$col_width.'%;" data-groups='["image"]'>';
+		$mosaic .= '<div class="gallery-brick" style="width: '.$col_width.'%;" data-groups="[\'image\']">';
 		$mosaic .= '<a href="' . $img_sm[0] . '" data-gallery="#' . $gallery_id . '">';
 
 		$mosaic .= '<span style="background-image: url(\'http://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif\'");z-index: 1;position:absolute;width:100%;height:100%;top:0;left:0;"></span></a>';
