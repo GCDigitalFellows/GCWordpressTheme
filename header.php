@@ -74,7 +74,7 @@
 			break;
 		case 'fixed-bottom':
 			$navheader_class .= 'navbar-fixed-bottom';
-			$body_style = 'navbar-no-offset';
+			$body_style = 'navbar-no-offset'; 
 			break;
 		case 'scroll':
 		default: 
@@ -84,11 +84,6 @@
 	?>
 		
 	<body <?php body_class($body_style); ?>>
-	<div id="sitewide-logo-div">
-		<a title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
-			<img id="sitewide-logo-img" src="http://www.gc.cuny.edu/shared/images/shared/CUNY-GC-logo.png" />
-		</a>
-	</div>
 				
 		<header class="navbar <?php echo $navheader_class; ?> clearfix" role="banner">
 			<div class="container">
@@ -96,7 +91,7 @@
 
 					<?php if ( $wheniwasbad_options['search_bar'] ) : ?>
 
-						<div class="col-xs-8">
+						<div class="col-sm-8 col-md-10">
 
 					<?php else : ?>
 
@@ -145,7 +140,7 @@
 
 					<?php if ( $wheniwasbad_options['search_bar'] ) : ?>
 
-						<div class="col-sm-3 col-sm-pull-2 col-md-2">
+						<div class="col-xs-6 col-sm-4 col-md-2">
 							<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
 								<div class="input-group input-group-sm">
 									<span class="input-group-btn">
@@ -159,7 +154,7 @@
 					<?php endif; ?>
 				</div>
 				<div id="main-nav-container">
-					<div class="navbar-header">
+					<div class="navbar-header pull-left">
 					    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
 					      <span class="sr-only">Toggle navigation</span>
 					      <span class="icon-bar"></span>
@@ -175,12 +170,17 @@
 				    		'theme_location' => 'main_nav', /* where in the theme it's assigned */
 				    		'depth' => 2, /* Bootstrap 3.0 doesn't support additional depths */
 				    		'container' => 'nav',
-							'container_class'   => 'collapse navbar-collapse navbar-main-collapse',
+							'container_class'   => 'collapse navbar-collapse navbar-main-collapse pull-left',
 				    		'container_id' => 'main-nav',
 				    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
 				    		'walker' => new wp_bootstrap_navwalker()
 					    ) );
 				    ?>
 				</div>					
-			</div> <!-- end container -->			
+			</div> <!-- end container -->
+			<div id="sitewide-logo-div">
+				<a title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
+					<img id="sitewide-logo-img" src="http://www.gc.cuny.edu/shared/images/shared/CUNY-GC-logo.png" />
+				</a>
+			</div>		
 		</header> <!-- end header -->

@@ -78,9 +78,30 @@ jQuery(document).ready(function($) {
             // Move the background
             $bgobj.css({ backgroundPosition: coords });
         }); 
-    });    
+    });
  
 }); /* end of as page load scripts */
+
+/* additional tools */
+
+jQuery(window).on('load resize', function() {
+	if ( jQuery('#wpadminbar').css('position') == 'absolute' && jQuery('body').hasClass('navbar-fixed-offset')) {
+		jQuery('.navbar').removeClass('navbar-fixed-top');
+		jQuery('.navbar').addClass('navbar-static-top');	
+		jQuery('.navbar').css('top', 0);
+		jQuery('#content').css('margin-top', 0);
+		jQuery('#sitewide-logo-div').css('top', 0);
+	}
+	if ( jQuery('#wpadminbar').css('position') == 'fixed' && jQuery('body').hasClass('navbar-fixed-offset') ) {
+		jQuery('.navbar').addClass('navbar-fixed-top');
+		jQuery('.navbar').removeClass('navbar-static-top');
+    	jQuery('.navbar').css('top', jQuery('#wpadminbar').height());
+    	jQuery('#content').css('margin-top', jQuery('.navbar').height());
+    	jQuery('#sitewide-logo-div').css('top', jQuery('#wpadminbar').height());
+	}
+});
+
+
 
 /*! A fix for the iOS orientationchange zoom bug.
  Script by @scottjehl, rebound by @wilto.
