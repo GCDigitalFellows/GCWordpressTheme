@@ -87,7 +87,7 @@
 }
 
 .navbar-brand {
-	padding: 24px 15px 40px;
+	padding: 8px 15px 8px;
 	font-size: 32px;
 	line-height: 24px;
 	font-weight: 400;
@@ -95,6 +95,27 @@
 	color: @navbar-default-brand-color;
 	text-shadow: none;
 }
+@media (min-width: @screen-sm) {
+	.navbar-brand {
+		padding: 24px 15px 40px;
+		font-size: 40px;
+	}
+}
+@media (min-width: @screen-md) {
+	.navbar-brand {
+		padding: 24px 15px 40px;
+		font-size: 48px;
+		line-height: 48px;
+	}
+}
+@media (min-width: @screen-lg) {
+	.navbar-brand {
+		padding: 30px 15px 50px;
+		font-size: 58px;
+		line-height: 58px;
+	}
+}
+
 
 /* custom navs */
 .nav {

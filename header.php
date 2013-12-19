@@ -20,34 +20,19 @@
 
 		<!-- Opera Speed Dial Favicon -->
 		  <link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/speeddial-160px.png" />
-			
-		<!-- Standard Favicon -->
-		  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-		<!-- For iPhone 4 Retina display: -->
-		  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/apple-touch-icon-114x114-precomposed.png">
+		<!-- For Apple displays: -->
+		<link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-iphone.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-ipad.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-iphone-retina.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-ipad-retina.png">
 
-		<!-- For iPad: -->
-		  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/apple-touch-icon-72x72-precomposed.png">
-
-		<!-- For iPhone: -->
-		  <link rel="apple-touch-icon-precomposed" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/apple-touch-icon-57x57-precomposed.png">
-
-
-
-
-		<!-- For iPhone 4 -->
-		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/h/apple-touch-icon.png">
-		<!-- For iPad 1-->
-		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/m/apple-touch-icon.png">
-		<!-- For iPhone 3G, iPod Touch and Android -->
-		<link rel="apple-touch-icon-precomposed" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/l/apple-touch-icon-precomposed.png">
 		<!-- For Nokia -->
-		<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/l/apple-touch-icon.png">
+		<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-iphone.png">
 		<!-- For everything else -->
 		
-		<?php $favicon_url = ($wheniwasbad_options['favicon_url']!='') ? $wheniwasbad_options['favicon_url'] : get_template_directory_uri() . '/favicon.ico'; ?>
-		<link rel="shortcut icon" href="<?php echo $favicon_url; ?>">
+		<?php $favicon_url = ($wheniwasbad_options['favicon_url']!='') ? $wheniwasbad_options['favicon_url'] : get_template_directory_uri() . '/library/images/icons/favicon.png'; ?>
+		<link rel="icon" type="image/png" href="<?php echo $favicon_url; ?>">
 		
 		<!-- or, set /favicon.ico for IE10 win -->
 		<meta name="msapplication-TileColor" content="#f01d4f">
