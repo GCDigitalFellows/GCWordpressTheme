@@ -124,11 +124,11 @@ function bootstrap_gallery($attr) {
 			jQuery(this).width(jQuery('#$links_id').width()/$columns);
 		});
 
-		var $pinterest_list = jQuery('#$links_id'),
-			$sizer = (jQuery('#$links_id').width()/$columns)
-		$pinterest_list.shuffle({
+		var pinterest_list = jQuery('#$links_id'),
+			sizer = (jQuery('#$links_id').width()/$columns)
+		pinterest_list.shuffle({
 			itemSelector: '.gallery-brick',
-			sizer: $sizer,
+			sizer: sizer,
 			gutterWidth: 0
 		});
 	});
@@ -144,10 +144,6 @@ function bootstrap_gallery($attr) {
 </script>
 EOD;
 	
-	if ($showtooltips) {
-		wp_enqueue_script('bs-tooltips'); // bootstrap hover tooltips
-	}
-
 	return $mosaic;
 }
 remove_shortcode('gallery','gallery_shortcode');
