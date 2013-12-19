@@ -413,7 +413,6 @@ if( !function_exists( "theme_js" ) ) {
 
 		// only enqueue the following scripts when needed, but register them here to centralize updates.
 		wp_register_script('jquery-ui','//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js', array('jquery'), '1.10.3', true);
-		wp_register_script( 'bs-tooltips',get_template_directory_uri() . '/library/js/bs-tooltips.js',array('jquery','bootstrap-js'),'3.0', true );
 		wp_register_script( 'blueimp-gallery-js', get_template_directory_uri() . '/library/Gallery/js/jquery.blueimp-gallery.min.js', array(jquery), '2.12.1', true );
 		wp_register_script( 'blueimp-gallery-init-js', get_template_directory_uri() . '/library/js/gallery_init.js', array('jquery','blueimp-gallery-js'), '2.12.1', true );
 		wp_register_script( 'shuffle', get_template_directory_uri() . '/library/js/jquery.shuffle.js', array('jquery'), '1.03', true);
