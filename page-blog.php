@@ -4,10 +4,7 @@ Template Name: Pinterest Blog
 */
 ?>
 
-<?php get_header();
-//wp_enqueue_script('freewall');
-wp_enqueue_script('shuffle');
-?>
+<?php get_header(); ?>
 
 <div id="content" class="content-no-margin clearfix">
 
@@ -315,41 +312,18 @@ wp_enqueue_script('shuffle');
 
 <script type='text/javascript'>
 	
-	jQuery(document).ready(function() {
-		var $pinterest_list = jQuery('#pinterest_list'),
-			$sizer = <?php echo $pinterest_columns_width; ?>;
-		$pinterest_list.shuffle({
-			itemSelector: '.pinterest_item',
-			sizer: $sizer,
-			gutterWidth: 10
-		});
-
-		/*jQuery("#pinterest_list .pinterest_item").each(function(){
-			var cellW = <?php echo $pinterest_columns_width; ?>,
-				cellH = Math.ceil(panelW / 3),
-				panelW = jQuery(this).width(),
-				panelH = jQuery(this).height();
-			jQuery(this).width(Math.ceil(panelW / cellW) * cellW);
-			jQuery(this).height(Math.ceil(panelH / cellH) * cellH);
-
-		});
-
-		var ewall = new freewall("#pinterest_list");
-
-		ewall.reset({
-			selector: '.pinterest_item',
-			animate: true,
-			cellW: <?php echo $pinterest_columns_width; ?>,
-			cellH: 'auto',//<?php echo ceil($pinterest_columns_width / 3); ?>,
-			gutterX: 10,
-			gutterY: 30,
-			animate: true,
-			onResize: function() {
-				ewall.fitWidth();
-			},
-		});
-		jQuery(window).trigger("resize");*/
-	});
+jQuery(window).load(function() {
+    var $pinterest_list = jQuery('.pinterest_list'),
+        $sizer = <?php echo $pinterest_columns_width; ?>;
+    
+    $pinterest_list.each(function() {
+        jQuery(this).shuffle({
+            itemSelector: '.pinterest_item',
+            sizer: $sizer,
+            gutterWidth: 20
+        });
+    });
+});
 
 </script>
 

@@ -1,5 +1,5 @@
 // as the page loads, call these scripts
-jQuery(document).ready(function($) {
+jQuery(window).on('load', function($) {
 
     // Input placeholder text fix for IE
     $('[placeholder]').focus(function() {
@@ -52,6 +52,13 @@ jQuery(document).ready(function($) {
         offset: jQuery('.navbar').height() + 50 //somewhat arbitrary, might need to be adjusted for various setups
     });
 
+    jQuery('#main-nav a').click(function() {
+    jQuery(document.body).animate({
+        scrollTop: (jQuery(jQuery(this).attr('href')).offset().top - jQuery('.navbar').height())
+    }, 500);
+    return false;
+});
+
 }); /* end of as page load scripts */
 
 /* additional tools */
@@ -74,12 +81,6 @@ jQuery(window).on('load resize', function() {
     }
 });
 
-jQuery('#main-nav a').click(function() {
-	jQuery(document.body).animate({
-	    scrollTop: (jQuery(jQuery(this).attr('href')).offset().top - jQuery('.navbar').height())
-	}, 500);
-	return false;
-});
 
 /*! A fix for the iOS orientationchange zoom bug.
  Script by @scottjehl, rebound by @wilto.
