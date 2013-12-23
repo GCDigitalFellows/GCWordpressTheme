@@ -204,10 +204,14 @@ Template Name: Pinterest Blog
 					if ( ! is_numeric($pinterest_columns_width) || $pinterest_columns_width <= 0 ) { // sanity check to prevent div by 0
 						$pinterest_columns_width = 180;
 					}
+					$pinterest_gutter = get_post_meta($post->ID, 'pinterest_gutter' , true);
+					if ( ! is_numeric($pinterest_gutter) || $pinterest_gutter <= 0 ) { // sanity check to prevent div by 0
+						$pinterest_gutter = 20;
+					}
 					
 				?>
 				
-				<div id="pinterest_list" style="width: 100%; ">
+				<div class="pinterest_list" style="width: 100%; ">
 
 					<?php while ( $pinterest_query->have_posts() ) : $pinterest_query->the_post(); ?>
 
@@ -320,7 +324,7 @@ jQuery(window).load(function() {
         jQuery(this).shuffle({
             itemSelector: '.pinterest_item',
             sizer: $sizer,
-            gutterWidth: 20
+            gutterWidth: <?php echo $pinterest_gutter; ?>
         });
     });
 });

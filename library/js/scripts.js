@@ -1,30 +1,5 @@
 // as the page loads, call these scripts
-jQuery(window).on('load', function($) {
-
-    // Input placeholder text fix for IE
-    $('[placeholder]').focus(function() {
-        var input = $(this);
-        if (input.val() == input.attr('placeholder')) {
-            input.val('');
-            input.removeClass('placeholder');
-        }
-    }).blur(function() {
-        var input = $(this);
-        if (input.val() == '' || input.val() == input.attr('placeholder')) {
-            input.addClass('placeholder');
-            input.val(input.attr('placeholder'));
-        }
-    }).blur();
-
-    // Prevent submission of empty form
-    $('[placeholder]').parents('form').submit(function() {
-        $(this).find('[placeholder]').each(function() {
-            var input = $(this);
-            if (input.val() == input.attr('placeholder')) {
-                input.val('');
-            }
-        })
-    });
+jQuery(window).load(function($) {
 
     $('.alert-message').alert();
 
@@ -46,24 +21,25 @@ jQuery(window).on('load', function($) {
         });
     });
 
-    //jQuery('#main-nav li:first').addClass('active');
+    /* menu scrollspy */
     jQuery('body').scrollspy({
         target: '#main-nav',
         offset: jQuery('.navbar').height() + 50 //somewhat arbitrary, might need to be adjusted for various setups
     });
 
     jQuery('#main-nav a').click(function() {
-    jQuery(document.body).animate({
-        scrollTop: (jQuery(jQuery(this).attr('href')).offset().top - jQuery('.navbar').height())
-    }, 500);
-    return false;
-});
+        jQuery(document.body).animate({
+            scrollTop: (jQuery(jQuery(this).attr('href')).offset().top - jQuery('.navbar').height())
+        }, 500);
+        return false;
 
-}); /* end of as page load scripts */
+    }); /* end of as page load scripts */
+
+});
 
 /* additional tools */
 
-jQuery(window).on('load resize', function() {
+jQuery(window).resize(function() {
     if (jQuery('#wpadminbar').css('position') == 'absolute' || jQuery('body').hasClass('navbar-no-offset')) {
         if (jQuery('body').hasClass('navbar-fixed-offset')) {
             jQuery('.navbar').removeClass('navbar-fixed-top');
@@ -79,7 +55,7 @@ jQuery(window).on('load resize', function() {
         jQuery('#content').css('margin-top', jQuery('.navbar').height());
         jQuery('#sitewide-logo-div').css('top', jQuery('#wpadminbar').height());
     }
-});
+}).resize();
 
 
 /*! A fix for the iOS orientationchange zoom bug.

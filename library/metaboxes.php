@@ -350,6 +350,12 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 				'desc'		=> 'Enter a custom WP_Query string to select/order posts (e.g., "post_type=post&orderby=rand"). Leave blank if you don\'t know what this means.',
 				'type'		=> 'text',
 			),
+			array(
+				'id'		=> 'pinterest_gutter', 
+				'name'		=> 'Gutter Size', 
+				'desc'		=> 'The amount of space between blocks (in px)',
+				'type'		=> 'text',
+			),
 		)
 	);
 
