@@ -6,7 +6,7 @@ Template Name: Pinterest Blog
 
 <?php get_header(); ?>
 
-<div id="content" class="content-no-margin clearfix">
+<div id="content" class="content-no-margin clearfix parallax-gc">
 
 <?php
 	global $wheniwasbad_options;
