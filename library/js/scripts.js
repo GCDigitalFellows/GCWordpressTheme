@@ -1,10 +1,6 @@
 // as the page loads, call these scripts
 jQuery(window).load(function($) {
 
-    $('.alert-message').alert();
-
-    $('.dropdown-toggle').dropdown();
-
     // parallax scrolling
     $('section[data-type="background"]').each(function() {
         var $bgobj = $(this); // assigning the object
