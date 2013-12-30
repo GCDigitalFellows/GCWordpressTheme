@@ -1,17 +1,17 @@
 // as the page loads, call these scripts
-jQuery(window).load(function($) {
+jQuery(window).load(function() {
 
     // parallax scrolling
-    $('section[data-type="background"]').each(function() {
-        var $bgobj = $(this); // assigning the object
+    jQuery('.parallax-gc').each(function() {
+        var bgobj = jQuery(this); // assigning the object
 
-        $(window).scroll(function() {
-            var yPos = -($(window).scrollTop() / $bgobj.data('speed'));
+        jQuery(window).scroll(function() {
+            var yPos = -(jQuery(window).scrollTop() / bgobj.data('bg-speed'));
 
             // Put together our final background position
             var coords = '50% ' + yPos + 'px';
             // Move the background
-            $bgobj.css({
+            bgobj.css({
                 backgroundPosition: coords
             });
         });
