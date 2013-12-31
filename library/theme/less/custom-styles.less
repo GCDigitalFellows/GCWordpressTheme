@@ -30,32 +30,34 @@
 }
 
 /* buttons */
-.btn-orange {
-  .button-variant(@btn-default-color; @orange; darken(@orange, 5%););
-}
-.btn-yellow {
-  .button-variant(@btn-default-color; @yellow; darken(@yellow, 5%););
-}
-.btn-green-light {
-  .button-variant(@btn-default-color; @green-light; darken(@green-light, 5%););
-}
-.btn-green {
-  .button-variant(@btn-default-color; @green; darken(@green, 5%););
-}
-.btn-green-dark {
-  .button-variant(@btn-default-color; @green-dark; darken(@green-dark, 5%););
-}
-.btn-blue-light {
-  .button-variant(@btn-default-color; @blue-light; darken(@blue-light, 5%););
-}
-.btn-blue {
-  .button-variant(@btn-default-color; @blue; darken(@blue, 5%););
-}
-.btn-blue-dark {
-  .button-variant(@btn-default-color; @blue-dark; darken(@blue-dark, 5%););
-}
-.btn-pink {
-  .button-variant(@btn-default-color; @pink; darken(@pink, 5%););
+.btn {
+	&-orange {
+	  .button-variant(@btn-default-color; @orange; darken(@orange, 5%););
+	}
+	&-yellow {
+	  .button-variant(@btn-default-color; @yellow; darken(@yellow, 5%););
+	}
+	&-green-light {
+	  .button-variant(@btn-default-color; @green-light; darken(@green-light, 5%););
+	}
+	&-green {
+	  .button-variant(@btn-default-color; @green; darken(@green, 5%););
+	}
+	&-green-dark {
+	  .button-variant(@btn-default-color; @green-dark; darken(@green-dark, 5%););
+	}
+	&-blue-light {
+	  .button-variant(@btn-default-color; @blue-light; darken(@blue-light, 5%););
+	}
+	&-blue {
+	  .button-variant(@btn-default-color; @blue; darken(@blue, 5%););
+	}
+	&-blue-dark {
+	  .button-variant(@btn-default-color; @blue-dark; darken(@blue-dark, 5%););
+	}
+	&-pink {
+	  .button-variant(@btn-default-color; @pink; darken(@pink, 5%););
+	}
 }
 
 /* custom navbars */
@@ -63,27 +65,28 @@
 .navbar {
 	margin-bottom: 0;
 	border:none;
-}
 
-.navbar-static-top {
-	position: relative;
-	#sitewide-logo-div {
-		position: absolute;
-		top: 0;
+	.nav {
+	 	float: right;
 	}
-}
 
-.navbar-fixed-top {
-	position: fixed;
-	#sitewide-logo-div {
+	&-static-top {
+		position: relative;
+		#sitewide-logo-div {
+			position: absolute;
+			top: 0;
+		}
+	}
+
+	&-fixed-top {
 		position: fixed;
+		#sitewide-logo-div {
+			position: fixed;
+		}
 	}
-}
-.navbar-fixed-bottom {
- 	bottom: 0;
-}
-.navbar .nav {
- 	float: right;
+	&-fixed-bottom {
+	 	bottom: 0;
+	}
 }
 
 /* sizing for different media queries */
@@ -115,11 +118,6 @@
 		font-size: 22px;
 	}
 
-	&.parallax-gc {
-		background: url(http://keithmiyake.info/digitalgc/wp-content/uploads/sites/10/2013/12/GC_exterior_blue.png) 50% 0 no-repeat fixed; 
-		background-size:cover;
-		box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
-	}
 	&.inset {
 		background: transparent; 
 		box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
@@ -127,6 +125,11 @@
 	&.white {
 		background-color: @white;
 	}
+}
+.parallax-gc {
+	background: url(http://commons.dev/gcdi/wp-content/uploads/sites/3/2013/12/GC_exterior_blue.png) 50% 0 repeat-y fixed; 
+	background-size:cover;
+	box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
 }
 @media (min-width: @screen-sm) {
 	.navbar-brand {
@@ -190,9 +193,10 @@
 
 #content {
 	padding-top: 40px;
-}
-#content.content-no-margin {
-	padding-top: 0;
+
+	&.content-no-margin {
+		padding-top: 0;
+	}
 }
 
 
@@ -206,20 +210,19 @@
 	margin: 0;
 }
 
-#main-nav-menu.nav {
-	font-family: @font-family-sans-serif-light;
-	font-size: ceil(@font-size-base * 1.07); // ~14px
-	letter-spacing: 0.1em;
-}
-
 #main-nav {
 	margin-top: 26px;
 	margin: 0;
 	padding: 0;
-}
 
-ul#main-nav-menu > li a {
-	padding: 0;
+	&-menu.nav {
+		font-family: @font-family-sans-serif-light;
+		font-size: ceil(@font-size-base * 1.07); // ~14px
+		letter-spacing: 0.1em;
+	}
+	&-menu > li a {
+		padding: 0;
+	}
 }
 
 #service-nav {
@@ -395,7 +398,7 @@ ul#main-nav-menu > li a {
 	max-height: 600px; //big enough to get rid of scrollbars
 }
 
-ul#main-nav-menu.navbar-nav > .active > a {
+#main-nav-menu.navbar-nav > .active > a {
 	background-color: @body-bg;
 	padding: 2px 10px;
 }
