@@ -71,7 +71,7 @@
 	<body <?php body_class($body_style); ?>>
 				
 		<header class="navbar <?php echo $navheader_class; ?> clearfix" role="banner">
-			<div class="container">
+			<div class="container" style="position: relative;">
 				<div class="row">
 
 					<?php if ( $wheniwasbad_options['search_bar'] ) : ?>
@@ -139,14 +139,6 @@
 					<?php endif; ?>
 				</div>
 				<div id="main-nav-container">
-					<div class="navbar-header pull-left">
-					    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-					      <span class="sr-only">Toggle navigation</span>
-					      <span class="icon-bar"></span>
-					      <span class="icon-bar"></span>
-					      <span class="icon-bar"></span>
-					    </button>
-					  </div>
 					<?php 
 					    wp_nav_menu( array(
 				    		'menu' => 'main_nav',
@@ -155,17 +147,26 @@
 				    		'theme_location' => 'main_nav', /* where in the theme it's assigned */
 				    		'depth' => 2, /* Bootstrap 3.0 doesn't support additional depths */
 				    		'container' => 'nav',
-							'container_class'   => 'collapse navbar-collapse navbar-main-collapse pull-left',
+							'container_class'   => 'collapse navbar-collapse navbar-main-collapse',
 				    		'container_id' => 'main-nav',
 				    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
 				    		'walker' => new wp_bootstrap_navwalker()
 					    ) );
 				    ?>
+				    <div class="navbar-header">
+					    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+					      <span class="sr-only">Toggle navigation</span>
+					      <span class="icon-bar bg-orange"></span>
+					      <span class="icon-bar bg-green"></span>
+					      <span class="icon-bar bg-blue-light"></span>
+					    </button>
+					  </div>
 				</div>					
-			</div> <!-- end container -->
-			<div id="sitewide-logo-div">
+				<div id="sitewide-logo-div">
 				<a title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
 					<img id="sitewide-logo-img" src="http://www.gc.cuny.edu/shared/images/shared/CUNY-GC-logo.png" />
 				</a>
 			</div>		
+			</div> <!-- end container -->
+			
 		</header> <!-- end header -->

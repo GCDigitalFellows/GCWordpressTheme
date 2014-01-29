@@ -29,6 +29,24 @@
 	&-pink			{ color: @pink; }
 }
 
+/* misc */
+.bg {
+  &-important         { background-color: @btn-danger-bg !important; }
+  &-warning           { background-color: @btn-warning-bg !important; }
+  &-success           { background-color: @btn-success-bg !important; }
+  &-info              { background-color: @btn-info-bg !important; }
+  &-inverse           { background-color: @gray-dark !important; }
+  &-orange            { background-color: @orange !important; }
+  &-yellow            { background-color: @yellow !important; }
+  &-green-light       { background-color: @green-light !important; }
+  &-green             { background-color: @green !important; }
+  &-green-dark        { background-color: @green-dark !important; }
+  &-blue-light        { background-color: @blue-light !important; }
+  &-blue              { background-color: @blue !important; }
+  &-blue-dark         { background-color: @blue-dark !important; }
+  &-pink              { background-color: @pink !important; }
+}
+
 /* buttons */
 .btn {
 	&-orange {
@@ -63,26 +81,21 @@
 /* custom navbars */
 
 .navbar {
+	top: 0;
 	margin-bottom: 0;
+	min-height: 60px;
 	border:none;
 
-	.nav {
-	 	float: right;
+	#sitewide-logo-div {
+		position: absolute;
 	}
 
 	&-static-top {
 		position: relative;
-		#sitewide-logo-div {
-			position: absolute;
-			top: 0;
-		}
 	}
 
 	&-fixed-top {
 		position: fixed;
-		#sitewide-logo-div {
-			position: fixed;
-		}
 	}
 	&-fixed-bottom {
 	 	bottom: 0;
@@ -92,9 +105,9 @@
 /* sizing for different media queries */
 .navbar-brand {
 	padding: 8px 80px 8px 15px;
-	font-size: 56px;
-	line-height: 56px;
-	font-weight: 400;
+	font-size: 58px;
+	line-height: 80px;
+	font-weight: 300;
 	font-family: @headings-font-family;
 	color: @navbar-default-brand-color;
 	text-shadow: none;
@@ -132,9 +145,13 @@
 	box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
 }
 @media (min-width: @screen-sm) {
+	.container {
+		width: @screen-sm - 30;
+	}
 	.navbar-brand {
 		padding: 10px 80px 32px 15px;
-		font-size: 40px;
+		font-size: 92px;
+		line-height: 84px;
 	}
 	.jumbotron {
 
@@ -157,21 +174,26 @@
 	}
 }
 @media (min-width: @screen-md) {
+	.container {
+		width: @screen-md - 30;
+	}
 	.navbar-brand {
-		padding: 16px 80px 36px 15px;
-		font-size: 48px;
-		line-height: 48px;
+		font-size: 100px;
+		line-height: 84px;
+		padding: 36px 0 42px;
 	}
 	.jumbotron h1 {
 		font-size: 90px;
 		line-height: 100px;
 	}
+	#main-nav-container {
+		right: 121px;
+		left: auto;
+	}
 }
 @media (min-width: @screen-lg) {
-	.navbar-brand {
-		padding: 28px 80px 42px 15px;
-		font-size: 58px;
-		line-height: 58px;
+	.container {
+		width: @screen-lg - 30;
 	}
 	.jumbotron {
 		h1 {
@@ -188,6 +210,14 @@
 		h4 {
 			font-size: 32px;
 		}
+	}
+
+	.navbar-brand {
+		font-size: 110px;
+	}
+
+	#main-nav-menu.nav {
+		font-size: 20px;
 	}
 }
 
@@ -235,10 +265,22 @@
 	}
 }
 
+#main-nav-container {
+	position: relative;
+}
+
+#main-nav-menu.nav {
+	font-size: 16px;
+}
+
 @media (min-width: @screen-sm) { 
 	#main-nav-container {
 		position: absolute;
 		bottom: -9px;
+	}
+
+	#main-nav-menu.nav {
+		font-size: 18px;
 	}
 
 	ul#main-nav-menu > li {
@@ -390,12 +432,21 @@
 }*/
 
 .navbar-header .navbar-toggle {
-	margin-top: 8px;
-	margin-bottom: 8px;
-
+	margin-top: 0;
+	padding: 6px 9px;
+	border-top: none;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	position: absolute;
+	left: 9px;
+	background-color: @white;
 }
 #main-nav.navbar-collapse {
 	max-height: 600px; //big enough to get rid of scrollbars
+	&.in {
+		padding: 10px 0 10px 10px;
+		margin: 0;
+	}
 }
 
 #main-nav-menu.navbar-nav > .active > a {
@@ -431,7 +482,7 @@
 }
 
 #sitewide-logo-div {
-	top: 0;
+	top: 8px;
 	right: 0;
 	z-index: 1200;
 	background-color: @navbar-default-bg;

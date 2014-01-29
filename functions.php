@@ -47,6 +47,9 @@ function clean_header() {
 }
 add_action('init', 'clean_header');
 
+// Hide admin bar
+add_filter('show_admin_bar', '__return_false');
+
 // Adding WP 3+ Functions & Theme Support
 function theme_setup() {
 	add_theme_support('post-thumbnails');      // wp thumbnails (sizes handled in functions.php)

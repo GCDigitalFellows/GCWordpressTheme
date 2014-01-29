@@ -24,8 +24,17 @@ jQuery(window).load(function() {
     });
 
     jQuery('#main-nav a').click(function() {
+
+        var thetop;
+
+        if (jQuery('#wpadminbar').css('position') == 'absolute' || jQuery('body').hasClass('navbar-no-offset')) {
+            thetop = (jQuery(jQuery(this).attr('href')).offset().top - jQuery('.navbar').height());
+        } else if (jQuery('#wpadminbar').css('position') == 'fixed' || jQuery('body').hasClass('navbar-fixed-offset')) {
+            thetop = (jQuery(jQuery(this).attr('href')).offset().top);
+        }
+
         jQuery(document.body).animate({
-            scrollTop: (jQuery(jQuery(this).attr('href')).offset().top - jQuery('.navbar').height())
+            scrollTop: thetop
         }, 500);
         return false;
 
@@ -40,16 +49,20 @@ jQuery(window).resize(function() {
         if (jQuery('body').hasClass('navbar-fixed-offset')) {
             jQuery('.navbar').removeClass('navbar-fixed-top');
             jQuery('.navbar').addClass('navbar-static-top');
-            jQuery('.navbar').css('top', 0);
+            //jQuery('.navbar').css('top', 0); /* got rid of these because we hid the admin bar universally */
         }
         jQuery('#content').css('margin-top', 0);
-        jQuery('#sitewide-logo-div').css('top', 0);
     } else if (jQuery('#wpadminbar').css('position') == 'fixed' || jQuery('body').hasClass('navbar-fixed-offset')) {
         jQuery('.navbar').addClass('navbar-fixed-top');
         jQuery('.navbar').removeClass('navbar-static-top');
-        jQuery('.navbar').css('top', jQuery('#wpadminbar').height());
+        //jQuery('.navbar').css('top', jQuery('#wpadminbar').height());
         jQuery('#content').css('margin-top', jQuery('.navbar').height());
-        jQuery('#sitewide-logo-div').css('top', jQuery('#wpadminbar').height());
+        //jQuery('#sitewide-logo-div').css('top', jQuery('#wpadminbar').height());
+    }
+    if (jQuery(document).width() < 768 && jQuery(document).width() > 400) {
+        jQuery('.navbar-brand').css('font-size', 58+(80-58)*(jQuery(document).width()-400)/(768-400));
+    } else {
+        jQuery('.navbar-brand').css('font-size','');
     }
 }).resize();
 
