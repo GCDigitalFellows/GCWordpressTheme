@@ -113,6 +113,24 @@
 	text-shadow: none;
 }
 
+#branding-logo {
+	display: none;
+}
+
+#sitewide-logo {
+	height: 108px;
+	width: 64px;
+	position: absolute;
+	top: 8px;
+	right: 0;
+	z-index: 1200;
+	background-color: @navbar-default-bg;
+	padding: 4px;
+	background: url('../images/GC_logo.svg') no-repeat; 
+	background-size: contain;
+	background-position: center;
+}
+
 .jumbotron {
 	font-size: 16px;
 	margin-bottom: 0;
@@ -140,7 +158,7 @@
 	}
 }
 .parallax-gc {
-	background: url(http://commons.dev/gcdi/wp-content/uploads/sites/3/2013/12/GC_exterior_blue.png) 50% 0 repeat-y fixed; 
+	background: url('../images/GC_exterior_blue.png') 50% 0 repeat-y fixed; 
 	background-size:cover;
 	box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
 }
@@ -149,10 +167,22 @@
 		width: @screen-sm - 30;
 	}
 	.navbar-brand {
-		padding: 10px 80px 32px 15px;
+		padding: 12px 15px 44px;
 		font-size: 92px;
-		line-height: 84px;
 	}
+
+	#branding-logo {
+		display: inline-block;
+		height: 66px;
+		width: 66px;
+		margin-top: -18px;
+	}
+
+	#sitewide-logo {
+		height: 156px;
+		width: 92px;
+	}
+
 	.jumbotron {
 
 		padding: 20px;
@@ -178,10 +208,20 @@
 		width: @screen-md - 30;
 	}
 	.navbar-brand {
-		font-size: 100px;
-		line-height: 84px;
-		padding: 36px 0 42px;
+		font-size: 108px;
+		padding: 40px 15px 58px;
 	}
+	#branding-logo {
+		height: 76px;
+		width: 76px;
+		margin-top: -24px;
+	}
+
+	#sitewide-logo {
+		height: 170px;
+		width: 100px;
+	}
+
 	.jumbotron h1 {
 		font-size: 90px;
 		line-height: 100px;
@@ -213,7 +253,18 @@
 	}
 
 	.navbar-brand {
-		font-size: 110px;
+		font-size: 120px;
+	}
+
+	#branding-logo {
+		height: 86px;
+		width: 86px;
+		margin-top: -26px;
+	}
+
+	#sitewide-logo {
+		height: 174px;
+		width: 102px;
 	}
 
 	#main-nav-menu.nav {
@@ -481,19 +532,6 @@
 		border: none;
 		.box-shadow(none);
 	}
-}
-
-#sitewide-logo-div {
-	top: 8px;
-	right: 0;
-	z-index: 1200;
-	background-color: @navbar-default-bg;
-	padding: 4px;
-}
-
-#sitewide-logo-img {
-	height: 120px;
-	width: auto;
 }
 
 /* custom pagination */
