@@ -38,33 +38,23 @@ jQuery(window).load(function() {
         }, 500);
         return false;
 
-    }); /* end of as page load scripts */
+    }); 
+
+    jQuery(window).resize(function() {
+        jQuery('#content').css('margin-top', jQuery('.navbar').height());
+
+        if (jQuery(document).width() < 768 && jQuery(document).width() > 400) {
+            jQuery('.navbar-brand').css('font-size', 58+(80-58)*(jQuery(document).width()-400)/(768-400));
+        } else {
+            jQuery('.navbar-brand').css('font-size','');
+        }
+    }).resize();
+
+    /* end of as page load scripts */
 
 });
 
 /* additional tools */
-
-jQuery(window).resize(function() {
-    if (jQuery('#wpadminbar').css('position') == 'absolute' || jQuery('body').hasClass('navbar-no-offset')) {
-        if (jQuery('body').hasClass('navbar-fixed-offset')) {
-            jQuery('.navbar').removeClass('navbar-fixed-top');
-            jQuery('.navbar').addClass('navbar-static-top');
-            //jQuery('.navbar').css('top', 0); /* got rid of these because we hid the admin bar universally */
-        }
-        jQuery('#content').css('margin-top', 0);
-    } else if (jQuery('#wpadminbar').css('position') == 'fixed' || jQuery('body').hasClass('navbar-fixed-offset')) {
-        jQuery('.navbar').addClass('navbar-fixed-top');
-        jQuery('.navbar').removeClass('navbar-static-top');
-        //jQuery('.navbar').css('top', jQuery('#wpadminbar').height());
-        jQuery('#content').css('margin-top', jQuery('.navbar').height());
-        //jQuery('#sitewide-logo-div').css('top', jQuery('#wpadminbar').height());
-    }
-    if (jQuery(document).width() < 768 && jQuery(document).width() > 400) {
-        jQuery('.navbar-brand').css('font-size', 58+(80-58)*(jQuery(document).width()-400)/(768-400));
-    } else {
-        jQuery('.navbar-brand').css('font-size','');
-    }
-}).resize();
 
 
 /*! A fix for the iOS orientationchange zoom bug.
