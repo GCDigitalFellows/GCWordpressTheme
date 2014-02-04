@@ -68,7 +68,7 @@
 	}
 	?>
 		
-	<body <?php body_class($body_style); ?>>
+	<body <?php body_class($body_style); ?> data-navpos="<?php echo $nav_position; ?>">
 				
 		<header class="navbar <?php echo $navheader_class; ?> clearfix" role="banner">
 

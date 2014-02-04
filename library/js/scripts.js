@@ -41,12 +41,30 @@ jQuery(window).load(function() {
     }); 
 
     jQuery(window).resize(function() {
-        jQuery('#content').css('margin-top', jQuery('.navbar').height());
-
-        if (jQuery(document).width() < 768 && jQuery(document).width() > 400) {
+        if (jQuery(document).width() < 768) {
             jQuery('.navbar-brand').css('font-size', 58+(80-58)*(jQuery(document).width()-400)/(768-400));
+            jQuery('body').addClass('navbar-no-offset');
+            jQuery('header.navbar').addClass('navbar-static-top');
+            jQuery('header.navbar').removeClass('navbar-fixed-bottom');
+            jQuery('header.navbar').removeClass('navbar-fixed-top');
+            jQuery('body').removeClass('navbar-fixed-offset');
+            jQuery('#content').css('margin-top', 0);
         } else {
             jQuery('.navbar-brand').css('font-size','');
+            console.log(jQuery('body').data('navpos'));
+            if (jQuery('body').data('navpos') == 'fixed') {
+                jQuery('#content').css('margin-top', jQuery('.navbar').height());
+                if (jQuery('body').hasClass('navbar-no-offset')) {
+                    jQuery('body').removeClass('navbar-no-offset');
+                    jQuery('body').addClass('navbar-fixed-offset');
+                    jQuery('header.navbar').removeClass('navbar-static-top');
+                    jQuery('header.navbar').addClass('navbar-fixed-top');
+                }
+            }
+            if (jQuery('body').data('navpos') == 'fixed-bottom' && jQuery('navbar').hasClass('navbar-static-top')) {
+                jQuery('header.navbar').removeClass('navbar-static-top');
+                jQuery('header.navbar').addClass('navbar-fixed-bottom');
+            }
         }
     }).resize();
 
