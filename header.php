@@ -188,7 +188,7 @@
 				</div>
 
 				<a title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
-					<span id="sitewide-logo"></span>
+					<img id="sitewide-logo" src="<?php echo get_template_directory_uri() . '/library/theme/images/GC_logo.svg'; ?>" alt="The CUNY Graduate Center" />
 				</a>
 		
 			</div> <!-- end container -->
