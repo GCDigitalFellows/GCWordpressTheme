@@ -27,6 +27,13 @@
 	&-blue			{ color: @blue; }
 	&-blue-dark		{ color: @blue-dark; }
 	&-pink			{ color: @pink; }
+	&-white         { color: @white; }
+	&-black         { color: @black; }
+	&-gray          { color: @gray; }
+	&-gray-dark     { color: @gray-dark; }
+	&-gray-darker   { color: @gray-darker; }
+	&-gray-light    { color: @gray-light; }
+	&-gray-lighter  { color: @gray-lighter; }
 }
 
 /* misc */
@@ -133,6 +140,7 @@
 
 	h1 {
 		font-size: 46px;
+		margin-bottom: 40px;
 	}
 	h2 {
 		font-size: 22px;
@@ -156,6 +164,10 @@
 	background: url('../images/GC_exterior_blue.png') 50% 0 repeat-y fixed; 
 	background-size:cover;
 	box-shadow: inset 0px 11px 8px -10px #CCC, inset 0px -11px 8px -10px #CCC;
+}
+
+.panel {
+	padding: 8px;
 }
 @media (min-width: @screen-sm) {
 	.container {
@@ -1045,8 +1057,8 @@ color: @gray-darker;
 	}
 }
 
-article.post.row {
-	margin-bottom: 24px;
+.row {
+	margin-bottom: 30px;
 }
 
 .archive #main .post h3{
