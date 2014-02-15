@@ -686,23 +686,23 @@ h6 {
 
 @circle-primary-color:              #fff;
 @circle-primary-bg:                 @brand-primary;
-@circle-primary-border:             darken(@circle-primary-bg, 5%);
+@circle-primary-border:             darken(@circle-primary-bg, 15%);
 
 @circle-success-color:              #fff;
 @circle-success-bg:                 @brand-success;
-@circle-success-border:             darken(@circle-success-bg, 5%);
+@circle-success-border:             darken(@circle-success-bg, 15%);
 
 @circle-warning-color:              #fff;
 @circle-warning-bg:                 @brand-warning;
-@circle-warning-border:             darken(@circle-warning-bg, 5%);
+@circle-warning-border:             darken(@circle-warning-bg, 15%);
 
 @circle-danger-color:               #fff;
 @circle-danger-bg:                  @brand-danger;
-@circle-danger-border:              darken(@circle-danger-bg, 5%);
+@circle-danger-border:              darken(@circle-danger-bg, 15%);
 
 @circle-info-color:                 #fff;
 @circle-info-bg:                    @brand-info;
-@circle-info-border:                darken(@circle-info-bg, 5%);
+@circle-info-border:                darken(@circle-info-bg, 15%);
 
 .circle-icon {
 	display: block;
@@ -741,35 +741,67 @@ h6 {
 	padding: 80px 0;
 	.circle-icon;
 }
-.circle-icon-default {
-	color: @circle-default-color;
-	background-color: @circle-default-bg;
-	border-color: @circle-default-border;
+
+.circle-icon-text {
+	font-size: 20px;
 }
-.circle-icon-primary {
-	color: @circle-primary-color;
-	background-color: @circle-primary-bg;
-	border-color: @circle-primary-border;
+
+.circle-icon-left {
+	margin-left: 0;
 }
-.circle-icon-success {
-	color: @circle-success-color;
-	background-color: @circle-success-bg;
-	border-color: @circle-success-border;
+
+.circle-icon-right {
+	margin-right: 0;
 }
-.circle-icon-warning {
-	color: @circle-warning-color;
-	background-color: @circle-warning-bg;
-	border-color: @circle-warning-border;
-}
-.circle-icon-danger {
-	color: @circle-danger-color;
-	background-color: @circle-danger-bg;
-	border-color: @circle-danger-border;
-}
-.circle-icon-info {
-	color: @circle-info-color;
-	background-color: @circle-info-bg;
-	border-color: @circle-info-border;
+
+.circle-icon {
+	color: @white;
+	&-default {
+		.shade(@gray-light,15%);
+	}
+	&-primary {
+		.shade(@brand-primary,15%);
+	}
+	&-success {
+		.shade(@brand-success,15%);
+	}
+	&-warning {
+		.shade(@brand-warning,15%);
+	}
+	&-danger {
+		.shade(@brand-danger,15%);
+	}
+	&-info {
+		.shade(@brand-info,15%);
+	}
+	&-yellow {
+		.shade(@yellow,15%);
+	}
+
+	&-orange {
+		.shade(@orange,15%);
+	}
+	&-green-light {
+		.shade(@green-light,15%);
+	}
+	&-green {
+		.shade(@green,15%);
+	}
+	&-green-dark {
+		.shade(@green-dark,15%);
+	}
+	&-blue-light {
+		.shade(@blue-light,15%);
+	}
+	&-blue {
+		.shade(@blue,15%);
+	}
+	&-blue-dark {
+		.shade(@blue-dark,15%);
+	}
+	&-pink {
+		.shade(@pink,15%);
+	}
 }
 
 .circle-image {

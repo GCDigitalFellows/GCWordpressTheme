@@ -2,19 +2,42 @@
 // Custom Mixins
 // --------------------------------------------------
 
-// Use with colour name: .rgba(black, 0.5) or hex value: .rgba(#FF2400, 0.5)
-.rgba(@colour, @alpha)
+// Use with color name: .rgba(black, 0.5) or hex value: .rgba(#FF2400, 0.5)
+.rgba(@color, @alpha)
 {
-	@alphaColour: hsla(hue(@colour), saturation(@colour), lightness(@colour), @alpha);
-	@ieAlphaColour: argb(@alphaColour);
+	@alphaColor: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+	@ieAlphaColor: argb(@alphaColor);
 	
-	background-color: @colour; // Fallback for older browsers
-	background-color: @alphaColour; 
+	background-color: @color; // Fallback for older browsers
+	background-color: @alphaColor; 
 	
 	// IE hacks
 	zoom: 1; // hasLayout
 	background-color: transparent\9;
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=@{ieAlphaColour}, endColorstr=@{ieAlphaColour})"; // IE 8+
-        filter:  ~"progid:DXImageTransform.Microsoft.gradient(startColorstr=@{ieAlphaColour}, endColorstr=@{ieAlphaColour})";  // IE 6 & 7 
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=@{ieAlphaColor}, endColorstr=@{ieAlphaColor})"; // IE 8+
+        filter:  ~"progid:DXImageTransform.Microsoft.gradient(startColorstr=@{ieAlphaColor}, endColorstr=@{ieAlphaColor})";  // IE 6 & 7 
 	
+}
+
+//sets background color and border color as % darker than background, with additional option for bg alpha
+.shade(@color,@bg)
+{
+	background-color: @color;
+	border-color: darken(@color,@bg);
+}
+.shade(@color,@bg,@alpha)
+{
+	@alphaColor: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+	@ieAlphaColor: argb(@alphaColor);
+	
+	background-color: @color; // Fallback for older browsers
+	background-color: @alphaColor; 
+	
+	// IE hacks
+	zoom: 1; // hasLayout
+	background-color: transparent\9;
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=@{ieAlphaColor}, endColorstr=@{ieAlphaColor})"; // IE 8+
+        filter:  ~"progid:DXImageTransform.Microsoft.gradient(startColorstr=@{ieAlphaColor}, endColorstr=@{ieAlphaColor})";  // IE 6 & 7 
+	
+	border-color: darken(@color,@bg);
 }
