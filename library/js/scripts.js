@@ -27,10 +27,10 @@ jQuery(window).load(function() {
 
         var thetop;
 
-        if (jQuery('#wpadminbar').css('position') == 'absolute' || jQuery('body').hasClass('navbar-no-offset')) {
-            thetop = (jQuery(jQuery(this).attr('href')).offset().top - jQuery('.navbar').height());
-        } else if (jQuery('#wpadminbar').css('position') == 'fixed' || jQuery('body').hasClass('navbar-fixed-offset')) {
-            thetop = (jQuery(jQuery(this).attr('href')).offset().top);
+	if (jQuery('body').hasClass('navbar-no-offset')) {
+	    thetop = jQuery(jQuery(this).attr('href')).offset().top;
+	} else if (jQuery('body').hasClass('navbar-fixed-offset')) {
+	    thetop = jQuery(jQuery(this).attr('href')).offset().top - jQuery('.navbar').height();
         }
 
         jQuery(document.body).animate({
@@ -51,7 +51,6 @@ jQuery(window).load(function() {
             jQuery('#content').css('margin-top', 0);
         } else {
             jQuery('.navbar-brand').css('font-size','');
-            console.log(jQuery('body').data('navpos'));
             if (jQuery('body').data('navpos') == 'fixed') {
                 jQuery('#content').css('margin-top', jQuery('.navbar').height());
                 if (jQuery('body').hasClass('navbar-no-offset')) {
