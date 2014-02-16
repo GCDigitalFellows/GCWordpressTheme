@@ -23,6 +23,10 @@ jQuery(window).load(function() {
         offset: jQuery('.navbar').height() + 50 //somewhat arbitrary, might need to be adjusted for various setups
     });
 
+    /* set up waypoints */
+
+
+
     jQuery('#main-nav a').click(function() {
 
         var thetop;
