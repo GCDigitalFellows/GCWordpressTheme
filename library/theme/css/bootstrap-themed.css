@@ -5642,52 +5642,52 @@ button.close {
 }
 /* text */
 .text-orange {
-  color: #ec9c1d;
+  color: #ec9c1d !important;
 }
 .text-yellow {
-  color: #ffc30b;
+  color: #ffc30b !important;
 }
 .text-green-light {
-  color: #bfd02a;
+  color: #bfd02a !important;
 }
 .text-green {
-  color: #8dc63f;
+  color: #8dc63f !important;
 }
 .text-green-dark {
-  color: #00a94f;
+  color: #00a94f !important;
 }
 .text-blue-light {
-  color: #0093d0;
+  color: #0093d0 !important;
 }
 .text-blue {
-  color: #005daa;
+  color: #005daa !important;
 }
 .text-blue-dark {
-  color: #003366;
+  color: #003366 !important;
 }
 .text-pink {
-  color: #ff5e99;
+  color: #ff5e99 !important;
 }
 .text-white {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .text-black {
-  color: #000000;
+  color: #000000 !important;
 }
 .text-gray {
-  color: #666666;
+  color: #666666 !important;
 }
 .text-gray-dark {
-  color: #444444;
+  color: #444444 !important;
 }
 .text-gray-darker {
-  color: #222222;
+  color: #222222 !important;
 }
 .text-gray-light {
-  color: #989898;
+  color: #989898 !important;
 }
 .text-gray-lighter {
-  color: #d8d9da;
+  color: #d8d9da !important;
 }
 /* misc */
 .bg-important {
@@ -6152,7 +6152,6 @@ fieldset[disabled] .btn-pink.active {
 .jumbotron h1,
 .jumbotron .h1 {
   font-size: 46px;
-  margin-bottom: 40px;
 }
 .jumbotron h2,
 .jumbotron .h2 {
