@@ -23,14 +23,19 @@ jQuery(window).load(function() {
         offset: jQuery('.navbar').height() + 50 //somewhat arbitrary, might need to be adjusted for various setups
     });
 
+    jQuery('body').scrollspy({
+        target: '.nav-projects',
+        offset: jQuery('.navbar').height() + 50 //somewhat arbitrary, might need to be adjusted for various setups
+    });
+
     jQuery('#main-nav a').click(function() {
 
         var thetop;
 
-	if (jQuery('body').hasClass('navbar-no-offset')) {
-	    thetop = jQuery(jQuery(this).attr('href')).offset().top;
-	} else if (jQuery('body').hasClass('navbar-fixed-offset')) {
-	    thetop = jQuery(jQuery(this).attr('href')).offset().top - jQuery('.navbar').height();
+        if (jQuery('body').hasClass('navbar-no-offset')) {
+            thetop = jQuery(jQuery(this).attr('href')).offset().top;
+        } else if (jQuery('body').hasClass('navbar-fixed-offset')) {
+            thetop = jQuery(jQuery(this).attr('href')).offset().top - jQuery('.navbar').height();
         }
 
         jQuery(document.body).animate({
