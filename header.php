@@ -1,7 +1,7 @@
 <?php
 /*
 * header.php
-* adds header information to every page
+* inserts document header information and the page header/top nav to every page
 */
 ?>
 <?php global $wheniwasbad_options; ?>
@@ -13,7 +13,7 @@
 <!--[if gt IE 8]><!--> <html <?php language_attributes(); ?> class="no-js"><!--<![endif]-->
 	<head>
 		<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title><?php bloginfo('name'); ?><?php is_front_page() ? bloginfo('description') : wp_title('|'); ?></title>
 
 		<!-- icons & favicons -->
@@ -30,28 +30,28 @@
 		<!-- For Nokia -->
 		<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-iphone.png">
 		<!-- For everything else -->
-		
+
 		<?php $favicon_url = ($wheniwasbad_options['favicon_url']!='') ? $wheniwasbad_options['favicon_url'] : get_template_directory_uri() . '/library/images/icons/favicon.png'; ?>
 		<link rel="icon" type="image/png" href="<?php echo $favicon_url; ?>">
-		
+
 		<!-- or, set /favicon.ico for IE10 win -->
 		<meta name="msapplication-TileColor" content="#f01d4f">
-		
+
   		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 
 		<!-- WordPress head functions -->
 		<?php wp_head(); ?>
 	</head>
-	
+
 	<?php
 	$nav_position = $wheniwasbad_options['nav_position'];
 	$navbar_style = $wheniwasbad_options['nav_style'];
-	
+
 	$navheader_class='navbar-default ';
-	
+
 	if ($navbar_style_inverted)
 		$navheader_class = 'navbar-inverted ';
-	
+
 	switch ($nav_position) {
 		case 'fixed':
 			$navheader_class .= 'navbar-fixed-top';
@@ -59,110 +59,98 @@
 			break;
 		case 'fixed-bottom':
 			$navheader_class .= 'navbar-fixed-bottom';
-			$body_style = 'navbar-no-offset'; 
+			$body_style = 'navbar-no-offset';
 			break;
 		case 'scroll':
-		default: 
+		default:
 			$navheader_class .= 'navbar-static-top';
 			$body_style = 'navbar-no-offset';
 	}
 	?>
-		
+
 	<body <?php body_class($body_style); ?> data-navpos="<?php echo $nav_position; ?>">
-				
+
 		<header class="navbar <?php echo $navheader_class; ?> clearfix" role="banner">
 
 			<div class="container" style="position: relative;">
 
-				<div class="row">
+			<?php if ( $wheniwasbad_options['search_bar'] ) : ?>
 
-				<?php if ( $wheniwasbad_options['search_bar'] ) : ?>
+				<div class="col-sm-8 col-md-10">
 
-					<div class="col-sm-8 col-md-10">
+			<?php else : ?>
 
-				<?php else : ?>
+				<div class="col-xs-12">
 
-					<div class="col-xs-12">
+			<?php endif; ?>
+
+				<?php if ( has_nav_menu('service_nav') ) : ?>
+
+					<div class="navbar-header pull-left">
+
+					    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-service-collapse">
+					      <span class="sr-only">Toggle navigation</span>
+					      <span class="icon-bar"></span>
+					      <span class="icon-bar"></span>
+					      <span class="icon-bar"></span>
+					    </button>
+
+					</div>
+
+					<?php wp_nav_menu( array(
+				    		'menu' => 'service_nav',
+				    		'menu_class' => 'nav navbar-nav',
+				    		'menu_id' => 'service-nav-menu',
+				    		'theme_location' => 'service_nav', /* where in the theme it's assigned */
+				    		'depth' => 1,
+				    		'container' => 'nav',
+							'container_class'   => 'collapse navbar-collapse navbar-service-collapse pull-left',
+				    		'container_id' => 'service-nav',
+				    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
+				    		'walker' => new wp_bootstrap_navwalker()
+					)); ?>
 
 				<?php endif; ?>
-						
-					<?php if ( has_nav_menu('service_nav') ) : ?>
-					
-						<div class="row">
-					
-							<div class="navbar-header pull-left">
-					
-							    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-service-collapse">
-							      <span class="sr-only">Toggle navigation</span>
-							      <span class="icon-bar"></span>
-							      <span class="icon-bar"></span>
-							      <span class="icon-bar"></span>
-							    </button>
-					
-							</div>
-					
-							<?php wp_nav_menu( array(
-						    		'menu' => 'service_nav',
-						    		'menu_class' => 'nav navbar-nav',
-						    		'menu_id' => 'service-nav-menu',
-						    		'theme_location' => 'service_nav', /* where in the theme it's assigned */
-						    		'depth' => 1,
-						    		'container' => 'nav',
-									'container_class'   => 'collapse navbar-collapse navbar-service-collapse pull-left',
-						    		'container_id' => 'service-nav',
-						    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
-						    		'walker' => new wp_bootstrap_navwalker()
-							)); ?>
 
-					    </div>
+				<?php if ( ($wheniwasbad_options['branding_logo'] && $wheniwasbad_options['branding_logo']['url']) || ($wheniwasbad_options['site_name'] && get_bloginfo()) ): ?>
 
-					<?php endif; ?>
+				    <a class="navbar-brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>">
 
-					<?php if ( ($wheniwasbad_options['branding_logo'] && $wheniwasbad_options['branding_logo']['url']) || ($wheniwasbad_options['site_name'] && get_bloginfo()) ): ?>
-					    
-					    <div class="row">
-						
-						    <a class="navbar-brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>">
-						
-								<?php if($wheniwasbad_options['branding_logo'] && $wheniwasbad_options['branding_logo']['url']) : ?>
-						
-									<img id="branding-logo" src="<?php echo $wheniwasbad_options['branding_logo']['url']; ?>" alt="<?php echo get_bloginfo('description'); ?>" />
-						
-								<?php else: ?>
-						
-									<img id="branding-logo" src="<?php echo get_template_directory_uri() . '/library/theme/images/gcdi_logo.svg'; ?>" alt="<?php echo get_bloginfo('description'); ?>" />
-						
-								<?php endif; ?>
+						<?php if($wheniwasbad_options['branding_logo'] && $wheniwasbad_options['branding_logo']['url']) : ?>
 
-								<?php if($wheniwasbad_options['site_name'] && get_bloginfo()) bloginfo('name'); ?>
+							<img id="branding-logo" src="<?php echo $wheniwasbad_options['branding_logo']['url']; ?>" alt="<?php echo get_bloginfo('description'); ?>" />
 
-							</a>
+						<?php else: ?>
 
-					    </div>
+							<img id="branding-logo" src="<?php echo get_template_directory_uri() . '/library/theme/images/gcdi_logo.svg'; ?>" alt="<?php echo get_bloginfo('description'); ?>" />
 
-					<?php endif; ?>
+						<?php endif; ?>
 
-					</div>
+						<?php if($wheniwasbad_options['site_name'] && get_bloginfo()) bloginfo('name'); ?>
 
-				<?php if ( $wheniwasbad_options['search_bar'] ) : ?>
-
-					<div class="col-xs-6 col-sm-4 col-md-2">
-						<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
-							<div class="input-group input-group-sm">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-								</span>
-								<input name="s" id="s" type="text" class="form-control" autocomplete="off" placeholder="<?php _e('Search','gcwordpress'); ?>" >
-							</div>
-						</form>
-					</div>
+					</a>
 
 				<?php endif; ?>
 
 				</div>
 
+			<?php if ( $wheniwasbad_options['search_bar'] ) : ?>
+
+				<div class="col-xs-6 col-sm-4 col-md-2">
+					<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
+						<div class="input-group input-group-sm">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+							</span>
+							<input name="s" id="s" type="text" class="form-control" autocomplete="off" placeholder="<?php _e('Search','gcwordpress'); ?>" >
+						</div>
+					</form>
+				</div>
+
+			<?php endif; ?>
+
 				<div id="main-nav-container">
-				
+
 					<?php wp_nav_menu( array(
 				    		'menu' => 'main_nav',
 				    		'menu_class' => 'nav navbar-nav',
@@ -190,7 +178,7 @@
 				<a title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
 					<img id="sitewide-logo" src="<?php echo get_template_directory_uri() . '/library/theme/images/GC_logo.svg'; ?>" alt="The CUNY Graduate Center" />
 				</a>
-		
+
 			</div> <!-- end container -->
-			
+
 		</header> <!-- end header -->
