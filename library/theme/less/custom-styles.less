@@ -111,7 +111,8 @@
 
 /* sizing for different media queries */
 .navbar-brand {
-	padding: 8px 80px 8px 15px;
+	padding: 8px 64px 8px 0;
+	margin-left: -15px;
 	font-size: 58px;
 	line-height: 80px;
 	font-weight: 300;
@@ -136,19 +137,19 @@
 .jumbotron {
 	font-size: 16px;
 	margin-bottom: 0;
-	padding: 10px;
+	padding: 20px 10px;
 
-	h1 {
+	h1,.h1 {
 		font-size: 46px;
 		margin-bottom: 40px;
 	}
-	h2 {
-		font-size: 22px;
+	h2,.h2 {
+		font-size: 28px;
 	}
-	h3 {
-		font-size: 18px;
+	h3,.h3 {
+		font-size: 24px;
 	}
-	h4 {
+	h4,.h4,h5,.h5 {
 		font-size: 22px;
 	}
 
@@ -168,7 +169,13 @@
 
 .panel {
 	padding: 8px;
+	&-transparent {
+		background: transparent;
+		border: none;
+		box-shadow: none;
+	}
 }
+
 @media (min-width: @screen-sm) {
 	.container {
 		width: @screen-sm - 30;
@@ -192,21 +199,21 @@
 
 	.jumbotron {
 
-		padding: 20px;
+		padding: 30px 20px;
 
 		font-size: 20px;
-	
-		h1 {
+
+		h1,.h1 {
 			font-size: 80px;
 		}
-		h2 {
+		h2,.h2 {
 			font-size: 42px;
 		}
-		h3 {
+		h3,.h3 {
 			font-size: 36px;
 		}
-		h4 {
-			font-size: 28px;
+		h4,.h4,h5,.h5 {
+			font-size: 26px;
 		}
 	}
 }
@@ -229,9 +236,12 @@
 		width: 100px;
 	}
 
-	.jumbotron h1 {
-		font-size: 90px;
-		line-height: 100px;
+	.jumbotron {
+		padding: 40px 20px;
+		h1, .h1 {
+			font-size: 90px;
+			line-height: 100px;
+		}
 	}
 	#main-nav-container {
 		right: 121px;
@@ -243,18 +253,18 @@
 		width: @screen-lg - 30;
 	}
 	.jumbotron {
-		h1 {
+		h1,.h1 {
 			font-size: 106px;
 			/*line-height: 120px;*/
 		}
-		h2 {
+		h2,.h2 {
 			font-size: 64px;
 		}
-		h3 {
+		h3,.h3 {
 			font-size: 42px;
 		}
 
-		h4 {
+		h4,.h4,h5,.h5 {
 			font-size: 32px;
 		}
 	}
@@ -325,6 +335,12 @@
 #main-nav-menu.nav > li > a {
 	font-size: 16px;
 	line-height: 16px;
+}
+
+.nav-projects {
+	.active {
+		.show();
+	}
 }
 
 @media (min-width: @screen-sm) { 
@@ -655,22 +671,20 @@ cite   { font-size: 85%; }
   line-height: @line-height-base * 1.2;
 }
 
-h1 {
+h1,.h1 {
 	text-transform: uppercase;
 	font-family: @font-family-sans-serif-bold;
 }
-h2,
-h3 {
+h2,.h2,
+h3,.h3 {
 	letter-spacing: 0.1em;
 }
 
-h5 {
-	color: @gray-light;
-	font-weight: bold;
-	font-family: @font-family-serif;
+h5,.h5 {
+	font-family: @font-family-sans-serif-light;
 }
 
-h6 {
+h6,.h6 {
 	font-style: italic;
 	font-family: @font-family-sans-serif-bold;
 }
@@ -678,84 +692,60 @@ h6 {
 // Circle Icons
 // -------------------------
 
-@circle-font-weight:                normal;
-
-@circle-default-color:              @white;
-@circle-default-bg:                 @gray-light;
-@circle-default-border:             @gray;
-
-@circle-primary-color:              #fff;
-@circle-primary-bg:                 @brand-primary;
-@circle-primary-border:             darken(@circle-primary-bg, 15%);
-
-@circle-success-color:              #fff;
-@circle-success-bg:                 @brand-success;
-@circle-success-border:             darken(@circle-success-bg, 15%);
-
-@circle-warning-color:              #fff;
-@circle-warning-bg:                 @brand-warning;
-@circle-warning-border:             darken(@circle-warning-bg, 15%);
-
-@circle-danger-color:               #fff;
-@circle-danger-bg:                  @brand-danger;
-@circle-danger-border:              darken(@circle-danger-bg, 15%);
-
-@circle-info-color:                 #fff;
-@circle-info-bg:                    @brand-info;
-@circle-info-border:                darken(@circle-info-bg, 15%);
-
 .circle-icon {
-	display: block;
+	display: inline-block;
 	border-radius: 50%;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
 	vertical-align: middle;
-	broder: 1px solid @circle-default-border;
-}
-.circle-icon-50 {
-	height: 50px;
-	width: 50px;
-	font-size: 24px;
-	padding: 13px 0;
-	.circle-icon;
-}
-.circle-icon-100 {
-	height: 100px;
-	width: 100px;
-	font-size: 32px;
-	padding: 34px 0;
-	.circle-icon;
-}
-.circle-icon-150 {
-	height: 150px;
-	width: 150px;
-	font-size: 32px;
-	padding: 59px 0;
-	.circle-icon;
-}
-.circle-icon-200 {
-	height: 200px;
-	width: 200px;
-	font-size: 40px;
-	padding: 80px 0;
-	.circle-icon;
-}
-
-.circle-icon-text {
-	font-size: 20px;
-}
-
-.circle-icon-left {
-	margin-left: 0;
-}
-
-.circle-icon-right {
-	margin-right: 0;
+	color: @white;
 }
 
 .circle-icon {
-	color: @white;
+ 	&-50 {
+		height: 50px;
+		width: 50px;
+		font-size: 24px;
+		padding: 13px 0;
+		.circle-icon;
+	}
+	&-100 {
+		height: 100px;
+		width: 100px;
+		font-size: 32px;
+		padding: 34px 0;
+		.circle-icon;
+	}
+	&-150 {
+		height: 150px;
+		width: 150px;
+		font-size: 32px;
+		padding: 59px 0;
+		.circle-icon;
+	}
+	&-200 {
+		height: 200px;
+		width: 200px;
+		font-size: 40px;
+		padding: 80px 0;
+		.circle-icon;
+	}
+
+	&-text {
+		font-size: 24px;
+		font-family: @font-family-sans-serif-light;
+		line-height: normal;
+	}
+
+	&-left {
+		margin-left: 0;
+	}
+
+	&-right {
+		margin-right: 0;
+	}
+
 	&-default {
 		.shade(@gray-light,15%);
 	}
@@ -805,7 +795,7 @@ h6 {
 }
 
 .circle-image {
-	display: block;
+	display: inline-block;
 	border-radius: 50%;
 	text-align: center;
 	margin-left: auto;
@@ -813,27 +803,30 @@ h6 {
 	vertical-align: middle;
 	padding: 0;
 	background-size: cover;
-	overflow: hidden; 
+	overflow: hidden;
 }
-.circle-image-50 {
-	height: 50px;
-	width: 50px;
-	.circle-image;
-}
-.circle-image-100 {
-	height: 100px;
-	width: 100px;
-	.circle-image;
-}
-.circle-image-150 {
-	height: 150px;
-	width: 150px;
-	.circle-image;
-}
-.circle-image-200 {
-	height: 200px;
-	width: 200px;
-	.circle-image;
+
+.circle-image {
+	&-50 {
+		height: 50px;
+		width: 50px;
+		.circle-image;
+	}
+	&-100 {
+		height: 100px;
+		width: 100px;
+		.circle-image;
+	}
+	&-150 {
+		height: 150px;
+		width: 150px;
+		.circle-image;
+	}
+	&-200 {
+		height: 200px;
+		width: 200px;
+		.circle-image;
+	}
 }
 
 /* custom classes */
@@ -847,12 +840,12 @@ h6 {
 	}
 
 	/*p, .label {*/
-		font-size:  @font-size-small;
-		font-family: @font-family-sans-serif;
-		font-weight: @headings-font-weight;
-		line-height: @line-height-base;
-		margin-bottom: 5px;
-	
+	font-size:  @font-size-small;
+	font-family: @font-family-sans-serif;
+	font-weight: @headings-font-weight;
+	line-height: @line-height-base;
+	margin-bottom: 5px;
+
 
 	.label {
 		line-height: @line-height-base*1.5;
@@ -1084,7 +1077,7 @@ color: @gray-darker;
 
 .entry-header
 {
-	h1,h2,h3,h4 {
+	h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5 {
 		margin-top: 0;
 	}
 }
@@ -1093,7 +1086,7 @@ color: @gray-darker;
 	margin-bottom: 30px;
 }
 
-.archive #main .post h3{
+.archive #main .post h3,.archive #main .post .h3{
 	line-height: 24px;
 	margin-bottom: 10px;
 }
@@ -1291,5 +1284,53 @@ blockquote.pull-left{
 @media only screen and (min-width: 768px) {
 	.carousel-caption p{
 		display: block;
+	}
+}
+
+// only xs screens
+@media (max-width : @screen-sm) {
+	.center-block-xs {
+		.center-block();
+	}
+	.left-block-xs {
+		display: block;
+		margin-left: 0;
+		margin-right: auto;
+	}
+}
+
+// only sm screens
+@media (min-width : @screen-sm) and (max-width : @screen-md) {
+	.center-block-sm {
+		.center-block();
+	}
+	.left-block-sm {
+		display: block;
+		margin-left: 0;
+		margin-right: auto;
+	}
+}
+
+// only md screens
+@media (min-width : @screen-md) and (max-width : @screen-lg) {
+	.center-block-md {
+		.center-block();
+	}
+	.left-block-md {
+		display: block;
+		margin-left: 0;
+		margin-right: auto;
+	}
+}
+
+// only lg screens (redundant with below, but for consistency with above)
+@media (min-width : @screen-lg) {
+	.center-block-lg {
+		.center-block();
+	}
+	.left-block-lg {
+		display: block;
+		margin-left: 0;
+		margin-right: auto;
 	}
 }
