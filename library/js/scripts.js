@@ -20,7 +20,7 @@ jQuery(window).load(function() {
     /* menu scrollspy */
     jQuery('body').scrollspy({
         target: '#main-nav',
-        offset: jQuery('.navbar').height() + 50 //somewhat arbitrary, might need to be adjusted for various setups
+        offset: 0//jQuery('.navbar').height()//somewhat arbitrary, might need to be adjusted for various setups
     });
 
     /* Setup waypoints for triggering events on scroll */
