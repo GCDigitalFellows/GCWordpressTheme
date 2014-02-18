@@ -1,0 +1,20 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "."
+		}
+	],
+    "settings":
+    {
+        "less2css":
+        {
+            "autoCompile": true,
+            "minify": false,
+            "main_file": "bootstrap-themed.less",
+            "outputDir": "auto",
+            "lessBaseDir": "library/theme/less"
+        }
+    }
+}
