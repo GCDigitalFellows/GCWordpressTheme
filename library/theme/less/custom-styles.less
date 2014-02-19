@@ -1,3 +1,9 @@
+a {
+	&:hover {
+		text-decoration: none;
+	}
+}
+
 
 /* custom labels and badges */
 .label,
@@ -18,22 +24,41 @@
 
 /* text */
 .text {
-	&-orange 		{ color: @orange!important; }
-	&-yellow		{ color: @yellow!important; }
-	&-green-light	{ color: @green-light!important; }
-	&-green			{ color: @green!important; }
-	&-green-dark	{ color: @green-dark!important; }
-	&-blue-light	{ color: @blue-light!important; }
-	&-blue			{ color: @blue!important; }
-	&-blue-dark		{ color: @blue-dark!important; }
-	&-pink			{ color: @pink!important; }
-	&-white         { color: @white!important; }
-	&-black         { color: @black!important; }
-	&-gray          { color: @gray!important; }
-	&-gray-dark     { color: @gray-dark!important; }
-	&-gray-darker   { color: @gray-darker!important; }
-	&-gray-light    { color: @gray-light!important; }
-	&-gray-lighter  { color: @gray-lighter!important; }
+	&-orange 		{ .text-and-links(@orange,15%);	}
+	&-yellow		{ .text-and-links(@yellow,15%); }
+	&-green-light	{ .text-and-links(@green-light,15%); }
+	&-green			{ .text-and-links(@green,15%); }
+	&-green-dark	{ .text-and-links(@green-dark,15%); }
+	&-blue-light	{ .text-and-links(@blue-light,15%); }
+	&-blue			{ .text-and-links(@blue,15%); }
+	&-blue-dark		{ .text-and-links(@blue-dark,15%); }
+	&-pink			{ .text-and-links(@pink,15%); }
+	&-white         { .text-and-links(@white,15%); }
+	&-black         { .text-and-links(@black,15%); }
+	&-gray          { .text-and-links(@gray,15%); }
+	&-gray-dark     { .text-and-links(@gray-dark,15%); }
+	&-gray-darker   { .text-and-links(@gray-darker,15%); }
+	&-gray-light    { .text-and-links(@gray-light,15%); }
+	&-gray-lighter  { .text-and-links(@gray-lighter,15%); }
+}
+
+a .text,a.text {
+	&-orange 		{ .text-and-links-a(@orange,15%);	}
+	&-yellow		{ .text-and-links-a(@yellow,15%); }
+	&-green-light	{ .text-and-links-a(@green-light,15%); }
+	&-green			{ .text-and-links-a(@green,15%); }
+	&-green-dark	{ .text-and-links-a(@green-dark,15%); }
+	&-blue-light	{ .text-and-links-a(@blue-light,15%); }
+	&-blue			{ .text-and-links-a(@blue,15%); }
+	&-blue-dark		{ .text-and-links-a(@blue-dark,15%); }
+	&-pink			{ .text-and-links-a(@pink,15%); }
+	&-white         { .text-and-links-a(@white,15%); }
+	&-black         { .text-and-links-a(@black,15%); }
+	&-gray          { .text-and-links-a(@gray,15%); }
+	&-gray-dark     { .text-and-links-a(@gray-dark,15%); }
+	&-gray-darker   { .text-and-links-a(@gray-darker,15%); }
+	&-gray-light    { .text-and-links-a(@gray-light,15%); }
+	&-gray-lighter  { .text-and-links-a(@gray-lighter,15%); }
 }
 
 /* misc */
@@ -1132,8 +1157,83 @@ blockquote.pull-left{
 }
 
 .side-text {
-	padding-right: 18px;
-	text-align: right;
+	text-align: left;
+}
+
+.content-panel {
+	padding-top: 0;
+}
+
+.sidebar {
+	padding-top: 20px;
+	height: 100%; 
+	padding-bottom:5000px; 
+	margin-bottom: -5000px;
+	border-right-style: solid;
+	border-right-width: 1px;
+}
+
+.sidebar-orange {
+	border-right-color: @orange;
+}
+.sidebar-yellow {
+	border-right-color: @yellow;
+}
+.sidebar-green-light {
+	border-right-color: @green-light;
+}
+.sidebar-green {
+	border-right-color: @green;
+}
+.sidebar-green-dark {
+	border-right-color: @green-dark;
+}
+.sidebar-blue-light {
+	border-right-color: @blue-light;
+}
+.sidebar-blue {
+	border-right-color: @blue;
+}
+.sidebar-blue-dark {
+	border-right-color: @blue-dark;
+}
+.sidebar-pink {
+	border-right-color: @pink;
+}
+
+.bottombar {
+	height: 100%; 
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	margin-bottom: 30px;
+}
+
+.bottombar-orange {
+	border-bottom-color: @orange;
+}
+.bottombar-yellow {
+	border-bottom-color: @yellow;
+}
+.bottombar-green-light {
+	border-bottom-color: @green-light;
+}
+.bottombar-green {
+	border-bottom-color: @green;
+}
+.bottombar-green-dark {
+	border-bottom-color: @green-dark;
+}
+.bottombar-blue-light {
+	border-bottom-color: @blue-light;
+}
+.bottombar-blue {
+	border-bottom-color: @blue;
+}
+.bottombar-blue-dark {
+	border-bottom-color: @blue-dark;
+}
+.bottombar-pink {
+	border-bottom-color: @pink;
 }
 
 .jumbotron {
@@ -1208,7 +1308,12 @@ blockquote.pull-left{
 	}
 
 	.side-text {
+		text-align: right;
 		padding-right: 16px;
+	}
+
+	.sidebar,.content-panel {
+		padding-top: 30px;
 	}
 
 	.jumbotron {
@@ -1261,8 +1366,12 @@ blockquote.pull-left{
 		margin-bottom: 30px;
 	}
 
+	.sidebar,.content-panel {
+		padding-top: 40px;
+	}
+
 	.jumbotron {
-		padding: 40px 20px;
+		padding: 80px 20px;
 
 		font-size: 22px;
 
@@ -1343,6 +1452,15 @@ blockquote.pull-left{
 		padding-top: 0;
 	}
 }
+.left-block {
+	display: block;
+	margin-left: 0;
+	margin-right: auto;
+}
+.iblock {
+	display: inline-block;
+	padding-left: 10px;
+}
 
 @media only screen and (min-width: 768px) {
 	.carousel-caption p{
@@ -1359,6 +1477,11 @@ blockquote.pull-left{
 		display: block;
 		margin-left: 0;
 		margin-right: auto;
+	}
+
+	.iblock-xs {
+		display: inline-block;
+		padding-left: 10px;
 	}
 
 	.circle-icon-100 {
@@ -1379,6 +1502,10 @@ blockquote.pull-left{
 		margin-left: 0;
 		margin-right: auto;
 	}
+	.iblock-sm {
+		display: inline-block;
+		padding-left: 10px;
+	}
 }
 
 // only md screens
@@ -1391,6 +1518,13 @@ blockquote.pull-left{
 		margin-left: 0;
 		margin-right: auto;
 	}
+	.iblock {
+		padding-left: 15px;
+	}
+	.iblock-md {
+		display: inline-block;
+		padding-left: 15px;
+	}
 }
 
 // only lg screens (redundant with below, but for consistency with above)
@@ -1402,5 +1536,12 @@ blockquote.pull-left{
 		display: block;
 		margin-left: 0;
 		margin-right: auto;
+	}
+	.iblock {
+		padding-left: 15px;
+	}
+	.iblock-lg {
+		display: inline-block;
+		padding-left: 15px;
 	}
 }

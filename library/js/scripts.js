@@ -36,52 +36,56 @@ jQuery(window).load(function() {
 
     jQuery('.waypoint-trigger').each(function() {
         jQuery(this).waypoint(function(direction) {
-            var $id = jQuery(this).attr('id');
-            var $nextElement = jQuery('.waypoint-sticky-' + jQuery(this).waypoint('next').attr('id'));
-            if (direction === 'up') {
-                var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight(true));
-                if (scrollH < 0) {
-                    jQuery('.waypoint-sticky-' + $id).css('width',jQuery('.waypoint-sticky-' + $id).parent().width());
-                    //jQuery('.waypoint-sticky-' + $id).wrap("<div class='waypoint-wrapper'></div>");
-                    //jQuery('.waypoint-wrapper').css('height',jQuery('.waypoint-sticky-' + $id).height());
-                    //jQuery('.waypoint-wrapper').css('width',jQuery('.waypoint-sticky-' + $id).width());
-                    jQuery('.waypoint-sticky-' + $id).addClass('waypoint-stuck');
-                    jQuery('.waypoint-sticky-' + $id + '.waypoint-stuck').css('top',jQuery('.navbar').height() + 40); //a little margin to breathe
-                    if ($nextElement.hasClass('waypoint-stuck')) {
-                        $nextElement.removeClass('waypoint-stuck');
+            if (jQuery(document).width() > 768) {
+                var $id = jQuery(this).attr('id');
+                var $nextElement = jQuery('.waypoint-sticky-' + jQuery(this).waypoint('next').attr('id'));
+                if (direction === 'up') {
+                    var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight(true));
+                    if (scrollH < 0) {
+                        jQuery('.waypoint-sticky-' + $id).css('width',jQuery('.waypoint-sticky-' + $id).parent().width());
+                        //jQuery('.waypoint-sticky-' + $id).wrap("<div class='waypoint-wrapper'></div>");
+                        //jQuery('.waypoint-wrapper').css('height',jQuery('.waypoint-sticky-' + $id).height());
+                        //jQuery('.waypoint-wrapper').css('width',jQuery('.waypoint-sticky-' + $id).width());
+                        jQuery('.waypoint-sticky-' + $id).addClass('waypoint-stuck');
+                        jQuery('.waypoint-sticky-' + $id + '.waypoint-stuck').css('top',jQuery('.navbar').height() + 40); //a little margin to breathe
+                        if ($nextElement.hasClass('waypoint-stuck')) {
+                            $nextElement.removeClass('waypoint-stuck');
+                        }
                     }
+                } else {
+                    jQuery('.waypoint-sticky-' + $id).removeClass('waypoint-stuck');
+                    //jQuery('.waypoint-sticky-' + $id).unwrap();
                 }
-            } else {
-                jQuery('.waypoint-sticky-' + $id).removeClass('waypoint-stuck');
-                //jQuery('.waypoint-sticky-' + $id).unwrap();
             }
         },{
           offset: 'bottom-in-view'
         });
 
         jQuery(this).waypoint(function(direction) {
-            var $id = jQuery(this).attr('id');
-            var $prevElement = jQuery('.waypoint-sticky-' + jQuery(this).waypoint('prev').attr('id'));
-            var $nextElement = jQuery('.waypoint-sticky-' + jQuery(this).waypoint('next').attr('id'));
-            if (direction === 'up') {
-                jQuery('.waypoint-sticky-' + $id).removeClass('waypoint-stuck');
-                //jQuery('.waypoint-sticky-' + $id).unwrap();
-            } else {
-                var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight(true));
-                if (scrollH < 0) {
-                    jQuery('.waypoint-sticky-' + $id).css('width',jQuery('.waypoint-sticky-' + $id).parent().width());
-                    //jQuery('.waypoint-sticky-' + $id).wrap("<div class='waypoint-wrapper'></div>");
-                    //jQuery('.waypoint-wrapper').css('height',jQuery('.waypoint-sticky-' + $id).height());
-                    //jQuery('.waypoint-wrapper').css('width',jQuery('.waypoint-sticky-' + $id).width());
-                    jQuery('.waypoint-sticky-' + $id).addClass('waypoint-stuck');
-                    jQuery('.waypoint-sticky-' + $id + '.waypoint-stuck').css('top',jQuery('.navbar').height() + 40);
-                    if ($prevElement.hasClass('waypoint-stuck')) {
-                        $prevElement.removeClass('waypoint-stuck');
+            if (jQuery(document).width() > 768) {
+                var $id = jQuery(this).attr('id');
+                var $prevElement = jQuery('.waypoint-sticky-' + jQuery(this).waypoint('prev').attr('id'));
+                var $nextElement = jQuery('.waypoint-sticky-' + jQuery(this).waypoint('next').attr('id'));
+                if (direction === 'up') {
+                    jQuery('.waypoint-sticky-' + $id).removeClass('waypoint-stuck');
+                    //jQuery('.waypoint-sticky-' + $id).unwrap();
+                } else {
+                    var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight(true));
+                    if (scrollH < 0) {
+                        jQuery('.waypoint-sticky-' + $id).css('width',jQuery('.waypoint-sticky-' + $id).parent().width());
+                        //jQuery('.waypoint-sticky-' + $id).wrap("<div class='waypoint-wrapper'></div>");
+                        //jQuery('.waypoint-wrapper').css('height',jQuery('.waypoint-sticky-' + $id).height());
+                        //jQuery('.waypoint-wrapper').css('width',jQuery('.waypoint-sticky-' + $id).width());
+                        jQuery('.waypoint-sticky-' + $id).addClass('waypoint-stuck');
+                        jQuery('.waypoint-sticky-' + $id + '.waypoint-stuck').css('top',jQuery('.navbar').height() + 40);
+                        if ($prevElement.hasClass('waypoint-stuck')) {
+                            $prevElement.removeClass('waypoint-stuck');
+                        }
                     }
                 }
             }
         },{
-          offset: jQuery('.navbar').height()
+          offset: jQuery('.navbar').height() - 40 // account for padding
         });
     })
 
@@ -89,24 +93,26 @@ jQuery(window).load(function() {
 
     jQuery('.waypoint-scrollspy').each(function() {
         jQuery(this).waypoint(function(direction) {
-            var $currentElement = jQuery(this);
-            var $id = $currentElement.attr('id');
-            var $prevElement = jQuery('.waypoint-scrollspy-' + $currentElement.waypoint('prev').attr('id'));
-            var $nextElement = jQuery('.waypoint-scrollspy-' + $currentElement.waypoint('next').attr('id'));
-            if (direction === 'up') {
-                if ($prevElement.hasClass('hidden')) {
-                    jQuery('.waypoint-scrollspy-' + $id).addClass('hidden');
-                    jQuery('.waypoint-scrollspy-' + $id).removeClass('visible');
-                    
-                    $prevElement.removeClass('hidden');
-                    $prevElement.addClass('visible');
-                }
-            } else {
-                jQuery('.waypoint-scrollspy-' + $id).removeClass('hidden');
-                jQuery('.waypoint-scrollspy-' + $id).addClass('visible');
-                if ($prevElement.hasClass('visible')) {
-                    $prevElement.removeClass('visible');
-                    $prevElement.addClass('hidden');
+            if (jQuery(document).width() > 768) {
+                var $currentElement = jQuery(this);
+                var $id = $currentElement.attr('id');
+                var $prevElement = jQuery('.waypoint-scrollspy-' + $currentElement.waypoint('prev').attr('id'));
+                var $nextElement = jQuery('.waypoint-scrollspy-' + $currentElement.waypoint('next').attr('id'));
+                if (direction === 'up') {
+                    if ($prevElement.hasClass('hidden')) {
+                        jQuery('.waypoint-scrollspy-' + $id).addClass('hidden');
+                        jQuery('.waypoint-scrollspy-' + $id).removeClass('visible');
+                        
+                        $prevElement.removeClass('hidden');
+                        $prevElement.addClass('visible');
+                    }
+                } else {
+                    jQuery('.waypoint-scrollspy-' + $id).removeClass('hidden');
+                    jQuery('.waypoint-scrollspy-' + $id).addClass('visible');
+                    if ($prevElement.hasClass('visible')) {
+                        $prevElement.removeClass('visible');
+                        $prevElement.addClass('hidden');
+                    }
                 }
             }
         },{
@@ -117,7 +123,9 @@ jQuery(window).load(function() {
 
     /* animate scrolling within a page on menu clicks */
 
-    jQuery('#main-nav a').click(function() {
+    jQuery('a[href^="#"]').on('click',function (e) {
+
+        e.preventDefault();
 
         var thetop;
 
@@ -130,7 +138,6 @@ jQuery(window).load(function() {
         jQuery(document.body).animate({
             scrollTop: thetop
         }, 500);
-        return false;
 
     });
 

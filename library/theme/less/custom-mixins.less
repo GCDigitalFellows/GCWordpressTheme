@@ -41,3 +41,26 @@
 	
 	border-color: darken(@color,@bg);
 }
+
+.text-and-links(@color,@pct) {
+	color: @color!important;
+	a {
+		color: @color;//darken(@color,@pct)!important;
+		//text-decoration: underline;
+		font-weight: bold;
+		&:hover {
+			color: darken(@color,@pct)!important;
+			font-weight: bold;
+		}
+	}
+}
+
+.text-and-links-a(@color,@pct) {
+	color: @color!important;
+	//text-decoration: underline;
+	font-weight: bold;
+	&:hover {
+		color: darken(@color,@pct)!important;
+		font-weight: bold;
+	}
+}
