@@ -317,7 +317,7 @@ if (!function_exists("theme_js")) {
         if (!is_admin()) {
             //use CDN for loading Bootstrap
             wp_register_script('bootstrap-js', '//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js', array('jquery'), '3.0.3', true);
-            wp_register_script('wpbs-scripts', get_template_directory_uri() . '/library/js/scripts.js', array('jquery'), '0.1.3', true);
+            wp_register_script('wpbs-scripts', get_template_directory_uri() . '/library/js/scripts.min.js', array('jquery'), '0.1.3', true);
             wp_register_script('modernizr', get_template_directory_uri() . '/library/js/modernizr.custom.min.js', array(), '2.5.3', true);
             wp_register_script('shuffle', get_template_directory_uri() . '/library/js/jquery.shuffle.js', array('jquery'), '1.03', true);
             wp_register_script('waypoints', get_template_directory_uri() . '/library/jquery-waypoints/waypoints.min.js', array('jquery'), '2.0.4', true);

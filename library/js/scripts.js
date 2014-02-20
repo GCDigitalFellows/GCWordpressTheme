@@ -17,13 +17,13 @@ jQuery(window).load(function() {
         });
     });
 
-    /* menu scrollspy */
+    // menu scrollspy
     jQuery('body').scrollspy({
         target: '#main-nav',
-        offset: 0//jQuery('.navbar').height()//somewhat arbitrary, might need to be adjusted for various setups
+        offset: 0
     });
 
-    /* Setup waypoints for triggering events on scroll */
+    // Setup waypoints for triggering events on scroll
 
     /* sticky sections
      *
@@ -43,9 +43,6 @@ jQuery(window).load(function() {
                     var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight(true));
                     if (scrollH < 0) {
                         jQuery('.waypoint-sticky-' + $id).css('width',jQuery('.waypoint-sticky-' + $id).parent().width());
-                        //jQuery('.waypoint-sticky-' + $id).wrap("<div class='waypoint-wrapper'></div>");
-                        //jQuery('.waypoint-wrapper').css('height',jQuery('.waypoint-sticky-' + $id).height());
-                        //jQuery('.waypoint-wrapper').css('width',jQuery('.waypoint-sticky-' + $id).width());
                         jQuery('.waypoint-sticky-' + $id).addClass('waypoint-stuck');
                         jQuery('.waypoint-sticky-' + $id + '.waypoint-stuck').css('top',jQuery('.navbar').height() + 40); //a little margin to breathe
                         if ($nextElement.hasClass('waypoint-stuck')) {
@@ -54,7 +51,6 @@ jQuery(window).load(function() {
                     }
                 } else {
                     jQuery('.waypoint-sticky-' + $id).removeClass('waypoint-stuck');
-                    //jQuery('.waypoint-sticky-' + $id).unwrap();
                 }
             }
         },{
@@ -68,14 +64,10 @@ jQuery(window).load(function() {
                 var $nextElement = jQuery('.waypoint-sticky-' + jQuery(this).waypoint('next').attr('id'));
                 if (direction === 'up') {
                     jQuery('.waypoint-sticky-' + $id).removeClass('waypoint-stuck');
-                    //jQuery('.waypoint-sticky-' + $id).unwrap();
                 } else {
                     var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight(true));
                     if (scrollH < 0) {
                         jQuery('.waypoint-sticky-' + $id).css('width',jQuery('.waypoint-sticky-' + $id).parent().width());
-                        //jQuery('.waypoint-sticky-' + $id).wrap("<div class='waypoint-wrapper'></div>");
-                        //jQuery('.waypoint-wrapper').css('height',jQuery('.waypoint-sticky-' + $id).height());
-                        //jQuery('.waypoint-wrapper').css('width',jQuery('.waypoint-sticky-' + $id).width());
                         jQuery('.waypoint-sticky-' + $id).addClass('waypoint-stuck');
                         jQuery('.waypoint-sticky-' + $id + '.waypoint-stuck').css('top',jQuery('.navbar').height() + 40);
                         if ($prevElement.hasClass('waypoint-stuck')) {
@@ -89,7 +81,7 @@ jQuery(window).load(function() {
         });
     })
 
-    /* hacked up waypoints version of scrollspy since bootstrap only lets you use one per page... */
+    // hacked up waypoints version of scrollspy since bootstrap only lets you use one per page...
 
     jQuery('.waypoint-scrollspy').each(function() {
         jQuery(this).waypoint(function(direction) {
@@ -121,25 +113,26 @@ jQuery(window).load(function() {
     })
 
 
-    /* animate scrolling within a page on menu clicks */
+    // animate scrolling within a page on menu clicks
 
-    jQuery('a[href^="#"]').on('click',function (e) {
-
-        e.preventDefault();
-
+    jQuery('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = jQuery(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
         var thetop;
-
         if (jQuery('body').hasClass('navbar-no-offset')) {
-            thetop = jQuery(jQuery(this).attr('href')).offset().top;
+            thetop = target.offset().top + 1;
         } else if (jQuery('body').hasClass('navbar-fixed-offset')) {
-            thetop = jQuery(jQuery(this).attr('href')).offset().top - jQuery('.navbar').height();
+            thetop = target.offset().top - jQuery('.navbar').height() + 1;
         }
-
-        jQuery(document.body).animate({
-            scrollTop: thetop
-        }, 500);
-
-    });
+        jQuery('html,body').animate({
+          scrollTop: thetop
+        }, 1000);
+        return false;
+      }
+    }
+  });
 
     jQuery(window).resize(function() {
         if (jQuery(document).width() < 768) {
@@ -171,62 +164,6 @@ jQuery(window).load(function() {
         jQuery.waypoints('refresh');
     }).resize();
 
-    /* end of as page load scripts */
+    // end of as page load scripts
 
 });
-
-/* additional tools */
-
-
-
-
-/*! A fix for the iOS orientationchange zoom bug.
- Script by @scottjehl, rebound by @wilto.
- MIT License.
-*/
-(function(w) {
-    // This fix addresses an iOS bug, so return early if the UA claims it's something else.
-    if (!(/iPhone|iPad|iPod/.test(navigator.platform) && navigator.userAgent.indexOf("AppleWebKit") > -1)) {
-        return;
-    }
-    var doc = w.document;
-    if (!doc.querySelector) {
-        return;
-    }
-    var meta = doc.querySelector("meta[name=viewport]"),
-        initialContent = meta && meta.getAttribute("content"),
-        disabledZoom = initialContent + ",maximum-scale=1",
-        enabledZoom = initialContent + ",maximum-scale=10",
-        enabled = true,
-        x, y, z, aig;
-    if (!meta) {
-        return;
-    }
-
-    function restoreZoom() {
-        meta.setAttribute("content", enabledZoom);
-        enabled = true;
-    }
-
-    function disableZoom() {
-        meta.setAttribute("content", disabledZoom);
-        enabled = false;
-    }
-
-    function checkTilt(e) {
-        aig = e.accelerationIncludingGravity;
-        x = Math.abs(aig.x);
-        y = Math.abs(aig.y);
-        z = Math.abs(aig.z);
-        // If portrait orientation and in one of the danger zones
-        if (!w.orientation && (x > 7 || ((z > 6 && y < 8 || z < 8 && y > 6) && x > 5))) {
-            if (enabled) {
-                disableZoom();
-            }
-        } else if (!enabled) {
-            restoreZoom();
-        }
-    }
-    w.addEventListener("orientationchange", restoreZoom, false);
-    w.addEventListener("devicemotion", checkTilt, false);
-})(this);
