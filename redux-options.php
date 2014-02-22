@@ -358,6 +358,12 @@ function setup_framework_options(){
 				"type" => "select",
 				"options" => array('left'=>'Align Left', 'right'=>'Align Right')
 			),
+			array( 'title' => __('Background Image', Redux_TEXT_DOMAIN),
+					'desc' => __('Select an image to use for the header background', Redux_TEXT_DOMAIN),
+					'id' => 'header_bg_image',
+					'default' => '',
+	        		'type' => 'media'
+			),
 			array( 
 				'title' => __('Use inverted colors on homepage nav bar?', Redux_TEXT_DOMAIN),
 				'desc' => __('Swap the font and background color on the navbar for the homepage template.', Redux_TEXT_DOMAIN),
