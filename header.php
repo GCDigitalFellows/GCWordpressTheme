@@ -129,7 +129,7 @@
 
 							<?php else: ?>
 
-								<img id="branding-logo" src="<?php echo get_template_directory_uri() . '/library/theme/images/gcdi_logo-circle.svg'; ?>" alt="<?php echo get_bloginfo('description'); ?>" />
+								<img id="branding-logo" src="<?php echo get_template_directory_uri() . '/library/theme/images/gcdi_logo-circle.svg'; ?>" alt="<?php echo get_bloginfo('description'); ?>" onerror="this.src=gcdi_logo-circle.png"/>
 
 							<?php endif; ?>
 
@@ -183,7 +183,7 @@
 					</div>
 
 					<a title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
-						<img id="sitewide-logo" src="<?php echo get_template_directory_uri() . '/library/theme/images/GC_logo-white.svg'; ?>" alt="The CUNY Graduate Center" />
+						<img id="sitewide-logo" src="<?php echo get_template_directory_uri() . '/library/theme/images/GC_logo-white.svg'; ?>" alt="The CUNY Graduate Center" onerror="this.src=GC_logo-white.png"/>
 					</a>
 
 				</div>
