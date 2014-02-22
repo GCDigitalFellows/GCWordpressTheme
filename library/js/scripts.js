@@ -40,8 +40,7 @@ jQuery(window).load(function() {
                 var $id = jQuery(this).attr('id');
                 var $nextElement = jQuery('.waypoint-sticky-' + jQuery(this).waypoint('next').attr('id'));
                 if (direction === 'up') {
-                    var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight(true)) + 160;
-                    console.log('up viewport: ' + jQuery.waypoints('viewportHeight') + ' this: ' + jQuery(this).outerHeight(true) + ' scrollh: ' + scrollH)
+                    var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight(true));
                     if (scrollH < 0) {
                         jQuery('.waypoint-sticky-' + $id).css('width',jQuery('.waypoint-sticky-' + $id).parent().width());
                         jQuery('.waypoint-sticky-' + $id).addClass('waypoint-stuck');
@@ -66,8 +65,7 @@ jQuery(window).load(function() {
                 if (direction === 'up') {
                     jQuery('.waypoint-sticky-' + $id).removeClass('waypoint-stuck');
                 } else {
-                    var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight(true)) + 160;
-                    console.log('down viewport: ' + jQuery.waypoints('viewportHeight') + ' this: ' + jQuery(this).outerHeight(true) + ' scrollh: ' + scrollH)
+                    var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight(true));
                     if (scrollH < 0) {
                         jQuery('.waypoint-sticky-' + $id).css('width',jQuery('.waypoint-sticky-' + $id).parent().width());
                         jQuery('.waypoint-sticky-' + $id).addClass('waypoint-stuck');
