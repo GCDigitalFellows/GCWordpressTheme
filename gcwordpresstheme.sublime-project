@@ -11,7 +11,7 @@
         "less2css":
         {
             "autoCompile": true,
-            "minify": false,
+            "minify": true,
             "main_file": "bootstrap-themed.less",
             "outputDir": "auto",
             "lessBaseDir": "library/theme/less"
