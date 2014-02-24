@@ -66,8 +66,8 @@
 			$body_style = 'navbar-no-offset';
 	}
 
-	if ($wheniwasbad_options['header_bg_image'] != '') {
-		$navheader_styles = 'style="background-image: url(\'' . $wheniwasbad_options['header_bg_image'] . '\');"';
+	if ($wheniwasbad_options['header_bg_image'] && $wheniwasbad_options['header_bg_image']['url']) {
+		$navheader_styles = 'style="background-image: url(\'' . $wheniwasbad_options['header_bg_image']['url'] . '\');"';
 	} else {
 		$navheader_styles = 'style="background-image: url(\'' . get_template_directory_uri() . '/library/theme/images/header_bg.gif' . '\');"';
 	}
