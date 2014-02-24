@@ -16,9 +16,12 @@ a {
   &-inverse           { background-color: @gray-dark; }
   &-orange            { background-color: @orange; }
   &-inverse[href]     { background-color: darken(@orange, 10%); }
-  &-light-green       { background-color: @green-light; }
-  &-dark-green        { background-color: @green-dark; }
-  &-light-blue        { background-color: @blue-light; }
+  &-green-light       { background-color: @green-light; }
+  &-green             { background-color: @green; }
+  &-green-dark        { background-color: @green-dark; }
+  &-blue-light        { background-color: @blue-light; }
+  &-blue              { background-color: @blue; }
+  &-blue-dark         { background-color: @blue-dark; }
   &-pink              { background-color: @pink; }
 }
 
@@ -214,101 +217,101 @@ a .text,a.text {
 			border-top: 9px solid @orange;
 		}
 		&:nth-child(7n+2) {
-			border-bottom: 9px solid @green-light;
+			border-bottom: 9px solid @green;
 		}
 		&:nth-child(7n+2).open {
 			border-bottom: none;
 			a {
-				background-color: @green-light;
+				background-color: @green;
 			}
 			> ul {
-				background-color: @green-light;
+				background-color: @green;
 			}
 		}
 		&:nth-child(7n+2).active {
 			border-bottom: none;
-			border-top: 9px solid @green-light;
+			border-top: 9px solid @green-dark;
 		}
 		&:nth-child(7n+3) {
-			border-bottom: 9px solid @green;
+			border-bottom: 9px solid @green-dark;
 		}
 		&:nth-child(7n+3).open {
 			border-bottom: none;
 			a {
-				background-color: @green;
+				background-color: @green-dark;
 			}
 			> ul {
-				background-color: @green;
+				background-color: @green-dark;
 			}
 		}
 		&:nth-child(7n+3).active {
 			border-bottom: none;
-			border-top: 9px solid @green;
+			border-top: 9px solid @green-dark;
 		}
 		&:nth-child(7n+4) {
-			border-bottom: 9px solid @green-dark;
+			border-bottom: 9px solid @blue-light;
 		}
 		&:nth-child(7n+4).open {
 			border-bottom: none;
 			a {
-				background-color: @green-dark;
+				background-color: @blue-light;
 			}
 			> ul {
-				background-color: @green-dark;
+				background-color: @blue-light;
 			}
 		}
 		&:nth-child(7n+4).active {
 			border-bottom: none;
-			border-top: 9px solid @green-dark;
+			border-top: 9px solid @blue-light;
 		}
 		&:nth-child(7n+5) {
-			border-bottom: 9px solid @blue-light;
+			border-bottom: 9px solid @blue;
 		}
 		&:nth-child(7n+5).open {
 			border-bottom: none;
 			a {
-				background-color: @blue-light;
+				background-color: @blue;
 			}
 			> ul {
-				background-color: @blue-light;
+				background-color: @blue;
 			}
 		}
 		&:nth-child(7n+5).active {
 			border-bottom: none;
-			border-top: 9px solid @blue-light;
+			border-top: 9px solid @blue;
 		}
 		&:nth-child(7n+6) {
-			border-bottom: 9px solid @blue;
+			border-bottom: 9px solid @blue-dark;
 		}
 		&:nth-child(7n+6).open {
 			border-bottom: none;
 			a {
-				background-color: @blue;
+				background-color: @blue-dark;
 			}
 			> ul {
-				background-color: @blue;
+				background-color: @blue-dark;
 			}
 		}
 		&:nth-child(7n+6).active {
 			border-bottom: none;
-			border-top: 9px solid @blue;
+			border-top: 9px solid @blue-dark;
 			border-bottom: none;
 		}
 		&:nth-child(7n) {
-			border-bottom: 9px solid @blue-dark;
+			border-bottom: 9px solid @pink;
 		}
 		&:nth-child(7n).open {
 			border-bottom: none;
 			a {
-				background-color: @blue-dark;
+				background-color: @pink;
 			}
 			> ul {
-				background-color: @blue-dark;
+				background-color: @pink;
 			}
 		}
 		&:nth-child(7n).active {
 			border-bottom: none;
-			border-top: 9px solid @blue-dark;
+			border-top: 9px solid @pink;
 			border-bottom: none;
 		}
 
