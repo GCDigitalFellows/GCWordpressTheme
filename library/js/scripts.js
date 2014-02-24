@@ -40,7 +40,7 @@ jQuery(window).load(function() {
                 var $id = jQuery(this).attr('id');
                 var $nextElement = jQuery('.waypoint-sticky-' + jQuery(this).waypoint('next').attr('id'));
                 if (direction === 'up') {
-                    var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight());
+                    var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight() + 160);
                     if (scrollH < 0) {
                         jQuery('.waypoint-sticky-' + $id).css('width',jQuery('.waypoint-sticky-' + $id).parent().width());
                         jQuery('.waypoint-sticky-' + $id).addClass('waypoint-stuck');
@@ -65,7 +65,7 @@ jQuery(window).load(function() {
                 if (direction === 'up') {
                     jQuery('.waypoint-sticky-' + $id).removeClass('waypoint-stuck');
                 } else {
-                    var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight());
+                    var scrollH = (jQuery.waypoints('viewportHeight') - jQuery('.navbar').height() - jQuery(this).outerHeight() + 160);
                     if (scrollH < 0) {
                         jQuery('.waypoint-sticky-' + $id).css('width',jQuery('.waypoint-sticky-' + $id).parent().width());
                         jQuery('.waypoint-sticky-' + $id).addClass('waypoint-stuck');
@@ -94,7 +94,7 @@ jQuery(window).load(function() {
                     if ($prevElement.hasClass('hidden')) {
                         jQuery('.waypoint-scrollspy-' + $id).addClass('hidden');
                         jQuery('.waypoint-scrollspy-' + $id).removeClass('visible');
-                        
+
                         $prevElement.removeClass('hidden');
                         $prevElement.addClass('visible');
                     }
