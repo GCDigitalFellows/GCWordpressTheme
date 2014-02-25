@@ -295,14 +295,16 @@ if (!function_exists("theme_styles")) {
             wp_register_style('bootstrap', get_template_directory_uri() . '/library/theme/css/bootstrap-themed.css', array(), '3.1.1', 'all');
             //wp_register_style( 'fonts', get_template_directory_uri() . '/library/theme/css/fonts.css', array(), '1.0.0', 'all' );
             wp_register_style('proxima_cn_font', get_template_directory_uri() . '/library/theme/fonts/proxima_cn/proxima_cn.css', array(), '1.0.0', 'all');
-            wp_register_style('proxima_excn_font', get_template_directory_uri() . '/library/theme/fonts/proxima_excn/proxima_excn.css', array(), '1.0.0', 'all');
+            //wp_register_style('proxima_excn_font', get_template_directory_uri() . '/library/theme/fonts/proxima_excn/proxima_excn.css', array(), '1.0.0', 'all');
+            wp_register_style('proxima_std_font', get_template_directory_uri() . '/library/theme/fonts/proxima_std/proxima_std.css', array(), '1.0.0', 'all');
             wp_register_style('font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css', array(), '4.0.3', 'all');
             // only enqueue the following styles when needed, but register them here to centralize updates.
             wp_register_style('blueimp-gallery-css', get_template_directory_uri() . '/library/Gallery/css/blueimp-gallery.min.css', array(), '2.12.1', 'all');
 
             wp_enqueue_style('bootstrap');
             wp_enqueue_style('proxima_cn_font');
-            wp_enqueue_style('proxima_excn_font');
+            //wp_enqueue_style('proxima_excn_font');
+            wp_enqueue_style('proxima_std_font');
             wp_enqueue_style('font-awesome');
         }
     }
