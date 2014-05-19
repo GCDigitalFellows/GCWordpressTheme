@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,18 +22,20 @@
  */
 
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_media' ) ) {
+if (!class_exists('ReduxFramework_media')) {
 
     /**
      * Main ReduxFramework_media class
      *
      * @since       1.0.0
      */
-    class ReduxFramework_media extends ReduxFramework {
-    
+    class ReduxFramework_media {
+
         /**
          * Field Constructor.
          *
@@ -42,13 +45,10 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
          * @access      public
          * @return      void
          */
-        function __construct( $field = array(), $value ='', $parent ) {
-        
-          parent::__construct( $parent->sections, $parent->args );
-          $this->parent = $parent;
-          $this->field = $field;
-          $this->value = $value;
-        
+        function __construct($field = array(), $value = '', $parent) {
+            $this->parent   = $parent;
+            $this->field    = $field;
+            $this->value    = $value;
         }
 
         /**
@@ -68,72 +68,77 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
                 'url'       => '',
                 'width'     => '',
                 'height'    => '',
-                'thumbnail' => ''
+                'thumbnail' => '',
             );
 
-            $this->value = wp_parse_args( $this->value, $defaults );
+            $this->value = wp_parse_args($this->value, $defaults);
 
-            if ( !isset( $this->field['mode'] ) ) {
+            if (!isset($this->field['mode'])) {
                 $this->field['mode'] = "image";
             }
 
-            if( empty( $this->value ) && !empty( $this->field['default'] ) ) { // If there are standard values and value is empty
-                if( is_array( $this->field['default'] ) ) {
-                    if( !empty( $this->field['default']['id'] ) ) {
+            if (empty($this->value) && !empty($this->field['default'])) { // If there are standard values and value is empty
+                if (is_array($this->field['default'])) {
+                    if (!empty($this->field['default']['id'])) {
                         $this->value['id'] = $this->field['default']['id'];
                     }
 
-                    if( !empty( $this->field['default']['url'] ) ) {
+                    if (!empty($this->field['default']['url'])) {
                         $this->value['url'] = $this->field['default']['url'];
-                    }           
+                    }
                 } else {
-                    if( is_numeric( $this->field['default'] ) ) { // Check if it's an attachment ID
+                    if (is_numeric($this->field['default'])) { // Check if it's an attachment ID
                         $this->value['id'] = $this->field['default'];
                     } else { // Must be a URL
                         $this->value['url'] = $this->field['default'];
-                    }           
+                    }
                 }
             }
 
 
-            if( empty( $this->value['url'] ) && !empty( $this->value['id'] ) ) {
-                $img = wp_get_attachment_image_src( $this->value['id'], 'full' );
-                $this->value['url'] = $img[0];
-                $this->value['width'] = $img[1];
-                $this->value['height'] = $img[2];
+            if (empty($this->value['url']) && !empty($this->value['id'])) {
+                $img = wp_get_attachment_image_src($this->value['id'], 'full');
+                $this->value['url']     = $img[0];
+                $this->value['width']   = $img[1];
+                $this->value['height']  = $img[2];
             }
 
             $hide = 'hide ';
 
-            if( (isset( $this->field['preview'] ) && $this->field['preview'] === false) ) {
+            if ((isset($this->field['preview']) && $this->field['preview'] === false)) {
                 $this->field['class'] .= " noPreview";
             }
 
-            if( ( !empty( $this->field['url'] ) && $this->field['url'] === true ) || isset( $this->field['preview'] ) && $this->field['preview'] === false ) {
+            if ((!empty($this->field['url']) && $this->field['url'] === true ) || isset($this->field['preview']) && $this->field['preview'] === false) {
                 $hide = '';
-            }   
+            }
 
-            $placeholder = isset($this->field['placeholder']) ? $this->field['placeholder'] : __('No media selected','redux-framework');
+            $placeholder = isset($this->field['placeholder']) ? $this->field['placeholder'] : __('No media selected', 'redux-framework');
 
-            echo '<input placeholder="' . $placeholder .'" type="text" class="' . $hide . 'upload ' . $this->field['class'] . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][url]" id="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][url]" value="' . $this->value['url'] . '" readonly="readonly" />';
-            echo '<input type="hidden" class="upload-id ' . $this->field['class'] . '" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][id]" id="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][id]" value="' . $this->value['id'] . '" />';
-            echo '<input type="hidden" class="upload-height" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][height]" id="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][height]" value="' . $this->value['height'] . '" />';
-            echo '<input type="hidden" class="upload-width" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][width]" id="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][width]" value="' . $this->value['width'] . '" />';
-            echo '<input type="hidden" class="upload-thumbnail" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][thumbnail]" id="' . $this->args['opt_name'] . '[' . $this->field['id'] . '][thumbnail]" value="' . $this->value['thumbnail'] . '" />';
+            $readOnly = ' readonly="readonly"';
+            if (isset($this->field['readonly']) && $this->field['readonly'] === false) {
+                $readOnly = '';
+            }
+
+            echo '<input placeholder="' . $placeholder . '" type="text" class="' . $hide . 'upload regular-text ' . $this->field['class'] . '" name="' . $this->field['name'] . '[url]' . $this->field['name_suffix'] . '" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][url]" value="' . $this->value['url'] . '"' . $readOnly . '/>';
+            echo '<input type="hidden" class="upload-id ' . $this->field['class'] . '" name="' . $this->field['name'] . '[id]' . $this->field['name_suffix'] . '" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][id]" value="' . $this->value['id'] . '" />';
+            echo '<input type="hidden" class="upload-height" name="' . $this->field['name'] . '[height]' . $this->field['name_suffix'] . '" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][height]" value="' . $this->value['height'] . '" />';
+            echo '<input type="hidden" class="upload-width" name="' . $this->field['name'] . '[width]' . $this->field['name_suffix'] . '" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][width]" value="' . $this->value['width'] . '" />';
+            echo '<input type="hidden" class="upload-thumbnail" name="' . $this->field['name'] . '[thumbnail]' . $this->field['name_suffix'] . '" id="' . $this->parent->args['opt_name'] . '[' . $this->field['id'] . '][thumbnail]" value="' . $this->value['thumbnail'] . '" />';
 
             //Preview
             $hide = '';
 
-            if( (isset( $this->field['preview'] ) && $this->field['preview'] === false) || empty( $this->value['url'] ) ) {
+            if ((isset($this->field['preview']) && $this->field['preview'] === false) || empty($this->value['url'])) {
                 $hide = 'hide ';
             }
 
-            if ( empty( $this->value['thumbnail'] ) && !empty( $this->value['url'] ) ) { // Just in case
-                if ( !empty( $this->value['id'] ) ) {
-                    $image = wp_get_attachment_image_src( $this->value['id'], array(150, 150) );
+            if (empty($this->value['thumbnail']) && !empty($this->value['url'])) { // Just in case
+                if (!empty($this->value['id'])) {
+                    $image = wp_get_attachment_image_src($this->value['id'], array(150, 150));
                     $this->value['thumbnail'] = $image[0];
                 } else {
-                    $this->value['thumbnail'] = $this->value['url'];    
+                    $this->value['thumbnail'] = $this->value['url'];
                 }
             }
 
@@ -142,42 +147,48 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
             echo '<img class="redux-option-image" id="image_' . $this->field['id'] . '" src="' . $this->value['thumbnail'] . '" alt="" target="_blank" rel="external" />';
             echo '</a>';
             echo '</div>';
-        
+
             //Upload controls DIV
             echo '<div class="upload_button_div">';
 
             //If the user has WP3.5+ show upload/remove button
-            echo '<span class="button media_upload_button" id="' . $this->field['id'] . '-media">' . __( 'Upload', 'redux-framework' ) . '</span>';
-            
+            echo '<span class="button media_upload_button" id="' . $this->field['id'] . '-media">' . __('Upload', 'redux-framework') . '</span>';
+
             $hide = '';
-            if( empty( $this->value['url'] ) || $this->value['url'] == '' )
-                $hide =' hide';
+            if (empty($this->value['url']) || $this->value['url'] == '')
+                $hide = ' hide';
 
-            echo '<span class="button remove-image' . $hide . '" id="reset_' . $this->field['id'] . '" rel="' . $this->field['id'] . '">' . __( 'Remove', 'redux-framework' ) . '</span>';
+            echo '<span class="button remove-image' . $hide . '" id="reset_' . $this->field['id'] . '" rel="' . $this->field['id'] . '">' . __('Remove', 'redux-framework') . '</span>';
 
-            echo '</div>';  
-                           
-            
+            echo '</div>';
         }
 
-    		/**
-    		 * 
-    		 * Functions to pass data from the PHP to the JS at render time.
-    		 * 
-    		 * @return array Params to be saved as a javascript object accessable to the UI.
-    		 * 
-    		 * @since  Redux_Framework 3.1.1
-    		 * 
-    		 */
-    		function localize() {
-                
-          if ( !isset( $this->field['mode'] ) ) {
-            $this->field['mode'] = "image";
-          }
+        /**
+         *
+         * Functions to pass data from the PHP to the JS at render time.
+         *
+         * @return array Params to be saved as a javascript object accessable to the UI.
+         *
+         * @since  Redux_Framework 3.1.1
+         *
+         */
+        function localize($field, $value = "") {
+            $params = array();
 
-          return array( 'mode' => $this->field['mode'] );
-          
-    		}        
+            if (!isset($field['mode'])) {
+                $field['mode'] = "image";
+            }
+
+            $params['mode'] = $field['mode'];
+
+            if (empty($value) && isset($this->value)) {
+                $value = $this->value;
+            }
+
+            $params['val'] = $value;
+
+            return $params;
+        }
 
         /**
          * Enqueue Function.
@@ -193,7 +204,7 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
             wp_enqueue_script(
                 'redux-field-media-js',
                 ReduxFramework::$_url . 'inc/fields/media/field_media.js',
-                array( 'jquery', 'wp-color-picker' ),
+                array('jquery', 'wp-color-picker'),
                 time(),
                 true
             );
@@ -204,7 +215,6 @@ if( !class_exists( 'ReduxFramework_media' ) ) {
                 time(),
                 true
             );
-
         }
     }
 }

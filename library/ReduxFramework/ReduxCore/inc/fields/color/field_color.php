@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,106 +20,110 @@
  * @author      Dovy Paukstys
  * @version     3.0.0
  */
-
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_color' ) ) {
+if (!class_exists('ReduxFramework_color')) {
 
     /**
      * Main ReduxFramework_color class
      *
      * @since       1.0.0
      */
-	class ReduxFramework_color extends ReduxFramework {
-	
-		/**
-		 * Field Constructor.
-		 *
-		 * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
-		 *
-	 	 * @since 		1.0.0
-	 	 * @access		public
-	 	 * @return		void
-		 */
-        function __construct( $field = array(), $value ='', $parent ) {
-        
-			parent::__construct( $parent->sections, $parent->args );
-			$this->parent = $parent;
-			$this->field = $field;
-			$this->value = $value;
-        
+    class ReduxFramework_color {
+
+        /**
+         * Field Constructor.
+         *
+         * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
+         *
+         * @since 		1.0.0
+         * @access		public
+         * @return		void
+         */
+        function __construct($field = array(), $value = '', $parent) {
+
+            $this->parent   = $parent;
+            $this->field    = $field;
+            $this->value    = $value;
         }
-	
-		/**
-		 * Field Render Function.
-		 *
-		 * Takes the vars and outputs the HTML for the field in the settings
-	 	 *
-	 	 * @since 		1.0.0
-	 	 * @access		public
-	 	 * @return		void
-		 */
-		public function render() {
 
-			echo '<input data-id="'.$this->field['id'].'" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" id="' . $this->field['id'] . '-color" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value . '"  data-default-color="' . $this->field['default'] . '" />';
+        /**
+         * Field Render Function.
+         *
+         * Takes the vars and outputs the HTML for the field in the settings
+         *
+         * @since 		1.0.0
+         * @access		public
+         * @return		void
+         */
+        public function render() {
 
-			if ( !isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
-				$tChecked = "";
-				if ( $this->value == "transparent" ) {
-					$tChecked = ' checked="checked"';
-				}
-				echo '<label for="' . $this->field['id'] . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency ' . $this->field['class'] . '" id="' . $this->field['id'] . '-transparency" data-id="'.$this->field['id'] . '-color" value="1"'.$tChecked.'> '.__('Transparent', 'redux-framework').'</label>';				
-			}
+            echo '<input data-id="' . $this->field['id'] . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" id="' . $this->field['id'] . '-color" class="redux-color redux-color-init ' . $this->field['class'] . '"  type="text" value="' . $this->value . '"  data-default-color="' . ( isset($this->field['default']) ? $this->field['default'] : "" ) . '" />';
 
-		}
-	
-		/**
-		 * Enqueue Function.
-		 *
-		 * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
-		 *
-		 * @since		1.0.0
-		 * @access		public
-		 * @return		void
-		 */
-		public function enqueue() {
+            if (!isset($this->field['transparent']) || $this->field['transparent'] !== false) {
 
-			wp_enqueue_style( 'wp-color-picker' );
+                $tChecked = "";
 
-			wp_enqueue_script(
-				'redux-field-color-js', 
-				ReduxFramework::$_url . 'inc/fields/color/field_color.js', 
-				array( 'jquery', 'wp-color-picker' ),
-				time(),
-				true
-			);
+                if ($this->value == "transparent") {
+                    $tChecked = ' checked="checked"';
+                }
 
-			wp_enqueue_style(
-				'redux-field-color-css', 
-				ReduxFramework::$_url . 'inc/fields/color/field_color.css', 
-				time(),
-				true
-			);
-		
-		}
+                echo '<label for="' . $this->field['id'] . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency ' . $this->field['class'] . '" id="' . $this->field['id'] . '-transparency" data-id="' . $this->field['id'] . '-color" value="1"' . $tChecked . '> ' . __('Transparent', 'redux-framework') . '</label>';
+            }
+        }
 
-		public function output() {
+        /**
+         * Enqueue Function.
+         *
+         * If this field requires any scripts, or css define this function and register/enqueue the scripts/css
+         *
+         * @since		1.0.0
+         * @access		public
+         * @return		void
+         */
+        public function enqueue() {
 
-			if (isset($this->field['output']) && !empty($this->field['output'])) {
+            wp_enqueue_style('wp-color-picker');
 
-				$keys = implode(",", $this->field['output']);
-		        $style = '';
-		        if ( !empty( $this->value ) ) {
+            wp_enqueue_script(
+                'redux-field-color-js',
+                ReduxFramework::$_url . 'inc/fields/color/field_color.js',
+                array('jquery', 'wp-color-picker'),
+                time(),
+                true
+            );
 
-		        	$style .= $keys."{";
-		        	$style .= 'color:'.$this->value.';';
-		        	$style .= '}';
-		        	$this->parent->outputCSS .= $style;  
-		        }
-			}
-		}
-	
-	}
+            wp_enqueue_style(
+                'redux-field-color-css',
+                ReduxFramework::$_url . 'inc/fields/color/field_color.css',
+                time(),
+                true
+            );
+        }
+
+        public function output() {
+            $style = '';
+
+            if (!empty($this->value)) {
+                $mode = ( isset($this->field['mode']) && !empty($this->field['mode']) ? $this->field['mode'] : 'color' );
+
+                $style .= $mode . ':' . $this->value . ';';
+
+                if (!empty($this->field['output']) && is_array($this->field['output'])) {
+                    $css = Redux_Functions::parseCSS($this->field['output'], $style, $this->value);
+                    $this->parent->outputCSS .= $css;
+                }
+
+                if (!empty($this->field['compiler']) && is_array($this->field['compiler'])) {
+                    $css = Redux_Functions::parseCSS($this->field['compiler'], $style, $this->value);
+                    $this->parent->compilerCSS .= $css;
+                    
+                }
+            }
+        }
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,18 +22,20 @@
  */
 
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_button_set' ) ) {
+if (!class_exists('ReduxFramework_button_set')) {
 
     /**
      * Main ReduxFramework_button_set class
      *
      * @since       1.0.0
      */
-    class ReduxFramework_button_set extends ReduxFramework {
-    
+    class ReduxFramework_button_set {
+
         /**
          * Holds configuration settings for each field in a model.
          * Defining the field options
@@ -54,12 +57,10 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
          *
          * @param array $arr (See above)
          * @return Object A new editor object.
-         **/
-
+         * */
         static $_properties = array(
-                'id'=> 'Identifier',
-
-            );
+            'id' => 'Identifier',
+        );
 
         /**
          * Field Constructor.
@@ -70,16 +71,13 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
          * @access      public
          * @return      void
          */
-        function __construct( $field = array(), $value ='', $parent ) {
-        
-            parent::__construct( $parent->sections, $parent->args );
-            $this->parent = $parent;
-            $this->field = $field;
-            $this->value = $value;
-        
+        function __construct($field = array(), $value = '', $parent) {
+
+            $this->parent   = $parent;
+            $this->field    = $field;
+            $this->value    = $value;
         }
-    
-    
+
         /**
          * Field Render Function.
          *
@@ -90,21 +88,38 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
          * @return      void
          */
         public function render() {
-        
+
+            // multi => true renders the field multi-selectable (checkbox vs radio)
             echo '<div class="buttonset ui-buttonset">';
-            
-            foreach( $this->field['options'] as $k => $v ) {
-                
-                echo '<input data-id="'.$this->field['id'].'" type="radio" id="'.$this->field['id'].'-buttonset'.$k.'" name="' . $this->args['opt_name'] . '[' . $this->field['id'] . ']" class="' . $this->field['class'] . '" value="' . $k . '" ' . checked( $this->value, $k, false ) . '/>';
-                echo '<label for="'.$this->field['id'].'-buttonset'.$k.'">' . $v . '</label>';
-                
+
+            $i = 0;
+            foreach ($this->field['options'] as $k => $v) {
+
+                $selected = '';
+                if (isset($this->field['multi']) && $this->field['multi'] == true) {
+                    $type = "checkbox";
+                    $this->field['name_suffix'] = "[]";
+                    $i++;
+
+                    if (!empty($this->value) && !is_array($this->value)) {
+                        $this->value = array($this->value);
+                    }
+
+                    if (in_array($k, $this->value)) {
+                        $selected = 'checked="checked"';
+                    }
+                } else {
+                    $type = "radio";
+                    $selected = checked($this->value, $k, false);
+                }
+
+                echo '<input data-id="' . $this->field['id'] . '" type="' . $type . '" id="' . $this->field['id'] . '-buttonset' . $k . '" name="' . $this->field['name'] . $this->field['name_suffix'] . '" class="buttonset-item ' . $this->field['class'] . '" value="' . $k . '" ' . $selected . '/>';
+                echo '<label for="' . $this->field['id'] . '-buttonset' . $k . '">' . $v . '</label>';
             }
-            
+
             echo '</div>';
-        
         }
-    
-        
+
         /**
          * Enqueue Function.
          *
@@ -117,14 +132,12 @@ if( !class_exists( 'ReduxFramework_button_set' ) ) {
         public function enqueue() {
 
             wp_enqueue_script(
-                'redux-field-button-set-js', 
-                ReduxFramework::$_url . 'inc/fields/button_set/field_button_set.js', 
-                array( 'jquery', 'jquery-ui-core', 'jquery-ui-dialog' ),
+                'redux-field-button-set-js',
+                ReduxFramework::$_url . 'inc/fields/button_set/field_button_set.js',
+                array(),
                 time(),
                 true
             );
-
         }
-    
     }
 }

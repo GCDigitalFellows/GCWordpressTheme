@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Redux Framework is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,18 +23,20 @@
  */
 
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework_editor' ) ) {
+if (!class_exists('ReduxFramework_editor')) {
 
     /**
      * Main ReduxFramework_editor class
      *
      * @since       1.0.0
      */
-    class ReduxFramework_editor extends ReduxFramework {
-    
+    class ReduxFramework_editor {
+
         /**
          * Field Constructor.
          *
@@ -43,13 +46,10 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
          * @access      public
          * @return      void
          */
-        function __construct( $field = array(), $value ='', $parent ) {
-        
-            parent::__construct( $parent->sections, $parent->args );
-            $this->parent = $parent;
-            $this->field = $field;
-            $this->value = $value;
-        
+        function __construct($field = array(), $value = '', $parent) {
+            $this->parent   = $parent;
+            $this->field    = $field;
+            $this->value    = $value;
         }
 
         /**
@@ -63,24 +63,27 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
          */
         public function render() {
 
-            // Setup up default editor_options
-            $defaults = array(
-                'textarea_name' => $this->args['opt_name'] . '[' . $this->field['id'] . ']', 
-                'editor_class'  => $this->field['class'],
-                'textarea_rows' => 10, //Wordpress default
-                'teeny' => true,
-            );
-
-            if ( !isset( $this->field['editor_options'] ) || empty( $this->field['editor_options'] ) ) {
-                $this->field['editor_options'] = array();
+            if (!isset($this->field['args'])) {
+                $this->field['args'] = array();
             }
 
-            $this->field['editor_options'] = wp_parse_args( $this->field['editor_options'], $defaults );
-            
-            wp_editor( $this->value, $this->field['id'], $this->field['editor_options'] );
-            
-        }
+            // Setup up default args
+            $defaults = array(
+                'textarea_name' => $this->field['name'],
+                'editor_class'  => $this->field['class'],
+                'textarea_rows' => 10, //Wordpress default
+                'teeny'         => true,
+            );
 
+            if (isset($this->field['editor_options']) && empty($this->field['args'])) {
+                $this->field['args'] = $this->field['editor_options'];
+                unset($this->field['editor_options']);
+            }
+
+            $this->field['args'] = wp_parse_args($this->field['args'], $defaults);
+
+            wp_editor($this->value, $this->field['id'], $this->field['args']);
+        }
 
         /**
          * Enqueue Function.
@@ -94,13 +97,11 @@ if( !class_exists( 'ReduxFramework_editor' ) ) {
         public function enqueue() {
 
             wp_enqueue_style(
-                'redux-field-editor-css', 
+                'redux-field-editor-css',
                 ReduxFramework::$_url . 'inc/fields/editor/field_editor.css',
                 time(),
                 true
             );
-        
         }
-
     }
 }

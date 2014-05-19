@@ -1,10 +1,28 @@
-# Redux Options Framework [![Build Status](https://travis-ci.org/ReduxFramework/ReduxFramework.png?branch=master)](https://travis-ci.org/ReduxFramework/ReduxFramework) [![Stories in Ready](https://badge.waffle.io/ReduxFramework/ReduxFramework.png?label=ready)](https://waffle.io/ReduxFramework/ReduxFramework)
+# [docs.reduxframework.com](http://docs.reduxframework.com)
+Need a little help with Redux?  Come check out our brand new documentation site, chock full of tutorials and examples!
+ 
+
+--------
+
+
+
+## Redux Options Framework [![Build Status](https://travis-ci.org/ReduxFramework/redux-framework.png?branch=master)](https://travis-ci.org/ReduxFramework/redux-framework) [![Stories in Ready](https://badge.waffle.io/ReduxFramework/redux-framework.png?label=ready)](https://waffle.io/ReduxFramework/redux-framework) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 WordPress options framework which uses the [WordPress Settings API](http://codex.wordpress.org/Settings_API "WordPress Settings API"), Custom Error/Validation Handling, Custom Field/Validation Types, and import/export functionality.
 
+## SMOF (Simple Modified Option Users) Converter! ##
+
+Hot off the press, our Redux Converter plugin. It takes your SMOF instance, and allows you to try out Redux without any fear. It also spits out valid PHP source for you if you want to migrate complete with data migration! Give it a try today. It will be in the WordPress.org repo shortly.  ;)
+https://github.com/ReduxFramework/redux-converter
+
+## Help Us Translate Redux ##
+
+Please head over to the wiki to learn how you can help us translate Redux quickly. Any and all are welcome. We appreciate your help!
+https://github.com/ReduxFramework/ReduxFramework/wiki/translate
+
 ## Getting Started with Redux ##
 
-ReduxFramework has been built from the groud up to be the most flexible framework around. You can run it as an auto-updating plugin, or embed it inside your plugin or theme. It allows for multiple copies of itself within the same WordPress instance. For a guide on getting started please refer to [http://reduxframework.com/docs/getting-started/](http://reduxframework.com/docs/getting-started/).
+ReduxFramework has been built from the ground up to be the most flexible framework around. You can run it as an auto-updating plugin, or embed it inside your plugin or theme. It allows for multiple copies of itself within the same WordPress instance. For a guide on getting started please refer to [https://github.com/ReduxFramework/redux-framework/wiki/Getting-Started](https://github.com/ReduxFramework/redux-framework/wiki/Getting-Started).
 
 You can also [download our sample theme available here](https://github.com/ReduxFramework/ReduxSampleTheme) to start developing right away.
 
@@ -55,6 +73,591 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ## Changelog ##
 
 ### Master ###
+
+= 3.2.9.5 =
+* Fixed:      Too many CSS tweaks to list, due to last build.
+* Fixed:      Sortable and Sorter fields now sort without page scroll when page size is under 782px.
+* Fixed:      Hint icon defaults to left position when screen size is under 782px.
+* Fixed:      `permissions` argument for fields and sections erasing saved field data.  See #1231
+
+= 3.2.9.4 =
+* Modified:   Woohoo! Nearly fully responsive. Yanked out all SMOF and NHP field customizations. Lots of little fixes on all browser screens. This will also greatly benefit Metaboxes and other areas of Redux.
+* Fixed:      In dev_mode panel CSS was being loaded 2x.
+
+= 3.2.9.3 =
+* Fixed:      Typography color picker bleeding under other elements.  #1225
+* Fixed:      Hint icon_color index error from builder.  #1222
+
+= 3.2.9.2 =
+* Fixed:      Tracking. It was... odd. Also started our support hooks, UI to come.
+* Fixed:      Now import/export supports multiple instances. I can't believe this has been this way for so long.
+
+= 3.2.9.1 =
+* Fixed:      Spacing field not outputting proper CSS when `mode` was set to absolute, and `all` was set to true.
+* Fixed:      CSS fix for typography.  Color picker would interfere with save/reset bar.
+
+= 3.2.8.21 =
+* Added:      Network admin support! Set argument 'database' to network and data will be saved site-wide. Also two new arguments: network_admin & network_sites for where to show the panel.
+
+= 3.2.8.20 =
+* Fixed:      Redux now ignores any directories that begin with `.` in the extension folder.  See #1213.
+
+= 3.2.8.19 =
+* Fixed:      Redux not saving when validating uploads.
+* Modified:   Dimension field default now accepts either `units` or `unit`.
+
+= 3.2.8.18 =
+* Fixed:      Border field output/compiler formatting.  Removed 'inherit' in place of default values.  See #1208.
+* Fixed:      Trim() warning in framework.php when saving.  See #1209, #1201.
+
+= 3.2.8.17 =
+* Fixed:      Typography not outputting all styles when `all_styles` set to true.
+
+= 3.2.8.16 =
+* Added:      `output` argument for `color` and `color_rgba` fields accepts key/pairs for different modes.  Example:
+```
+              'output' => array('color' => '.site-title, .site-header', 'background-color' => '.site-background')
+```
+
+= 3.2.8.15 =
+* Added:      Customizer hook that can be used to simulate the customizer for live preview in the customizer. `redux/customizer/live_preview`
+
+= 3.2.8.14 =
+* Fixed:      'Cannot send header' issues with typography.
+* Modified:   Google CSS moved into HEAD via WP enqueue.
+
+= 3.2.8.13 =
+* Added:      `class` argument to the Redux Arguments, section array, and metabox array. If set, a class will be appended to whichever level is used. This allows further customization for our users.
+
+= 3.2.8.12 =
+* Fixed:      Small fix for validation if subsection parent is free of errors, remove the red highlight when not expanded.
+* Fixed:      Small CSS classes for flashing fonts where web-font-loader.
+* Fixed:      ASync Flash on fonts. FINALLY. What a pain.
+* Modified:   Now do a trim on all fields before validating. No need to alert because of a space...
+
+= 3.2.8.11 =
+* Modified:   Typography field CSS completely rewritten. All thanks to @eplanetdesign!
+* Modified:   Validation now works in metaboxes as well as updates numbers as changes occur. Validation for subsections is SO hot now.
+* Modified:   Various CSS fixes and improvements.
+* Fixed:      3+ JavaScript errors found in the background field. Now works flawlessly.
+* Added:      disable_save_warn flags to the arguments to disable the "you should save" slidedown.
+
+= 3.2.8.10 =
+* Fixed:      PHP warnings in background field.  #1173.  Thanks, @abossola.
+* Fixed:      CSS validation not respecting child selector symbol. #1162
+
+= 3.2.8.9 =
+* Modified:   Turned of mod_rewrite check.
+
+= 3.2.8.8 =
+* Modified:   How errors are displayed, no longer dependent on the ID, now proper classes.
+* Fixed:      Extra check for typography bug.
+* Fixed:      Error css alignment issue with subsections.
+* Modified:   Error notice stays until all errors are gone. Also updates it's number as errors fixed!
+
+= 3.2.8.7 =
+* Modified:   Moved google font files to proprietary folder in upload to help with permission issues.
+
+= 3.2.8.6 =
+* Fixed:      javascript error in typography field.
+
+= 3.2.8.5 =
+* Fixed:      Added a title to the google fonts stylesheet to fix validation errors.
+
+= 3.2.8.4 =
+* Fixed:      One more slides field error check, and an extra JS goodie for an extension.
+
+= 3.2.8.3 =
+* Fixed:      Leftover debug code messing up slides field.
+
+= 3.2.8.2 =
+* Fixed:      More reliable saved action hook.
+* Added:      Actions hooks for errors and warnings.
+
+= 3.2.8.1 =
+* Fixed:      Removed erroneous debug output in link_color field.
+
+= 3.2.7.3 =
+* Added:      is_empty / empty / !isset    AND    not_empty / !empty / isset as required operations
+
+= 3.2.7.2 =
+* Fixed:      Reset defaults error.
+* Added:      `show` argument to turn on and off input boxes in slider.
+
+= 3.2.7.1 =
+* Fixed:      Required now works with muti-check fields and button set when set to multi.
+
+= 3.2.7 =
+* Fixed:      Import works again. A single line was missed...
+
+= 3.2.6.2 =
+* Fixed:      link_color field not outputting CSS properly via compiler or output.  Thanks @vertigo7x 
+* Fixed:      Sorter field CSS.  Buttons were all smushed together.
+
+= 3.2.6.1 =
+* Fixed:      'undefined' error in typography.js.  Thanks @ksere.
+
+= 3.2.6 =
+* Fixed:      Another stray undefined index. Oy.
+
+= 3.2.5.1 =
+* Added:      `open_expanded` argument to start the panel completely expanded initially.
+
+= 3.2.5 =
+* Fixed:      Various bad mistakes. Oy.
+
+= 3.2.4 =
+* Fixed:      Slight typography speed improvement. Less HTML hopefully faster page loads.
+* Fixed:      Unload error on first load if the typography defaults are not set.
+
+= 3.2.3.5 =
+* Modified:   Moved update check functions to class file and out of the core.
+* Fixed:      Errors pertaining to mod_rewrite check.
+
+= 3.2.3.4 =
+* Fixed:      All those headers already set errors.
+
+= 3.2.3.3 =
+* Added:      $changed_values variable to save hooks denoting the old values on a save.
+* Added:      Pointers to Extensions on load.
+* Modified:   CSS Output for the background field.
+
+= 3.2.3.2 =
+* Fixed:      Validation error messages not appearing on save.
+* Modified:   Speed boost on validation types.
+* Added:      Apache mod_rewrite check.  This should solve many issues we've been seeing regarding mod_rewrite noe being enabled.
+
+= 3.2.3.1 =
+* Fixed:      Sortable field not saving properly.
+* Fixed:      Erroneous data in admin.less
+* Updated:    sample-config.php.  Sortable checkbox field example now uses true/false instead of text meant for textbox example.
+
+= 3.2.3 =
+* Fixed:      Responsive issues with spacing and dimension fields.
+
+= 3.2.2.16 =
+* Fixed:      Style conflicts with WP 3.9. Added register filter to fields via id.
+
+= 3.2.2.15 =
+* Fixed:      Metaboxes issues.
+
+= 3.2.2.14 =
+* Modified:   Some admin panel stylings. Now perfect with mobile hover. Also fixed an issue
+              with the slidedown width for sections. No more 2 empty pixels.
+
+= 3.2.2.13 =
+* Added:      Tick mark if section has sub sections. Hidden when subsections expanded.
+
+= 3.2.2.12 =
+* Fixed:      Compiler hook in the customizer now passes the CSS.
+
+= 3.2.2.11 =
+* Fixed:      Compiler hook now properly fires in the customizer.
+
+= 3.2.2.10 =
+* Fixed:      Validation error with headers already being set.
+
+= 3.2.2.9 =
+* Fixed:      Added mode for width/height to override dimensions css output.
+
+= 3.2.2.8 =
+* Fixed:      Restoring lost formatting from multiple merges.
+
+= 3.2.2.7 =
+* Fixed:      New sorter default values get set properly now.  ;)
+
+= 3.2.2.6 =
+* Added:      `data` and `args` can now be set to sorter! Just make sure to have it be a key based on what
+              you want it to display as. IE: `array('Main'=>'sidebars')`
+
+= 3.2.2.5 =
+* Added:      Prevent Redux from firing on AJAX heartbeat, but added hook for it 'redux/ajax/heartbeat'.
+* Fixed:      Removed erroneous 's' character from HTML.
+
+= 3.2.2.4 =
+* Added:	  Check to make sure a field isn't empty after the filter. If it is empty, skip over it.
+
+= 3.2.2.3 =
+* Added:	  Subsections now show icon if they have it. Show text only (without indent) if they do not.
+
+= 3.2.2.2 =
+* Added:	  Set a section or field argument of `'panel' => false` to skip over that field or panel and
+              hide it. It will still be registered with defaults saved, but not display. This can be useful
+              for things like the customizer.
+
+= 3.2.2.1 =
+* Added:	  SUBSECTIONS! Just add `'subsection' => true` to any section that isn't a divide/callback and
+              isn't the first section in your panel.  ;)
+
+= 3.2.1.2 =
+* Fixed:      Info field didn't intend within section.
+
+= 3.2.1.1 =
+* Fixed:      Compiler hook wasn't running.
+
+
+= 3.1.9.44 =
+* Fixed:      Small bug in image_select javascript.
+
+= 3.1.9.43 =
+* Added:      Import hook, just because we can.  :)
+
+= 3.1.9.42 =
+* Fixed:      Customizer now TRULY outputting CSS if output_tag is set to false.
+
+= 3.1.9.41 =
+* Fixed:      Reset section, etc. Discovered an odd WordPress thing.
+
+= 3.1.9.40 =
+* Fixed:      Image_select size override.
+* Fixed:      Customizer save not firing the compiler hook.
+* Fixed:      Customizer not outputting CSS if output_tag is set to false.
+* Fixed:      Small empty variable check. Undefined index in the defaults generating function.
+
+= 3.1.9.39 =
+* Fixed:      WP 3.9 update made editor field button look ugly.
+* Fixed:      Save hook not firing when save_default set to false.
+
+= 3.1.9.38 =
+* Fixed:      Reset section anomalies.  Maybe.
+
+= 3.1.9.37 =
+* Fixed:      Array of values in required not recognized.
+
+= 3.1.9.36 =
+* Fixed:      Updated hint defaults to prevent index warning.
+
+= 3.1.9.35 =
+* Fixed:      Removed leftover debug code.
+
+= 3.1.9.34 =
+* Added:      New readonly argument for text field.
+
+= 3.1.9.33 =
+* Fixed:      Reset/Reset section actions hooks now fire properly.
+
+= 3.1.9.32 =
+* Fixed:      When developer uses section field but does not specify an indent argument.
+
+= 3.1.9.31 =
+* Fixed:      Dynamic URL for slides
+* Fixed:      Accidently removed reset action on section reset. Restored.
+
+= 3.1.9.30 =
+* Fixed:      Section defaults bug for certain field types.
+
+= 3.1.9.29 =
+* Fixed:      Dynamic URL if site URL changed now updates media properly if attachement exists.
+
+= 3.1.9.28 =
+* Fixed:      Customizer now correctly does live preview.
+
+= 3.1.9.27 =
+* Fixed:      Special enqueue case fix.
+
+= 3.1.9.26 =
+* Added:      A few more hooks for defaults and options.
+* Fixed:      Small undefined index error.
+* Added:      Section key generation via title.
+* Modified:   File intending.
+
+= 3.1.9.25 =
+* Fixed:      Custom menus not displaying options panel.
+
+= 3.1.9.24 =
+* Fixed:      Single checkbox option not retaining checked value.
+* Fixed:      Border field returning bad CSS in CSS compiler.
+
+= 3.1.9.23 =
+* Fixed:      Import/Export fix.  Thanks, CGlingener!
+
+= 3.1.9.22 =
+* Added:      Save warning now is sticky to the top and responsive.
+* Fixed:      Mobile fixes for Redux. Looks great on small screens how.
+* Fixed:      Slight CSS fixes.
+* Fixed:      Compiler fixes and added notices.
+* Added:      Import/Export more reasonable text.
+
+= 3.1.9.21 =
+* Added:      `force_output` are on the field level to bypass the required check that removes the output
+              if the field is hidden. Thanks @rffaguiar.
+
+= 3.1.9.20 =
+* Fixed:      Rare case (mediatemple grid server) when file_get_contents won't work outside of the
+              uploads dir. Used curl to grab the font HTML.  ;)
+
+= 3.1.9.19 =
+* Fixed:      Undefined index for admin bar.
+
+= 3.1.9.18 =
+* Fixed:      SMALL issue with WordPress 3.9. Now it works.  ;)
+
+= 3.1.9.17 =
+* Fixed:      Info and divide field now work with required.
+
+= 3.1.9.16 =
+* Added:      Fallback. Now if the media, slides, or background URL doesn't match the site URL, but the
+              attachment ID is present, the data is updated.
+
+= 3.1.9.15 =
+* Fixed:      Last tab not properly set.  Slow rendering.
+
+= 3.1.9.14 =
+* Modified:   Replaced transients with cookies.
+
+= 3.1.9.13 =
+* Fixed:      Undefined variable issues for new required methods.
+
+= 3.1.9.12 =
+* Fixed:      Default_show display error with a non-array being steralized.
+* Added:      Multiple required parent value checking! Booya!
+* Fixed:      Sections now fold with required.
+
+= 3.1.9.11 =
+* Fixed:      select2 not rendering properly when dev_mode = false, because of ace_editor fix.
+* Fixed:      Removed mistakenly compiled test code from redux.js.
+
+= 3.1.9.10 =
+* Fixed:      ace_editor not rendering properly in certain instances.
+* Modified:   Small change to import_export field in checking for existing instance of itself.
+
+= 3.1.9.9 =
+* Fixed:      import_export not rendering when the menutype argument was set to menu
+
+= 3.1.9.8 =
+* Fixed:      Ace_editor not enqueued unless used. MEMORY HOG.
+
+= 3.1.9.7 =
+* Fixed:      Color_Gradient transparency to was being auto-selected if from way transparent.
+* Fixed:	  Enqueue select with slider for local dev.
+
+= 3.1.9.6 =
+* Modified:   removed add_submenu_page when creating a submenu for us in the WP admin area.  WP
+              approved API is used in it's place to being Redux up to wp.org theme check standards.
+
+= 3.1.9.5 =
+* Fixed:      Massive speed issue with button_set. Resolved.
+* Fixed:      Issue where default values throws an error if ID is not set.
+
+= 3.1.9.4 =
+* Fixed:      Continuing effort to ensure proper loading of config from child themes.
+
+= 3.1.9.3 =
+* Fixed:      Import/Export array search bug if section['fields'] is not defined.
+
+= 3.1.9.2 =
+* Fixed:      Inconsistencies in import/export across different versions of PHP.
+
+= 3.1.9.1 =
+* Fixed:      Redux checks for child or parent theme exclusively before loading.
+
+= 3.1.9 =
+* Updated:    RGBA Field stability.  Thank you, SilverKenn.
+
+= 3.1.8.23 =
+* Modified:   Separated Import/Export from the core.  It can now be used as a field.
+
+= 3.1.8.22 =
+* Fixed:      Typography custom preview text/size not outputting.
+* Fixed:      No font selected in typography would default to 'inherit'.
+* Fixed:      Hint feature kicking back a notice if no title was specified.
+
+= 3.1.8.21 =
+* Fixed:      Sortable field, when used a checkboxes, were all checked by default, even when set not to be.
+* Fixed:      button_set field not setting properly in multi mode.
+
+= 3.1.8.20 =
+* Fixed:      Javascript console object not printing options object.
+* Fixed:      Load errors from child themes no longer occur.
+
+= 3.1.8.19 =
+* Modified:   Typography word and letter spacing now accept negative values.
+* Modified:   Typography preview shows spaces between upper and lower case groupings.
+* Fixed:      Compiler output for slider field.
+
+= 3.1.8.18 =
+* Fixed:      update_check produced a fatal error on a local install with no internet connection.
+* Modified:   Google font CSS moved to header so pages will pass HTML5 validation.
+
+= 3.1.8.17 =
+* Fixed:      Compiler hook failing on slider.
+
+= 3.1.8.16 =
+* Fixed:      Error on update_check when the response code was something other than 200.
+* Modified:   Removed Google font CSS line from header (because it's in the footer via wp_enqueue_style.
+
+= 3.1.8.15 =
+* Added:      Admin notice for new builds of Redux on Github as they become available.  This feature is
+              available on in dev_mode, and may be turned off by setting the `update_notice` argument to
+              false.  See the Arguments page of the wiki for more details.
+* Added:      text-transform option for the typography field.
+* Fixed:      image_select images not resizing properly in FF and IE.
+* Fixed:      Layout for the typography field, so everything isn't smushed together.  The new layout is
+              as follows:
+                  [family-font] [backup-font]
+                  [style] [script] [align] [transform]
+                  [size] [height] [word space] [letter space]
+                  [color]
+
+= 3.1.8.14 =
+* Added:      Newsletter sign-up popup at first load of the Redux options panel.
+
+= 3.1.8.12 =
+* Added:      Added PHP 5.2 support for import/export.
+
+= 3.1.8.11 =
+* Added:      Action hooks for options reset and options reset section.
+* Added:      Theme responsive for date picker.
+
+= 3.1.8.10 =
+* Added:      New slider.  Better looking UI, double handles and support for floating
+              point values.  See the wiki for more info.
+
+= 3.1.8.9 =
+* Fixed:      link_color field showing notice on default, if user enters no defaults.
+* Fixed:      Fixed tab notice in framework.php if no tab parameter is set in URL.
+
+= 3.1.8.8 =
+* Added:      Typography improvements.
+
+= 3.1.8.7 =
+* Added:      Hints!  More info:  https://github.com/ReduxFramework/ReduxFramework/wiki/Using-Hints-in-Fields
+
+= 3.1.8.6 =
+* Added:      Complete Wordpress admin color styles. Blessed LESS/SCSS mixins.  ;)
+
+= 3.1.8.5 =
+* Added:      Font family not required for the typography module any longer.
+
+= 3.1.8.4 =
+* Added:      Support for using the divide field in folding.
+* Added:      Error trapping in typography.js for those still attempting to use
+              typography with no font-family.
+
+= 3.1.8.3 =
+* Added:      Full asynchronous font loading.
+* 
+= 3.1.8.2 =
+* Added:      email_not_empty validation field.
+* Reverted:   email validation field only checks for valid email.  not_empty check moved
+              to new validation field.
+
+= 3.1.8.1 =
+* Fixed:      Hide demo hook wasn't hiding demo links.
+
+= 3.1.8 =
+* Fixed:    Improper enqueue in tracking class.
+* Fixed:    Few classes missed for various fields.
+* Fixed:    Spacing field kicking back notices and warnings when 'output' wasn't set.
+* Modified: Added file_exists check to all include lines in framework.php
+* Fixed:    Background field now works with dynamic preview as it should.
+* Fixed:    Extension fields now enqueueing properly.
+* Added:    Text-align to typography field.
+* Fixed:    Servers returning forwards slashes in TEMPLATEPATH, while Redux is installed
+            embedded would not show options menu.
+* Fixed:    On and Off for switch field not displaying language translation.
+* Fixed:    email validation allowing a blank field.
+* Fixed:    Now allow for empty values as valid keys.
+* Added:    Dismiss option to admin notices (internal function)
+
+= 3.1.6 =
+* Fixed:    CSS spacing issue
+* Fixed:    Customizer now works and doesn't break other customizer fields outside of Redux.
+* Fixed:    Several minor bug fixes
+* Added:    Metabox support via extension http://reduxframework.com/extensions/
+* Added:    Admin-bar menu
+* Fixed:    Section field now folds.
+* Fixed:    wp_content_dir path now handles double forward slashes.
+* Fixed:    Typography field missing italics in Google fonts.
+* Fixed:    Default color in border field not saving properly.
+* Fixed:    hex2rgba in class.redux_helpers.php changed to static.
+* Fixed:    'sortable' field type not saving options as default.
+* Fixed:    Specified default color not set when clicking the color box default button.
+* Fixed:    Sorter field options are now saved as default in database.
+* Fixed:    Issues with checkboxes displaying default values instead of labels.
+* Fixed:    Outstanding render issues with spacing field.
+* Fixed:    Plugins using Redux from load failure.
+* Fixed:    'not_empty' field validation.
+* Fixed:    Media field.
+* Added:    'read-only' option for media text field.
+* Added:    'mode' option to image_select, so CSS output element may be specified.
+* Added:    Admin Bar menu for option panel.
+* Modified: Removed raw_align field and added align option to raw field.
+            See wiki for more info.
+* Modified: media field 'read-only' to 'readonly' to vonform to HTML standards.
+* Removed:  EDD extension. It never belonged in Core and will be re-released as a
+            downloadable extension shortly
+* Removed:  Group field, temporarily.
+* Removed:  wp_get_current_user check.  See
+            https://github.com/ReduxFramework/ReduxFramework/wiki/How-to-fix-%22Fatal-error%3A-Call-to-undefined-function-wp_get_current_user%28%29-%22
+ 
+= 3.1.5 =
+* Typography font arrays may not contain comma spaces.
+* Merge in pull request - 542, code cleanup and better readability
+* Change how HTML is output to support metaboxes
+* CSS only on pages that matter, better checks.
+* font-backup in typography now appends to font-family in output and compiler.
+* More fixes for Google font css outputting.
+* Addded output and compiler to field_image_select.  Images will be output as 'background-image'.
+* Fixed output in field_background.
+* Prevent standard fonts from outputting to Google fonts CSS call.
+* class_exists in field_section checking for incorrect classname.
+* sample_config fix.
+* Compiler not outputting CSS without output set to comthing other than false.
+* Google fonts not rendering on frontend.
+* Rewrote sample_config as a class
+
+= 3.1.4 =
+* Fixed error in redux-framework.php.
+* Added select_image field.
+
+= 3.1.3 =
+* Fixed a few undefined variables
+* Removed old code from the repo.
+* Fix for validation.
+* Remove the compiler hook by default.
+* Fix to sortable field.
+* Added an extra check for link color. Removes user error.
+* Localization updates.
+* Error in slides.
+* Fixed the info box bug with spacing and padding.
+* Fixed the first item in each section having WAY too much padding.  ;)
+* Fixed section reset issue where values weren't being saved to the db properly.
+
+= 3.1.2 =
+* Feature - Sortable select boxes!
+* Feature - Reset a section only or the whole panel!
+* New Field - RGBA Color Field!
+* Improvement - Use of REM throughout.
+* Fixed Typography - Fix output option and various small bugs.
+* Fixed Border - Fix output option and various small bugs.
+* Fixed Dimensions - Fix output option and various small bugs.
+* Fixed Image_select - Various small bugs.
+* Fixed Slides - Various small bugs.
+* Fixed Sortable - Using native jQuery UI library same as within WordPress.
+* Fixed Slider and Spinner Input Field - Values now move to the closest valid
+  value in regards to the step, automatically.
+* Fixed Ace Editor
+* FEATURE - All CSS/JS files are compiled into a single file now! Speed
+  improvements for the backend.
+* Fix in how WordPress data is received, improved some output.
+* Fix for various fields not triggering fold/compiler/save.
+* Fixed elusive icons to use the new version and classes.
+* Fixed media thumb to only be the thumbnail version.
+* Fixed admin https error with WordPress core not renaming URL.
+* Placeholders throughout the framework are now properly there.
+* Feature - Setting to not save defaults to database on load.
+* Fixed - Computability issue with GT3 builder.
+* Fixed localization issue with default values.
+* Language - Added Russian
+* Feature - Media now can have any content type passed in to limit content types.
+* Allow negative values in typography and other fields.
+* WordPress 3.8 computability.
+* CSS validation issue.
+* Feature - User contributed text direction feature.
+* EDD Extension now fully function for plugins or themes.
+* Removed get_theme_data() fallbacks, we're well pass WordPress 3.4 now.  ;)
+* A ton of other small updates and improvements.
 
 = 3.1.0 =
 * Fix Issue 224 - Image Select width was breaking the panel.

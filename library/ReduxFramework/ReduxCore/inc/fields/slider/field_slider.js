@@ -1,93 +1,204 @@
-/* global redux_change */
-jQuery(document).ready(function() {
-	jQuery('.redux_slider').each(function() {
-		//slider init
-		var slider = redux.slider[jQuery(this).attr('rel')];
-	
-		jQuery(this).slider({
-			value: parseInt(slider.val, null),
-			min: parseInt(slider.min, null),
-			max: parseInt(slider.max, null),
-			step: parseInt(slider.step, null),
-			range: "min",
-			slide: function(event, ui) {
-				var input = jQuery("#" + slider.id);
-				input.val(ui.value);	
-				redux_change(input);
-			}
-		});
+(function($) {
+    "use strict";
 
-		// Limit input for negative
-		var neg = false;
-		if (parseInt(slider.min, null) < 0) {
-			neg = true;
-		}
+    // Return true for float value, false otherwise
+    function is_float(mixed_var) {
+        return +mixed_var === mixed_var && (!(isFinite(mixed_var))) || Boolean((mixed_var % 1));
+    }
 
-		jQuery(".slider-input").numeric({
-			allowPlus: false,
-			allowMinus: neg,
-			min: slider.min,
-			max: slider.max
-		});
+    // Return number of integers after the decimal point.
+    function decimalCount(res) {
+        var q = res.toString().split('.');
+        return q[1].length;
+    }
 
-	});
-	
-	// Update the slider from the input and vice versa
-	jQuery(".slider-input").keyup(function() {
+    function loadSelect(myClass, min, max, res, step) {
 
-		jQuery(this).addClass('sliderInputChange');
+        //var j = step + ((decCount ) - (step )); //  18;
 
-	});
+        for (var i = min; i <= max; i = i + res) {
+            //var step = 2;
 
-	// Update the slider from the input and vice versa
-	jQuery(".slider-input").focus(function() {
+            //if (j === (step + ((decCount ) - (step )))) {
+            var n = i;
+            if (is_float(res)) {
+                var decCount = decimalCount(res);
+                n = i.toFixed(decCount);
+            }
 
-		if ( !jQuery(this).hasClass('sliderInputChange') ) {
-			return;
-		}
-		jQuery(this).removeClass('sliderInputChange');
+            $(myClass).append(
+                    '<option value="' + n + '">' + n + '</option>'
+                    );
+            //j = 0;
+            //}
+            //j++;
+        }
+    }
 
-		var slider = redux.slider[jQuery(this).attr('id')];
-		value = parseInt(jQuery(this).val());
-		if (value > slider.max) {
-			value = slider.max;
-		} else if (value < slider.min) {
-			value = slider.min;
-		} else {
-			value = Math.round(value / slider.step) * slider.step;
-		}
+    $(document).ready(function() {
+        $('div.redux-slider-container').each(function() {
 
-		jQuery('#' + slider.id + '-slider').slider("value", value);
-		jQuery("#" + slider.id).val(value);
+            var start, toClass, defClassOne, defClassTwo, connectVal;
+            var DISPLAY_NONE    = 0;
+            var DISPLAY_LABEL   = 1;
+            var DISPLAY_TEXT    = 2;
+            var DISPLAY_SELECT  = 3;
 
-	});
+            var mainID = $(this).data('id');
 
-	jQuery('.slider-input').typeWatch({
-		callback:function(value){
+            var minVal          = $(this).data('min');
+            var maxVal          = $(this).data('max');
+            var stepVal         = $(this).data('step');
+            var handles         = $(this).data('handles');
+            var defValOne       = $(this).data('default-one');
+            var defValTwo       = $(this).data('default-two');
+            var resVal          = $(this).data('resolution');
+            var displayValue    = parseInt(($(this).data('display')));
+            var rtlVal          = Boolean($(this).data('rtl'));
+            var floatMark       = ($(this).data('float-mark'));
 
-			if ( !jQuery(this).hasClass('sliderInputChange') ) {
-				return;
-			}
-			jQuery(this).removeClass('sliderInputChange');
+            var rtl;
+            if (rtlVal === true) {
+                rtl = 'rtl';
+            } else {
+                rtl = 'ltr';
+            }
 
-			var slider = redux.slider[jQuery(this).attr('id')];
-			value = parseInt(jQuery(this).val());
-			if (value > slider.max) {
-				value = slider.max;
-			} else if (value < slider.min) {
-				value = slider.min;
-			} else {
-				value = Math.round(value / slider.step) * slider.step;
-			}
-			
+            // range array
+            var range = [minVal, maxVal];
 
-			jQuery('#' + slider.id + '-slider').slider("value", value);
-			jQuery("#" + slider.id).val(value);
+            // Set default values for dual slides.
+            var startTwo = [defValOne, defValTwo];
 
-		},
-		wait:400,
-		highlight:false,
-		captureLength:1
-	});
+            // Set default value for single slide
+            var startOne = [defValOne];
 
-});
+            var inputOne, inputTwo;
+            if (displayValue == DISPLAY_TEXT) {
+                defClassOne = $('.redux-slider-input-one-' + mainID);
+                defClassTwo = $('.redux-slider-input-two-' + mainID);
+
+                inputOne = defClassOne;
+                inputTwo = defClassTwo;
+            } else if (displayValue == DISPLAY_SELECT) {
+                defClassOne = $('.redux-slider-select-one-' + mainID);
+                defClassTwo = $('.redux-slider-select-two-' + mainID);
+
+                loadSelect(defClassOne, minVal, maxVal, resVal, stepVal);
+
+                if (handles === 2) {
+                    loadSelect(defClassTwo, minVal, maxVal, resVal, stepVal);
+                }
+
+            } else if (displayValue == DISPLAY_LABEL) {
+                defClassOne = $('#redux-slider-label-one-' + mainID);
+                defClassTwo = $('#redux-slider-label-two-' + mainID);
+            } else if (displayValue == DISPLAY_NONE) {
+                defClassOne = $('.redux-slider-value-one-' + mainID);
+                defClassTwo = $('.redux-slider-value-two-' + mainID);
+            }
+
+            var classOne, classTwo;
+            if (displayValue == DISPLAY_LABEL) {
+                var x = [defClassOne, 'html'];
+                var y = [defClassTwo, 'html'];
+
+                classOne = [x];
+                classTwo = [x, y];
+            } else {
+                classOne = [defClassOne];
+                classTwo = [defClassOne, defClassTwo];
+            }
+
+            if (handles === 2) {
+                start       = startTwo;
+                toClass     = classTwo;
+                connectVal  = true;
+            } else {
+                start = startOne;
+                toClass     = classOne;
+                connectVal  = 'lower';
+            }
+
+            var slider = $(this).noUiSlider({
+                range:      range,
+                start:      start,
+                handles:    handles,
+                step:       stepVal,
+                connect:    connectVal,
+                behaviour:  "tap-drag",
+                direction:  rtl,
+                serialization: {
+                    resolution: resVal,
+                    to:         toClass,
+                    mark:       floatMark,
+                },
+                slide: function() {
+                    if (displayValue == DISPLAY_LABEL) {
+                        if (handles === 2) {
+                            var inpSliderVal = slider.val();
+                            $('input.redux-slider-value-one-' + mainID).attr('value', inpSliderVal[0]);
+                            $('input.redux-slider-value-two-' + mainID).attr('value', inpSliderVal[1]);
+                        } else {
+                            $('input.redux-slider-value-one-' + mainID).attr('value', slider.val());
+                        }
+                    }
+
+                    if (displayValue == DISPLAY_SELECT) {
+                        $('.redux-slider-select-one').select2('val', slider.val()[0]);
+
+                        if (handles === 2) {
+                            $('.redux-slider-select-two').select2('val', slider.val()[1]);
+                        }
+                    }
+
+                    redux_change(jQuery(this).parents('.redux-field-container:first').find('input'));
+                },
+            });
+
+            if (displayValue === DISPLAY_TEXT) {
+                inputOne.keydown(function(e) {
+
+                    var sliderOne = slider.val();
+                    var value = parseInt(sliderOne[0]);
+
+                    switch (e.which) {
+                        case 38:
+                            slider.val([value + 1, null]);
+                            break;
+                        case 40:
+                            slider.val([value - 1, null]);
+                            break;
+                        case 13:
+                            e.preventDefault();
+                            break;
+                    }
+                });
+
+                if (handles === 2) {
+                    inputTwo.keydown(function(e) {
+                        var sliderTwo = slider.val();
+                        var value = parseInt(sliderTwo[1]);
+
+                        switch (e.which) {
+                            case 38:
+                                slider.val([null, value + 1]);
+                                break;
+                            case 40:
+                                slider.val([null, value - 1]);
+                                break;
+                            case 13:
+                                e.preventDefault();
+                                break;
+                        }
+                    });
+                }
+            }
+        });
+        $('select.redux-slider-select-one, select.redux-slider-select-two').select2({
+            width:          'resolve',
+            triggerChange:  true,
+            allowClear:     true
+        });
+    });
+})(jQuery);
