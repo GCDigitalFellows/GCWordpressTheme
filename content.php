@@ -3,6 +3,7 @@ global $wheniwasbad_options;
 $show_blog_sidebar = $wheniwasbad_options['blog_sidebar'];
 if (is_page()) {
 	$sidebar_position = get_post_meta($post->ID, 'sidebar_position' , true);
+	$content_class = 'row';
 } else {
 	if ($show_blog_sidebar) {
 		$sidebar_position = $wheniwasbad_options['blog_sidebar_position'];	
@@ -26,7 +27,7 @@ if ( ! is_singular() || ! is_page() ) {
 }
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class("row clearfix"); ?> role="article">
+<article id="post-<?php the_ID(); ?>" <?php post_class("clearfix"); ?> role="article">
 	<div class="<?php echo $content_class; ?>">
 		<?php if ( ! is_singular() && has_post_thumbnail()) {
 		   $large_image_url = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'large');
@@ -34,9 +35,17 @@ if ( ! is_singular() || ! is_page() ) {
 		   echo get_the_post_thumbnail($post->ID, 'thumbnail',array('class' => 'media-object')); 
 		   echo '</a>';
 		 }?>
-		 <div class="media-body">
+		<?php if ( ! is_singular() || ! is_page() ) { ?>
+			<div class="media-body">
+		<?php } else { ?>
+			<div>
+		<?php } ?>
 			<?php if ( ! is_singular() && get_the_title() != '' ) : ?>
-				<header class="entry-header media-heading">
+				<?php if ( ! is_singular() || ! is_page() ) { ?>
+					<header class="entry-header media-heading">
+				<?php } else { ?>
+					<header class="entry-header">
+				<?php } ?>
 					<h3><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => 'Permalink to: ', 'after' => '' ) ); ?>" rel="bookmark"><?php the_title(); ?>
 						<?php if (get_post_format() == 'link') : ?>
 							<i class="glyphicon glyphicon-external-link"></i>
