@@ -78,8 +78,9 @@ class CMB_Meta_Box {
 			elseif ( $post_id )
 				$values = (array) get_post_meta( $post_id, $field['id'], false );
 
-
-			$this->fields[] = new $class( $field['id'], $field['name'], (array) $values, $field );
+			if ( class_exists( $class ) ) {
+				$this->fields[] = new $class( $field['id'], $field['name'], (array) $values, $field );
+			}
 
 		}
 
@@ -117,7 +118,12 @@ class CMB_Meta_Box {
 
 	function enqueue_styles() {
 
-		wp_enqueue_style( 'cmb-styles', trailingslashit( CMB_URL ) . 'style.css' );
+		$suffix = CMB_DEV ? '' : '.min';
+
+		if ( version_compare( get_bloginfo( 'version' ), '3.8', '>=' ) )
+			wp_enqueue_style( 'cmb-styles', trailingslashit( CMB_URL ) . "css/dist/cmb$suffix.css" );
+		else
+			wp_enqueue_style( 'cmb-styles', trailingslashit( CMB_URL ) . 'css/legacy.css' );
 
 		foreach ( $this->fields as $field )
 			$field->enqueue_styles();
@@ -142,7 +148,7 @@ class CMB_Meta_Box {
 
 		$this->_meta_box['context'] = empty($this->_meta_box['context']) ? 'normal' : $this->_meta_box['context'];
 		$this->_meta_box['priority'] = empty($this->_meta_box['priority']) ? 'low' : $this->_meta_box['priority'];
-		
+
 		// Backwards compatablilty.
 		if ( isset( $this->_meta_box['show_on']['key'] ) ) {
 			$this->_meta_box['show_on'][ $this->_meta_box['show_on']['key'] ] = $this->_meta_box['show_on']['value'];
@@ -150,9 +156,12 @@ class CMB_Meta_Box {
 			unset( $this->_meta_box['show_on']['value'] );
 		}
 
-		foreach ( (array) $this->_meta_box['pages'] as $page )
-			if ( apply_filters( 'cmb_show_on', true, $this->_meta_box ) )
+		foreach ( (array) $this->_meta_box['pages'] as $page ) {
+			$show = apply_filters( 'cmb_show_on', true, $this->_meta_box );
+			if ( $show ) {
 				add_meta_box( $this->_meta_box['id'], $this->_meta_box['title'], array(&$this, 'show'), $page, $this->_meta_box['context'], $this->_meta_box['priority'] ) ;
+			}
+		}
 
 	}
 
@@ -173,21 +182,21 @@ class CMB_Meta_Box {
 		if ( ! $post_id || ! isset( $meta_box['show_on']['id'] ) )
 			return $display;
 
-		
+
 
 		// If value isn't an array, turn it into one
 		$meta_box['show_on']['id'] = ! is_array( $meta_box['show_on']['id'] ) ? array( $meta_box['show_on']['id'] ) : $meta_box['show_on']['id'];
-		
+
 		return in_array( $post_id, $meta_box['show_on']['id'] );
 
 	}
 
 	// Add for Page Template
 	function add_for_page_template( $display, $meta_box ) {
-		
+
 		$post_id = isset( $_GET['post'] ) ? $_GET['post'] : null;
 
-		if ( ! $post_id ) 
+		if ( ! $post_id )
 			$post_id  = isset( $_POST['post_id'] ) ? $_POST['post_id'] : null;
 
 		if ( ! $post_id || ! isset( $meta_box['show_on']['page-template'] ) )
@@ -198,7 +207,7 @@ class CMB_Meta_Box {
 
 		// If value isn't an array, turn it into one
 		$meta_box['show_on']['page-template'] = !is_array( $meta_box['show_on']['page-template'] ) ? array( $meta_box['show_on']['page-template'] ) : $meta_box['show_on']['page-template'];
-		
+
 		return in_array( $current_template, $meta_box['show_on']['page-template'] );
 
 	}
@@ -221,7 +230,7 @@ class CMB_Meta_Box {
 	 */
 	static function layout_fields( array $fields ) { ?>
 
-		<table class="form-table cmb_metabox">
+		<div class="cmb_metabox">
 
 			<?php $current_colspan = 0;
 
@@ -229,49 +238,52 @@ class CMB_Meta_Box {
 
 				if ( $current_colspan == 0 ) : ?>
 
-					<tr>
+					<div class="cmb-row">
 
 				<?php endif;
 
 				$current_colspan += $field->args['cols'];
 
-				$classes = array('field');
+				$classes = array( 'field', get_class($field) );
 
 				if ( ! empty( $field->args['repeatable'] ) )
 					$classes[] = 'repeatable';
 
-				$classes[] = get_class($field);
+				if ( ! empty( $field->args['sortable'] ) )
+					$classes[] = 'cmb-sortable';
 
-				$classes = 'class="' . esc_attr( implode(' ', array_map( 'sanitize_html_class', $classes ) ) ) . '"';
+				$attrs = array(
+					sprintf( 'id="%s"', sanitize_html_class( $field->id ) ),
+					sprintf( 'class="%s"', esc_attr( implode(' ', array_map( 'sanitize_html_class', $classes ) ) ) )
+				);
 
-				$attrs = array();
-
+				// Field Repeatable Max.
 				if ( isset( $field->args['repeatable_max']  ) )
-					$attrs[] = 'data-rep-max="' . intval( $field->args['repeatable_max'] ) . '"';
-
-				$attrs = implode( ' ', $attrs );
+					$attrs[] = sprintf( 'data-rep-max="%s"', intval( $field->args['repeatable_max'] ) );
 
 				?>
 
-				<td style="width: <?php esc_attr_e( $field->args['cols'] / 12 * 100 ); ?>%" colspan="<?php esc_attr_e( $field->args['cols'] ); ?>">
-					<div <?php echo $classes; ?> <?php echo $attrs; ?>>
-						<?php $field->display(); ?>
-					</div>
-				</td>
+				<div class="cmb-cell-<?php echo intval( $field->args['cols'] ); ?>">
 
-				<?php if ( $current_colspan == 12 ) :
+						<div <?php echo implode( ' ', $attrs ); ?>>
+							<?php $field->display(); ?>
+						</div>
+
+						<input type="hidden" name="_cmb_present_<?php esc_attr_e( $field->id ); ?>" value="1" />
+
+				</div>
+
+				<?php if ( $current_colspan == 12 || $field === end( $fields ) ) :
 
 					$current_colspan = 0; ?>
 
-					</tr>
+					</div><!-- .cmb-row -->
 
 				<?php endif; ?>
 
-				<input type="hidden" name="_cmb_present_<?php esc_attr_e( $field->id ); ?>" value="1" />
-
 			<?php endforeach; ?>
 
-		</table>
+		</div>
 
 	<?php }
 
@@ -280,7 +292,7 @@ class CMB_Meta_Box {
 		foreach ( $values as $key => $value ) {
 
 			if ( false !== strpos( $key, 'cmb-group-x' ) || false !==  strpos( $key, 'cmb-field-x' ) )
-				unset( $values[$key] ); 
+				unset( $values[$key] );
 
 			elseif ( is_array( $value ) )
 				$values[$key] = $this->strip_repeatable( $value );
@@ -318,6 +330,7 @@ class CMB_Meta_Box {
 				$field['repeatable'] = true;
 
 			$field_obj = new $class( $field['id'], $field['name'], $value, $field );
+
 			$field_obj->save( $post_id, $value );
 
 		}
