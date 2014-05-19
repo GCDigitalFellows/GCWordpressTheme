@@ -243,6 +243,8 @@ var options = {
     closeOnSwipeUpOrDown: true,
     // Emulate touch events on mouse-pointer devices such as desktop browsers:
     emulateTouchEvents: true,
+    // Stop touch events from bubbling up to ancestor elements of the Gallery:
+    stopTouchEventsPropagation: false,
     // Hide the page scrollbars: 
     hidePageScrollbars: true,
     // Stops any touches on the container from scrolling the page:
@@ -641,7 +643,7 @@ blueimp.Gallery([
         href: 'https://www.youtube.com/watch?v=VIDEO_ID',
         type: 'text/html',
         youtube: 'VIDEO_ID',
-        poster: 'https://img.youtube.com/vi/VIDEO_ID/0.jpg'
+        poster: 'https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg'
     },
     {
         title: 'Banana',
@@ -651,6 +653,8 @@ blueimp.Gallery([
     }
 ]);
 ```
+
+If the `href` and `poster` properties are undefined, they are set automatically based on the video ID.
 
 Please note that the Gallery YouTube integration requires a browser with [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage) support, which excludes IE7.
 
@@ -674,6 +678,8 @@ blueimp.Gallery([
     }
 ]);
 ```
+
+If the `href` property is undefined, it is set automatically based on the video ID.
 
 Please note that the Gallery Vimeo integration requires a browser with [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage) support, which excludes IE7.
 
