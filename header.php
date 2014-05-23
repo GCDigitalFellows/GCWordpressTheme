@@ -4,7 +4,7 @@
 * inserts document header information and the page header/top nav to every page
 */
 ?>
-<?php global $wheniwasbad_options; ?>
+<?php global $gctheme_options; ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]><html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if (IE 7)&!(IEMobile)]><html <?php language_attributes(); ?> class="no-js lt-ie9 lt-ie8"><![endif]-->
@@ -16,22 +16,27 @@
 		<title><?php bloginfo('name'); ?><?php is_front_page() ? bloginfo('description') : wp_title('|'); ?></title>
 
 		<!-- icons & favicons -->
+		<?php if (isset($gctheme_options['favicon_url']) && $gctheme_options['favicon_url']['url'] !== "") : ?>
 
-		<!-- Opera Speed Dial Favicon -->
-		  <link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/speeddial-160px.png" />
+			<!-- Custom Favicon -->
+			<link rel="icon" type="image/png" href="<?php echo $gctheme_options['favicon_url']['url']; ?>">
 
-		<!-- For Apple displays: -->
-		<link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-iphone.png">
-		<link rel="apple-touch-icon" sizes="76x76" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-ipad.png">
-		<link rel="apple-touch-icon" sizes="120x120" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-iphone-retina.png">
-		<link rel="apple-touch-icon" sizes="152x152" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-ipad-retina.png">
+		<?php else : ?>
+			<!-- Opera Speed Dial Favicon -->
+			  <link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/speeddial-160px.png" />
 
-		<!-- For Nokia -->
-		<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-iphone.png">
-		<!-- For everything else -->
+			<!-- For Apple displays: -->
+			<link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-iphone.png">
+			<link rel="apple-touch-icon" sizes="76x76" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-ipad.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-iphone-retina.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-ipad-retina.png">
 
-		<?php $favicon_url = ($wheniwasbad_options['favicon_url']!='') ? $wheniwasbad_options['favicon_url'] : get_template_directory_uri() . '/library/images/icons/favicon.png'; ?>
-		<link rel="icon" type="image/png" href="<?php echo $favicon_url; ?>">
+			<!-- For Nokia -->
+			<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/touch-icon-iphone.png">
+			<!-- For everything else -->
+			<link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/favicon.png">
+
+		<?php endif; ?>
 
 		<!-- or, set /favicon.ico for IE10 win -->
 		<meta name="msapplication-TileColor" content="#f01d4f">
@@ -40,18 +45,18 @@
 
 		<!-- WordPress head functions -->
 		<?php wp_head(); ?>
+
 	</head>
 
 	<?php
-	$nav_position = $wheniwasbad_options['nav_position'];
-	$navbar_style = $wheniwasbad_options['nav_style'];
+	$navbar_style = $gctheme_options['nav_style'];
 
 	$navheader_class='navbar-default ';
 
 	if ($navbar_style_inverted)
 		$navheader_class = 'navbar-inverted ';
 
-	switch ($nav_position) {
+	switch ($gctheme_options['opt-header-scroll']) {
 		case 'fixed':
 			$navheader_class .= 'navbar-fixed-top';
 			$body_style = 'navbar-fixed-offset';
@@ -65,23 +70,17 @@
 			$navheader_class .= 'navbar-static-top';
 			$body_style = 'navbar-no-offset';
 	}
-
-	if ($wheniwasbad_options['header_bg_image'] && $wheniwasbad_options['header_bg_image']['url']) {
-		$navheader_styles = 'style="background-image: url(\'' . $wheniwasbad_options['header_bg_image']['url'] . '\');"';
-	} else {
-		$navheader_styles = 'style="background-image: url(\'' . get_template_directory_uri() . '/library/theme/images/header_bg.gif' . '\');"';
-	}
 	?>
 
-	<body <?php body_class($body_style); ?> data-navpos="<?php echo $nav_position; ?>">
+	<body <?php body_class($body_style); ?> data-navpos="<?php echo $gctheme_options['opt-header-scroll']; ?>">
 
-		<header class="navbar <?php echo $navheader_class; ?> clearfix" role="banner" <?php echo $navheader_styles; ?>>
+		<header id="main_header" class="navbar <?php echo $navheader_class; ?> clearfix" role="banner" >
 
 			<div class="container" style="position: relative;">
 
 				<div class="row" style="margin-bottom: 0;">
 
-				<?php if ( $wheniwasbad_options['search_bar'] ) : ?>
+				<?php if ( $gctheme_options['search_bar'] ) : ?>
 
 					<div class="col-sm-8 col-md-10">
 
@@ -117,23 +116,25 @@
 					    		'walker' => new wp_bootstrap_navwalker()
 						)); ?>
 
+						<div class="clearfix"></div>
+
 					<?php endif; ?>
 
-					<?php if ( ($wheniwasbad_options['branding_logo'] && $wheniwasbad_options['branding_logo']['url']) || ($wheniwasbad_options['site_name'] && get_bloginfo()) ): ?>
+					<?php if ( ($gctheme_options['branding_logo'] && $gctheme_options['branding_logo']['url']) || ($gctheme_options['site_name'] && get_bloginfo()) ): ?>
 
 					    <a class="navbar-brand" id="logo" title="<?php echo get_bloginfo('description'); ?>" href="<?php echo home_url(); ?>">
 
-							<?php if($wheniwasbad_options['branding_logo'] && $wheniwasbad_options['branding_logo']['url']) : ?>
+							<?php if($gctheme_options['branding_logo'] && $gctheme_options['branding_logo']['url']) : ?>
 
-								<img id="branding-logo" src="<?php echo $wheniwasbad_options['branding_logo']['url']; ?>" alt="<?php echo get_bloginfo('description'); ?>" />
+								<img id="branding-logo" src="<?php echo $gctheme_options['branding_logo']['url']; ?>" alt="<?php echo get_bloginfo('description'); ?>" />
 
 							<?php else: ?>
 
-								<img id="branding-logo" src="<?php echo get_template_directory_uri() . '/library/theme/images/gcdi_logo-circle.svg'; ?>" alt="<?php echo get_bloginfo('description'); ?>" onerror="this.src=gcdi_logo-circle.png"/>
+								<img id="branding-logo" src="<?php echo get_template_directory_uri() . '/library/images/gcdi_logo-circle.svg'; ?>" alt="<?php echo get_bloginfo('description'); ?>" onerror="this.src=gcdi_logo-circle.png"/>
 
 							<?php endif; ?>
 
-							<?php if($wheniwasbad_options['site_name'] && get_bloginfo()) bloginfo('name'); ?>
+							<?php if($gctheme_options['site_name'] && get_bloginfo()) bloginfo('name'); ?>
 
 						</a>
 
@@ -141,7 +142,7 @@
 
 					</div>
 
-				<?php if ( $wheniwasbad_options['search_bar'] ) : ?>
+				<?php if ( $gctheme_options['search_bar'] ) : ?>
 
 					<div class="col-xs-6 col-sm-4 col-md-2">
 						<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
@@ -182,9 +183,7 @@
 
 					</div>
 
-					<a title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">
-						<img id="sitewide-logo" src="<?php echo get_template_directory_uri() . '/library/theme/images/GC_logo-white.svg'; ?>" alt="The CUNY Graduate Center" onerror="this.src=GC_logo-white.png"/>
-					</a>
+					<a id="sitewide_logo" title="The Graduate Center, City University of New York" href="http://www.gc.cuny.edu">The Graduate Center, City University of New York</a>
 
 				</div>
 

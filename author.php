@@ -92,7 +92,7 @@
 									<p><i class="glyphicon glyphicon-pencil"></i> Original post by <a href="<?php echo get_author_posts_url($original_post->post_author); ?>" title="Author page for <?php echo get_the_author_meta('display_name', $original_post->post_author); ?>"><?php echo get_the_author_meta('display_name', $original_post->post_author); ?></a></p>
 									<p><i class="glyphicon glyphicon-calendar-empty"></i> <time datetime="<?php echo get_comment_date(DATE_W3C,$comment->comment_ID); ?>" ><?php echo get_comment_date(get_option('date_format'),$comment->comment_ID); ?></time></p>
 									<p><i class="glyphicon glyphicon-bookmark"></i> <a href="<?php echo get_permalink($comment->comment_post_ID); ?>" title="On: '<?php echo get_the_title($comment->comment_post_ID); ?>'" rel="bookmark">Permalink</a>
-									<?php edit_comment_link( __( 'Edit', 'wheniwasbad' ), ' &nbsp;&bull;&nbsp; ', '' ); ?></p>
+									<?php edit_comment_link( __( 'Edit', 'gcwordpresstheme' ), ' &nbsp;&bull;&nbsp; ', '' ); ?></p>
 								</aside>
 			 				</div>
 						</div>

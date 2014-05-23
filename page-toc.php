@@ -15,10 +15,10 @@ Template Name: TOC Page Template
 <?php if (have_posts()) : while ( have_posts() ) : the_post(); ?>
 
 	<?php 
-		global $wheniwasbad_options;
+		global $gctheme_options;
 		$sidebar_position = get_post_meta($post->ID, 'sidebar_position' , true);
 		$sidebar_widget_group = get_post_meta($post->ID, 'sidebar_widgets' , true);
-		$hide_empty_sidebar = $wheniwasbad_options['hide_widgets'];
+		$hide_empty_sidebar = $gctheme_options['hide_widgets'];
 		if ( ! is_active_sidebar($sidebar_widget_group) && $hide_empty_sidebar) {
 			$main_class = "col-md-12";
 			$sidebar_class = "";

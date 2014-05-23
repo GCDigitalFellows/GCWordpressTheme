@@ -12,10 +12,10 @@ Template Name: Full-width Jumbotron
 	$post_thumbnail_id = get_post_thumbnail_id();
 	$featured_src = wp_get_attachment_image_src( $post_thumbnail_id, 'wpbs-featured-home' );
 	
-	global $wheniwasbad_options;
+	global $gctheme_options;
 	$sidebar_position = get_post_meta($post->ID, 'sidebar_position' , true);
 	$sidebar_widget_group = get_post_meta($post->ID, 'sidebar_widgets' , true);
-	$hide_empty_sidebar = $wheniwasbad_options['hide_widgets'];
+	$hide_empty_sidebar = $gctheme_options['hide_widgets'];
 
 	$jumbotron_contents = get_post_meta($post->ID, 'jumbotron_contents' , true);
 	$jumbotron_bg_color = get_post_meta($post->ID, 'jumbotron_bg_color' , true);

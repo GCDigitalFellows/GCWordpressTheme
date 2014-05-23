@@ -9,7 +9,7 @@ Template Name: Pinterest Blog
 <div id="content" class="content-no-margin clearfix parallax-gc" data-type="background" data-bg-speed="15" >
 
 <?php
-	global $wheniwasbad_options;
+	global $gctheme_options;
 	$use_carousel = get_post_meta($post->ID, 'carousel_enable' , true);
 	$carousel_cats = get_post_meta($post->ID, 'carousel_categories',true);
 	$carousel_only_images = get_post_meta($post->ID, 'carousel_only_images',true);
@@ -109,7 +109,7 @@ Template Name: Pinterest Blog
 
 		$sidebar_position = get_post_meta($post->ID, 'sidebar_position' , true);
 		$sidebar_widget_group = get_post_meta($post->ID, 'sidebar_widgets' , true);
-		$hide_empty_sidebar = $wheniwasbad_options['hide_widgets'];
+		$hide_empty_sidebar = $gctheme_options['hide_widgets'];
 		if ( ! is_active_sidebar($sidebar_widget_group) && $hide_empty_sidebar) {
 			$main_class = "col-md-12";
 			$sidebar_class = "";

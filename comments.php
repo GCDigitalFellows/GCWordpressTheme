@@ -54,8 +54,8 @@ comments page
 	?>
 	
 	<?php
-		global $wheniwasbad_options;
-		$suppress_comments_message = $wheniwasbad_options['suppress_comments_message'];
+		global $gctheme_options;
+		$suppress_comments_message = $gctheme_options['suppress_comments_message'];
 
 		if (is_page() && $suppress_comments_message) :
 	?>

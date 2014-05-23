@@ -1,11 +1,11 @@
 <?php get_header(); ?>
 
 <?php 
-	global $wheniwasbad_options;
-	$hide_empty_sidebar = $wheniwasbad_options['hide_widgets'];
-	$show_blog_sidebar = $wheniwasbad_options['blog_sidebar'];
-	$sidebar_widget_group = $wheniwasbad_options['blog_sidebar_widgets'];
-	$sidebar_position = $wheniwasbad_options['blog_sidebar_position'];
+	global $gctheme_options;
+	$hide_empty_sidebar = $gctheme_options['hide_widgets'];
+	$show_blog_sidebar = $gctheme_options['blog_sidebar'];
+	$sidebar_widget_group = $gctheme_options['blog_sidebar_widgets'];
+	$sidebar_position = $gctheme_options['blog_sidebar_position'];
 	if ( is_active_sidebar($sidebar_widget_group) && ! $hide_empty_sidebar && $show_blog_sidebar ) {
 		if ( $sidebar_position == 'left' ) {
 			$main_class = "col-md-9 col-md-push-3";
@@ -30,7 +30,7 @@
 			?>
 
 		    <h3 class="search_title h3">
-		    	<?php echo __('Search Found ','wheniwasbad') . $total_results . __(' Matches for "','wheniwasbad') . '<em>' . get_search_query() . __('"','wheniwasbad') . "</em>"; ?>
+		    	<?php echo __('Search Found ','gcwordpresstheme') . $total_results . __(' Matches for "','gcwordpresstheme') . '<em>' . get_search_query() . __('"','gcwordpresstheme') . "</em>"; ?>
 		    </h3>
 			
 		</header> <!-- page header -->
@@ -60,7 +60,7 @@
 				
 				<?php else : ?>
 
-					<h3><?php _e('Sorry, there was nothing found matching those search terms.','wheniwasbad'); ?></h3>
+					<h3><?php _e('Sorry, there was nothing found matching those search terms.','gcwordpresstheme'); ?></h3>
 		
 				<?php endif; ?>
 				

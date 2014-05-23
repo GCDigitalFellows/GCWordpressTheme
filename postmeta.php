@@ -2,7 +2,7 @@
 $avatar_class = ' pull-right';
 $extra_classes = '';
 $icon = 'glyphicon glyphicon-star';
-$label_class = 'label-light-blue';
+$label_class = 'label-blue-light';
 if (is_page_template('page-right-sidebar.php')) {
 	$extra_classes = ' text-right';
 	$avatar_class = ' pull-left';
@@ -16,14 +16,14 @@ if (is_sticky()) {
 switch ($post_format) {
 	case 'aside': 
 		$icon='glyphicon glyphicon-pushpin';
-		$label_class='label-warning';
+		$label_class='label-pink';
 		break;
 	case 'gallery':
 		$label_class='label-orange';
 		$icon='glyphicon glyphicon-camera';
 		break;
 	case 'image': 
-		$label_class='label-info';
+		$label_class='label-yellow';
 		$icon='glyphicon glyphicon-picture';
 		break;
 	case 'link':
@@ -31,29 +31,29 @@ switch ($post_format) {
 		$icon='glyphicon glyphicon-link';
 		break;
 	case 'quote': 
-		$label_class='label-success';
+		$label_class='label-green';
 		$icon='glyphicon glyphicon-star-empty';
 		break;
 	case 'status': 
-		$label_class='label-light-blue';
+		$label_class='label-blue-light';
 		$icon='glyphicon glyphicon-info-sign';
 		break;
 	case 'attachment':
-		$label_class='label-light-green';
+		$label_class='label-green-light';
 		$icon='glyphicon glyphicon-paper-clip';
 		break;
 	case 'video':
-		$label_class='label-important';
+		$label_class='label-gray';
 		$icon='glyphicon glyphicon-facetime-video';
 		break;
 	case 'audio':
-		$label_class='label-warning';
+		$label_class='label-green-dark';
 		$icon='glyphicon glyphicon-headphones';
-		break;		
+		break;
 	case 'post':
 	default:
-		if (is_attachment()) {	
-			$label_class='label-dark-green';
+		if (is_attachment()) {
+			$label_class='label-blue-dark';
 			$icon='glyphicon glyphicon-paper-clip';
 		} elseif (!is_page()) { //other edge cases or default post
 			$icon='glyphicon glyphicon-pencil';
@@ -83,7 +83,7 @@ switch ($post_format) {
 		<p><i class="glyphicon glyphicon-calendar"></i> <time datetime="<?php the_time(DATE_W3C); ?>" ><?php the_time(get_option('date_format')); ?></time></p>
 	<?php endif; ?>
 		<p><i class="glyphicon glyphicon-bookmark"></i> <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => 'Permalink to: ', 'after' => '' ) ); ?>" rel="bookmark">Permalink</a>
-		<?php edit_post_link( __( 'Edit', 'wheniwasbad' ), ' &nbsp;&bull;&nbsp; ', '' ); ?></p>
+		<?php edit_post_link( __( 'Edit', 'gcwordpresstheme' ), ' &nbsp;&bull;&nbsp; ', '' ); ?></p>
 	<?php if ( comments_open() && get_comments_number() ) : ?>
 		<p><i class="glyphicon glyphicon-comment"></i> <?php comments_popup_link( __("Leave a comment","wheniwasbad"), __( "One Comment", "wheniwasbad"), __( "% Comments", "wheniwasbad" ) ); ?></p>
 	<?php endif; // comments_open() ?>

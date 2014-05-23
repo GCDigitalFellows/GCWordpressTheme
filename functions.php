@@ -8,11 +8,12 @@ Modified: 20131003
 /************* DEBUGGING TOOLS ****************/
 // const WPBS_DEBUGGING turns on or off the theme's development/debugging tools
 define("WPBS_DEBUGMODE", false);
-// Redux Options
-if (!class_exists('ReduxFramework')) {
-    require_once (dirname(__FILE__) . '/library/ReduxFramework/ReduxCore/framework.php');
-}
-require_once ('redux-options.php');
+/**
+ * Add Redux Framework & extras
+ */
+require get_template_directory() . '/admin/admin-init.php';
+global $gctheme_options;
+
 // Custom Metaboxes and Fields (https://github.com/jaredatch/Custom-Metaboxes-and-Fields-for-WordPress)
 if (!class_exists('cmb_Meta_Box')) {
     define('CMB_URL', get_template_directory_uri() . '/library/Custom-Meta-Boxes/');
@@ -42,7 +43,18 @@ add_filter('show_admin_bar', '__return_false');
 function theme_setup() {
     add_theme_support('post-thumbnails'); // wp thumbnails (sizes handled in functions.php)
     set_post_thumbnail_size(200, 200, true); // default thumb size
-    add_theme_support('custom-background'); // wp custom background
+    add_theme_support( 'custom-background', apply_filters( 'gctheme_custom_background_args', array(
+        'default-color' => 'ffffff',
+        'default-image' => '',
+    ) ) );
+    // Enable support for HTML5 markup.
+    add_theme_support( 'html5', array(
+        'comment-list',
+        'search-form',
+        'comment-form',
+        'gallery',
+        'caption',
+    ) );
     add_theme_support('automatic-feed-links'); // rss thingy
     //	add_theme_support('bootstrap-gallery'); //TODO: add theme support to turn off custom galleries
     add_theme_support('post-formats', // post formats
@@ -160,17 +172,15 @@ function comments_layout($comment, $args, $depth) {
 				</div>
 				<div class="col-md-10 comment-text">
 					<?php printf('<h4>%s</h4>', get_comment_author_link()) ?>
-					<?php edit_comment_link(__('Edit', 'wheniwasbad'), '<span class="edit-comment btn btn-sm btn-info"><i class="glyphicon glyphicon-white glyphicon-edit"></i>', '</span>') ?>
+                    <time datetime="<?php echo comment_time('Y-m-j'); ?>"><a href="<?php echo htmlspecialchars(get_comment_link($comment->comment_ID)) ?>"><?php comment_time('F jS, Y'); ?> </a></time><?php edit_comment_link(__('[Edit]', 'gcwordpresstheme')) ?>
 
                     <?php if ($comment->comment_approved == '0'): ?>
        					<div class="alert-message success">
-          				<p><?php _e('Your comment is awaiting moderation.', 'wheniwasbad') ?></p>
+          				<p><?php _e('Your comment is awaiting moderation.', 'gcwordpresstheme') ?></p>
           				</div>
 					<?php endif; ?>
 
-                    <?php comment_text() ?>
-
-                    <time datetime="<?php echo comment_time('Y-m-j'); ?>"><a href="<?php echo htmlspecialchars(get_comment_link($comment->comment_ID)) ?>"><?php comment_time('F jS, Y'); ?> </a></time>
+                    <p><?php comment_text() ?></p>
 
 					<?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
                 </div>
@@ -179,6 +189,38 @@ function comments_layout($comment, $args, $depth) {
     <!-- </li> is added by WordPress automatically -->
 <?php
 } // don't remove this bracket!
+
+/*
+ * Change the comment reply link to use 'Reply to &lt;Author First Name>'
+ */
+function add_comment_author_to_reply_link($link, $args, $comment){
+
+    $comment = get_comment( $comment );
+
+    // If no comment author is blank, use 'Anonymous'
+    if ( empty($comment->comment_author) ) {
+        if (!empty($comment->user_id)){
+            $user=get_userdata($comment->user_id);
+            $author=$user->user_login;
+        } else {
+            $author = __('Anonymous');
+        }
+    } else {
+        $author = $comment->comment_author;
+    }
+
+    // If the user provided more than a first name, use only first name
+    if(strpos($author, ' ')){
+        $author = substr($author, 0, strpos($author, ' '));
+    }
+
+    // Replace Reply Link with "Reply to &lt;Author First Name>"
+    $reply_link_text = $args['reply_text'];
+    $link = str_replace($reply_link_text, 'Reply to ' . $author, $link);
+
+    return $link;
+}
+add_filter('comment_reply_link', 'add_comment_author_to_reply_link', 10, 3);
 
 // Display trackbacks/pings callback function
 function list_pings($comment, $args, $depth) {
@@ -206,8 +248,8 @@ function custom_password_form() {
     global $post;
     $label = 'pwbox-' . (empty($post->ID) ? rand() : $post->ID);
     $o = '<div class="clearfix"><form class="protected-post-form" action="' . get_option('siteurl') . '/wp-login.php?action=postpass" method="post">
-	' . '<p>' . __("This post is password protected. To view it please enter your password below:", 'wheniwasbad') . '</p>' . '
-	<label for="' . $label . '">' . __("Password:", 'wheniwasbad') . ' </label><div class="input-group"><input name="post_password" id="' . $label . '" type="password" size="20" /><input type="submit" name="Submit" class="btn btn-primary" value="' . esc_attr__("Submit", 'wheniwasbad') . '" /></div>
+	' . '<p>' . __("This post is password protected. To view it please enter your password below:", 'gcwordpresstheme') . '</p>' . '
+	<label for="' . $label . '">' . __("Password:", 'gcwordpresstheme') . ' </label><div class="input-group"><input name="post_password" id="' . $label . '" type="password" size="20" /><input type="submit" name="Submit" class="btn btn-primary" value="' . esc_attr__("Submit", 'gcwordpresstheme') . '" /></div>
 	</form></div>
 	';
     return $o;
@@ -310,9 +352,15 @@ if (!function_exists("theme_styles")) {
     }
 }
 add_action('wp_enqueue_scripts', 'theme_styles');
+
+//add custom user styles and styles from the theme options
 add_action('wp_head', function () {
     include ('redux-styles.php');
-});
+    if ($gctheme_options['opt-custom-css']) {
+        echo '<style type="text/css" title="custom-user-css">' . $gctheme_options['opt-custom-css'] . '</style>';
+    }
+},999);
+
 // enqueue javascript
 if (!function_exists("theme_js")) {
     function theme_js() {
@@ -337,19 +385,17 @@ if (!function_exists("theme_js")) {
     }
 }
 add_action('wp_enqueue_scripts', 'theme_js');
-// IE js hacks
-add_action('wp_head', function () {
-    echo '<!--[if lt IE 9]>
-	<script src="//css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->';
-});
+
+// add custom user js in page footer
 add_action('wp_footer', function () {
-    echo '<!--[if lt IE 7 ]>
-	<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-	<script>window.attachEvent(\'onload\',function(){CFInstall.check({mode:\'overlay\'})})</script>
-<![endif]-->';
-});
+    global $gctheme_options;
+    if (isset($gctheme_options['opt-custom-js'])) {
+        echo '<script type="text/javascript" title="theme-options-css">' . $gctheme_options['opt-custom-js'] . '</script>';
+    }
+    if (isset($gctheme_options['opt-google-analytics'])) {
+        echo '<script type="text/javascript" title="theme-options-google-analytics">' . $gctheme_options['opt-google-analytics'] . '</script>';
+    }
+},99);
 /************* DEBUGGING TOOLS ****************/
 if (WPBS_DEBUGMODE) {
     // use runtime-compiled less instead of compiled css

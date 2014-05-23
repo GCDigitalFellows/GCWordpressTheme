@@ -9,7 +9,7 @@ Template Name: Homepage
 <div id="content" class="content-no-margin clearfix">
 			
 <?php
-	global $wheniwasbad_options;
+	global $gctheme_options;
 	$use_carousel = get_post_meta($post->ID, 'carousel_enable' , true);
 	$carousel_cats = get_post_meta($post->ID, 'carousel_categories',true);
 	$carousel_only_images = get_post_meta($post->ID, 'carousel_only_images',true);
@@ -25,7 +25,7 @@ Template Name: Homepage
 		$carousel_height_ratio = 2.33;
 	}
 	if ($use_carousel) : ?>
-		
+
 		<div id="myCarousel" class="carousel slide<?php echo $carousel_hide_xs; ?>" data-ride="carousel">
 		    <!-- Carousel items -->
 		    <div class="carousel-inner">
@@ -63,7 +63,7 @@ Template Name: Homepage
 		                			//$the_excerpt = substr( $the_excerpt, 0, $excerpt_length );
 		                			echo $the_excerpt;
 		                	} ?>
-		                
+
 		                <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>" class="btn btn-xs btn-primary">Read more &rsaquo;</a></p>
 	                </div>
 			    </div>
@@ -108,7 +108,7 @@ Template Name: Homepage
 
 		$sidebar_position = get_post_meta($post->ID, 'sidebar_position' , true);
 		$sidebar_widget_group = get_post_meta($post->ID, 'sidebar_widgets' , true);
-		$hide_empty_sidebar = $wheniwasbad_options['hide_widgets'];
+		$hide_empty_sidebar = $gctheme_options['hide_widgets'];
 		if ( ! is_active_sidebar($sidebar_widget_group) && $hide_empty_sidebar) {
 			$main_class = "col-md-12";
 			$sidebar_class = "";

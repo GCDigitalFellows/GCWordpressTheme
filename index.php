@@ -1,11 +1,11 @@
 <?php get_header(); ?>
 
 <?php 	
-	global $wheniwasbad_options;
-	$show_blog_sidebar = $wheniwasbad_options['blog_sidebar'];
-	$sidebar_position = $wheniwasbad_options['blog_sidebar_position'];
-	$sidebar_widget_group = $wheniwasbad_options['blog_sidebar_widgets'];
-	$hide_empty_sidebar = $wheniwasbad_options['hide_widgets'];
+	global $gctheme_options;
+	$show_blog_sidebar = $gctheme_options['blog_sidebar'];
+	$sidebar_position = $gctheme_options['blog_sidebar_position'];
+	$sidebar_widget_group = $gctheme_options['blog_sidebar_widgets'];
+	$hide_empty_sidebar = $gctheme_options['hide_widgets'];
 	if ( ! is_active_sidebar($sidebar_widget_group) && $hide_empty_sidebar) {
 		$main_class = "col-md-12";
 		$sidebar_class = "";
@@ -19,8 +19,8 @@
 		}
 	}
 	
-	$blog_jumbotron = $wheniwasbad_options['blog_jumbotron']; 
-	$jumbotron_content = $wheniwasbad_options['blog_jumbotron_content'];
+	$blog_jumbotron = $gctheme_options['blog_jumbotron']; 
+	$jumbotron_content = $gctheme_options['blog_jumbotron_content'];
 	?>
 
 	<?php if ( $blog_jumbotron && $jumbotron_content ) : ?>

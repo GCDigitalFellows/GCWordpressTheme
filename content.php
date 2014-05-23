@@ -1,12 +1,12 @@
 <?php 
-global $wheniwasbad_options;
-$show_blog_sidebar = $wheniwasbad_options['blog_sidebar'];
+global $gctheme_options;
+$show_blog_sidebar = $gctheme_options['blog_sidebar'];
 if (is_page()) {
 	$sidebar_position = get_post_meta($post->ID, 'sidebar_position' , true);
 	$content_class = 'row';
 } else {
 	if ($show_blog_sidebar) {
-		$sidebar_position = $wheniwasbad_options['blog_sidebar_position'];	
+		$sidebar_position = $gctheme_options['blog_sidebar_position'];	
 	} else {
 		$sidebar_position = 'left'; // default so postmeta is positioned on the right
 	}
@@ -56,14 +56,14 @@ if ( ! is_singular() || ! is_page() ) {
 			<section class="post_content clearfix">
 			<?php 
 				if ( ! is_singular()) {
-					if ( $wheniwasbad_options['use_excerpts'] ) {
+					if ( $gctheme_options['use_excerpts'] ) {
 						the_excerpt();
 					} else {
 						the_content( __("<span class='btn btn-primary pull-right'>Read more <i class='glyphicon glyphicon-chevron-sign-right'></i></span>","wheniwasbad") );
 					}	
 				} else {
 					the_content();
-					wp_link_pages( array( 'before' => '<div class="page-links">' . __( 'Pages:', 'wheniwasbad' ), 'after' => '</div>' ) );
+					wp_link_pages( array( 'before' => '<div class="page-links">' . __( 'Pages:', 'gcwordpresstheme' ), 'after' => '</div>' ) );
 					if ( ! is_front_page() )
 						comments_template( '', true );
 				} 

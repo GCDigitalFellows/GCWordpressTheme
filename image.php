@@ -9,11 +9,11 @@
 get_header(); ?>
 
 <?php 
-	global $wheniwasbad_options;
-	$hide_empty_sidebar = $wheniwasbad_options['hide_widgets'];
-	$show_blog_sidebar = $wheniwasbad_options['blog_sidebar'];
-	$sidebar_widget_group = $wheniwasbad_options['blog_sidebar_widgets'];
-	$sidebar_position = $wheniwasbad_options['blog_sidebar_position'];
+	global $gctheme_options;
+	$hide_empty_sidebar = $gctheme_options['hide_widgets'];
+	$show_blog_sidebar = $gctheme_options['blog_sidebar'];
+	$sidebar_widget_group = $gctheme_options['blog_sidebar_widgets'];
+	$sidebar_position = $gctheme_options['blog_sidebar_position'];
 	if ( is_active_sidebar($sidebar_widget_group) && ! $hide_empty_sidebar && $show_blog_sidebar ) {
 		if ( $sidebar_position == 'left' ) {
 			$main_class = "col-md-9 col-md-push-3";
