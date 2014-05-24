@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<?php 
+<?php
 	global $gctheme_options;
 	$hide_empty_sidebar = $gctheme_options['hide_widgets'];
 	$show_blog_sidebar = $gctheme_options['blog_sidebar'];
@@ -17,29 +17,29 @@
 	} else {
 		$main_class = "col-md-12";
 		$sidebar_class = "";
-	}		
+	}
 ?>
-	
+
 	<div id="content" class="container clearfix">
-	
+
 		<div class="row clearfix">
-				
+
 			<section id="main" role="main" class="<?php echo $main_class; ?>">
 
 				<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-					
+
 					<header class="page-header">
-	
+
 						<h1><?php the_title(); ?></h1>
-	
+
 					</header>
-		
+
 					<?php get_template_part( 'content', get_post_format() ); ?>
-					
+
 					<?php /*if (function_exists('page_navi')) : // if expirimental feature is active ?>
-			
+
 						<?php page_navi(); // use the page navi function ?>
-			
+
 					<?php else : // if it is disabled, display regular wp prev & next links ?>
 						<nav class="wp-prev-next pagenavi">
 							<ul class="clearfix">
@@ -50,27 +50,27 @@
 					<?php endif; */?>
 
 				<?php endwhile; // end of the loop. ?>
-		
+
 				<?php else : ?>
-			
+
 					<? not_found(); ?>
-					
+
 				<?php endif; ?>
 
 			</section> <!-- end #main -->
-			
+
 			<?php if ($sidebar_class != ''): ?>
-	
+
 				<section class="<?php echo $sidebar_class; ?> clearfix">
-	
+
 					<?php get_sidebar($sidebar_widget_group); ?>
-	
+
 				</section>
-	
-			<?php endif; ?>		
-		
-		</div> <!-- row -->		
-    
+
+			<?php endif; ?>
+
+		</div> <!-- row -->
+
 	</div> <!-- end #content -->
 
 <?php get_footer(); ?>

@@ -359,6 +359,81 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		)
 	);
 
+	/* People Custom Post Type */
+
+	$meta_boxes[] = array(
+		'title'      => 'Personal Details',
+		'pages'      => 'gc_person', // Post type
+		'context'    => 'normal',
+		'priority'   => 'high',
+		'fields' => array(
+			array(
+				'id'		=> 'gc_person_affiliations',
+				'name'		=> 'Affiliations',
+				'desc'		=> 'Enter one or more titles and affiliations.',
+				'type'		=> 'group',
+				'repeatable'	=> true,
+				'fields'	=> array(
+					array(
+						'id'		=> 'gc_person_title',
+						'name'		=> 'Title or Position',
+						'desc'		=> 'Enter the person\'s title or position, e.g., Professor of Anthropology',
+						'type'		=> 'text',
+					),
+					array(
+						'id'		=> 'gc_person_affiliation',
+						'name'		=> 'Affiliation',
+						'desc'		=> 'Enter the person\'s institutional affiliation, e.g., The Graduate Center, CUNY',
+						'type'		=> 'text',
+					),
+				)
+			),
+			array(
+				'id'		=> 'gc_person_email',
+				'name'		=> 'Email',
+				'desc'		=> 'Enter the person\'s email address',
+				'type'		=> 'text',
+			),
+			array(
+				'id'		=> 'gc_person_website',
+				'name'		=> 'Website',
+				'desc'		=> 'Enter the URL for the person\'s website',
+				'type'		=> 'text_url',
+			),
+			array(
+				'id'		=> 'gc_person_social_links',
+				'name'		=> 'Social Media Links',
+				'desc'		=> 'Add one or more social media links',
+				'type'		=> 'group',
+				'repeatable'	=> true,
+				'fields'	=> array(
+					array(
+						'id'		=> 'gc_person_social_url',
+						'name'		=> 'Profile URL',
+						'desc'		=> 'Enter the URL to the person\'s profile page, e.g., https://twitter.com/cunydhi',
+						'type'		=> 'text_url',
+					),
+					array(
+						'id'		=> 'gc_person_social_network',
+						'name'		=> 'Network',
+						'desc'		=> 'Select the social network for this link. For other networks, select \'Generic\'',
+						'type'		=> 'select',
+						'options'	=> array(
+							'0'	=> 'CUNY Academic Commons',
+							'1' => 'Facebook',
+							'2'	=> 'Twitter',
+							'5'	=> 'LinkedIn',
+							'4'	=> 'Google+',
+							'3'	=> 'Academia.edu',
+							'6'	=> 'ResearchGate',
+							'7'	=> 'Generic'
+							)
+					),
+				)
+			),
+		)
+	);
+
 	return $meta_boxes;
 
 }

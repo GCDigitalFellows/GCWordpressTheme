@@ -20,6 +20,10 @@ if (!class_exists('cmb_Meta_Box')) {
     require_once ('library/Custom-Meta-Boxes/custom-meta-boxes.php');
     require_once ('library/metaboxes.php');
 }
+
+// Register Custom Post Type for People
+require get_template_directory() . '/gc_person_post_type.php';
+
 // Shortcodes
 require_once ('library/shortcodes.php');
 // custom function for displaying page not found info
@@ -339,7 +343,7 @@ if (!function_exists("theme_styles")) {
             wp_register_style('proxima_cn_font', get_template_directory_uri() . '/library/theme/fonts/proxima_cn/proxima_cn.css', array(), '1.0.0', 'all');
             //wp_register_style('proxima_excn_font', get_template_directory_uri() . '/library/theme/fonts/proxima_excn/proxima_excn.css', array(), '1.0.0', 'all');
             wp_register_style('proxima_std_font', get_template_directory_uri() . '/library/theme/fonts/proxima_std/proxima_std.css', array(), '1.0.0', 'all');
-            wp_register_style('font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css', array(), '4.0.3', 'all');
+            wp_register_style('font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css', array(), '4.1.0', 'all');
             // only enqueue the following styles when needed, but register them here to centralize updates.
             wp_register_style('blueimp-gallery-css', get_template_directory_uri() . '/library/Gallery/css/blueimp-gallery.min.css', array(), '2.12.1', 'all');
 
@@ -355,7 +359,6 @@ add_action('wp_enqueue_scripts', 'theme_styles');
 
 //add custom user styles and styles from the theme options
 add_action('wp_head', function () {
-    include ('redux-styles.php');
     if ($gctheme_options['opt-custom-css']) {
         echo '<style type="text/css" title="custom-user-css">' . $gctheme_options['opt-custom-css'] . '</style>';
     }
