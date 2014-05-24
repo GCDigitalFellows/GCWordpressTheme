@@ -51,6 +51,9 @@ function not_found($content_type = null) { ?>
 					_e("We could not locate any posts tagged with '","wheniwasbad");
 					_e(single_tag_title()."'.");
 					break;
+				case 'people':
+					_e("We could not locate any people in the database'","wheniwasbad");
+					break;
 				default:
 					_e("Sorry, whatever you were looking for was not found.","wheniwasbad");
 			}

@@ -934,6 +934,44 @@ ol.commentlist ul.children li{
   }
 }
 
+/* gc_person archive pages */
+
+.gc_person_info_inner {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	padding: 0 40px;
+}
+
+.gc_person_info {
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+
+.gc_person_info_wrapper {
+	background-color: #ffffff;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: opacity .3s ease-in-out;
+}
+
+.gc_person_image:hover .gc_person_info_wrapper {
+	opacity: 1;
+}
+
+.gc_person_image {
+	position: relative;
+}
+
+.gc_person_thumb {
+	width: 100%;
+	vertical-align: middle;
+}
+
 /* social icons */
 .gc_social_cac,
 .gc_social_facebook,
