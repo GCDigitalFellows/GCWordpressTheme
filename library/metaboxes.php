@@ -18,10 +18,10 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		'priority'   => 'high',
 		'show_on' => array( 'page-template' => array('page-homepage.php','page-jumbotron.php','page-blog.php') ),
 		'fields' => array(
-			array(  
-		        'name'=> 'Jumbotron Contents',  
-		        'desc'  => 'Displayed in place of a page title. Only used on homepage and jumbotron templates. HTML can be used.',  
-		        'id'    => 'jumbotron_contents',  
+			array(
+		        'name'=> 'Jumbotron Contents',
+		        'desc'  => 'Displayed in place of a page title. Only used on homepage and jumbotron templates. HTML can be used.',
+		        'id'    => 'jumbotron_contents',
 		        'type'  => 'wysiwyg',
 				'options' => array(
 					    'wpautop' => true, // use wpautop?
@@ -34,27 +34,27 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 					    'teeny' => false, // output the minimal editor config used in Press This
 					    'dfw' => false, // replace the default fullscreen with DFW (needs specific css)
 					    'tinymce' => true, // load TinyMCE, can be used to pass settings directly to TinyMCE using an array()
-					    'quicktags' => true // load Quicktags, can be used to pass settings directly to Quicktags using an array()	
-					) 
+					    'quicktags' => true // load Quicktags, can be used to pass settings directly to Quicktags using an array()
+					)
 		    ),
 			array(
 		        'name'=> 'Jumbotron Background Color',
-		        'desc'  => 'Pick a background color for the Jumbotron.',  
+		        'desc'  => 'Pick a background color for the Jumbotron.',
 		        'id'    => 'jumbotron_bg_color',
 		        'type'  => 'colorpicker'
 		    ),
-		    array( 
-			    'id'   => 'jumbotron_bg_image', 
-			    'name' => 'Jumbotron Background Image', 
+		    array(
+			    'id'   => 'jumbotron_bg_image',
+			    'name' => 'Jumbotron Background Image',
 			    'desc' => 'Upload or select an image to use as the jumbotron background. Overrides the background color.',
-			    'type' => 'image', 
+			    'type' => 'image',
 			),
 		)
 	);
 
 
 	/* Sidebar Options */
-	
+
 	foreach($GLOBALS['wp_registered_sidebars'] as $key => $val) {
 		$sidebar_list[$key] = $val['name'];
 	}
@@ -66,21 +66,21 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		'context'    => 'side',
 		'priority'   => 'default',
 		'fields' => array(
-		    array(  
-		        'name'=> 'Sidebar Position',  
-		        'desc'  => 'Select the visibility and position of sidebars for this page.',  
+		    array(
+		        'name'=> 'Sidebar Position',
+		        'desc'  => 'Select the visibility and position of sidebars for this page.',
 		        'id'    => 'sidebar_position',
 		        'type'  => 'select',
 				'options' => array(
 					'none' => 'No Sidebar',
-					'left' => 'Left Sidebar', 
+					'left' => 'Left Sidebar',
 					'right' => 'Right Sidebar'
 				)
 		    ),
-			array(  
-		        'name'=> 'Widget Group',  
-		        'desc'  => 'Select a widget group to display in the sidebar on this page.',  
-		        'id'    => 'sidebar_widgets',  
+			array(
+		        'name'=> 'Widget Group',
+		        'desc'  => 'Select a widget group to display in the sidebar on this page.',
+		        'id'    => 'sidebar_widgets',
 		        'type'  => 'select',
 				'options' => $sidebar_list
 		    )
@@ -120,23 +120,23 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		'priority'   => 'high',
 		'show_on' => array( 'page-template' => array('page-homepage.php', 'page-blank.php', 'page-blog.php') ),
 		'fields' => array(
-			array( 
-			    'id'       => 'homepage_additional_pages_above', 
-			    'name'     => 'Include the contents of another page (only the content!) within the homepage, ABOVE the primary content and sidebars.', 
+			array(
+			    'id'       => 'homepage_additional_pages_above',
+			    'name'     => 'Include the contents of another page (only the content!) within the homepage, ABOVE the primary content and sidebars.',
 			    'type'     => 'post_select',
 			    'repeatable'     => true,
 			    'use_ajax' => true,
-			    'query' => array( 
+			    'query' => array(
 			        'post_type' => 'page'
 			    )
 			),
-			array( 
-			    'id'       => 'homepage_additional_pages_below', 
-			    'name'     => 'Include the contents of another page (only the content!) within the homepage, BELOW the primary content and sidebars.', 
+			array(
+			    'id'       => 'homepage_additional_pages_below',
+			    'name'     => 'Include the contents of another page (only the content!) within the homepage, BELOW the primary content and sidebars.',
 			    'type'     => 'post_select',
 			    'repeatable'     => true,
 			    'use_ajax' => true,
-			    'query' => array( 
+			    'query' => array(
 			        'post_type' => 'page'
 			    )
 			),
@@ -208,11 +208,11 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		)
 	);
 
-	
+
 	/* Table of Contents */
 
 	$effect_speed = array(
-		'slow' => 'Slow', 
+		'slow' => 'Slow',
 		'medium' => 'Medium',
 		'fast' => 'Fast'
 	);
@@ -225,27 +225,27 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		'priority'   => 'high',
 		'show_on' => array( 'page-template' => array('page-toc.php') ),
 		'fields' => array(
-		    array(  
+		    array(
 		        'name'=> 'DOM Selector',
-		        'desc'  => 'Comma separated list of header elements to include in the TOC, in hierarchical order. Default is "h1,h2,h3".',  
-		        'id'    => 'toc_selector',  
+		        'desc'  => 'Comma separated list of header elements to include in the TOC, in hierarchical order. Default is "h1,h2,h3".',
+		        'id'    => 'toc_selector',
 		        'type'  => 'text_small'
 			),
-			array(  
+			array(
 		        'name'=> 'TOC Context',
-		        'desc'  => 'The container element that holds all of the elements used to generate the TOC. Can be any valid jQuery selector. Default is the container around the main content.',  
-		        'id'    => 'toc_context',  
+		        'desc'  => 'The container element that holds all of the elements used to generate the TOC. Can be any valid jQuery selector. Default is the container around the main content.',
+		        'id'    => 'toc_context',
 		        'type'  => 'text_small'
 			),
-			array(  
+			array(
 		        'name'=> 'Show and Hide Child Menu Levels',
-		        'desc'  => 'When checked, nested child items are hidden until the parent level is displayed; when unchecked, all items are displayed.',  
-		        'id'    => 'toc_showAndHide',  
+		        'desc'  => 'When checked, nested child items are hidden until the parent level is displayed; when unchecked, all items are displayed.',
+		        'id'    => 'toc_showAndHide',
 		        'type'  => 'checkbox'
 			),
-			array(  
+			array(
 		        'name'=> 'Show Effect',
-		        'desc'  => 'Animation effect used to display nested TOC items',  
+		        'desc'  => 'Animation effect used to display nested TOC items',
 		        'id'    => 'toc_showEffect',
 		        'type'  => 'select',
 		        'options' => array(
@@ -255,16 +255,16 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		        	'slideDown' => 'Slide Down'
 		        )
 			),
-			array(  
+			array(
 		        'name'=> 'Show Effect Speed',
-		        'desc'  => 'Animation speed used to display nested TOC items',  
+		        'desc'  => 'Animation speed used to display nested TOC items',
 		        'id'    => 'toc_showEffectSpeed',
 		        'type'  => 'select',
 		        'options' => $effect_speed
 			),
-			array(  
+			array(
 		        'name'=> 'Hide Effect',
-		        'desc'  => 'Animation effect used to hide nested TOC items',  
+		        'desc'  => 'Animation effect used to hide nested TOC items',
 		        'id'    => 'toc_hideEffect',
 		        'type'  => 'select',
 		        'options' => array(
@@ -274,50 +274,50 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		        	'slideUp' => 'Slide Up',
 		        )
 			),
-			array(  
+			array(
 		        'name'=> 'Hide Effect Speed',
-		        'desc'  => 'Animation speed used to hide nested TOC items',  
+		        'desc'  => 'Animation speed used to hide nested TOC items',
 		        'id'    => 'toc_hideEffectSpeed',
 		        'type'  => 'select',
 		        'options' => $effect_speed
 			),
-			array(  
+			array(
 		        'name'=> 'Smooth Scroll',
-		        'desc'  => 'Animates the page scroll when specific table of content items are clicked and the page moves up or down.',  
-		        'id'    => 'toc_smoothScroll',  
+		        'desc'  => 'Animates the page scroll when specific table of content items are clicked and the page moves up or down.',
+		        'id'    => 'toc_smoothScroll',
 		        'type'  => 'checkbox'
 			),
-			array(  
+			array(
 		        'name'=> 'Smooth Scroll Speed',
-		        'desc'  => 'Animation speed for the smooth scrolling effect.',  
-		        'id'    => 'toc_smoothScrollSpeed',  
+		        'desc'  => 'Animation speed for the smooth scrolling effect.',
+		        'id'    => 'toc_smoothScrollSpeed',
 		        'type'  => 'select',
 		        'options' => $effect_speed
 			),
-			array(  
+			array(
 		        'name'=> 'Item Scroll Offset',
-		        'desc'  => 'Offset (in pixels) from the top of the page and the selected TOC item when jumping to that item.',  
-		        'id'    => 'toc_scrollTo',  
+		        'desc'  => 'Offset (in pixels) from the top of the page and the selected TOC item when jumping to that item.',
+		        'id'    => 'toc_scrollTo',
 		        'type'  => 'text_small'
 			),
-			array(  
+			array(
 		        'name'=> 'Highlight on Scroll',
-		        'desc'  => 'When checked, current TOC item will be highlighted (different background color) while scrolling.',  
-		        'id'    => 'toc_highlightOnScroll',  
+		        'desc'  => 'When checked, current TOC item will be highlighted (different background color) while scrolling.',
+		        'id'    => 'toc_highlightOnScroll',
 		        'type'  => 'checkbox'
 			),
-			array(  
+			array(
 		        'name'=> 'Highlight Offset',
-		        'desc'  => 'Offset (in pixels) from the top of the page and the selected TOC item when jumping to that item.',  
-		        'id'    => 'toc_scrollTo',  
+		        'desc'  => 'Offset (in pixels) from the top of the page and the selected TOC item when jumping to that item.',
+		        'id'    => 'toc_scrollTo',
 		        'type'  => 'text_small'
 			),
-			array(  
+			array(
 		        'name'=> 'Ignore Selector',
-		        'desc'  => 'jQuery selector for items that should not appear in the TOC.',  
-		        'id'    => 'toc_ignoreSelector',  
+		        'desc'  => 'jQuery selector for items that should not appear in the TOC.',
+		        'id'    => 'toc_ignoreSelector',
 		        'type'  => 'text_small'
-			)			
+			)
 		)
 	);
 
@@ -331,28 +331,28 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		'show_on' => array( 'page-template' => array('page-blog.php') ),
 		'fields' => array(
 			array(
-				'id'		=> 'pinterest_columns_width', 
-				'name'		=> 'Column Width', 
+				'id'		=> 'pinterest_columns_width',
+				'name'		=> 'Column Width',
 				'desc'		=> 'Enter the nominal width for each cell (in px).',
 				'type'		=> 'text_small',
 			),
-			array( 
-				'id'		=> 'pinterest_taxonomy', 
-				'name'		=> 'Categories to Include', 
+			array(
+				'id'		=> 'pinterest_taxonomy',
+				'name'		=> 'Categories to Include',
 				'desc'		=> 'Select one or more categories from which to draw posts, or leave blank to include all posts.',
 				'type'		=> 'taxonomy_select',
 				'multiple'	=> true,
 				'taxonomy'	=> 'category'
 			),
 			array(
-				'id'		=> 'pinterest_args', 
-				'name'		=> '(Advanced) Custom WP_Query Arguments', 
+				'id'		=> 'pinterest_args',
+				'name'		=> '(Advanced) Custom WP_Query Arguments',
 				'desc'		=> 'Enter a custom WP_Query string to select/order posts (e.g., "post_type=post&orderby=rand"). Leave blank if you don\'t know what this means.',
 				'type'		=> 'text',
 			),
 			array(
-				'id'		=> 'pinterest_gutter', 
-				'name'		=> 'Gutter Size', 
+				'id'		=> 'pinterest_gutter',
+				'name'		=> 'Gutter Size',
 				'desc'		=> 'The amount of space between blocks (in px)',
 				'type'		=> 'text',
 			),
@@ -431,6 +431,23 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 					),
 				)
 			),
+		)
+	);
+
+	/* project custom post type */
+
+	$meta_boxes[] = array(
+		'title'      => 'Project Details',
+		'pages'      => 'gc_project', // Post type
+		'context'    => 'normal',
+		'priority'   => 'high',
+		'fields' => array(
+			array(
+				'id'		=> 'gc_project_url',
+				'name'		=> 'External URL',
+				'desc'		=> 'Enter an external URL for this project',
+				'type'		=> 'text_url',
+			)
 		)
 	);
 

@@ -26,7 +26,7 @@ if( ! function_exists( 'gc_person_create_post_type' ) ) :
 			'show_in_nav_menus'		=> true,
 			'show_in_admin_bar'		=> true,
 			'menu_position'			=> 20,
-			'menu_icon'				=> '',
+			'menu_icon'				=> 'dashicons-admin-users',
 			'can_export'			=> true,
 			'has_archive'			=> true,
 			'exclude_from_search'	=> false,
@@ -61,7 +61,7 @@ if( ! function_exists( 'gc_person_create_post_type' ) ) :
 			'gc_person',
 			array(
 				'hierarchical' => true,
-				'label' => __( 'People categories' ),
+				'label' => __( 'People Categories' ),
 				'query_var' => true,
 				'rewrite' => array(
 					'slug' => 'people_categories',
@@ -82,6 +82,9 @@ if( ! function_exists( 'gc_person_create_post_type' ) ) :
 	// add some descriptive text below the title
 	add_action( 'edit_form_after_title', 'gc_person_edit_form_after_title' );
 	function gc_person_edit_form_after_title() {
+		$scr = get_current_screen();
+  		if ( $scr->post_type !== 'gc_person' )
+  			return;
 	    echo '<h2>Instructions:</h2><p>A short bio can be added in the content box. Add a picture using the Featured Image on the right side. Enter title, affiliation and contact information in the box below the main editor.';
 	}
 
@@ -156,69 +159,4 @@ if( ! function_exists( 'gc_person_print_social_links' ) ) : // output
 	}
 endif;
 
-if( ! function_exists( 'view_gc_persons_posts' ) ) : // output
-	function view_gc_persons_posts( $num = 4, $do_shortcode = 1, $strip_shortcodes = 0 ) {
-
-		$args = array(
-			'numberposts'     => $num,
-			'offset'          => 0,
-			//'category'        => ,
-			'orderby'         => 'menu_order, post_title', // post_date, rand
-			'order'           => 'DESC',
-			//'include'         => ,
-			//'exclude'         => ,
-			//'meta_key'        => ,
-			//'meta_value'      => ,
-			'post_type'       => 'gc_person',
-			//'post_mime_type'  => ,
-			//'post_parent'     => ,
-			'post_status'     => 'publish',
-			'suppress_filters' => true
-		);
-
-		$posts = get_posts( $args );
-
-		$html = '';
-		foreach ( $posts as $post ) {
-			$meta_name = get_post_meta( $post->ID, '_gc_person_post_name', true );
-			$meta_desc = get_post_meta( $post->ID, '_gc_person_post_desc', true );
-			$img = get_the_post_thumbnail( $post->ID, 'medium' );
-			if( empty( $img ) ) {
-				$img = '<img src="'.plugins_url( '/img/default.png', __FILE__ ).'">';
-			}
-
-
-			if( has_post_thumbnail( $post->ID ) ) {
-				//$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
-				//$img_url = $image[0];
-				$img = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
-				$img_url = $img[0];
-
-				//the_post_thumbnail( 'thumbnail' ); /* thumbnail, medium, large, full, thumb-100, thumb-200, thumb-400, array(100,100) */
-			}
-
-			$content = $post->post_content;
-			if( $do_shortcode == 1 ) {
-				$content = do_shortcode( $content );
-			}
-			if( $strip_shortcodes == 1 ) {
-				$content = strip_shortcodes( $content );
-			}
-
-			$html .= '
-			<div>
-				<h3>'.$post->post_title.'</h3>
-				<div>
-					<p>Name: '.$meta_name.'</p>
-					<p>Description: '.$meta_desc.'</p>
-				</div>
-				<div>'.$img.'</div>
-				<div>'.$content.'</div>
-			</div>
-    		';
-		}
-		$html = '<div class="wrapper">'.$html.'</div>';
-		return $html;
-	}
-endif; // end of function_exists()
 ?>

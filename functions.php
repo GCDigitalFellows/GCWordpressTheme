@@ -21,8 +21,9 @@ if (!class_exists('cmb_Meta_Box')) {
     require_once ('library/metaboxes.php');
 }
 
-// Register Custom Post Type for People
+// Register Custom Post Type for People and Projects
 require get_template_directory() . '/gc_person_post_type.php';
+require get_template_directory() . '/gc_project_post_type.php';
 
 // Shortcodes
 require_once ('library/shortcodes.php');
