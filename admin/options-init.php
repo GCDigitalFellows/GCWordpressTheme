@@ -721,22 +721,22 @@ if (!class_exists('gctheme_Redux_Framework_config')) {
             }
             $theme_info .= '</div>';
 
-            if (file_exists(dirname(__FILE__) . '/../README.md')) {
+            if (file_exists(dirname(__FILE__) . '/shortcodes.html')) {
                 $this->sections['theme_docs'] = array(
                     'icon'      => 'el-icon-list-alt',
-                    'title'     => __('Documentation', Redux_TEXT_DOMAIN),
+                    'title'     => __('Shortcodes', Redux_TEXT_DOMAIN),
                     'fields'    => array(
                         array(
-                            'id'        => '17',
+                            'id'        => 'shortcodes_info',
                             'type'      => 'raw',
-                            'markdown'  => true,
-                            'content'   => file_get_contents(dirname(__FILE__) . '/../README.md')
+                            'markdown'  => false,
+                            'content'   => file_get_contents(dirname(__FILE__) . '/shortcodes.html')
                         ),
                     ),
                 );
             }
 
-                    
+
             $this->sections[] = array(
                 'type' => 'divide',
             );
@@ -750,7 +750,17 @@ if (!class_exists('gctheme_Redux_Framework_config')) {
                         'id'        => 'opt-raw-info',
                         'type'      => 'raw',
                         'content'   => $item_info,
-                    )
+                    ),
+                    array(
+                        'id'   =>'divider_1',
+                        'type' => 'divide'
+                    ),
+                    array(
+                            'id'        => '18',
+                            'type'      => 'raw',
+                            'markdown'  => true,
+                            'content'   => file_get_contents(dirname(__FILE__) . '/../README.md')
+                    ),
                 ),
             );
 
