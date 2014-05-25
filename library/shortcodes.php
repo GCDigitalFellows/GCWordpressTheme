@@ -97,8 +97,8 @@ function bootstrap_gallery($attr) {
 	foreach ($attachments as $id => $attachment) {
 		//$img_lg = wp_get_attachment_image_src($id,'large',false);
 		$img_sm = wp_get_attachment_image_src($id,'full',false);
-		
-		$img = '<img src="' . $img_sm[0] . '" alt="' . $attachment->post_title . '" />';		
+
+		$img = '<img src="' . $img_sm[0] . '" alt="' . $attachment->post_title . '" />';
 		$mosaic .= '<div class="gallery-brick" style="width: '.$col_width.'%;" data-groups="[\'image\']">';
 		$mosaic .= '<a href="' . $img_sm[0] . '" data-gallery="#' . $gallery_id . '">';
 
@@ -111,14 +111,14 @@ function bootstrap_gallery($attr) {
 			$mosaic .= '<p class="caption hidden">' . $the_excerpt . "</p>\n";
 		}
 		$mosaic .= "</div>";
-		
+
 		//$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_url($id) : get_attachment_link($id);
 	}
 
 	$mosaic .= "</div>\n";
 	$mosaic .= <<<EOD
 <script type='text/javascript'>
-	jQuery( document ).ready( function() { 
+	jQuery( document ).ready( function() {
 		blueimpGalleryInit('$gallery_id','$attr');
 		jQuery('#$links_id.galleryitem').each(function(){
 			jQuery(this).width(jQuery('#$links_id').width()/$columns);
@@ -132,7 +132,7 @@ function bootstrap_gallery($attr) {
 			gutterWidth: 0
 		});
 	});
- 
+
     jQuery('.gallery-brick').hover(
         function(){
             jQuery(this).find('.gallery-caption').slideDown(250); //.fadeIn(250)
@@ -143,7 +143,7 @@ function bootstrap_gallery($attr) {
     );
 </script>
 EOD;
-	
+
 	return $mosaic;
 }
 remove_shortcode('gallery','gallery_shortcode');
@@ -156,46 +156,46 @@ function buttons( $atts, $content = null ) {
 	'type' => 'default', /* primary, default, info, success, danger, warning, inverse */
 	'size' => 'default', /* mini, small, default, large */
 	'url'  => '',
-	'text' => '', 
+	'text' => '',
 	), $atts ) );
-	
+
 	if($type == "default"){
 		$type = "";
 	}
-	else{ 
+	else{
 		$type = "btn-" . $type;
 	}
-	
+
 	if($size == "default"){
 		$size = "";
 	}
 	else{
 		$size = "btn-" . $size;
 	}
-	
+
 	$output = '<a href="' . $url . '" class="btn '. $type . ' ' . $size . '">';
 	$output .= $text;
 	$output .= '</a>';
-	
+
 	return $output;
 }
 
-add_shortcode('button', 'buttons'); 
+add_shortcode('button', 'buttons');
 
 // Alerts
 function alerts( $atts, $content = null ) {
 	extract( shortcode_atts( array(
 	'type' => 'alert-info', /* alert-info, alert-success, alert-error */
 	'close' => 'false', /* display close link */
-	'text' => '', 
+	'text' => '',
 	), $atts ) );
-	
+
 	$output = '<div class="fade in alert alert-'. $type . '">';
 	if($close == 'true') {
 		$output .= '<a class="close" data-dismiss="alert">&times;</a>';
 	}
 	$output .= $text . '</div>';
-	
+
 	return $output;
 }
 
@@ -206,19 +206,19 @@ function block_messages( $atts, $content = null ) {
 	extract( shortcode_atts( array(
 	'type' => 'alert-info', /* alert-info, alert-success, alert-error */
 	'close' => 'false', /* display close link */
-	'text' => '', 
+	'text' => '',
 	), $atts ) );
-	
+
 	$output = '<div class="fade in alert alert-block alert-'. $type . '">';
 	if($close == 'true') {
 		$output .= '<a class="close" data-dismiss="alert">&times;</a>';
 	}
 	$output .= '<p>' . $text . '</p></div>';
-	
+
 	return $output;
 }
 
-add_shortcode('block-message', 'block_messages'); 
+add_shortcode('block-message', 'block_messages');
 
 // Block Messages
 function blockquotes( $atts, $content = null ) {
@@ -226,7 +226,7 @@ function blockquotes( $atts, $content = null ) {
 	'float' => '', /* left, right */
 	'cite' => '', /* text for cite */
 	), $atts ) );
-	
+
 	$output = '<blockquote';
 	if($float == 'left') {
 		$output .= ' class="pull-left"';
@@ -235,19 +235,80 @@ function blockquotes( $atts, $content = null ) {
 		$output .= ' class="pull-right"';
 	}
 	$output .= '><p>' . $content . '</p>';
-	
+
 	if($cite){
 		$output .= '<small>' . $cite . '</small>';
 	}
-	
+
 	$output .= '</blockquote>';
-	
+
 	return $output;
 }
 
-add_shortcode('blockquote', 'blockquotes'); 
- 
+add_shortcode('blockquote', 'blockquotes');
 
 
+// list project custom post types
+function list_projects_shortcode( $atts ) {
+
+	// Attributes
+	$args = shortcode_atts(
+		array(
+			'project_categories' => '',
+			'posts_per_page'	=> 10,
+			'offset'	=> 0,
+			'orderby'	=> 'post_date',
+			'order'		=> 'DESC',
+			'include'	=> '',
+			'exclude'	=> '',
+			'meta_key'	=> '',
+			'meta_value'	=> '',
+			'post_mime_type'	=> '',
+			'post_parent'		=> '',
+			'post_status'		=> 'publish',
+			'suppress_filters'	=> true
+		), $atts );
+
+	// Code
+	$args = array_merge($args, array('post_type' => 'gc_project'));
+
+	$proj_query = new WP_Query( $args );
+
+	$output = '';
+
+	while ( $proj_query->have_posts() ) {
+
+		$proj_query->the_post();
+
+		$output .= '<div class="col-xs-6 col-sm-4 col-lg-3"><div class="gc_person_image">';
+
+		if ( has_post_thumbnail() ) {
+
+			$image_url = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail');
+			$image_url = $image_url[0];
+
+		} else {
+
+			$image_url = get_template_directory_uri() . '/library/images/icon-user-default.png';
+
+		}
+
+		$output .= '<img src="' . $image_url .'" alt="' . the_title_attribute('echo=0') . '" class="gc_person_thumb" />';
+
+		$output .= '<div class="gc_person_info_wrapper"><div class="gc_person_info"><div class="gc_person_info_inner">';
+
+		$output .= '<p>' . get_the_excerpt() . '</p>';
+
+		$output .= '<a href="' . get_the_permalink() . '" title="' . the_title_attribute('echo=0') . '" class="btn btn-default btn-xs">Details</a>';
+
+		$output .= '</div></div></div></div><div class="caption text-center">';
+
+		$output .= '<h3>' . get_the_title() . '</h3></div></div>';
+
+	} // end of the loop.
+
+return $output;
+}
+add_shortcode( 'list_projects', 'list_projects_shortcode' );
 
 ?>
