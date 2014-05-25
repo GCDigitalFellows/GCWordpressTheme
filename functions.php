@@ -14,9 +14,9 @@ define("WPBS_DEBUGMODE", false);
 require get_template_directory() . '/admin/admin-init.php';
 global $gctheme_options;
 
-// Custom Metaboxes and Fields (https://github.com/jaredatch/Custom-Metaboxes-and-Fields-for-WordPress)
+// Custom Metaboxes and Fields (https://github.com/humanmade/Custom-Meta-Boxes)
 if (!class_exists('cmb_Meta_Box')) {
-    define('CMB_URL', get_template_directory_uri() . '/library/Custom-Meta-Boxes/');
+    //define('CMB_URL', get_template_directory_uri() . '/library/Custom-Meta-Boxes/');
     require_once ('library/Custom-Meta-Boxes/custom-meta-boxes.php');
     require_once ('library/metaboxes.php');
 }
