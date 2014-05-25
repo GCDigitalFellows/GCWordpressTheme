@@ -74,6 +74,90 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.15 =
+* Fixed:      #1218 - Select2 multi select not accepting any keyboard input.
+
+= 3.2.9.14 =
+* Fixed:      #1228 - CSS fixes
+
+= 3.2.9.13 =
+* Fixed:      #1255 - button_set multi field not saving when all buttons not selected.
+
+= 3.2.9.12 =
+* Fixed:      #1254 - Border field with 0px not outputting properly.
+* Fixed:      #1250 - Typography preview font-size not set in preview.
+* Fixed:      #1247 - Spacing field not outputting properly in `absolute` mode.
+* Modified:   Typography previewing hidden until font inputs are changed.
+
+= 3.2.9.11 =
+* Fixed:      Vendor js not loading properly when dev_mode = true
+* Fixed:      Border field not outputting properly.
+
+= 3.2.9.10 =
+* Modified:   Centralized import/export code in anticipation of new builder features.
+* Fixed:      Removed rogue echo statement.
+
+= 3.2.9.9 =
+* Modified:   select2 loads only when a field requires it.
+
+= 3.2.9.8 =
+* Modified:   More code to load JS on demand for fields require it.
+
+= 3.2.9.7 =
+* Modified:   Field specific JS only loads with active field.
+* Fixed:      Hints stopped working due to classname change.
+
+= 3.2.9.6 =
+* Fixed:      Permissions argument on section array not filtering out raw field.
+
+= 3.2.9.5 =
+* Fixed:      Too many CSS tweaks to list, due to last build.
+* Fixed:      Sortable and Sorter fields now sort without page scroll when page size is under 782px.
+* Fixed:      Hint icon defaults to left position when screen size is under 782px.
+* Fixed:      `permissions` argument for fields and sections erasing saved field data.  See #1231
+
+= 3.2.9.4 =
+* Modified:   Woohoo! Nearly fully responsive. Yanked out all SMOF and NHP field customizations. Lots of little fixes on all browser screens. This will also greatly benefit Metaboxes and other areas of Redux.
+* Fixed:      In dev_mode panel CSS was being loaded 2x.
+
+= 3.2.9.3 =
+* Fixed:      Typography color picker bleeding under other elements.  #1225
+* Fixed:      Hint icon_color index error from builder.  #1222
+
+= 3.2.9.2 =
+* Fixed:      Tracking. It was... odd. Also started our support hooks, UI to come.
+* Fixed:      Now import/export supports multiple instances. I can't believe this has been this way for so long.
+
+= 3.2.9.1 =
+* Fixed:      Spacing field not outputting proper CSS when `mode` was set to absolute, and `all` was set to true.
+* Fixed:      CSS fix for typography.  Color picker would interfere with save/reset bar.
+
+= 3.2.8.21 =
+* Added:      Network admin support! Set argument 'database' to network and data will be saved site-wide. Also two new arguments: network_admin & network_sites for where to show the panel.
+
+= 3.2.8.20 =
+* Fixed:      Redux now ignores any directories that begin with `.` in the extension folder.  See #1213.
+
+= 3.2.8.19 =
+* Fixed:      Redux not saving when validating uploads.
+* Modified:   Dimension field default now accepts either `units` or `unit`.
+
+= 3.2.8.18 =
+* Fixed:      Border field output/compiler formatting.  Removed 'inherit' in place of default values.  See #1208.
+* Fixed:      Trim() warning in framework.php when saving.  See #1209, #1201.
+
+= 3.2.8.17 =
+* Fixed:      Typography not outputting all styles when `all_styles` set to true.
+
+= 3.2.8.16 =
+* Added:      `output` argument for `color` and `color_rgba` fields accepts key/pairs for different modes.  Example:
+```
+              'output' => array('color' => '.site-title, .site-header', 'background-color' => '.site-background')
+```
+
+= 3.2.8.15 =
+* Added:      Customizer hook that can be used to simulate the customizer for live preview in the customizer. `redux/customizer/live_preview`
+
 = 3.2.8.14 =
 * Fixed:      'Cannot send header' issues with typography.
 * Modified:   Google CSS moved into HEAD via WP enqueue.

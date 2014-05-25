@@ -60,7 +60,6 @@ jQuery(document).ready(function($) {
             if (typeof (script) !== undefined) {
                 script = String(script);
             }
-            $('#' + mainID).addClass('typography-initialized');
         }
         // Get the styles and such from the font
         var details = "";
@@ -146,7 +145,7 @@ jQuery(document).ready(function($) {
 
         //remove other elements crested in <head>
         $('.' + _linkclass).remove();
-        if (family !== null && family !== "inherit") {
+        if (family !== null && family !== "inherit" && $('#' + mainID).hasClass('typography-initialized')) {
             //replace spaces with "+" sign
             var the_font = family.replace(/\s+/g, '+');
             if (google) {
@@ -170,9 +169,6 @@ jQuery(document).ready(function($) {
             }
         }
 
-        $('#' + mainID + ' .typography-preview').css('font-size', size + units);
-        $('#' + mainID + ' .typography-preview').css('font-style', "normal");
-
         // Weight and italic
         if (style.indexOf("italic") !== -1) {
             $('#' + mainID + ' .typography-preview').css('font-style', 'italic');
@@ -182,22 +178,11 @@ jQuery(document).ready(function($) {
             $('#' + mainID + ' .typography-font-style').val('');
         }
         $('#' + mainID + ' .typography-font-weight').val(style);
-        $('#' + mainID + ' .typography-preview').css('font-weight', style);
 
-        //show in the preview box the font
-        $('#' + mainID + ' .typography-preview').css('font-family', family + ', sans-serif');
-
-        if (family === 'none' && family === '') {
-            //if selected is not a font remove style "font-family" at preview box
-            $('#' + mainID + ' .typography-preview').css('font-family', 'inherit');
-        }
         if (!height) {
             height = size;
         }
 
-        $('#' + mainID + ' .typography-preview').css('line-height', height + units);
-        $('#' + mainID + ' .typography-preview').css('word-spacing', word + units);
-        $('#' + mainID + ' .typography-preview').css('letter-spacing', letter + units);
         if (size === '') {
             $('#' + mainID + ' .typography-font-size').val('');
         } else {
@@ -212,45 +197,74 @@ jQuery(document).ready(function($) {
         $('#' + mainID + ' .typography-word-spacing').val(word + units);
         $('#' + mainID + ' .typography-letter-spacing').val(letter + units);
 
-        if (color) {
-            $('#' + mainID + ' .typography-preview').css('color', color);
-            $('#' + mainID + ' .typography-preview').css('background-color', getContrastColour(color));
-        }
+        if ($('#' + mainID).hasClass('typography-initialized')) {
+            var isPreviewSize = $('#' + mainID + ' .typography-preview').data('preview-size');
+            
+            if (isPreviewSize == '0') {
+                $('#' + mainID + ' .typography-preview').css('font-size', size + units);
+            }
+            
+            $('#' + mainID + ' .typography-preview').css('font-style', "normal");
+            $('#' + mainID + ' .typography-preview').css('font-weight', style);
+            //show in the preview box the font
+            $('#' + mainID + ' .typography-preview').css('font-family', family + ', sans-serif');
+            if (family === 'none' && family === '') {
+                //if selected is not a font remove style "font-family" at preview box
+                $('#' + mainID + ' .typography-preview').css('font-family', 'inherit');
+            }
+            $('#' + mainID + ' .typography-preview').css('line-height', height + units);
+            $('#' + mainID + ' .typography-preview').css('word-spacing', word + units);
+            $('#' + mainID + ' .typography-preview').css('letter-spacing', letter + units);
 
-        $('#' + mainID + ' .redux-typography-font-family').val(output);
-        $('#' + mainID + ' .typography-style .select2-chosen').text($('#' + mainID + ' .redux-typography-style option:selected').text());
-        $('#' + mainID + ' .typography-script .select2-chosen').text($('#' + mainID + ' .redux-typography-subsets option:selected').text());
+            if (color) {
+                $('#' + mainID + ' .typography-preview').css('color', color);
+                $('#' + mainID + ' .typography-preview').css('background-color', getContrastColour(color));
+            }
 
-        if (align) {
-            $('#' + mainID + ' .typography-preview').css('text-align', align);
-        }
+            $('#' + mainID + ' .redux-typography-font-family').val(output);
+            $('#' + mainID + ' .typography-style .select2-chosen').text($('#' + mainID + ' .redux-typography-style option:selected').text());
+            $('#' + mainID + ' .typography-script .select2-chosen').text($('#' + mainID + ' .redux-typography-subsets option:selected').text());
 
-        if (transform) {
-            $('#' + mainID + ' .typography-preview').css('text-transform', transform);
-        }
-		
-        if (fontVariant) {
-            $('#' + mainID + ' .typography-preview').css('font-variant', fontVariant);
-        }
-		
-        if (decoration) {
-            $('#' + mainID + ' .typography-preview').css('text-decoration', decoration);
-        }
+            if (align) {
+                $('#' + mainID + ' .typography-preview').css('text-align', align);
+            }
 
+            if (transform) {
+                $('#' + mainID + ' .typography-preview').css('text-transform', transform);
+            }
+
+            if (fontVariant) {
+                $('#' + mainID + ' .typography-preview').css('font-variant', fontVariant);
+            }
+
+            if (decoration) {
+                $('#' + mainID + ' .typography-preview').css('text-decoration', decoration);
+            }
+            $('#' + mainID + ' .typography-preview').slideDown();
+        }
+        if (!$('#' + mainID).hasClass('typography-initialized')) {
+            $('#' + mainID).addClass('typography-initialized');
+        }
     }
+
+
     //init for each element
     jQuery('.redux-typography-container').each(function() {
         var family = jQuery(this).find('.redux-typography-family');
         if (family.data('value') !== "") {
             jQuery(family).val(family.data('value'));
         }
+
         typographySelect(family);
+
         window.onbeforeunload = null;
     });
+
     //init when value is changed
     jQuery('.redux-typography').on('change', function() {
         typographySelect(this);
     });
+    
     //init when value is changed
     jQuery('.redux-typography-size, .redux-typography-height, .redux-typography-word, .redux-typography-letter, .redux-typography-align, .redux-typography-transform, .redux-typography-font-variant, .redux-typography-decoration').keyup(function() {
         typographySelect(this);
@@ -271,7 +285,56 @@ jQuery(document).ready(function($) {
     jQuery(".redux-typography-height, .redux-typography-word, .redux-typography-letter").numeric({
         allowMinus: true,
     });
-    //jQuery(".redux-typography-family, .redux-typography-style, .redux-typography-subsets").select2({
+
+//    jQuery(".redux-typography-family").select2({
+//        
+//    }).on("select2-opening", function(e) {
+//        console.log('opening');
+//        
+//        var data = {
+//             action:     'redux_font_load',
+//         };
+//         
+//         $.post(redux_ajax_script.ajaxurl, data, function(response) {
+//             
+//             
+//        });
+//    });    
+    
+//    var aj_data = {
+//        action:         'redux_font_load',
+//    };
+//    
+//    $.post(redux_ajax_script.ajaxurl, aj_data, function(response) {
+//        console.log(response);
+//    });
+    
+//    var data = [{id:'none', text: 'none'}];
+//    $("#s2test").select2({
+//        query: function(query) {
+//          query.callback({results: data});
+//        },
+//          
+//         //data: [{id:'enh',text:'enhancement'},{id:'buggy',text:'bug'},{id:'dupe',text:'duplicate'},{id:'no',text:'invalid'},{id:'nono',text:'wontfix'}]
+//         
+//        }).on("select2-opening", function(e) {
+//            
+//             data = [{id:'enh',text:'enhancement','data-google': true},{id:'buggy',text:'bug'},{id:'dupe',text:'duplicate'},{id:'no',text:'invalid'},{id:'nono',text:'wontfix'}, {id:'biggus',text:'diccus'}];
+//            //.data('data',[{id:'enh',text:'enhancement'},{id:'buggy',text:'bug'},{id:'dupe',text:'duplicate'},{id:'no',text:'invalid'},{id:'nono',text:'wontfix'}]
+//            //);             
+////            
+////         });
+//         //}, 30); 
+//
+////             
+//        }).on('select2-selecting', function(val, object) {
+//            console.log(val.object['data-google'])
+////            //console.log(object)
+////            
+//        });
+//    //});    
+
+    
     jQuery(".redux-typography-family, .redux-typography-family-backup, .redux-typography-align, .redux-typography-transform, .redux-typography-font-variant, .redux-typography-decoration").select2({
         width: 'resolve',
         triggerChange: true,

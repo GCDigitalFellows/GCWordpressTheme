@@ -38,6 +38,7 @@ class ReduxFramework_typography {
         "Verdana, Geneva, sans-serif"                           => "Verdana, Geneva, sans-serif",
     );
 
+    private $fontClass = null;
     /**
      * Field Constructor.
      *
@@ -81,6 +82,11 @@ class ReduxFramework_typography {
         
         // Get the google array
         $this->getGoogleArray();
+        
+//        include_once(ReduxFramework::$_dir . 'inc/fields/typography/class.google-fonts.php');
+//        $this->fontClass = new reduxGoogleFonts();
+//        $this->parent->gfontClass = $this->fontClass;
+//        $this->fontClass->std_fonts = $this->std_fonts;
     }
 
     /**
@@ -183,7 +189,7 @@ class ReduxFramework_typography {
                 $fontFamily[0] = $this->value['font-family'];
                 $fontFamily[1] = "";
             }
-
+            //echo '<div id="s2test" placeholder="Open Sans" class="select2-container" name="" style="width:300px"></div>';
             echo '<input type="hidden" class="redux-typography-font-family ' . $this->field['class'] . '" name="' . $this->field['name'] . '[font-family]' . $this->field['name_suffix'] . '" value="' . $this->value['font-family'] . '" data-id="' . $this->field['id'] . '"  />';
             echo '<input type="hidden" class="redux-typography-font-options ' . $this->field['class'] . '" name="' . $this->field['name'] . '[font-options]' . $this->field['name_suffix'] . '" value="' . $this->value['font-options'] . '" data-id="' . $this->field['id'] . '"  />';
             echo '<div class="select_wrapper typography-family" style="width: 220px; margin-right: 5px;">';
@@ -485,11 +491,13 @@ class ReduxFramework_typography {
             
             if (isset($this->field['preview']['font-size'])) {
                 $g_size = 'style="font-size: ' . $this->field['preview']['font-size'] . ';"';
+                $inUse = '1';
             } else {
                 $g_size = '';
+                $inUse = '0';
             }
 
-            echo '<p class="clear ' . $this->field['id'] . '_previewer typography-preview" ' . $g_size . '>' . $g_text . '</p>';
+            echo '<p data-preview-size="' . $inUse . '" class="clear ' . $this->field['id'] . '_previewer typography-preview" ' . $g_size . '>' . $g_text . '</p>';
             echo '</div>'; // end typography container
         }
     }  //function
@@ -525,6 +533,12 @@ class ReduxFramework_typography {
             true
         );
 
+        wp_localize_script( 
+            'redux-field-typography-js', 
+            'redux_ajax_script', 
+            array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) 
+        );        
+        
         wp_enqueue_style(
             'redux-field-typography-css',
             ReduxFramework::$_url . 'inc/fields/typography/field_typography.css',
