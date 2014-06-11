@@ -53,7 +53,7 @@
 
 				<?php else : ?>
 
-					<? not_found(); ?>
+					<?php not_found(); ?>
 
 				<?php endif; ?>
 

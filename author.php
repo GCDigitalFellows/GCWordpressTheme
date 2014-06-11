@@ -32,7 +32,7 @@
 				
 			<div class="col-md-3">	
 			
-				<? // replace this with the user's profile?! ?>
+				<?php // replace this with the user's profile?! ?>
 				<?php get_sidebar(); // sidebar 1 ?>
 			
 			</div>
