@@ -339,7 +339,7 @@ function add_active_class($classes, $item) {
 if (!function_exists("theme_styles")) {
     function theme_styles() {
         if (!is_admin()) {
-            wp_register_style('bootstrap', get_template_directory_uri() . '/library/theme/css/bootstrap-themed.css', array(), '3.1.1', 'all');
+            wp_register_style('bootstrap', get_template_directory_uri() . '/library/theme/css/bootstrap-themed.css', array(), '3.2.0', 'all');
             //wp_register_style( 'fonts', get_template_directory_uri() . '/library/theme/css/fonts.css', array(), '1.0.0', 'all' );
             wp_register_style('proxima_cn_font', get_template_directory_uri() . '/library/theme/fonts/proxima_cn/proxima_cn.css', array(), '1.0.0', 'all');
             //wp_register_style('proxima_excn_font', get_template_directory_uri() . '/library/theme/fonts/proxima_excn/proxima_excn.css', array(), '1.0.0', 'all');
