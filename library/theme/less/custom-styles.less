@@ -198,6 +198,14 @@ a .text,a.text {
     display: block;
  }
 
+@menu-1: @orange;
+@menu-2: @green;
+@menu-3: @green-dark;
+@menu-4: @blue-light;
+@menu-5: @blue;
+@menu-6: @blue-dark;
+@menu-7: @pink;
+
 @media (min-width: @screen-sm) { 
 	#main-nav-container {
 		position: absolute;
@@ -219,118 +227,81 @@ a .text,a.text {
 		}
 
 		&:nth-child(7n+1) {
-			border-bottom: 9px solid @orange;
-			> ul {
-				background-color: @orange;
+			border-bottom: 9px solid @menu-1;
+			&.open, &:hover {
+				border-bottom: none;
+				background-color: @menu-1;
 			}
-		}
-		&:nth-child(7n+1).open, &:nth-child(7n+1):hover {
-			border-bottom: none;
-			a {
-				background-color: @orange;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-1;	
 			}
-		}
-		&:nth-child(7n+1).active {
-			border-bottom: none;
-			border-top: 9px solid @orange;
 		}
 		&:nth-child(7n+2) {
-			border-bottom: 9px solid @green;
-			> ul {
-				background-color: @green;
+			border-bottom: 9px solid @menu-2;
+			&.open, &:hover {
+				border-bottom: none;
+				background-color: @menu-2;
 			}
-		}
-		&:nth-child(7n+2).open, &:nth-child(7n+2):hover {
-			border-bottom: none;
-			a {
-				background-color: @green;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-2;
 			}
-		}
-		&:nth-child(7n+2).active {
-			border-bottom: none;
-			border-top: 9px solid @green;
 		}
 		&:nth-child(7n+3) {
-			border-bottom: 9px solid @green-dark;
-			> ul {
-				background-color: @green-dark;
+			border-bottom: 9px solid @menu-3;
+			&.open, &:hover {
+				border-bottom: none;		
+				background-color: @menu-3;
 			}
-		}
-		&:nth-child(7n+3).open, &:nth-child(7n+3):hover {
-			border-bottom: none;
-			a {
-				background-color: @green-dark;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-3;
 			}
-		}
-		&:nth-child(7n+3).active {
-			border-bottom: none;
-			border-top: 9px solid @green-dark;
 		}
 		&:nth-child(7n+4) {
-			border-bottom: 9px solid @blue-light;
-			> ul {
-				background-color: @blue-light;
+			border-bottom: 9px solid @menu-4;
+			&.open, &:hover {
+				border-bottom: none;		
+				background-color: @menu-4;
 			}
-		}
-		&:nth-child(7n+4).open, &:nth-child(7n+4):hover {
-			border-bottom: none;
-			a {
-				background-color: @blue-light;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-4;
 			}
-		}
-		&:nth-child(7n+4).active {
-			border-bottom: none;
-			border-top: 9px solid @blue-light;
 		}
 		&:nth-child(7n+5) {
-			border-bottom: 9px solid @blue;
-			> ul {
-				background-color: @blue;
+			border-bottom: 9px solid @menu-5;
+			&.open, &:hover {
+				border-bottom: none;		
+				background-color: @menu-5;
 			}
-		}
-		&:nth-child(7n+5).open, &:nth-child(7n+5):hover {
-			border-bottom: none;
-			a {
-				background-color: @blue;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-5;
 			}
-		}
-		&:nth-child(7n+5).active {
-			border-bottom: none;
-			border-top: 9px solid @blue;
 		}
 		&:nth-child(7n+6) {
-			border-bottom: 9px solid @blue-dark;
-			> ul {
-				background-color: @blue-dark;
+			border-bottom: 9px solid @menu-6;
+			&.open, &:hover {
+				border-bottom: none;		
+				background-color: @menu-6;
 			}
-		}
-		&:nth-child(7n+6).open, &:nth-child(7n+6):hover {
-			border-bottom: none;
-			a {
-				background-color: @blue-dark;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-6;
 			}
-		}
-		&:nth-child(7n+6).active {
-			border-bottom: none;
-			border-top: 9px solid @blue-dark;
-			border-bottom: none;
 		}
 		&:nth-child(7n) {
-			border-bottom: 9px solid @pink;
-			> ul {
-				background-color: @pink;
+			border-bottom: 9px solid @menu-7;
+			&.open, &:hover {
+				border-bottom: none;		
+				background-color: @menu-7;
 			}
-		}
-		&:nth-child(7n).open, &:nth-child(7n):hover {
-			border-bottom: none;
-			a {
-				background-color: @pink;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-7;
 			}
-		}
-		&:nth-child(7n).active {
-			border-bottom: none;
-			border-top: 9px solid @pink;
-			border-bottom: none;
 		}
 
 		a {

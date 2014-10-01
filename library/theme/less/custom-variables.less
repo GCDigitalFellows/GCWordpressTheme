@@ -107,7 +107,10 @@
 @border-radius-large:            6px;
 @border-radius-small:            3px;
 
-@component-active-bg:            @brand-primary;
+//** Global color for active items (e.g., navs or dropdowns).
+@component-active-color:    #fff;
+//** Global background color for active items (e.g., navs or dropdowns).
+@component-active-bg:       @brand-primary;
 
 @caret-width-base:               5px;
 @caret-width-large:              6px;
@@ -285,7 +288,7 @@
 
 // Inverted navbar links
 @navbar-inverse-link-color:                 @gray-light;
-@navbar-default-brand-hover-color:          darken(@navbar-default-brand-color, 10%);
+@navbar-inverse-link-hover-color:          darken(@navbar-default-brand-color, 10%);
 @navbar-inverse-link-hover-bg:              transparent;
 @navbar-inverse-link-active-color:          @navbar-inverse-link-hover-color;
 @navbar-inverse-link-active-bg:             darken(@navbar-inverse-bg, 10%);
