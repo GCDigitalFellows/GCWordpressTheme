@@ -329,27 +329,72 @@ a .text,a.text {
 	}
 }
 
-.navbar-header .navbar-toggle {
-	margin-top: 0;
-	padding: 6px 9px;
+.navbar-toggle {
+	padding: 9px 9px 6px 0;
 	border-top: none;
+	background-color: @white;
+	margin: 0;
+	position:fixed;
+	z-index: 2001;
+}
+#navbar-toggle-main {
+	top:0;
+	left:0;
+	border: 1px solid #e8e8e8;
+	border-top: none;
+	border-left: none;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
-	position: absolute;
-	left: 9px;
-	background-color: @white;
-}
-#main-nav.navbar-collapse {
-	max-height: 600px; //big enough to get rid of scrollbars
-	&.in {
-		padding: 10px 0 10px 10px;
-		margin: 0;
+	border-bottom-left-radius: 0;
+	box-sizing: border-box;
+	-moz-transition: left 0.5s ease-in-out;
+    -webkit-transition: left 0.5s ease-in-out;
+    -o-transition: left 0.5s ease-in-out;
+    transition: left 0.5s ease-in-out;
+	&.down {
+		left:229px;
+		-moz-transition: left 0.5s ease-in-out;
+	    -webkit-transition: left 0.5s ease-in-out;
+	    -o-transition: left 0.5s ease-in-out;
+	    transition: left 0.5s ease-in-out;
 	}
 }
+.nav-toggle-container {
+	display: block;
+	width: 230px;
+	padding: 10px 0 10px 10px;
+	margin: 0;
+	background-color: #fff;
+	position: fixed;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	z-index: 2000;
+	height: 100%;
+	overflow-y: scroll;
+	border-right: 1px solid #e8e8e8;
+}
+.nav-toggle-container.out {
+	left:-230px;
+	-moz-transition: left 0.5s ease-in-out;
+    -webkit-transition: left 0.5s ease-in-out;
+    -o-transition: left 0.5s ease-in-out;
+    transition: left 0.5s ease-in-out;
+}
+.nav-toggle-container.in {
+	left: 0;
 
-.navbar-form {
+	-moz-transition: left 0.5s ease-in-out;
+    -webkit-transition: left 0.5s ease-in-out;
+    -o-transition: left 0.5s ease-in-out;
+    transition: left 0.5s ease-in-out;
+
+}
+
+.navbar-default .navbar-form {
 	margin: 4px 0 0 0;
 	padding: 1px;
+	border: none;
 	border-bottom: 2px solid @gray-lighter;
 	.input-group-btn > .btn, .btn-default {
 		height: 20px;
@@ -1244,10 +1289,10 @@ blockquote.pull-left{
 
 /* sizing for different media queries */
 .navbar-brand {
-	padding: 8px 20px 8px 0;
-	margin-bottom: 16px;
+	padding: 6px 20px 10px 0;
+	height: 58px;
 	font-size: 58px;
-	line-height: 80px;
+	line-height: 42px;
 	font-weight: 300;
 	font-family: @font-family-sans-serif;
 	color: @navbar-default-brand-color;
@@ -1259,16 +1304,16 @@ blockquote.pull-left{
 }
 
 #sitewide_logo {
-	height: 88px;
-	width: 52px;
+	height: 96px;
+	width: 56px;
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: inherit;
 	display: block;
 	text-indent: -999999px;
 	position: absolute;
-	top: 8px;
-	right: 0;
+	top: 4px;
+	right: 4px;
 	z-index: 1200;
 }
 
@@ -1410,6 +1455,7 @@ blockquote.pull-left{
 	.navbar-brand {
 		padding: 20px 15px 50px;
 		font-size: 88px;
+		line-height: 80px;
 		margin-bottom: 64px;
 	}
 
