@@ -198,6 +198,14 @@ a .text,a.text {
     display: block;
  }
 
+@menu-1: @orange;
+@menu-2: @green;
+@menu-3: @green-dark;
+@menu-4: @blue-light;
+@menu-5: @blue;
+@menu-6: @blue-dark;
+@menu-7: @pink;
+
 @media (min-width: @screen-sm) { 
 	#main-nav-container {
 		position: absolute;
@@ -219,118 +227,81 @@ a .text,a.text {
 		}
 
 		&:nth-child(7n+1) {
-			border-bottom: 9px solid @orange;
-			> ul {
-				background-color: @orange;
+			border-bottom: 9px solid @menu-1;
+			&.open, &:hover {
+				border-bottom: none;
+				background-color: @menu-1;
 			}
-		}
-		&:nth-child(7n+1).open, &:nth-child(7n+1):hover {
-			border-bottom: none;
-			a {
-				background-color: @orange;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-1;	
 			}
-		}
-		&:nth-child(7n+1).active {
-			border-bottom: none;
-			border-top: 9px solid @orange;
 		}
 		&:nth-child(7n+2) {
-			border-bottom: 9px solid @green;
-			> ul {
-				background-color: @green;
+			border-bottom: 9px solid @menu-2;
+			&.open, &:hover {
+				border-bottom: none;
+				background-color: @menu-2;
 			}
-		}
-		&:nth-child(7n+2).open, &:nth-child(7n+2):hover {
-			border-bottom: none;
-			a {
-				background-color: @green;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-2;
 			}
-		}
-		&:nth-child(7n+2).active {
-			border-bottom: none;
-			border-top: 9px solid @green;
 		}
 		&:nth-child(7n+3) {
-			border-bottom: 9px solid @green-dark;
-			> ul {
-				background-color: @green-dark;
+			border-bottom: 9px solid @menu-3;
+			&.open, &:hover {
+				border-bottom: none;		
+				background-color: @menu-3;
 			}
-		}
-		&:nth-child(7n+3).open, &:nth-child(7n+3):hover {
-			border-bottom: none;
-			a {
-				background-color: @green-dark;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-3;
 			}
-		}
-		&:nth-child(7n+3).active {
-			border-bottom: none;
-			border-top: 9px solid @green-dark;
 		}
 		&:nth-child(7n+4) {
-			border-bottom: 9px solid @blue-light;
-			> ul {
-				background-color: @blue-light;
+			border-bottom: 9px solid @menu-4;
+			&.open, &:hover {
+				border-bottom: none;		
+				background-color: @menu-4;
 			}
-		}
-		&:nth-child(7n+4).open, &:nth-child(7n+4):hover {
-			border-bottom: none;
-			a {
-				background-color: @blue-light;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-4;
 			}
-		}
-		&:nth-child(7n+4).active {
-			border-bottom: none;
-			border-top: 9px solid @blue-light;
 		}
 		&:nth-child(7n+5) {
-			border-bottom: 9px solid @blue;
-			> ul {
-				background-color: @blue;
+			border-bottom: 9px solid @menu-5;
+			&.open, &:hover {
+				border-bottom: none;		
+				background-color: @menu-5;
 			}
-		}
-		&:nth-child(7n+5).open, &:nth-child(7n+5):hover {
-			border-bottom: none;
-			a {
-				background-color: @blue;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-5;
 			}
-		}
-		&:nth-child(7n+5).active {
-			border-bottom: none;
-			border-top: 9px solid @blue;
 		}
 		&:nth-child(7n+6) {
-			border-bottom: 9px solid @blue-dark;
-			> ul {
-				background-color: @blue-dark;
+			border-bottom: 9px solid @menu-6;
+			&.open, &:hover {
+				border-bottom: none;		
+				background-color: @menu-6;
 			}
-		}
-		&:nth-child(7n+6).open, &:nth-child(7n+6):hover {
-			border-bottom: none;
-			a {
-				background-color: @blue-dark;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-6;
 			}
-		}
-		&:nth-child(7n+6).active {
-			border-bottom: none;
-			border-top: 9px solid @blue-dark;
-			border-bottom: none;
 		}
 		&:nth-child(7n) {
-			border-bottom: 9px solid @pink;
-			> ul {
-				background-color: @pink;
+			border-bottom: 9px solid @menu-7;
+			&.open, &:hover {
+				border-bottom: none;		
+				background-color: @menu-7;
 			}
-		}
-		&:nth-child(7n).open, &:nth-child(7n):hover {
-			border-bottom: none;
-			a {
-				background-color: @pink;
+			&.active {
+				border-bottom: none;
+				border-top: 9px solid @menu-7;
 			}
-		}
-		&:nth-child(7n).active {
-			border-bottom: none;
-			border-top: 9px solid @pink;
-			border-bottom: none;
 		}
 
 		a {
@@ -358,27 +329,72 @@ a .text,a.text {
 	}
 }
 
-.navbar-header .navbar-toggle {
-	margin-top: 0;
-	padding: 6px 9px;
+.navbar-toggle {
+	padding: 9px 9px 6px 0;
 	border-top: none;
+	background-color: @white;
+	margin: 0;
+	position:fixed;
+	z-index: 2001;
+}
+#navbar-toggle-main {
+	top:0;
+	left:0;
+	border: 1px solid #e8e8e8;
+	border-top: none;
+	border-left: none;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
-	position: absolute;
-	left: 9px;
-	background-color: @white;
-}
-#main-nav.navbar-collapse {
-	max-height: 600px; //big enough to get rid of scrollbars
-	&.in {
-		padding: 10px 0 10px 10px;
-		margin: 0;
+	border-bottom-left-radius: 0;
+	box-sizing: border-box;
+	-moz-transition: left 0.5s ease-in-out;
+    -webkit-transition: left 0.5s ease-in-out;
+    -o-transition: left 0.5s ease-in-out;
+    transition: left 0.5s ease-in-out;
+	&.down {
+		left:229px;
+		-moz-transition: left 0.5s ease-in-out;
+	    -webkit-transition: left 0.5s ease-in-out;
+	    -o-transition: left 0.5s ease-in-out;
+	    transition: left 0.5s ease-in-out;
 	}
 }
+.nav-toggle-container {
+	display: block;
+	width: 230px;
+	padding: 10px 0 10px 10px;
+	margin: 0;
+	background-color: #fff;
+	position: fixed;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	z-index: 2000;
+	height: 100%;
+	overflow-y: scroll;
+	border-right: 1px solid #e8e8e8;
+}
+.nav-toggle-container.out {
+	left:-230px;
+	-moz-transition: left 0.5s ease-in-out;
+    -webkit-transition: left 0.5s ease-in-out;
+    -o-transition: left 0.5s ease-in-out;
+    transition: left 0.5s ease-in-out;
+}
+.nav-toggle-container.in {
+	left: 0;
 
-.navbar-form {
+	-moz-transition: left 0.5s ease-in-out;
+    -webkit-transition: left 0.5s ease-in-out;
+    -o-transition: left 0.5s ease-in-out;
+    transition: left 0.5s ease-in-out;
+
+}
+
+.navbar-default .navbar-form {
 	margin: 4px 0 0 0;
 	padding: 1px;
+	border: none;
 	border-bottom: 2px solid @gray-lighter;
 	.input-group-btn > .btn, .btn-default {
 		height: 20px;
@@ -1273,10 +1289,10 @@ blockquote.pull-left{
 
 /* sizing for different media queries */
 .navbar-brand {
-	padding: 8px 20px 8px 0;
-	margin-bottom: 16px;
+	padding: 6px 20px 10px 0;
+	height: 58px;
 	font-size: 58px;
-	line-height: 80px;
+	line-height: 42px;
 	font-weight: 300;
 	font-family: @font-family-sans-serif;
 	color: @navbar-default-brand-color;
@@ -1288,16 +1304,16 @@ blockquote.pull-left{
 }
 
 #sitewide_logo {
-	height: 88px;
-	width: 52px;
+	height: 96px;
+	width: 56px;
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: inherit;
 	display: block;
 	text-indent: -999999px;
 	position: absolute;
-	top: 8px;
-	right: 0;
+	top: 4px;
+	right: 4px;
 	z-index: 1200;
 }
 
@@ -1439,6 +1455,7 @@ blockquote.pull-left{
 	.navbar-brand {
 		padding: 20px 15px 50px;
 		font-size: 88px;
+		line-height: 80px;
 		margin-bottom: 64px;
 	}
 

@@ -61,10 +61,7 @@
 			$navheader_class .= 'navbar-fixed-top';
 			$body_style = 'navbar-fixed-offset';
 			break;
-		case 'fixed-bottom':
-			$navheader_class .= 'navbar-fixed-bottom';
-			$body_style = 'navbar-no-offset';
-			break;
+		case 'scroll_xs':
 		case 'scroll':
 		default:
 			$navheader_class .= 'navbar-static-top';
@@ -80,28 +77,9 @@
 
 				<div class="row" style="margin-bottom: 0;">
 
-				<?php if ( $gctheme_options['search_bar'] ) : ?>
-
-					<div class="col-sm-8 col-md-10">
-
-				<?php else : ?>
-
-					<div class="col-xs-12">
-
-				<?php endif; ?>
+					<div class="col-xs-10 col-sm-11">
 
 					<?php if ( has_nav_menu('service_nav') ) : ?>
-
-						<div class="navbar-header pull-left">
-
-						    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-service-collapse">
-						      <span class="sr-only">Toggle navigation</span>
-						      <span class="icon-bar"></span>
-						      <span class="icon-bar"></span>
-						      <span class="icon-bar"></span>
-						    </button>
-
-						</div>
 
 						<?php wp_nav_menu( array(
 					    		'menu' => 'service_nav',
@@ -116,9 +94,25 @@
 					    		'walker' => new wp_bootstrap_navwalker()
 						)); ?>
 
-						<div class="clearfix"></div>
+					<?php endif; ?>
+
+					<?php if ( $gctheme_options['search_bar'] ) : ?>
+
+						<div class="col-xs-10 col-sm-4 col-md-2 pull-right">
+							<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
+								<div class="input-group input-group-sm">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+									</span>
+									<input name="s" id="s" type="text" class="form-control" autocomplete="off" placeholder="<?php _e('Search','gcwordpress'); ?>" >
+								</div>
+							</form>
+						</div>
 
 					<?php endif; ?>
+
+					</div>
+					<div class="col-xs-12">
 
 					<?php if ( ($gctheme_options['branding_logo'] && $gctheme_options['branding_logo']['url']) || ($gctheme_options['site_name'] && get_bloginfo()) ): ?>
 
@@ -142,21 +136,6 @@
 
 					</div>
 
-				<?php if ( $gctheme_options['search_bar'] ) : ?>
-
-					<div class="col-xs-6 col-sm-4 col-md-2">
-						<form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
-							<div class="input-group input-group-sm">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-								</span>
-								<input name="s" id="s" type="text" class="form-control" autocomplete="off" placeholder="<?php _e('Search','gcwordpress'); ?>" >
-							</div>
-						</form>
-					</div>
-
-				<?php endif; ?>
-
 					<div id="main-nav-container">
 
 						<?php wp_nav_menu( array(
@@ -173,12 +152,7 @@
 						)); ?>
 
 					    <div class="navbar-header">
-						    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-						      <span class="sr-only">Toggle navigation</span>
-						      <span class="icon-bar bg-orange"></span>
-						      <span class="icon-bar bg-green"></span>
-						      <span class="icon-bar bg-blue-light"></span>
-						    </button>
+						    
 						  </div>
 
 					</div>
@@ -190,3 +164,43 @@
 			</div> <!-- end container -->
 
 		</header> <!-- end header -->
+
+		<button type="button" id="navbar-toggle-main" class="nav-toggle navbar-toggle" data-nav-button data-target=".nav-toggle-container">
+			<span class="sr-only">Toggle navigation</span>
+			<i class="fa fa-bars text-orange"></i> <i class="fa fa-caret-right text-orange"></i>
+		</button>
+
+		<div class="nav-toggle-container out">
+		<?php if ( has_nav_menu('main_nav') ) : ?>
+
+			<?php wp_nav_menu( array(
+		    		'menu' => 'main_nav',
+		    		'menu_class' => 'nav nav-pills nav-stacked',
+		    		'menu_id' => 'main-nav-toggle',
+		    		'theme_location' => 'main_nav', /* where in the theme it's assigned */
+		    		'depth' => 2, /* Bootstrap 3.0 doesn't support additional depths */
+		    		'container' => 'nav',
+					'container_class'   => 'nav-toggle',
+		    		'container_id' => 'container-main-nav-toggle',
+		    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
+		    		'walker' => new wp_bootstrap_navwalker()
+			)); ?>
+		<?php endif; ?>
+
+		<?php if ( has_nav_menu('service_nav') ) : ?>
+
+			<?php wp_nav_menu( array(
+		    		'menu' => 'service_nav',
+		    		'menu_class' => 'nav nav-pills nav-stacked',
+		    		'menu_id' => 'service-nav-toggle',
+		    		'theme_location' => 'service_nav', /* where in the theme it's assigned */
+		    		'depth' => 1,
+		    		'container' => 'nav',
+					'container_class'   => 'nav-toggle',
+		    		'container_id' => 'container-service-nav-toggle',
+		    		'fallback_cb' => 'wp_bootstrap_navwalker::fallback', /* menu fallback */
+		    		'walker' => new wp_bootstrap_navwalker()
+			)); ?>						
+
+		<?php endif; ?>
+		</div>

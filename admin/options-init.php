@@ -472,7 +472,7 @@ if (!class_exists('gctheme_Redux_Framework_config')) {
                         'type' => 'select',
                         'title' => __('Position', Redux_TEXT_DOMAIN),
                         'desc' => __('Affix the header at the top of the page or scroll with the page?', Redux_TEXT_DOMAIN),
-                        'options' => array("scroll" => "Scroll","fixed" => "Fixed"),
+                        'options' => array("scroll" => "Scroll","scroll_xs" => "Fixed+scroll on mobile", "fixed" => "Fixed"),
                         'default' => 'scroll'
                     ),
                     array(
