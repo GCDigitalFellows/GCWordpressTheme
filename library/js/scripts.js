@@ -1,5 +1,8 @@
 jQuery(document).ready(function($){
 
+    // position static header at the top of the screen, accounting for admin bar
+    $('#main_header.navbar-fixed-top').css('top',$('#wpadminbar').outerHeight());
+
     // force footer to bottom of page
     var height_diff = $(window).height() - $('body').height();
     if ( height_diff > 0 ) {
