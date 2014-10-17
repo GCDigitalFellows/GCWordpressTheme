@@ -77,7 +77,7 @@
 
 				<div class="row" style="margin-bottom: 0;">
 
-					<div class="col-xs-10 col-sm-11">
+					<div id="service_container" class="col-xs-10 col-sm-11">
 
 					<?php if ( has_nav_menu('service_nav') ) : ?>
 

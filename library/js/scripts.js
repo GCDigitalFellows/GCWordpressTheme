@@ -34,12 +34,16 @@ jQuery(document).ready(function($){
                 if ($target.hasClass('in')) {
                     $target.removeClass('in');
                     $target.addClass('out');
+                    $('#content').removeClass('slide_right');
+                    $('#main_header').removeClass('slide_right');
                     el.removeClass('down');
                     el.html('<span class="sr-only">Toggle navigation</span><i class="fa fa-bars text-orange"></i> <i class="fa fa-caret-right text-orange"></i>');
                     el.refresh;
                 } else {
                     $target.addClass('in');
                     $target.removeClass('out');
+                    $('#content').addClass('slide_right');
+                    $('#main_header').addClass('slide_right');
                     el.addClass('down');
                     el.html('<span class="sr-only">Toggle navigation</span><i class="fa fa-caret-left text-orange"></i> <i class="fa fa-bars text-orange"></i>');
                     el.refresh;
@@ -174,18 +178,26 @@ jQuery(document).ready(function($){
             $('.navbar-brand').css('height', String(58+(80-58)*($(document).width()-320)/(767-320)) + 'px');
             $('#sitewide_logo').css('width', 42+(56-42)*($(document).width()-320)/(767-320));
             $('#sitewide_logo').css('height', 80+(98-80)*($(document).width()-320)/(767-320));
-            if ($('body').data('navpos') == 'scroll_xs') {
-                $('body').addClass('navbar-no-offset');
-                $('body').removeClass('navbar-fixed-offset');
-                $('header.navbar').addClass('navbar-static-top');
-                $('header.navbar').removeClass('navbar-fixed-top');
+            if ($('body').data('navpos') == 'scroll_xs' || $('body').data('navpos') == 'scroll') {
+                if ($('body').hasClass('navbar-fixed-offset')) {
+                    $('body').addClass('navbar-no-offset');
+                    $('body').removeClass('navbar-fixed-offset');
+                    $('header.navbar').addClass('navbar-static-top');
+                    $('header.navbar').removeClass('navbar-fixed-top');
+                }
                 $('#content').css('margin-top', 0);
+            } else {
+                $('#content').css('margin-top', $('#main_header').height());
             }
             $.waypoints('disable');
         } else {
             $('.navbar-brand').css('font-size','');
-            if ($('body').data('navpos') == 'scroll_xs') {
-                $('#content').css('margin-top', $('.navbar').height());
+            $('.navbar-brand').css('line-height','');
+            $('.navbar-brand').css('height','');
+            $('#sitewide_logo').css('height','');
+            $('#sitewide_logo').css('width','');
+            if ($('body').data('navpos') == 'scroll_xs' || $('body').data('navpos') == 'fixed') {
+                $('#content').css('margin-top', $('#main_header').height());
                 if ($('body').hasClass('navbar-no-offset')) {
                     $('body').removeClass('navbar-no-offset');
                     $('body').addClass('navbar-fixed-offset');
