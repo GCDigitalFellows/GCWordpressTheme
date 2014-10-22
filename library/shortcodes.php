@@ -99,17 +99,14 @@ function bootstrap_gallery($attr) {
 	$gallery_id = 'blueimp_gallery_'.rand();
 	$links_id = 'links-'.$gallery_id;
 
-	$mosaic = '<div id="'.$links_id.'" class="gridalicious clearfix">';
+	$mosaic = '<div id="'.$links_id.'" class="gridalicious clearfix" style="width:100%;">';
 	foreach ($attachments as $id => $attachment) {
-		//$img_lg = wp_get_attachment_image_src($id,'large',false);
-		$img_sm = wp_get_attachment_image_src($id,'full',false);
+		$img_lg = wp_get_attachment_image_src($id,'full',false);
+		$img_sm = wp_get_attachment_image_src($id,$size,false);
 
-		$img = '<img src="' . $img_sm[0] . '" alt="' . $attachment->post_title . '" />';
+		$img = '<img style="width:100%;" src="' . $img_sm[0] . '" alt="' . $attachment->post_title . '" />';
 		$mosaic .= '<div class="gallery-brick" style="width: '.$col_width.'%;" data-groups="[\'image\']">';
-		$mosaic .= '<a href="' . $img_sm[0] . '" data-gallery="#' . $gallery_id . '">';
-
-		$mosaic .= '<span style="background-image: url(\'http://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif\'");z-index: 1;position:absolute;width:100%;height:100%;top:0;left:0;"></span></a>';
-
+		$mosaic .= '<a href="' . $img_lg[0] . '" data-gallery="#' . $gallery_id . '">';
 		$mosaic .= "\n" . $img . "\n</a>\n";
 		$the_excerpt = wptexturize($attachment->post_excerpt);
 		if ($the_excerpt) {
@@ -124,29 +121,30 @@ function bootstrap_gallery($attr) {
 	$mosaic .= "</div>\n";
 	$mosaic .= <<<EOD
 <script type='text/javascript'>
-	jQuery( document ).ready( function() {
+	jQuery( document ).ready( function($) {
 		blueimpGalleryInit('$gallery_id','$attr');
-		jQuery('#$links_id.galleryitem').each(function(){
-			jQuery(this).width(jQuery('#$links_id').width()/$columns);
+		$('#$links_id .gallery-brick').each(function(){
+			var containerWidth = $('#$links_id').width()/$columns;
+			$(this).width(containerWidth);
+			$(this).children('img').width(containerWidth);
 		});
 
-		var pinterest_list = jQuery('#$links_id'),
-			sizer = (jQuery('#$links_id').width()/$columns)
+		var pinterest_list = $('#$links_id'),
+			sizer = ($('#$links_id').width()/$columns)
 		pinterest_list.shuffle({
 			itemSelector: '.gallery-brick',
 			sizer: sizer,
 			gutterWidth: 0
 		});
+		$('.gallery-brick').hover(
+	        function(){
+	            $(this).find('.gallery-caption').slideDown(250); //.fadeIn(250)
+	        },
+	        function(){
+	            $(this).find('.gallery-caption').slideUp(250); //.fadeOut(205)
+	        }
+	    );
 	});
-
-    jQuery('.gallery-brick').hover(
-        function(){
-            jQuery(this).find('.gallery-caption').slideDown(250); //.fadeIn(250)
-        },
-        function(){
-            jQuery(this).find('.gallery-caption').slideUp(250); //.fadeOut(205)
-        }
-    );
 </script>
 EOD;
 
