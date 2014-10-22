@@ -1,0 +1,32 @@
+{
+  "name": "GCWordpressTheme",
+  "version": "0.0.1",
+  "description": "GC Styled Wordpress Theme",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/GCDigitalFellows/GCWordpressTheme.git"
+  },
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [
+    "Yeoman",
+    "Wordpress",
+    "YeoPress",
+    "Template"
+  ],
+  "author": "Keith Miyake",
+  "license": "BSD",
+  "devDependencies": {
+    "bower": "~0.8.6",
+    "grunt": "~0.4.1",
+    "grunt-autoprefixer": "^1.0.1",
+    "grunt-bower-requirejs": "~0.4.1",
+    "grunt-contrib-imagemin": "~0.1.4",
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-less": "^0.11.4",
+    "grunt-contrib-requirejs": "~0.4.0",
+    "grunt-contrib-watch": "~0.5.1",
+    "grunt-svgmin": "~0.1.0"
+  }
+}
