@@ -125,6 +125,7 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 			    'name'     => 'Include the contents of another page (only the content!) within the homepage, ABOVE the primary content and sidebars.',
 			    'type'     => 'post_select',
 			    'repeatable'     => true,
+			    'sortable'		=> true,
 			    'use_ajax' => true,
 			    'query' => array(
 			        'post_type' => 'page'
@@ -134,7 +135,8 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 			    'id'       => 'homepage_additional_pages_below',
 			    'name'     => 'Include the contents of another page (only the content!) within the homepage, BELOW the primary content and sidebars.',
 			    'type'     => 'post_select',
-			    'repeatable'     => true,
+			    'repeatable'    => true,
+			    'sortable'		=> true,
 			    'use_ajax' => true,
 			    'query' => array(
 			        'post_type' => 'page'
@@ -362,7 +364,7 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 	/* People Custom Post Type */
 
 	$meta_boxes[] = array(
-		'title'      => 'Personal Details',
+		'title'      => 'Person Details',
 		'pages'      => 'gc_person', // Post type
 		'context'    => 'normal',
 		'priority'   => 'high',
@@ -443,11 +445,37 @@ function cmb_add_metaboxes( array $meta_boxes ) {
 		'priority'   => 'high',
 		'fields' => array(
 			array(
+		        'name'=> 'Page Layout',
+		        'desc'  => 'Select the layout template to use to display this project.',
+		        'id'    => 'gc_project_layout',
+		        'type'  => 'select',
+				'options' => array(
+					'blank'	=> 'Blank (use raw post content)',
+					'slider' => 'Slider',
+					'adjacent' => 'Images and Text Adjacent',
+					'gallery' => 'Image Gallery'
+				)
+			),
+			array(
 				'id'		=> 'gc_project_url',
 				'name'		=> 'External URL',
 				'desc'		=> 'Enter an external URL for this project',
 				'type'		=> 'text_url',
-			)
+			),
+			array(
+			    'id'   => 'gc_project_images',
+			    'name' => 'Project Images',
+			    'desc' => 'Upload or select one or more images to display for this project.',
+			    'type' => 'image',
+			    'repeatable' => true,
+			    'sortable' => true,
+			),
+			array(
+				'id'	=> 'gc_project_sidebars',
+				'name'	=> 'Display sidebars?',
+				'type'	=> 'checkbox',
+				'default' => false
+			),
 		)
 	);
 
